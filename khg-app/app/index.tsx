@@ -14,7 +14,7 @@ export default function IndexSplash() {
     if (isAuthenticated) {
       router.replace("/(tab)");
     } else {
-      router.replace("/(auth)/login");
+      router.replace("/login");
     }
   };
 
