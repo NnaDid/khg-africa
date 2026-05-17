@@ -32,7 +32,7 @@ const AIPredictions = () => {
     <Box>
       <VStack align="start" spacing={1} mb={8}>
         <Heading size="lg">AI Disease Outbreak Dashboard</Heading>
-        <Text color="gray.500">FastAPI ML Engine predictions based on real-time climate data</Text>
+        <Text color="gray.400">FastAPI ML Engine predictions based on real-time climate data</Text>
       </VStack>
 
       <SimpleGrid columns={{ base: 1, xl: 3 }} spacing={6} mb={8}>
@@ -40,7 +40,7 @@ const AIPredictions = () => {
           <Box key={`${p.region}-${p.disease}`} p={5} bg="bg.card" borderRadius="xl" border="1px solid" borderColor="whiteAlpha.100">
             <HStack justify="space-between" mb={4}>
               <VStack align="start" spacing={0}>
-                <Text fontSize="sm" color="gray.500">{p.region}</Text>
+                <Text fontSize="sm" color="gray.300">{p.region}</Text>
                 <Text fontSize="xl" fontWeight="bold">{p.disease}</Text>
               </VStack>
               <Badge colorScheme={p.level === 'Critical' ? 'red' : p.level === 'High' ? 'orange' : 'yellow'} p={2} borderRadius="md">
@@ -51,14 +51,14 @@ const AIPredictions = () => {
             <VStack align="stretch" spacing={3}>
               <Box>
                 <HStack justify="space-between" mb={1}>
-                  <Text fontSize="xs">Outbreak Probability</Text>
+                  <Text fontSize="xs" color="gray.300">Outbreak Probability</Text>
                   <Text fontSize="xs" fontWeight="bold">{p.probability}%</Text>
                 </HStack>
                 <Progress value={p.probability} colorScheme={p.probability > 70 ? 'red' : p.probability > 40 ? 'orange' : 'green'} size="sm" borderRadius="full" />
               </Box>
 
               <Box>
-                <Text fontSize="xs" color="gray.500" mb={2}>Contributing Drivers:</Text>
+                <Text fontSize="xs" color="gray.300" mb={2}>Contributing Drivers:</Text>
                 <HStack spacing={2} flexWrap="wrap">
                   {p.factors.map(f => (
                     <Badge key={f} variant="outline" fontSize="2xs" colorScheme="blue">{f}</Badge>

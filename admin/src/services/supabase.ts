@@ -47,6 +47,45 @@ export const authService = {
     });
     return { data, error };
   },
+
+  async resetPassword(email: string) {
+    // Verify that the email belongs to an existing registered user profile
+    const { data: profile, error: profileError } = await supabase
+      .from('profiles')
+      .select('email')
+      .eq('email', email)
+      .maybeSingle();
+
+    if (profileError) {
+      return { data: null, error: profileError };
+    }
+
+    if (!profile) {
+      return {
+        data: null,
+        error: new Error('Unauthorized: This email is not registered in the system.')
+      };
+    }
+
+    const { data, error } = await supabase.auth.resetPasswordForEmail(email);
+    return { data, error };
+  },
+
+  async verifyRecoveryOtp(email: string, token: string) {
+    const { data, error } = await supabase.auth.verifyOtp({
+      email,
+      token,
+      type: 'recovery',
+    });
+    return { data, error };
+  },
+
+  async updatePassword(password: string) {
+    const { data, error } = await supabase.auth.updateUser({
+      password,
+    });
+    return { data, error };
+  },
   
   async signOut() {
     const { error } = await supabase.auth.signOut();

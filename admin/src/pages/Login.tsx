@@ -15,19 +15,24 @@ import {
   InputLeftElement,
   FormControl,
   FormLabel,
+  Link,
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
-import { FiMail, FiShield, FiGlobe, FiAlertCircle } from 'react-icons/fi';
+import { FiMail, FiShield, FiGlobe, FiAlertCircle, FiLock } from 'react-icons/fi';
 import { authService } from '../services/supabase';
 import loginBg from '../assets/images/login-bg.png';
 
-const MotionBox = motion(Box);
-const MotionStack = motion(Stack);
+const MotionBox = motion.create(Box);
+const MotionStack = motion.create(Stack);
+
+type AuthStep = 'login_email' | 'login_code' | 'forgot_email' | 'forgot_code' | 'update_password';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [code, setCode] = useState('');
-  const [step, setStep] = useState<'email' | 'code'>('email');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [step, setStep] = useState<AuthStep>('login_email');
   const [loading, setLoading] = useState(false);
   const toast = useToast();
 
@@ -46,7 +51,7 @@ const Login = () => {
         duration: 7000,
         isClosable: true,
       });
-      setStep('code');
+      setStep('login_code');
     } catch (error: any) {
       toast({
         title: 'Access Denied',
@@ -85,6 +90,117 @@ const Login = () => {
       });
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleRequestPasswordReset = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    
+    try {
+      const { error } = await authService.resetPassword(email);
+      if (error) throw error;
+      
+      toast({
+        title: 'Recovery Code Sent',
+        description: 'Please check your inbox for the 6-digit password recovery code.',
+        status: 'success',
+        duration: 7000,
+        isClosable: true,
+      });
+      setStep('forgot_code');
+    } catch (error: any) {
+      toast({
+        title: 'Recovery Request Failed',
+        description: error.message || 'Verification failed. Ensure the email belongs to a registered admin.',
+        status: 'error',
+        duration: 7000,
+        isClosable: true,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleVerifyRecoveryOtp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    
+    try {
+      const { error } = await authService.verifyRecoveryOtp(email, code);
+      if (error) throw error;
+      
+      toast({
+        title: 'Recovery Code Verified',
+        description: 'Access authorized. Please establish your new admin password.',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      });
+      setStep('update_password');
+    } catch (error: any) {
+      toast({
+        title: 'Verification Failed',
+        description: error.message || 'Invalid or expired recovery code.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleUpdatePassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      toast({
+        title: 'Passwords Mismatch',
+        description: 'Ensure both password inputs match exactly.',
+        status: 'warning',
+        duration: 5000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const { error } = await authService.updatePassword(password);
+      if (error) throw error;
+      
+      toast({
+        title: 'Credentials Established',
+        description: 'Your security password has been updated. Accessing dashboard...',
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+      });
+    } catch (error: any) {
+      toast({
+        title: 'Failed to Establish Credentials',
+        description: error.message || 'An error occurred. Please contact system admin.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getSubTitle = () => {
+    switch (step) {
+      case 'login_email':
+        return 'Secure portal for authorized personnel';
+      case 'login_code':
+        return 'Enter the 6-digit access code sent to your email';
+      case 'forgot_email':
+        return 'Enter your registered email to request recovery OTP';
+      case 'forgot_code':
+        return 'Enter the 6-digit recovery code sent to your email';
+      case 'update_password':
+        return 'Establish your new secure dashboard access password';
     }
   };
 
@@ -200,9 +316,11 @@ const Login = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <VStack align={{ base: 'center', lg: 'start' }} spacing={2}>
-            <Heading size="xl" fontWeight="bold">Admin Access</Heading>
-            <Text color="gray.500">
-              {step === 'email' ? 'Secure portal for authorized personnel' : 'Enter the 6-digit code sent to your email'}
+            <Heading size="xl" fontWeight="bold">
+              {step === 'update_password' ? 'Establish Credentials' : step.startsWith('forgot') ? 'Password Recovery' : 'Admin Access'}
+            </Heading>
+            <Text color="gray.500" fontSize="sm" textAlign={{ base: 'center', lg: 'left' }}>
+              {getSubTitle()}
             </Text>
           </VStack>
 
@@ -214,7 +332,8 @@ const Login = () => {
             borderColor="whiteAlpha.100"
             shadow="2xl"
           >
-            {step === 'email' ? (
+            {/* Step 1: Login Email */}
+            {step === 'login_email' && (
               <form onSubmit={handleSendOtp}>
                 <VStack spacing={6}>
                   <FormControl id="email" isRequired>
@@ -251,9 +370,25 @@ const Login = () => {
                   >
                     Send Security Code
                   </Button>
+
+                  <Link
+                    fontSize="sm"
+                    color="brand.400"
+                    onClick={() => {
+                      setEmail('');
+                      setStep('forgot_email');
+                    }}
+                    alignSelf="flex-end"
+                    _hover={{ color: 'brand.300', textDecoration: 'underline' }}
+                  >
+                    Forgot password?
+                  </Link>
                 </VStack>
               </form>
-            ) : (
+            )}
+
+            {/* Step 2: Login Code verification */}
+            {step === 'login_code' && (
               <form onSubmit={handleVerifyOtp}>
                 <VStack spacing={6}>
                   <FormControl id="code" isRequired>
@@ -297,13 +432,187 @@ const Login = () => {
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={() => setStep('email')}
+                      onClick={() => setStep('login_email')}
                       color="gray.400"
                       _hover={{ color: 'white' }}
                     >
                       Change Email Address
                     </Button>
                   </VStack>
+                </VStack>
+              </form>
+            )}
+
+            {/* Step 3: Forgot Password Request (Email) */}
+            {step === 'forgot_email' && (
+              <form onSubmit={handleRequestPasswordReset}>
+                <VStack spacing={6}>
+                  <FormControl id="forgot-email" isRequired>
+                    <FormLabel fontSize="sm" color="gray.400">Registered Admin Email</FormLabel>
+                    <InputGroup size="lg">
+                      <InputLeftElement pointerEvents="none">
+                        <Icon as={FiMail} color="brand.500" />
+                      </InputLeftElement>
+                      <Input
+                        type="email"
+                        placeholder="e.g. admin@khgafrica.org"
+                        bg="whiteAlpha.50"
+                        border="1px solid"
+                        borderColor="whiteAlpha.200"
+                        _hover={{ borderColor: 'brand.500' }}
+                        _focus={{ borderColor: 'brand.500', boxShadow: '0 0 0 1px #00bcd4' }}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                    </InputGroup>
+                  </FormControl>
+
+                  <VStack w="full" spacing={3}>
+                    <Button
+                      w="full"
+                      size="lg"
+                      bg="brand.500"
+                      color="white"
+                      isLoading={loading}
+                      type="submit"
+                      _hover={{ bg: 'brand.600', transform: 'translateY(-2px)' }}
+                      _active={{ bg: 'brand.700' }}
+                      transition="all 0.2s"
+                      leftIcon={<Icon as={FiShield} />}
+                    >
+                      Request Recovery Code
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => {
+                        setEmail('');
+                        setStep('login_email');
+                      }}
+                      color="gray.400"
+                      _hover={{ color: 'white' }}
+                    >
+                      Back to Sign In
+                    </Button>
+                  </VStack>
+                </VStack>
+              </form>
+            )}
+
+            {/* Step 4: Forgot Password OTP verification */}
+            {step === 'forgot_code' && (
+              <form onSubmit={handleVerifyRecoveryOtp}>
+                <VStack spacing={6}>
+                  <FormControl id="recovery-code" isRequired>
+                    <FormLabel fontSize="sm" color="gray.400">Recovery Verification Code</FormLabel>
+                    <InputGroup size="lg">
+                      <InputLeftElement pointerEvents="none">
+                        <Icon as={FiShield} color="brand.500" />
+                      </InputLeftElement>
+                      <Input
+                        type="text"
+                        maxLength={6}
+                        placeholder="123456"
+                        bg="whiteAlpha.50"
+                        border="1px solid"
+                        borderColor="whiteAlpha.200"
+                        _hover={{ borderColor: 'brand.500' }}
+                        _focus={{ borderColor: 'brand.500', boxShadow: '0 0 0 1px #00bcd4' }}
+                        textAlign="center"
+                        fontSize="xl"
+                        letterSpacing="10px"
+                        value={code}
+                        onChange={(e) => setCode(e.target.value)}
+                      />
+                    </InputGroup>
+                  </FormControl>
+
+                  <VStack w="full" spacing={3}>
+                    <Button
+                      w="full"
+                      size="lg"
+                      bg="brand.500"
+                      color="white"
+                      isLoading={loading}
+                      type="submit"
+                      _hover={{ bg: 'brand.600', transform: 'translateY(-2px)' }}
+                      _active={{ bg: 'brand.700' }}
+                      transition="all 0.2s"
+                    >
+                      Verify Recovery Code
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setStep('forgot_email')}
+                      color="gray.400"
+                      _hover={{ color: 'white' }}
+                    >
+                      Resend Recovery Code
+                    </Button>
+                  </VStack>
+                </VStack>
+              </form>
+            )}
+
+            {/* Step 5: Update/Set Password */}
+            {step === 'update_password' && (
+              <form onSubmit={handleUpdatePassword}>
+                <VStack spacing={6}>
+                  <FormControl id="new-password" isRequired>
+                    <FormLabel fontSize="sm" color="gray.400">Establish Password</FormLabel>
+                    <InputGroup size="lg">
+                      <InputLeftElement pointerEvents="none">
+                        <Icon as={FiLock} color="brand.500" />
+                      </InputLeftElement>
+                      <Input
+                        type="password"
+                        placeholder="••••••••"
+                        bg="whiteAlpha.50"
+                        border="1px solid"
+                        borderColor="whiteAlpha.200"
+                        _hover={{ borderColor: 'brand.500' }}
+                        _focus={{ borderColor: 'brand.500', boxShadow: '0 0 0 1px #00bcd4' }}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                      />
+                    </InputGroup>
+                  </FormControl>
+
+                  <FormControl id="confirm-password" isRequired>
+                    <FormLabel fontSize="sm" color="gray.400">Confirm Password</FormLabel>
+                    <InputGroup size="lg">
+                      <InputLeftElement pointerEvents="none">
+                        <Icon as={FiLock} color="brand.500" />
+                      </InputLeftElement>
+                      <Input
+                        type="password"
+                        placeholder="••••••••"
+                        bg="whiteAlpha.50"
+                        border="1px solid"
+                        borderColor="whiteAlpha.200"
+                        _hover={{ borderColor: 'brand.500' }}
+                        _focus={{ borderColor: 'brand.500', boxShadow: '0 0 0 1px #00bcd4' }}
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                      />
+                    </InputGroup>
+                  </FormControl>
+
+                  <Button
+                    w="full"
+                    size="lg"
+                    bg="brand.500"
+                    color="white"
+                    isLoading={loading}
+                    type="submit"
+                    _hover={{ bg: 'brand.600', transform: 'translateY(-2px)' }}
+                    _active={{ bg: 'brand.700' }}
+                    transition="all 0.2s"
+                    leftIcon={<Icon as={FiShield} />}
+                  >
+                    Save New Credentials
+                  </Button>
                 </VStack>
               </form>
             )}

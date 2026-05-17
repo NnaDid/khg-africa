@@ -13,6 +13,8 @@ The KHG Africa ecosystem is composed of three primary decoupled layers, orchestr
 
 ![alt text](image.png)
 
+![alt text](image-1.png)
+
 ```mermaid
 graph TD
     %% Client/Field Inputs

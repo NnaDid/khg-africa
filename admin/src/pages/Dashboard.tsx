@@ -39,8 +39,8 @@ const data = [
 const StatCard = ({ title, value, icon, trend, color }: any) => (
   <Box p={5} shadow="md" borderWidth="1px" borderRadius="xl" bg="bg.card">
     <Flex justifyContent="space-between" alignItems="center">
-      <Box>
-        <StatLabel fontWeight="medium" color="gray.500">
+      <Stat>
+        <StatLabel fontWeight="medium" color="gray.400">
           {title}
         </StatLabel>
         <StatNumber fontSize="2xl" fontWeight="bold">
@@ -50,7 +50,7 @@ const StatCard = ({ title, value, icon, trend, color }: any) => (
           <StatArrow type={trend > 0 ? 'increase' : 'decrease'} />
           {Math.abs(trend)}% from last week
         </StatHelpText>
-      </Box>
+      </Stat>
       <Box
         p={3}
         bg={`${color}.500`}
