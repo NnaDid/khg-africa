@@ -59,7 +59,7 @@ const ReportCard = ({ report }: any) => (
         <Badge colorScheme={report.severity === 'Critical' ? 'red' : report.severity === 'High' ? 'orange' : 'yellow'}>
           {report.severity} Severity
         </Badge>
-        <HStack spacing={1} color="gray.500" fontSize="xs">
+        <HStack spacing={1} color="gray.300" fontSize="xs">
           <Icon as={FiClock} />
           <Text>{report.time}</Text>
         </HStack>

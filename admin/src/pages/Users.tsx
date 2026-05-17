@@ -36,7 +36,7 @@ const Users = () => {
       <HStack justify="space-between" mb={6}>
          <VStack align="start" spacing={0}>
             <Heading size="lg">User & Role Management</Heading>
-            <Text color="gray.500">Manage administrative access and regional permissions</Text>
+            <Text color="gray.300">Manage administrative access and regional permissions</Text>
          </VStack>
          <Button colorScheme="brand" leftIcon={<FiUserPlus />}>Add User</Button>
       </HStack>
@@ -60,7 +60,7 @@ const Users = () => {
                           <Avatar size="sm" name={u.name} />
                           <VStack align="start" spacing={0}>
                              <Text fontWeight="bold" fontSize="sm">{u.name}</Text>
-                             <Text fontSize="xs" color="gray.500">{u.email}</Text>
+                             <Text fontSize="xs" color="gray.300">{u.email}</Text>
                           </VStack>
                        </HStack>
                     </Td>

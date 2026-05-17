@@ -40,7 +40,7 @@ const RiskMap = () => {
       <Flex justify="space-between" align="center" mb={4}>
         <VStack align="start" spacing={0}>
           <Heading size="lg">Live Climate-Health Risk Map</Heading>
-          <Text color="gray.500">Real-time geospatial surveillance for Lagos, Nigeria</Text>
+          <Text color="gray.300">Real-time geospatial surveillance for Lagos, Nigeria</Text>
         </VStack>
         <HStack spacing={4}>
           <Select placeholder="Filter by Type" w="200px" bg="bg.card" onChange={(e) => setFilter(e.target.value)}>

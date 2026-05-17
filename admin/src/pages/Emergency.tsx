@@ -61,19 +61,19 @@ const Emergency = () => {
            <SimpleGrid columns={2} spacing={4}>
               <Box p={4} bg="whiteAlpha.50" borderRadius="lg" textAlign="center">
                  <Text fontSize="3xl" fontWeight="bold">1,240</Text>
-                 <Text fontSize="xs" color="gray.500">Nets Distributed</Text>
+                 <Text fontSize="xs" color="gray.300">Nets Distributed</Text>
               </Box>
               <Box p={4} bg="whiteAlpha.50" borderRadius="lg" textAlign="center">
                  <Text fontSize="3xl" fontWeight="bold">42</Text>
-                 <Text fontSize="xs" color="gray.500">Clinics Dispatched</Text>
+                 <Text fontSize="xs" color="gray.300">Clinics Dispatched</Text>
               </Box>
               <Box p={4} bg="whiteAlpha.50" borderRadius="lg" textAlign="center">
                  <Text fontSize="3xl" fontWeight="bold">8.5k</Text>
-                 <Text fontSize="xs" color="gray.500">Vaccines Administered</Text>
+                 <Text fontSize="xs" color="gray.300">Vaccines Administered</Text>
               </Box>
               <Box p={4} bg="whiteAlpha.50" borderRadius="lg" textAlign="center">
                  <Text fontSize="3xl" fontWeight="bold">15</Text>
-                 <Text fontSize="xs" color="gray.500">Active Outbreaks Contained</Text>
+                 <Text fontSize="xs" color="gray.300">Active Outbreaks Contained</Text>
               </Box>
            </SimpleGrid>
            <Button mt={8} w="100%" colorScheme="brand" leftIcon={<Icon as={FiCheckSquare} />}>

@@ -18,6 +18,7 @@ import {
   MenuList,
   MenuItem,
   MenuDivider,
+  useToast,
 } from '@chakra-ui/react';
 import type { BoxProps, FlexProps } from '@chakra-ui/react';
 import {
@@ -37,6 +38,7 @@ import {
 import type { IconType } from 'react-icons';
 import { Link as RouterLink, Outlet, useLocation } from 'react-router-dom';
 import { useAppStore } from '../store/useAppStore';
+import { authService } from '../services/supabase';
 
 interface LinkItemProps {
   name: string;
@@ -168,6 +170,29 @@ interface MobileProps extends FlexProps {
 }
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   const { user, profile } = useAppStore();
+  const toast = useToast();
+
+  const handleSignOut = async () => {
+    try {
+      const { error } = await authService.signOut();
+      if (error) throw error;
+      toast({
+        title: 'Logged Out',
+        description: 'Your administrative session has been closed securely.',
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      });
+    } catch (err: any) {
+      toast({
+        title: 'Sign Out Failed',
+        description: err.message || 'An error occurred during sign out.',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+      });
+    }
+  };
 
   return (
     <Flex
@@ -238,7 +263,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               <MenuItem>Settings</MenuItem>
               <MenuItem>Billing</MenuItem>
               <MenuDivider />
-              <MenuItem>Sign out</MenuItem>
+              <MenuItem onClick={handleSignOut}>Sign out</MenuItem>
             </MenuList>
           </Menu>
         </Flex>

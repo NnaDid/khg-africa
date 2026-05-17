@@ -33,7 +33,7 @@ const SchoolCard = ({ school }: any) => (
            Safety Score: {school.score}/100
         </Badge>
       </VStack>
-      <Icon as={FiUsers} boxSize={5} color="gray.500" />
+      <Icon as={FiUsers} boxSize={5} color="gray.300" />
     </HStack>
 
     <SimpleGrid columns={2} spacing={4} mb={4}>

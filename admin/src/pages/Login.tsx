@@ -319,7 +319,7 @@ const Login = () => {
             <Heading size="xl" fontWeight="bold">
               {step === 'update_password' ? 'Establish Credentials' : step.startsWith('forgot') ? 'Password Recovery' : 'Admin Access'}
             </Heading>
-            <Text color="gray.500" fontSize="sm" textAlign={{ base: 'center', lg: 'left' }}>
+            <Text color="gray.300" fontSize="sm" textAlign={{ base: 'center', lg: 'left' }}>
               {getSubTitle()}
             </Text>
           </VStack>
@@ -623,7 +623,7 @@ const Login = () => {
               <Icon as={FiAlertCircle} />
               <Text fontWeight="bold">RESTRICTED ACCESS AREA</Text>
             </HStack>
-            <Text fontSize="xs" color="gray.500" textAlign="center" px={4}>
+            <Text fontSize="xs" color="gray.400" textAlign="center" px={4}>
               By proceeding, you acknowledge that all activities are logged and monitored for national security and public health integrity.
             </Text>
           </VStack>

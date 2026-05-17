@@ -49,11 +49,11 @@ const Clinics = () => {
                </Box>
                <HStack justify="space-between">
                   <VStack align="start" spacing={0}>
-                     <Text fontSize="xs" color="gray.500">Patient Influx</Text>
+                     <Text fontSize="xs" color="gray.300">Patient Influx</Text>
                      <Text fontWeight="bold" color={c.influx === 'Extreme' ? 'red.400' : 'inherit'}>{c.influx}</Text>
                   </VStack>
                   <VStack align="end" spacing={0}>
-                     <Text fontSize="xs" color="gray.500">Outbreak Signals</Text>
+                     <Text fontSize="xs" color="gray.300">Outbreak Signals</Text>
                      <Text fontWeight="bold" color={c.outbreaks > 0 ? 'orange.400' : 'inherit'}>{c.outbreaks} Active</Text>
                   </VStack>
                </HStack>

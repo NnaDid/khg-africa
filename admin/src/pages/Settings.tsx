@@ -54,7 +54,7 @@ const SystemSettings = () => {
               <FormControl>
                  <FormLabel>Alert Threshold (%)</FormLabel>
                  <Input type="number" defaultValue={85} bg="whiteAlpha.50" />
-                 <Text fontSize="xs" color="gray.500" mt={1}>Risk probability required to trigger automated SMS.</Text>
+                 <Text fontSize="xs" color="gray.300" mt={1}>Risk probability required to trigger automated SMS.</Text>
               </FormControl>
               <FormControl>
                  <FormLabel>Prediction Frequency</FormLabel>

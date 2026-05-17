@@ -80,17 +80,17 @@ const Alerts = () => {
          <Box p={5} bg="bg.card" borderRadius="xl" border="1px solid" borderColor="whiteAlpha.100">
             <Text fontWeight="bold" mb={2}>SMS Delivery Rate</Text>
             <Text fontSize="2xl">98.4%</Text>
-            <Text fontSize="xs" color="gray.500">Last 24 hours via Termii</Text>
+            <Text fontSize="xs" color="gray.300">Last 24 hours via Termii</Text>
          </Box>
          <Box p={5} bg="bg.card" borderRadius="xl" border="1px solid" borderColor="whiteAlpha.100">
             <Text fontWeight="bold" mb={2}>Email Open Rate</Text>
             <Text fontSize="2xl">64.2%</Text>
-            <Text fontSize="xs" color="gray.500">Government/NGO accounts</Text>
+            <Text fontSize="xs" color="gray.300">Government/NGO accounts</Text>
          </Box>
          <Box p={5} bg="bg.card" borderRadius="xl" border="1px solid" borderColor="whiteAlpha.100">
             <Text fontWeight="bold" mb={2}>Avg. Response Time</Text>
             <Text fontSize="2xl">4.2m</Text>
-            <Text fontSize="xs" color="gray.500">Time to acknowledge alert</Text>
+            <Text fontSize="xs" color="gray.300">Time to acknowledge alert</Text>
          </Box>
       </SimpleGrid>
     </Box>
