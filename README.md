@@ -1,4 +1,4 @@
-# KHG Africa (Koolvix Health & Geo-Intelligence Africa)
+# KHG Africa (Protecting Africa's Future Through AI Intelligence)
 
 KHG Africa is an AI-powered, offline-first climate-health early warning infrastructure designed to protect vulnerable African children from climate-related disease outbreaks and environmental health risks.
 By combining smart environmental sensing, community reporting, predictive AI, and low-connectivity communication systems, KHG Africa enables schools, clinics, governments, and NGOs to detect, predict, and respond to threats such as malaria, cholera, heat stress, flooding, and air pollution before they escalate into child health emergencies.

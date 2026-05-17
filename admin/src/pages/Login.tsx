@@ -26,10 +26,12 @@ const MotionStack = motion(Stack);
 
 const Login = () => {
   const [email, setEmail] = useState('');
+  const [code, setCode] = useState('');
+  const [step, setStep] = useState<'email' | 'code'>('email');
   const [loading, setLoading] = useState(false);
   const toast = useToast();
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     
@@ -38,16 +40,45 @@ const Login = () => {
       if (error) throw error;
       
       toast({
-        title: 'Authentication Link Sent',
-        description: 'Please check your inbox for the secure access link.',
+        title: 'Security Code Sent',
+        description: 'Please check your inbox for the 6-digit secure access code.',
         status: 'success',
         duration: 7000,
         isClosable: true,
       });
+      setStep('code');
     } catch (error: any) {
       toast({
         title: 'Access Denied',
         description: error.message || 'Verification failed. Please contact the system administrator.',
+        status: 'error',
+        duration: 7000,
+        isClosable: true,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleVerifyOtp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    
+    try {
+      const { error } = await authService.verifyOtp(email, code);
+      if (error) throw error;
+      
+      toast({
+        title: 'Session Verified',
+        description: 'Welcome to the KHG Command Center.',
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      });
+    } catch (error: any) {
+      toast({
+        title: 'Verification Failed',
+        description: error.message || 'Invalid or expired secure access code.',
         status: 'error',
         duration: 5000,
         isClosable: true,
@@ -99,7 +130,6 @@ const Login = () => {
           as={MotionBox}
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          // transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <HStack spacing={4}>
             <Box p={3} bg="brand.500" borderRadius="xl" shadow="0 0 20px rgba(0, 188, 212, 0.4)">
@@ -171,7 +201,9 @@ const Login = () => {
         >
           <VStack align={{ base: 'center', lg: 'start' }} spacing={2}>
             <Heading size="xl" fontWeight="bold">Admin Access</Heading>
-            <Text color="gray.500">Secure portal for authorized personnel</Text>
+            <Text color="gray.500">
+              {step === 'email' ? 'Secure portal for authorized personnel' : 'Enter the 6-digit code sent to your email'}
+            </Text>
           </VStack>
 
           <Box
@@ -182,44 +214,99 @@ const Login = () => {
             borderColor="whiteAlpha.100"
             shadow="2xl"
           >
-            <form onSubmit={handleLogin}>
-              <VStack spacing={6}>
-                <FormControl id="email" isRequired>
-                  <FormLabel fontSize="sm" color="gray.400">Official Admin Email</FormLabel>
-                  <InputGroup size="lg">
-                    <InputLeftElement pointerEvents="none">
-                      <Icon as={FiMail} color="brand.500" />
-                    </InputLeftElement>
-                    <Input
-                      type="email"
-                      placeholder="e.g. admin@khgafrica.org"
-                      bg="whiteAlpha.50"
-                      border="1px solid"
-                      borderColor="whiteAlpha.200"
-                      _hover={{ borderColor: 'brand.500' }}
-                      _focus={{ borderColor: 'brand.500', boxShadow: '0 0 0 1px #00bcd4' }}
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                    />
-                  </InputGroup>
-                </FormControl>
+            {step === 'email' ? (
+              <form onSubmit={handleSendOtp}>
+                <VStack spacing={6}>
+                  <FormControl id="email" isRequired>
+                    <FormLabel fontSize="sm" color="gray.400">Official Admin Email</FormLabel>
+                    <InputGroup size="lg">
+                      <InputLeftElement pointerEvents="none">
+                        <Icon as={FiMail} color="brand.500" />
+                      </InputLeftElement>
+                      <Input
+                        type="email"
+                        placeholder="e.g. admin@khgafrica.org"
+                        bg="whiteAlpha.50"
+                        border="1px solid"
+                        borderColor="whiteAlpha.200"
+                        _hover={{ borderColor: 'brand.500' }}
+                        _focus={{ borderColor: 'brand.500', boxShadow: '0 0 0 1px #00bcd4' }}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                      />
+                    </InputGroup>
+                  </FormControl>
 
-                <Button
-                  w="full"
-                  size="lg"
-                  bg="brand.500"
-                  color="white"
-                  isLoading={loading}
-                  type="submit"
-                  _hover={{ bg: 'brand.600', transform: 'translateY(-2px)' }}
-                  _active={{ bg: 'brand.700' }}
-                  transition="all 0.2s"
-                  leftIcon={<Icon as={FiGlobe} />}
-                >
-                  Send Security Link
-                </Button>
-              </VStack>
-            </form>
+                  <Button
+                    w="full"
+                    size="lg"
+                    bg="brand.500"
+                    color="white"
+                    isLoading={loading}
+                    type="submit"
+                    _hover={{ bg: 'brand.600', transform: 'translateY(-2px)' }}
+                    _active={{ bg: 'brand.700' }}
+                    transition="all 0.2s"
+                    leftIcon={<Icon as={FiGlobe} />}
+                  >
+                    Send Security Code
+                  </Button>
+                </VStack>
+              </form>
+            ) : (
+              <form onSubmit={handleVerifyOtp}>
+                <VStack spacing={6}>
+                  <FormControl id="code" isRequired>
+                    <FormLabel fontSize="sm" color="gray.400">Secure Access Code</FormLabel>
+                    <InputGroup size="lg">
+                      <InputLeftElement pointerEvents="none">
+                        <Icon as={FiShield} color="brand.500" />
+                      </InputLeftElement>
+                      <Input
+                        type="text"
+                        maxLength={6}
+                        placeholder="123456"
+                        bg="whiteAlpha.50"
+                        border="1px solid"
+                        borderColor="whiteAlpha.200"
+                        _hover={{ borderColor: 'brand.500' }}
+                        _focus={{ borderColor: 'brand.500', boxShadow: '0 0 0 1px #00bcd4' }}
+                        textAlign="center"
+                        fontSize="xl"
+                        letterSpacing="10px"
+                        value={code}
+                        onChange={(e) => setCode(e.target.value)}
+                      />
+                    </InputGroup>
+                  </FormControl>
+
+                  <VStack w="full" spacing={3}>
+                    <Button
+                      w="full"
+                      size="lg"
+                      bg="brand.500"
+                      color="white"
+                      isLoading={loading}
+                      type="submit"
+                      _hover={{ bg: 'brand.600', transform: 'translateY(-2px)' }}
+                      _active={{ bg: 'brand.700' }}
+                      transition="all 0.2s"
+                    >
+                      Verify Access Code
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => setStep('email')}
+                      color="gray.400"
+                      _hover={{ color: 'white' }}
+                    >
+                      Change Email Address
+                    </Button>
+                  </VStack>
+                </VStack>
+              </form>
+            )}
           </Box>
 
           <VStack spacing={4} pt={2}>
