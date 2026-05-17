@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import { View, Text, Pressable, useWindowDimensions, Image } from "react-native";
+import { View, Text, Pressable, useWindowDimensions, ActivityIndicator } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
-import { useAuthStore } from "../src/store/authStore";
-import { COLORS } from "../src/constants/colors";
+import { useAuthStore } from "../store/authStore";
+import { COLORS } from "../constants/colors";
 import { Ionicons } from "@expo/vector-icons";
 
 export default function IndexSplash() {
@@ -14,7 +14,7 @@ export default function IndexSplash() {
     if (isAuthenticated) {
       router.replace("/(tab)");
     } else {
-      router.replace("/login");
+      router.replace("/(auth)/login");
     }
   };
 
@@ -35,9 +35,9 @@ export default function IndexSplash() {
       {/* Top Header Panel */}
       <View className="pt-16 px-4 items-center">
         <View className="bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full flex-row items-center gap-1.5 mb-6">
-          <View className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
+          <View className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
           <Text className="text-emerald-400 text-[10px] font-black uppercase tracking-wider">
-            KHG Africa Mobile V2.4
+            KHG Africa Field Companion v2.4
           </Text>
         </View>
 
@@ -53,15 +53,15 @@ export default function IndexSplash() {
         </Text>
       </View>
 
-      {/* Center Image / Visual Widget */}
+      {/* Center Intelligence Preview Widget */}
       <View className="items-center px-6">
-        <View className="w-full bg-slate-950/80 border border-blue-950/60 rounded-3xl p-6 shadow-2xl relative overflow-hidden backdrop-blur-md">
+        <View className="w-full bg-slate-950/80 border border-blue-950/60 rounded-3xl p-6 shadow-2xl relative overflow-hidden">
           <View className="flex-row justify-between items-center mb-4">
             <View className="flex-row items-center gap-2">
               <Ionicons name="pulse" size={20} color={COLORS.risk.critical} />
               <Text className="text-white text-xs font-bold uppercase tracking-wider">Outbreak Prediction</Text>
             </View>
-            <View className="bg-red-500/10 px-2 py-0.5 rounded">
+            <View className="bg-red-500/10 px-2 py-0.5 rounded border border-red-500/20">
               <Text className="text-red-400 text-[9px] font-bold">ACTIVE BULLETIN</Text>
             </View>
           </View>
@@ -89,7 +89,6 @@ export default function IndexSplash() {
 
       {/* Bottom Action Section */}
       <View className="px-4 gap-4">
-        
         <Pressable
           onPress={handleGetStarted}
           className="py-4 bg-emerald-500 rounded-2xl items-center justify-center active:opacity-85 shadow-lg flex-row gap-2"
