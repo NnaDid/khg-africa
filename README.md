@@ -1,6 +1,9 @@
-# 🌍 KHG Africa (Koolvix Health & Geo-Intelligence Africa)
+# KHG Africa (Koolvix Health & Geo-Intelligence Africa)
 
-KHG Africa is an advanced, production-grade, multi-tenant platform designed to combat public health crises and environmental risks (such as flooding, air pollution, and vector-borne diseases) across the African continent. By integrating **IoT Environmental Sensors**, **Crowdsourced Community Health Reports**, **PostGIS Geo-Intelligence**, and **Predictive Machine Learning Models**, the platform provides real-time risk assessment, disease prediction, and automated emergency dispatches.
+KHG Africa is an AI-powered, offline-first climate-health early warning infrastructure designed to protect vulnerable African children from climate-related disease outbreaks and environmental health risks.
+By combining smart environmental sensing, community reporting, predictive AI, and low-connectivity communication systems, KHG Africa enables schools, clinics, governments, and NGOs to detect, predict, and respond to threats such as malaria, cholera, heat stress, flooding, and air pollution before they escalate into child health emergencies.
+Built specifically for low-resource African communities, KHG Africa transforms schools and rural clinics into intelligent climate-health protection hubs capable of safeguarding children at scale.
+By integrating **IoT Environmental Sensors**, **Crowdsourced Community Health Reports**, **PostGIS Geo-Intelligence**, and **Predictive Machine Learning Models**, the platform provides real-time risk assessment, disease prediction, and automated emergency dispatches.
 
 ---
 
