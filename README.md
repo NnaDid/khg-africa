@@ -11,6 +11,8 @@ By integrating **IoT Environmental Sensors**, **Crowdsourced Community Health Re
 
 The KHG Africa ecosystem is composed of three primary decoupled layers, orchestrating a seamless flow from field capture to administrative oversight.
 
+![alt text](image.png)
+
 ```mermaid
 graph TD
     %% Client/Field Inputs
