@@ -41,7 +41,7 @@ async def get_current_user(token: HTTPAuthorizationCredentials = Depends(securit
             pass
         raise credentials_exception
 
-async def check_role(required_roles: list):
+def check_role(required_roles: list):
     async def role_checker(user: dict = Depends(get_current_user)):
         user_id = user.get("sub")
         # Fetch profile to check role
