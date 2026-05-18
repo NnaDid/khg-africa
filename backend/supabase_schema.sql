@@ -1,13 +1,25 @@
-﻿-- Enable PostGIS for geo-intelligence
+-- Enable PostGIS for geo-intelligence
 CREATE EXTENSION IF NOT EXISTS postgis;
+
+-- User Roles Enum
+CREATE TYPE user_role AS ENUM (
+    'super_admin',
+    'government_admin',
+    'ngo_admin',
+    'school_admin',
+    'clinic_staff',
+    'teacher',
+    'community_health_worker',
+    'emergency_officer'
+);
 
 -- 1. Profiles (RBAC)
 CREATE TABLE profiles (
     id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
     email TEXT UNIQUE NOT NULL,
     full_name TEXT,
-    role TEXT NOT NULL DEFAULT 'community_health_worker' 
-        CHECK (role IN ('super_admin', 'government_admin', 'ngo_admin', 'school_admin', 'clinic_staff', 'teacher', 'community_health_worker', 'emergency_officer')),
+    role user_role NOT NULL DEFAULT 'community_health_worker',
+
     location_id UUID,
     avatar_url TEXT,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
@@ -160,7 +172,17 @@ CREATE OR REPLACE FUNCTION public.handle_new_user()
 RETURNS TRIGGER AS $$
 BEGIN
   INSERT INTO public.profiles (id, email, full_name, role)
-  VALUES (new.id, new.email, new.raw_user_meta_data->>'full_name', COALESCE(new.raw_user_meta_data->>'role', 'community_health_worker'));
+  VALUES (new.id, new.email, new.raw_user_meta_data->>'full_name', (CASE COALESCE(new.raw_user_meta_data->>'role', 'community_health_worker')
+    WHEN 'super_admin' THEN 'super_admin'::public.user_role
+    WHEN 'government_admin' THEN 'government_admin'::public.user_role
+    WHEN 'ngo_admin' THEN 'ngo_admin'::public.user_role
+    WHEN 'school_admin' THEN 'school_admin'::public.user_role
+    WHEN 'clinic_staff' THEN 'clinic_staff'::public.user_role
+    WHEN 'teacher' THEN 'teacher'::public.user_role
+    WHEN 'community_health_worker' THEN 'community_health_worker'::public.user_role
+    WHEN 'emergency_officer' THEN 'emergency_officer'::public.user_role
+    ELSE 'community_health_worker'::public.user_role
+  END));
   RETURN new;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
