@@ -1,0 +1,242 @@
+[
+  {
+    "source": "scheb_main_enclosure",
+    "target": "enclosure_front_panel",
+    "label": "M4 enclosure screws and adhesive weather seal for IP65"
+  },
+  {
+    "source": "scheb_main_enclosure",
+    "target": "scheb_wall_mounting_plate",
+    "label": "Sliding mechanism, locks with security screw"
+  },
+  {
+    "source": "scheb_main_enclosure",
+    "target": "security_screw_m4",
+    "label": "M4 screw for theft prevention"
+  },
+  {
+    "source": "scheb_main_enclosure",
+    "target": "ventilation_grille_top",
+    "label": "Integrated/snap-fit into enclosure opening"
+  },
+  {
+    "source": "scheb_main_enclosure",
+    "target": "ventilation_grille_bottom",
+    "label": "Integrated/snap-fit into enclosure opening"
+  },
+  {
+    "source": "ventilation_grille_top",
+    "target": "dust_filter_vent_top",
+    "label": "Snap-fit/press-fit"
+  },
+  {
+    "source": "ventilation_grille_bottom",
+    "target": "dust_filter_vent_bottom",
+    "label": "Snap-fit/press-fit"
+  },
+  {
+    "source": "scheb_main_enclosure",
+    "target": "carry_handle",
+    "label": "M4 screws/integrated mounts"
+  },
+  {
+    "source": "scheb_main_enclosure",
+    "target": "cable_gland_dc_input",
+    "label": "Threaded into enclosure top/side opening with seal"
+  },
+  {
+    "source": "internal_frame_back_pcb_mount",
+    "target": "scheb_main_enclosure",
+    "label": "M3 screws to internal standoffs"
+  },
+  {
+    "source": "pcb_vertical_mount",
+    "target": "internal_frame_back_pcb_mount",
+    "label": "Guide rails and M3 screws"
+  },
+  {
+    "source": "rf_module_standoffs",
+    "target": "pcb_vertical_mount",
+    "label": "M2 screws for module mounting"
+  },
+  {
+    "source": "oled_display_bezel",
+    "target": "enclosure_front_panel",
+    "label": "Snap-fit/M2 screws from inside"
+  },
+  {
+    "source": "led_alert_red_mount",
+    "target": "enclosure_front_panel",
+    "label": "Snap-fit/press-fit"
+  },
+  {
+    "source": "led_alert_green_mount",
+    "target": "enclosure_front_panel",
+    "label": "Snap-fit/press-fit"
+  },
+  {
+    "source": "sensor_pm25_co2_mount",
+    "target": "pcb_vertical_mount",
+    "label": "M2 screws"
+  },
+  {
+    "source": "sensor_temp_humidity_mount",
+    "target": "pcb_vertical_mount",
+    "label": "M2 screws"
+  },
+  {
+    "source": "sensor_uv_mount",
+    "target": "pcb_vertical_mount",
+    "label": "M2 screws"
+  },
+  {
+    "source": "sensor_ambient_light_mount",
+    "target": "pcb_vertical_mount",
+    "label": "M2 screws"
+  },
+  {
+    "source": "sensor_occupancy_mount",
+    "target": "pcb_vertical_mount",
+    "label": "M2 screws"
+  },
+  {
+    "source": "solar_panel_assembly",
+    "target": "solar_panel_mounting_bracket",
+    "label": "M6 bolts into pre-drilled holes"
+  },
+  {
+    "source": "solar_panel_assembly",
+    "target": "solar_panel_cable",
+    "label": "IP67 junction box connection"
+  },
+  {
+    "source": "main_mcu_mount",
+    "target": "pcb_vertical_mount",
+    "label": "M2 screws"
+  },
+  {
+    "source": "lora_module_mount",
+    "target": "rf_module_standoffs",
+    "label": "M2 screws for module mounting"
+  },
+  {
+    "source": "gps_module_mount",
+    "target": "rf_module_standoffs",
+    "label": "M2 screws for module mounting"
+  },
+  {
+    "source": "rainfall_sensor_mount",
+    "target": "pcb_vertical_mount",
+    "label": "M2 screws"
+  },
+  {
+    "source": "mini_gsm_antenna_mount",
+    "target": "scheb_main_enclosure",
+    "label": "Threaded into enclosure top with lock nut"
+  },
+  {
+    "source": "mini_lora_antenna_mount",
+    "target": "scheb_main_enclosure",
+    "label": "Threaded into enclosure top with lock nut"
+  },
+  {
+    "source": "mini_gps_antenna_mount",
+    "target": "scheb_main_enclosure",
+    "label": "Threaded into enclosure top with lock nut"
+  },
+  {
+    "source": "cable_gland_dc_input",
+    "target": "dc_barrel_jack",
+    "label": "mount"
+  },
+  {
+    "source": "battery_slot_1",
+    "target": "li_ion_18650_cell_1",
+    "label": "mount"
+  },
+  {
+    "source": "battery_slot_2",
+    "target": "li_ion_18650_cell_2",
+    "label": "mount"
+  },
+  {
+    "source": "rf_module_standoffs",
+    "target": "cellular_module",
+    "label": "mount"
+  },
+  {
+    "source": "oled_display_bezel",
+    "target": "oled_display",
+    "label": "mount"
+  },
+  {
+    "source": "led_alert_red_mount",
+    "target": "led_alert_red",
+    "label": "mount"
+  },
+  {
+    "source": "led_alert_green_mount",
+    "target": "led_alert_green",
+    "label": "mount"
+  },
+  {
+    "source": "sensor_pm25_co2_mount",
+    "target": "pm25_co2_sensor",
+    "label": "mount"
+  },
+  {
+    "source": "sensor_temp_humidity_mount",
+    "target": "temperature_humidity_sensor",
+    "label": "mount"
+  },
+  {
+    "source": "sensor_uv_mount",
+    "target": "uv_sensor",
+    "label": "mount"
+  },
+  {
+    "source": "sensor_ambient_light_mount",
+    "target": "ambient_light_sensor",
+    "label": "mount"
+  },
+  {
+    "source": "sensor_occupancy_mount",
+    "target": "occupancy_sensor",
+    "label": "mount"
+  },
+  {
+    "source": "main_mcu_mount",
+    "target": "main_mcu",
+    "label": "mount"
+  },
+  {
+    "source": "lora_module_mount",
+    "target": "lora_module",
+    "label": "mount"
+  },
+  {
+    "source": "gps_module_mount",
+    "target": "gps_module",
+    "label": "mount"
+  },
+  {
+    "source": "rainfall_sensor_mount",
+    "target": "rainfall_sensor",
+    "label": "mount"
+  },
+  {
+    "source": "mini_gsm_antenna_mount",
+    "target": "mini_gsm_antenna",
+    "label": "mount"
+  },
+  {
+    "source": "mini_lora_antenna_mount",
+    "target": "mini_lora_antenna",
+    "label": "mount"
+  },
+  {
+    "source": "mini_gps_antenna_mount",
+    "target": "mini_gps_antenna",
+    "label": "mount"
+  }
+]

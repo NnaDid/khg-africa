@@ -81,7 +81,7 @@ export default function Login() {
         <View className="w-16 h-16 bg-blue-600/15 border border-blue-500/30 rounded-2xl items-center justify-center mb-4">
           <Ionicons name="shield-checkmark" size={32} color={COLORS.primary} />
         </View>
-        <Text className="text-white text-2xl font-black uppercase tracking-widest text-center">
+        <Text className="text-white text-2xl font-black uppercase text-center">
           Field Officer Login
         </Text>
         <Text className="text-slate-400 text-xs text-center mt-1">
@@ -90,15 +90,15 @@ export default function Login() {
       </View>
 
       {/* Form Panel Container */}
-      <View className="bg-slate-950/80 border border-blue-950/60 p-6 rounded-3xl shadow-2xl backdrop-blur-md">
+      <View className=" p-6 rounded-3xl shadow-2xl backdrop-blur-md">
         
         {/* Email input field */}
         <View className="mb-4">
-          <Text className="text-slate-300 text-xs font-bold uppercase tracking-wider mb-2">
+          <Text className="text-slate-300 text-xs font-bold  mb-2">
             Email Address
           </Text>
           <View
-            className={`flex-row items-center border rounded-xl px-4 py-3 bg-slate-900 ${
+            className={`flex-row items-center border rounded px-4 py-3 bg-slate-900 ${
               focusedField === "email" ? "border-emerald-500" : "border-blue-950"
             }`}
           >
@@ -121,7 +121,7 @@ export default function Login() {
         {/* Password input field */}
         <View className="mb-6">
           <View className="flex-row justify-between items-center mb-2">
-            <Text className="text-slate-300 text-xs font-bold uppercase tracking-wider">
+            <Text className="text-slate-300 text-xs font-bold">
               Security Password
             </Text>
             <Pressable onPress={() => router.push("/(auth)/forgot-password")}>
@@ -129,7 +129,7 @@ export default function Login() {
             </Pressable>
           </View>
           <View
-            className={`flex-row items-center border rounded-xl px-4 py-3 bg-slate-900 ${
+            className={`flex-row items-center border rounded px-4 py-3 bg-slate-900 ${
               focusedField === "password" ? "border-emerald-500" : "border-blue-950"
             }`}
           >
@@ -160,7 +160,7 @@ export default function Login() {
         <Pressable
           onPress={handleLogin}
           disabled={isLoading}
-          className="py-4 bg-emerald-500 rounded-2xl items-center justify-center active:opacity-85 shadow-lg flex-row gap-2"
+          className="py-4 bg-emerald-500 rounded items-center justify-center active:opacity-85 shadow-lg flex-row gap-2"
         >
           {isLoading ? (
             <ActivityIndicator size="small" color="white" />

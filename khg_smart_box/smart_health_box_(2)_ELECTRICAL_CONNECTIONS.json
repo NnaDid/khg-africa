@@ -1,0 +1,398 @@
+[
+  {
+    "source": "dc_barrel_jack",
+    "target": "solar_charge_controller",
+    "type": "power",
+    "voltage": "5-12V",
+    "current": "500mA-1A",
+    "label": "Solar Panel Input"
+  },
+  {
+    "source": "solar_charge_controller",
+    "target": "bms_18650",
+    "type": "power",
+    "voltage": "8.4V",
+    "current": "1A",
+    "label": "Charge to BMS"
+  },
+  {
+    "source": "li_ion_18650_cell_1",
+    "target": "bms_18650",
+    "type": "power",
+    "voltage": "3.7V",
+    "current": "2.5A",
+    "label": "Cell 1 to BMS (B-)"
+  },
+  {
+    "source": "li_ion_18650_cell_2",
+    "target": "bms_18650",
+    "type": "power",
+    "voltage": "3.7V",
+    "current": "2.5A",
+    "label": "Cell 2 to BMS (B+)"
+  },
+  {
+    "source": "li_ion_18650_cell_1",
+    "target": "li_ion_18650_cell_2",
+    "type": "power",
+    "voltage": "3.7V",
+    "current": "2.5A",
+    "label": "Series Connection"
+  },
+  {
+    "source": "bms_18650",
+    "target": "main_mcu",
+    "type": "power",
+    "voltage": "7.4V",
+    "current": "2A",
+    "label": "Main System Power"
+  },
+  {
+    "source": "main_mcu",
+    "target": "cellular_module",
+    "type": "power",
+    "voltage": "3.3V",
+    "current": "1A",
+    "label": "Cellular Module Power"
+  },
+  {
+    "source": "main_mcu",
+    "target": "lora_module",
+    "type": "power",
+    "voltage": "3.3V",
+    "current": "100mA",
+    "label": "LoRa Module Power"
+  },
+  {
+    "source": "main_mcu",
+    "target": "gps_module",
+    "type": "power",
+    "voltage": "3.3V",
+    "current": "50mA",
+    "label": "GPS Module Power"
+  },
+  {
+    "source": "main_mcu",
+    "target": "temperature_humidity_sensor",
+    "type": "power",
+    "voltage": "3.3V",
+    "current": "10mA",
+    "label": "Temp/Hum Sensor Power"
+  },
+  {
+    "source": "main_mcu",
+    "target": "pm25_co2_sensor",
+    "type": "power",
+    "voltage": "3.3V",
+    "current": "100mA",
+    "label": "PM2.5/CO2 Sensor Power"
+  },
+  {
+    "source": "main_mcu",
+    "target": "uv_sensor",
+    "type": "power",
+    "voltage": "3.3V",
+    "current": "5mA",
+    "label": "UV Sensor Power"
+  },
+  {
+    "source": "main_mcu",
+    "target": "rainfall_sensor",
+    "type": "power",
+    "voltage": "3.3V",
+    "current": "5mA",
+    "label": "Rainfall Sensor Power"
+  },
+  {
+    "source": "main_mcu",
+    "target": "ambient_light_sensor",
+    "type": "power",
+    "voltage": "3.3V",
+    "current": "5mA",
+    "label": "Ambient Light Sensor Power"
+  },
+  {
+    "source": "main_mcu",
+    "target": "occupancy_sensor",
+    "type": "power",
+    "voltage": "3.3V",
+    "current": "15mA",
+    "label": "Occupancy Sensor Power"
+  },
+  {
+    "source": "main_mcu",
+    "target": "oled_display",
+    "type": "power",
+    "voltage": "3.3V",
+    "current": "20mA",
+    "label": "OLED Display Power"
+  },
+  {
+    "source": "main_mcu",
+    "target": "led_alert_red",
+    "type": "power",
+    "voltage": "3.3V",
+    "current": "10mA",
+    "label": "Red LED Power"
+  },
+  {
+    "source": "main_mcu",
+    "target": "led_alert_green",
+    "type": "power",
+    "voltage": "3.3V",
+    "current": "10mA",
+    "label": "Green LED Power"
+  },
+  {
+    "source": "main_mcu",
+    "target": "cellular_module",
+    "type": "data",
+    "protocol": "uart",
+    "sourcePin": "UART_TX",
+    "targetPin": "RX",
+    "label": "MCU to Cellular TX"
+  },
+  {
+    "source": "cellular_module",
+    "target": "main_mcu",
+    "type": "data",
+    "protocol": "uart",
+    "sourcePin": "TX",
+    "targetPin": "UART_RX",
+    "label": "Cellular to MCU RX"
+  },
+  {
+    "source": "cellular_module",
+    "target": "mini_gsm_antenna",
+    "type": "data",
+    "protocol": "rf",
+    "sourcePin": "ANT",
+    "targetPin": "SMA",
+    "label": "Cellular Antenna"
+  },
+  {
+    "source": "main_mcu",
+    "target": "lora_module",
+    "type": "data",
+    "protocol": "spi",
+    "sourcePin": "SPI_MOSI",
+    "targetPin": "MOSI",
+    "label": "MCU to LoRa MOSI"
+  },
+  {
+    "source": "lora_module",
+    "target": "main_mcu",
+    "type": "data",
+    "protocol": "spi",
+    "sourcePin": "MISO",
+    "targetPin": "SPI_MISO",
+    "label": "LoRa to MCU MISO"
+  },
+  {
+    "source": "main_mcu",
+    "target": "lora_module",
+    "type": "data",
+    "protocol": "spi",
+    "sourcePin": "SPI_SCK",
+    "targetPin": "SCK",
+    "label": "MCU to LoRa SCK"
+  },
+  {
+    "source": "main_mcu",
+    "target": "lora_module",
+    "type": "data",
+    "protocol": "gpio",
+    "sourcePin": "GPIO_CS",
+    "targetPin": "CS",
+    "label": "MCU to LoRa CS"
+  },
+  {
+    "source": "main_mcu",
+    "target": "lora_module",
+    "type": "data",
+    "protocol": "gpio",
+    "sourcePin": "GPIO_DIO0",
+    "targetPin": "DIO0",
+    "label": "MCU to LoRa DIO0"
+  },
+  {
+    "source": "main_mcu",
+    "target": "lora_module",
+    "type": "data",
+    "protocol": "gpio",
+    "sourcePin": "GPIO_RESET",
+    "targetPin": "RESET",
+    "label": "MCU to LoRa Reset"
+  },
+  {
+    "source": "lora_module",
+    "target": "mini_lora_antenna",
+    "type": "data",
+    "protocol": "rf",
+    "sourcePin": "ANT",
+    "targetPin": "SMA",
+    "label": "LoRa Antenna"
+  },
+  {
+    "source": "main_mcu",
+    "target": "gps_module",
+    "type": "data",
+    "protocol": "uart",
+    "sourcePin": "UART2_TX",
+    "targetPin": "RX",
+    "label": "MCU to GPS TX"
+  },
+  {
+    "source": "gps_module",
+    "target": "main_mcu",
+    "type": "data",
+    "protocol": "uart",
+    "sourcePin": "TX",
+    "targetPin": "UART2_RX",
+    "label": "GPS to MCU RX"
+  },
+  {
+    "source": "gps_module",
+    "target": "mini_gps_antenna",
+    "type": "data",
+    "protocol": "rf",
+    "sourcePin": "ANT",
+    "targetPin": "SMA",
+    "label": "GPS Antenna"
+  },
+  {
+    "source": "main_mcu",
+    "target": "temperature_humidity_sensor",
+    "type": "data",
+    "protocol": "i2c",
+    "sourcePin": "I2C_SDA",
+    "targetPin": "SDA",
+    "label": "MCU to Temp/Hum SDA"
+  },
+  {
+    "source": "main_mcu",
+    "target": "temperature_humidity_sensor",
+    "type": "data",
+    "protocol": "i2c",
+    "sourcePin": "I2C_SCL",
+    "targetPin": "SCL",
+    "label": "MCU to Temp/Hum SCL"
+  },
+  {
+    "source": "main_mcu",
+    "target": "pm25_co2_sensor",
+    "type": "data",
+    "protocol": "uart",
+    "sourcePin": "UART3_TX",
+    "targetPin": "RX",
+    "label": "MCU to PM2.5/CO2 TX"
+  },
+  {
+    "source": "pm25_co2_sensor",
+    "target": "main_mcu",
+    "type": "data",
+    "protocol": "uart",
+    "sourcePin": "TX",
+    "targetPin": "UART3_RX",
+    "label": "PM2.5/CO2 to MCU RX"
+  },
+  {
+    "source": "main_mcu",
+    "target": "uv_sensor",
+    "type": "data",
+    "protocol": "i2c",
+    "sourcePin": "I2C_SDA",
+    "targetPin": "SDA",
+    "label": "MCU to UV SDA"
+  },
+  {
+    "source": "main_mcu",
+    "target": "uv_sensor",
+    "type": "data",
+    "protocol": "i2c",
+    "sourcePin": "I2C_SCL",
+    "targetPin": "SCL",
+    "label": "MCU to UV SCL"
+  },
+  {
+    "source": "main_mcu",
+    "target": "rainfall_sensor",
+    "type": "data",
+    "protocol": "gpio",
+    "sourcePin": "GPIO_RAIN_DO",
+    "targetPin": "DO",
+    "label": "MCU to Rainfall Digital Out"
+  },
+  {
+    "source": "main_mcu",
+    "target": "rainfall_sensor",
+    "type": "data",
+    "protocol": "analog",
+    "sourcePin": "ADC_RAIN_AO",
+    "targetPin": "AO",
+    "label": "MCU to Rainfall Analog Out"
+  },
+  {
+    "source": "main_mcu",
+    "target": "ambient_light_sensor",
+    "type": "data",
+    "protocol": "i2c",
+    "sourcePin": "I2C_SDA",
+    "targetPin": "SDA",
+    "label": "MCU to Light SDA"
+  },
+  {
+    "source": "main_mcu",
+    "target": "ambient_light_sensor",
+    "type": "data",
+    "protocol": "i2c",
+    "sourcePin": "I2C_SCL",
+    "targetPin": "SCL",
+    "label": "MCU to Light SCL"
+  },
+  {
+    "source": "main_mcu",
+    "target": "occupancy_sensor",
+    "type": "data",
+    "protocol": "gpio",
+    "sourcePin": "GPIO_PIR_OUT",
+    "targetPin": "OUT",
+    "label": "MCU to PIR Out"
+  },
+  {
+    "source": "main_mcu",
+    "target": "oled_display",
+    "type": "data",
+    "protocol": "i2c",
+    "sourcePin": "I2C_SDA",
+    "targetPin": "SDA",
+    "label": "MCU to OLED SDA"
+  },
+  {
+    "source": "main_mcu",
+    "target": "oled_display",
+    "type": "data",
+    "protocol": "i2c",
+    "sourcePin": "I2C_SCL",
+    "targetPin": "SCL",
+    "label": "MCU to OLED SCL"
+  },
+  {
+    "source": "main_mcu",
+    "target": "led_alert_red",
+    "type": "data",
+    "protocol": "gpio",
+    "sourcePin": "GPIO_LED_RED",
+    "targetPin": "CATHODE",
+    "label": "MCU to Red LED"
+  },
+  {
+    "source": "main_mcu",
+    "target": "led_alert_green",
+    "type": "data",
+    "protocol": "gpio",
+    "sourcePin": "GPIO_LED_GREEN",
+    "targetPin": "CATHODE",
+    "label": "MCU to Green LED"
+  }
+]

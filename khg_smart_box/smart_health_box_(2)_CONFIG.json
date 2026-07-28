@@ -1,0 +1,3446 @@
+{
+  "projectName": "Smart Health Box (2)",
+  "nodes": [
+    {
+      "id": "main_mcu",
+      "name": "Main Controller",
+      "productName": "ESP32-S3-WROOM-1-N16R8",
+      "category": "electrical",
+      "type": "mcu",
+      "pins": [
+        "GPIO",
+        "UART",
+        "SPI",
+        "I2C",
+        "ADC"
+      ],
+      "dimensions": "18x25.5x3mm",
+      "quantity": 1,
+      "estimatedCost": 7.5,
+      "purchaseUrl": "https://www.digikey.com/en/products/detail/espressif-systems/ESP32-S3-WROOM-1-N16R8/16474668",
+      "partId": "f9744683-b81f-4ddc-bfff-9284e413d12e",
+      "description": "ESP32-S3-WROOM-1-N16R8 module with 16MB Flash and 8MB PSRAM for display buffer and general processing.",
+      "imageUrl": "https://cdn-shop.adafruit.com/640x480/5364-00.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHxzP9bQdhMkzYP23ClY6q77MOEMLTakubOCHUyq0uZ1Pr4rTWYT0qRlKwXzxR6SGEmGriKy6ZobZ0TyesFaGq0mmAIS9NgjQhWNDL7wfHp8ZTu9qkTdrjA9vh5ipMmZuDfbVmHeg1snERiFhk7WPId9tleN62rRODDwrObMmpNRpRpKpwes092t8GY3hhCGMR64U7n3PJd4WdGA9jxbCjJutUQkhvxIs7dRudoNBz8JOrmpwPY7OD3b7CXviE9kWvumNfsAUIabw2tlXaX9QlAYtOy4TqwsGv8IA4Jn8eEGJaPO8rqVeD9d6t0ahqfdkeCiZ8nXhRtALKyCsFjJZC33m4HI1KNB8OUMi8Jq1hMKa3sUG6UaBSlaMFFB62WJYwPT2PX838BoWNvqg8T2CYteDOVK93JRdirpFCqMJqO5yLPcKDimTeB3Ya09UWu33u9C5Hv4vLWjFLEnUUrlwsPkpdVJAtAKAAheVND2ZZXOAnviPWV5Im0b15mBTDes1GnBZjVuxkIddtXIpGW6I2CObBgOkrPIIXailQ7CfKLq8PHdsjxR2OkgRBRfTvuXSyqtlAzAp5BiJ2QG6Fd0HZSXYFVEE1kpfCZMd9PUVbYqT6SQl2GmYK7hCMLpNgKwRRcrZ5bQGeAASOqamwbq0xPV",
+      "research": {
+        "documentationUrls": [
+          {
+            "url": "https://www.adafruit.com/product/5364",
+            "title": "Product Page (Adafruit)"
+          }
+        ],
+        "sourcing": [
+          {
+            "vendor": "TME",
+            "url": "https://octopart.com/opatz8j6/a1?t=2tVy51o-0MrxGoP1xAnv_NHTA8oa2Kh2viVwv_SS273kVF5E_2GkYNtR3bH6778ZUmUMS2whWDdca-73T_jewrFLCRuEUv-XP1iLPyUIXYCLlvgl1VVNeS9JWtrKIqsspB8RGXLbtJY_GS8mY8tU_1lc85xBq93Ux16fXyUZQmK8OnJVqVierwm7uA_a47iJISrqZaP_N1Yzj_uyp2j_KD6jdbC-LF8N9sIcf2eTFfb9QIW7atXN_91I99US4ekx2WP6P8QG85UOe8M0hQkDFoaRz5WjWQ",
+            "price": "$6.3"
+          },
+          {
+            "vendor": "Conrad",
+            "url": "https://octopart.com/opatz8j6/a1?t=zIggpD53FtVCtuVkTgRUFsCdiP5Mrms3nMfbpIkj1IO4NWTlbIWJCucTb-voqGdfuwt1IZXY9leLj03G88NbjCg4k7vhpnEZWRSmJB7UFUg4JeOzakP1Y-D-kE89toZrmEnux4UhLc6AYUFiPVaMj3BWpFZ712eUIXqAwz1LyvezXIRPRy7KfNivD1gGWL4H6ZGSjVoGlXcQk9sqoVLqsLGUETSXcghQ5K3kWUZVTgolCtAI0Grl6KvRTRXXZKj4xueq9OURJiixq2UNlC_RMTwfCxVA9OI",
+            "price": "$7.56"
+          },
+          {
+            "vendor": "Future Electronics",
+            "url": "https://octopart.com/opatz8j6/a1?t=VNSQRYFDRqkQVUZHLvEz3hbVmuZRDqvwYlAlGQLICU3_PP3Vue98sXGmjcVyEv5UfaZcuPr-MZRCKxuEETmkbDc-QwJCbbgStO9si5oXIbL8cpTEe4zqjcnbtaUDtQTwF66hCe2Jd0nUvTMft-DIJkExruUbDhzwc1PsfbSmAFwv9A8Z1KgsENJqeZgkS-JvZ8TcXxr8iVLe7qxkI6_ogfK2rQxxS3Qbl76fFv5VZ_OfAIYonDlhyhRmnoRTKpVgLat2lixcHczeWbyfVgjOhTlM9VJAZQ",
+            "price": "$3.9"
+          },
+          {
+            "vendor": "DigiKey",
+            "url": "https://octopart.com/opatz8j6/a1?t=tNshgvHlpoBr8OEnY6HTziOaIyDuIsD6TlKho9lgwzp0xHZeZ87fnB9_b1uG3s0XhXpvoUrlSnZr27fSF8D9s0BcadTZ3jTttC7sFssdWckaa6tnYce_tN43rok2X0hpO_uHrlfqKGXJJAQmkbDDKEFxrzptZToyaNtg8MuperCzSbrEUOod0kR2x9dujPJrfaizQo7X17rvB9OdhmiKjII5Ogus2TuTonqsqPP810ZP1m5kd2wKKUr-nKV2Zoyb3tLLA_W70LfKH-6W0NXBXWVJ06c9",
+            "price": "$6.76"
+          },
+          {
+            "vendor": "Schukat",
+            "url": "https://octopart.com/opatz8j6/a1?t=JZdqWOx0vOl_vmlEjaxU1IM9KwUt34_fbJBhh3lP7IkKPeDqA_dJL4Wj91O9izi1uCZrlpXU3XR9PjtpgvABKkJI9XtX0DMn-wTC1V69iAX5npsOa2bNWfP1I5hwCZj1lpm4C4o0XFlxDLcL9tHPHzmcG_1GYdEQNXT0NbP0VbiKbx3WHbl-OhZwboXXb2jJjgWiDia5QJwlXVJyZ2GvyIliCi2b4vgauMuylEmCuaKym-f8-xEFmyE-Q88ebB7awLRr3eAFpx1r9C3v9OdBZ1OPYml-e9M",
+            "price": "$4.39"
+          },
+          {
+            "vendor": "Mouser",
+            "url": "https://octopart.com/opatz8j6/a1?t=KLPr55ud_5zfv_PK1hEG5S2AzD0HM7ryGnFC9KmeHbJZPs711RJiEEpBnGuwhvxVdoizT97qQl1aDZouMHnsFo9Pk9dYgHXWrExt-8UROzAea-28MUrB3YxUXXMuoqsKtmKEkNZZww4WQRk9DUCJtqnSTDOJkvgag_zjzDe75Ghd3-XF5tT9MmMZ82qKIWvmCxU0y0GYxE-s-PPN5tleb8Hf0uGgfcefB9O4jU3VJixhqsdBLAxQjTIVWNEyuHJov3n4AvM86V8QS4DfVQuTSsijr7d4Aw",
+            "price": "$6.74"
+          },
+          {
+            "vendor": "Component Search",
+            "url": "https://octopart.com/opatz8j6/a1?t=Di2cuGC8fsGvGi0LcG_dQgnMSBk055UiR0HYaw_WvQiXRUSheY6SM6zBJDATks4y-Sh8x1kmg9bLnTM9aJ5B_yoteWLB0OEVpJ9TDbCusNmzzSL39lH2w8ZWnuxFtwiw8VJrqrPxAGNl6YgdEtN6BvNnpkV9yLXpwIYRH33Xs68jsyeCfFY42DE4vWIviOy0xBpPGR45kv_ELcxSnTgW0yXgVD_XEbPEah8GkwAovRWBqr6krQnLrW51aV8_cnroJYaMEccqMHVZUiNzU6vAIXJT6GW6uI0"
+          },
+          {
+            "vendor": "Weyland Electronics Group Pte. Ltd.",
+            "url": "https://octopart.com/opatz8j6/a1?t=ldP4W_hkDH3kzudAvG-i6_SLaXneg-f4IPL99niBMoDGlYy83dOrzlbueeB_FmgFUOzyXy2jSN6fmDoQXW6Gqq-QCw7Lb8F_sDK7Mtclv_d3WVpEU8Fqurh9IKkULSATvAfI37O_w2jgUBXK-_rZe-GWxdW64k-NAc0p-KT0Mq5wBP_mI1eW1ECe0iL1mz7TQWeowZ93r_pvjsU8FKk2SJ3UIEqnbXrt_tqZn1Brl1yHz-Pt0b1P07KbDYRYcNMWI4npkBC3fV1CkXbaFyZ97HguHi4JkIQ",
+            "price": "$2.479"
+          },
+          {
+            "vendor": "Win Source",
+            "url": "https://octopart.com/opatz8j6/a1?t=fFj6DphuBG_uoNstJqZBRlM1Jr6lCtdRzZqleymNTf0An2QqYpARgQvGA0QcWZF0HaDD_l8J262t1ba88cPlbsu6iMJuEa5ZzxYaIXomJGLqAyGWLwFTqJNYDFvSMNJnAmKrN_R4bjy_r6C_CFESynR4DJ8bP0EF8zzntRGdhDpKFEzMDVZ8t3-7NnOlkR3oj4UcLsX0-S2id4xnVBUsCvxnjS3GfiI1buWJwknKf_DFuQVbLYFpdo3iLGVpHt7TvUe5DAatF13ubrpGYkrzGfyyJdjcsCo",
+            "price": "$5.6843"
+          },
+          {
+            "vendor": "YIC International",
+            "url": "https://octopart.com/opatz8j6/a1?t=FTId-M9oay4FDdFXH8PPE2zVo8JZvKWfJ9PV2d-bYugbPcR5JYOmlnvVGMPPJuH52wZROu1d00WDi3w-hC81n8HCVEfFi-VpmT3-bTtayeKOPoxj0EFwGuXgZ4HR3LNkUWvh1GcDuYWIy_YQIOB7vUxtrVL-yRkIzKavpRaNmMjYJa4V0SHWtPbx8uamk50uS-ocZOcRIb82abLhVfSpISZbng_Eb7j1bID6sLbJYSLR0COFBAX0N3Godx06CAIWgajEna2kH2ndjliSCcZEJqWlv2thepQ",
+            "price": "$2.814"
+          },
+          {
+            "vendor": "Classic Components",
+            "url": "https://octopart.com/opatz8j6/a1?t=IQBoSeVJdKqLcEOndMJsWrABvZaj_4yLCN5zo3TvYqRa_vS9f_rBlCQASOTq9vnYmtbtyJXEhBHPVSDwzrU9hMw9ioELD-sonTkSN0yzUWzeWEvPlaEYOs_wnXbW87DfpnBhN6IKlHhsYozxYVcrk40DGyAQeVym8arC0H-yD_IGf6S5tJda7YZhIKj3swobYalivCCQ3K8dy68WF4hLlFMBHIsyqLhJje_xQlvPtOS0uxd7N_u0Ok9qgPinBcCJxxSe2gLy8oxb00fpFGbOW5kmRPcIpn8",
+            "price": "$2.964"
+          },
+          {
+            "vendor": "IC Components Ltd.",
+            "url": "https://octopart.com/opatz8j6/a1?t=psUanlDtI293SCaoHMNVvK0EgNWQdZouqKF0fjTLKACEkPeJZw5jAYgPhZ9CUoVwLh25gl7IFkoiQj0FhUMWmV4Zs-Knfo8fro9FCDoI-vpYAsHTJtEKoVNsX_NaozVtIqpr9m8Iv0z-aerq8Vruz3_OtzmjSiTVFMDD5LWGL2GbXRtfKStxABWE8-Wd4OjE7Hzk5tFgliWoY-D5POo2HtBtfl6iFDiAN1eMxuT5rGkTbAp5hnoZA-fC0QUfH6hSJfacC5DYzIKos2PZll6XCillgErTisA",
+            "price": "$10.66"
+          },
+          {
+            "vendor": "Maritex",
+            "url": "https://octopart.com/opatz8j6/a1?t=rKN7Lh8PvDBfCnOSQUKrev4ETw_KyWYZZTG2_Aj_8_7Q14Ayn2t3321gVil5pbaTs2jV27M8eoY5tEcprkcwY042jrXtfqCNFZ5bZyGK86mlr-fZCcfbmlM1Yocn1_e9oGSV5sgoeYhTWSAV-tdiriSDSO0H5KQXVcII7CPDnJM6OKkwku7jo2oAaWjJj6S_aXuCKCps4O5xUlAfs7QiGuw1iDgBZrkgazasSltOCyQDsZWihbUUPtfaaRBL90CFUMD1JFkC0KM5zcDSMjrLEf-fHPoeg_E",
+            "price": "$9.5693"
+          },
+          {
+            "vendor": "Aztech",
+            "url": "https://octopart.com/opatz8j6/a1?t=U6TGg9LlJb-nI6dx4F4csydI9RXzaoq-YQWRAKRgyodDzT1CiKBLbIqAgbgvPWfmoBKTWo7FZaCfPiWtsyOp-dHS_MC9LOlLSdZxDjeRsGT6b1bEUGfcQPCMnCIVrLH2KzP2PhsPqMGmbyzkufts9nN03MIMqz3cwGDuy2upgBfo9rJCPBT6hLhqlZoCYRnED33S3kGPEV_9ufAmCuL55fYvALmS9-hnaxnZBhyhLNzCHWXiGNrcwnTP8bsM9u4XmI-KSJ6dNKJBZA0BoanjICIQCm-uvzY",
+            "price": "$4.16"
+          },
+          {
+            "vendor": "UnikeyIC",
+            "url": "https://octopart.com/opatz8j6/a1?t=naUjXeOGu5n1oM9Usybib3h5NZw4EImwkJPeDKYLOGopAu97hXxeOBqWHIlblpsbOCe29r7WodaLtrdRr-aYttot82Lvx_fE5pFD-Z_UuQg1LZYvS_BbWXSyVU6IBraep52Xvqxe3ZH_gnEzVFqo2teHhOOFDmFwYH0UinJrfcTlnQR06aYFUDMY4ZFspMCOEngwyQVGNL0amKqagaT0nknXZnldVkFKVXMknlsZRwa5hxY37_WprZR458LYXX90ALd-zP_jwAx6nZ6DO7Zw9u70sCMTC9Q",
+            "price": "$5.9606"
+          },
+          {
+            "vendor": "Worldway Electronics",
+            "url": "https://octopart.com/opatz8j6/a1?t=W6-nwzjh-yHmgWFnzhG3TIXCxfALXZhDq2mQ8lMDlbAXaRblw_C08zprDhFYO8dJCuvi390Vyysn0g0-guHYef7CCQjsY_qBbLc5DTVuS4GrcSFrtfs9y7WmC4V5ZFRj6UtH2QCoCb0hyG_vK6mQ7pl9_mFFIZ6miulDCutPGlDCckwi7ckT24OzxwMy1dVkH-EN7moCuF3BM-heKayex9p91DtWGwqZHcb8G6fVbJsaN4iiB0PLPqZ0oe1Wrq96cXINVtn-rCKwjaKMaIxAs-f4gRtptrg",
+            "price": "$2.7731"
+          },
+          {
+            "vendor": "LCSC",
+            "url": "https://octopart.com/opatz8j6/a1?t=c5qPIq1t4-KzS2iSzxS-hO8dmM-m8FnwivO6Cddt0DObj3tXwSS4iP7VXzjVBtRxcDmIt8DlsXQn2sfSlDv893UIW9G0Pz4kAYSX6W1X51OLSW--GcgGWIaUdgZfzdWFV42FWgqWeXQ8Ut6cz-hnVjwO9IQw0Yhm7vpGdN6o8mS6_OQLrGv3RfQnHHQjYhTT4C4QixCt48aU5AD_y6cRPgX4S8IbtgBf5SyH6TDvgktZztEeX8r1nL7itGfK7_mEX9OXvEu6G4NAN_naQGWUOVpZdPhbnn0",
+            "price": "$5.4014"
+          },
+          {
+            "vendor": "Chipsmall Limited",
+            "url": "https://octopart.com/opatz8j6/a1?t=VNfArN0zpXi096wtvISN7HcSDohO9jeN29mSIlR1E1f-v4oJhoJjiFLZkMBFjU0HAte9nfjwSoNWsH0ipC7RYEH1abbWPOzd2CbwUMJ0DtBed2mBICEyKNKlMfsVGWtxguPgTyo_omQYz4OLeSTTnunAGT7GhF3kyoieQLqCuWR6dLt1ResJJ9GSllN4n5jelARKSEZu_u9KjXsAeW_DgzBbHtCGbjzwQ3tjP0I4qOPT4CSGsQ-xynWh9Ew0sX3XRW0dFcziORZqc5A-kkCdVzFIHJm8308",
+            "price": "$5.62178"
+          },
+          {
+            "vendor": "Axis Part Limited",
+            "url": "https://octopart.com/opatz8j6/a1?t=TO8nr3HqSKfYlbv8Zkje1C9_Xojm4fD3O4-4N28iXEgLwDdlHbu7e2t2LP3FoduSbb6k6HL0FDi34bEKfN0DEnLeIrxkZSHUyuneaQCTBiGsWqcs4Kb-swreNpA8LuG0pgh1isBiDp2nU-ljK9ZXv3kCS9t_D6AEl1jzXhK1WHByaaxgmv4-ClccfAAbtwia1TgGYCfbPmtF-4eeaf215rBVE0xX0BZzbuOwuS2QS3CsSTHx9SrIruNZ9CYdomv0K7NMG4aIzXL2kIK1xQbJ1HJeTOky1Uo",
+            "price": "$4.0693"
+          },
+          {
+            "vendor": "Abacus Technologies",
+            "url": "https://octopart.com/opatz8j6/a1?t=H-AgFX03OjSixOVJ5RZAyRAXQu6nRn4yfXM143qS1lPDnXMu819hxuCEDFtx4tFpTxeZUEfoSiYJtu-zKSVIwcSVhptndv4LRyDhoJtFcQK5UNyOk5S0_nl2Cd2UWx9PkgdT8TugvgaefwwifbhKT6yv5p6RneCio7JoXmCV-U-fYpwjqcPycu4b6jd5t3QMcvuiy2kBbic6ItqBynKVH_6jwC0hvXF-7pKl-xl6oSORl5OFLIMq013BKGgv3NRMx170F6Iqb7IY99wnaM5kXfNBD1oVk7o",
+            "price": "$5.85"
+          },
+          {
+            "vendor": "ODG (Origin Data Global)",
+            "url": "https://octopart.com/opatz8j6/a1?t=9LB4aaREVrDFZfkQQEowBpoj49M6aJwNxy6ElR7WSmwT7TfaUzlLwGbuyZfGyEw0qWNhrxL4HULn6fCqI5Zl6GER5uQzavfdjD08UlTLrCJBGxKmxvvJlMF-vj2C2PD4KN0CL78C4h7mj1Tmnva5-q8YOZDXLwR5rm-VaJ6FoMmH3avYwxozQPpNUjttRv9_VIiPtjfF-Pw-ZFUc19HoXfGXQncd4-Qxg0ub4oSKElpGo5Z_kj0VwRTswO44_lyBi7xRMUWwK1Im5z3BXRU5Fy9pzW_ftnY",
+            "price": "$3.4587"
+          },
+          {
+            "vendor": "Digi-ic_SMART PIONEER",
+            "url": "https://octopart.com/opatz8j6/a1?t=2vr8lcAuDImp5MSN3Umug_N5HUtFs-VuHiXRpt1bcO5XFV2TvC6svdzXkro5SJvqNgPAg41aNkry1ER0ntFUrhi8E43ZXG39jLUuWAh0nUvk51G09yXow8yV8crv-EBDIskkHCOqVJ2K-ojUEJ91_cwl_94FAHBp0bijQrzHOdA4hfmSpOOKdoqLaXrY-sHjcc-TOjI3kgh-FlmKZBfEjXOf8Kwp07PG9ReKlDvIFZVxlJxsk8vPWPfr4nDLVBZKok8ioO6Bfj26QrSpA9eF_MYlxG2qMqM"
+          },
+          {
+            "vendor": "Rapid Electronics",
+            "url": "https://octopart.com/opatz8j6/a1?t=ir_ImiDVKQ5tG2eI4Lq4ucGqTf5HFKdfyHKFfns1nNiaYvzQokXRRK4NxgipDn9v8pXRXTu_EG16aFN_Nqs0H3Y_CtTGz1qZjH5Er1TQKuFmUQ66RsqY1vIisrpIQp903eqK5Lrp4iXxRIjiwl6XnWjEuO896irKknD3-ZkzhQvbwYxKoR0DQVeuUMb0SlhoWnMo9KQ-mDP5268LQ6mgv3YZ8sBRPiNt3tOrdT-LgEZ2pXRcYVO56_4_iMzk3Dr-lW9ZvJst_Mr40DqO9aTj9p12pVePrS4",
+            "price": "$5.95"
+          },
+          {
+            "vendor": "Augswan",
+            "url": "https://octopart.com/opatz8j6/a1?t=alcpK4VgwTBEfMmuhKibUcxxQ2vbWNDouT8F0v2FdRr6n7Uf8aGomhG1FICPESdUYaeWm8vCYyaiuSH7n8TyxxAnZqa3uaMrH-MViYCZ3-I59SH4QRslT8ZxQTVbPwSTGBOSNhK1FajXvSMmzSH6-iG9I-XCKDSK-1aErBHZ1cwpWAovQqzzyLc3IG1S552GASP_jYsc2op_6QEj0iJMIEhb2jvU2v-tVekg-Z4RigLJjZWwc8dNDEW7Drpr05cUvRXm43LSKOKouJo0IA0cQCd206bXQ50",
+            "price": "$3.939"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0F5QCK6X5?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$18.99"
+          },
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/item/1005008168727665.html?pdp_npi=6%40dis%21USD%2116.30%215.70%21%21%21110.22%2138.58%21%402141149b17793341042625066e11dc%2112000044073440726%21affd%21%21%21%211%210%21",
+            "price": "$5.7"
+          },
+          {
+            "vendor": "Adafruit",
+            "url": "https://www.adafruit.com/product/5364",
+            "price": "$19.95"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0DB1WK3CW?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$19.82"
+          }
+        ],
+        "specs": [
+          {
+            "label": "pins",
+            "value": "GPIO0-48,ADC,DAC,I2C,I2S,SPI,UART,PWM,USB-OTG,3V3,5V,GND"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=ESP32-S3-WROOM-1-N16R8&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "amazonUrl": "https://www.amazon.com/dp/B0F5QCK6X5?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+      "boundingBox": {
+        "width": 18,
+        "height": 25.5,
+        "depth": 3
+      },
+      "position3d": {
+        "x": 50.8,
+        "y": 160,
+        "z": 30
+      }
+    },
+    {
+      "id": "cellular_module",
+      "name": "GSM/4G Module",
+      "productName": "SIM7600G-H",
+      "category": "electrical",
+      "type": "module",
+      "pins": [
+        "UART",
+        "PWR",
+        "ANT"
+      ],
+      "dimensions": "30x30x2.9mm",
+      "quantity": 1,
+      "estimatedCost": 35,
+      "purchaseUrl": "https://www.digikey.com/en/products/detail/simcom-wireless-solutions/SIM7600G-H/10475149",
+      "partId": "cb169c15-5e8d-4d3c-8400-9ab480806265",
+      "description": "Global multi-mode 2G/3G/4G cellular module with integrated SIM card slot for independent network connectivity.",
+      "imageUrl": "https://m.media-amazon.com/images/I/51QYV4ZpwsL._SL500_.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHuCkGRexKwrNCV8y8wvuGa5p9lQWmLZFKKDq1VQnKjSIBkQgU3Q2jdWOO2MptI7t2XGfDnYXfFgbC3zKUu3dLAOt3aYrNbvJDwWqRQZTc1N7mkUCQTgClLXBT2hCOohXpbIIGywOomP8qq4Ll8QXcl7pR73Z6pYC2z6SO1mlXKX3sYttIvFRMBWsv7Gi4USJWnUx3V4tlNMerCnExUeEUWqM8TIvYFOkZKwCwsAjN6JWzLWBpMeNgfe5vasxzSg7CfGonmXMVxuwQp3BtnVJhlAmeXCMDhxAScSMPT0rq6sXpNZkF76U4mOvjZtUje5UIPto6b9UqE87cF6JYQzlabFt2AebcW2Y8Ezvsahd1wQcdZxsCUdHlrOuvCEMu8iGn3mDSa9A98ePeRcrrAux1CLUT9bgdsqGJp3n7mBZlf7Ob3BjSFzrVVTJFR5LzCU9Gt2GBP3nJPgkHocFYcGTEiT6VuCcM10l988IyS0saiGW0LDamOm1ZVdjbDaQJM6KDBf80dfYmyXivjfZwy9rEMoUja5Q5j7ifauWu3FiNuTRoqUiH2cfaZEB2JomeD8yi8IECpxnG0tWPu2WtoDIvQzNeJKWsTkYkhYPwgYZQeLJ9Ta3N7AMFhBy21KMsRnUJSY7wGg8W489MITN55ETNht",
+      "research": {
+        "sourcing": [
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/item/1005006999298056.html?pdp_npi=6%40dis%21USD%2128.00%2128.00%21%21%21189.44%21189.44%21%402141149b17795522793458233e1179%2112000039001486943%21affd%21%21%21%211%210%21",
+            "price": "$28"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B08CSB596W?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$78.71"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B08ZSSCYDD?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$115.99"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=SIM7600G-H&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "amazonUrl": "https://www.amazon.com/dp/B08CSB596W?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+      "boundingBox": {
+        "width": 30,
+        "height": 30,
+        "depth": 2.9
+      },
+      "position3d": {
+        "x": 50.8,
+        "y": 200,
+        "z": 30
+      }
+    },
+    {
+      "id": "lora_module",
+      "name": "LoRa Transceiver Module",
+      "productName": "SX1262 LoRa Module (e.g., Ra-02S)",
+      "category": "electrical",
+      "type": "module",
+      "pins": [
+        "SPI",
+        "DIO",
+        "RESET",
+        "PWR",
+        "ANT"
+      ],
+      "dimensions": "16x16x2.5mm",
+      "quantity": 1,
+      "estimatedCost": 5,
+      "purchaseUrl": "https://www.digikey.com/en/products/result?keywords=SX1262+LoRa+module",
+      "partId": "8372ce1b-e403-4f8d-9af5-f5131fc9fa32",
+      "imageUrl": "https://m.media-amazon.com/images/I/41Wsoh-lSUL._SL500_.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/e/_c3mDJRzv",
+      "research": {
+        "sourcing": [
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0G527ZB64?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$18.99"
+          },
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/w/wholesale-semtech-sx1262-lora-module-e-g-rak4270.html"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=SX1262+LoRa+Module+%28e.g.%2C+Ra-02S%29&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "amazonUrl": "https://www.amazon.com/dp/B0G527ZB64?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+      "boundingBox": {
+        "width": 16,
+        "height": 16,
+        "depth": 2.5
+      },
+      "position3d": {
+        "x": 25,
+        "y": 230,
+        "z": 30
+      }
+    },
+    {
+      "id": "gps_module",
+      "name": "GPS Module",
+      "productName": "U-blox NEO-6M",
+      "category": "electrical",
+      "type": "module",
+      "pins": [
+        "UART",
+        "PWR",
+        "ANT"
+      ],
+      "dimensions": "25x35x5mm",
+      "quantity": 1,
+      "estimatedCost": 15,
+      "purchaseUrl": "https://www.amazon.com/dp/B0F2DKWJ4J?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+      "partId": "bec11008-f3fa-41df-9ca8-7e28421d9552",
+      "description": "GPS module for outdoor navigation and position sensing.",
+      "imageUrl": "https://m.media-amazon.com/images/I/511KTCS10kL._SL500_.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxR9MUQZL17Q2qqvEZnmYKW3JPkgeqgZ8bJ1efe6Xc4Q9McAkr6wAEDlTxuSJrOJnx0SFMJ2xX0pPBfgoT7pj1i0PwaoOws9jtcIUADQMKi16Hd5WSzj54z4xxDSkJKaJIHbTRjTb1FcuWHQtbzy5ZPWYBQodYp2lU5umZDaRtjM3lA7yfzYqm7oKXnrryZNry7xJrsVJW7hGRoYQrBypdYLI6CeFkoodH7IlJoFl9vy9V02aykugsiKpr8WFzzPKEMP08v6fPuXNbtjSppd8bmZEPHTzaZfmro4tMzzbSxSMaF84yYzILF3nVCdM9hj2VsZ2MsUeRyq4lShqmFKAtddKbuT24QdTWPv8W0QRYQF5A2UYtxc3WkDzMhsdol7pQMJh3rlruh6geuOf1cGrhexM6knuubMLhJkPJARGCJcZFH7PbQlD6iJz0v9wX1mwumlJDInlwYCIC119HOV3XNFS0uVNmO7wHl6dBhw3kdOIXZHvFhs1a788jTp4bRengt1wa6YemBU9poPsqJy7PEt0TceZrfiWSGQYo14gA9EigNXpxe763qP7wOdpl5AQtiNPpe1swVDEcGIdnXApBuia8FKdcAWRub2n8UuPNapcRd2UjSkXCyrfCqBvWQJYsnjCDZM9nPrLhnUEMlZfIagF",
+      "research": {
+        "sourcing": [
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0F2DKWJ4J?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$10.99"
+          },
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/item/1005010145191853.html?pdp_npi=6%40dis%21USD%2159.29%2129.05%21%21%21401.16%21196.57%21%4021013cc617796106144542450e10eb%2112000051307475431%21affd%21%21%21%211%210%21",
+            "price": "$29.05"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0B31NRSD2?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$18.99"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=U-blox+NEO-6M&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "amazonUrl": "https://www.amazon.com/dp/B0F2DKWJ4J?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+      "boundingBox": {
+        "width": 25,
+        "height": 35,
+        "depth": 5
+      },
+      "position3d": {
+        "x": 75,
+        "y": 230,
+        "z": 30
+      }
+    },
+    {
+      "id": "solar_charge_controller",
+      "name": "MPPT Solar Charge Controller",
+      "productName": "CN3791 MPPT Solar Charger Module",
+      "category": "electrical",
+      "type": "power",
+      "pins": [
+        "VIN",
+        "BAT_OUT",
+        "SOLAR_IN",
+        "LED"
+      ],
+      "dimensions": "38x38x12mm",
+      "quantity": 1,
+      "estimatedCost": 10,
+      "purchaseUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxw5CCfNZHbkRViGUC8WQKKOiPpxfeq940MzXBuCwxTh0xllbyraAtKuRvp7T1QLqFaBXne5hQCUiqn0oM2JfUVvHN3n1FSi0K4lin2Pb11xoMfXNXcdF9T2pLeEYkKq93yMZIY3ENYnRC7mnTL6fOeAP7DUTHAQ7LgqCyI8YaHcE1b0sDNIamrasRc9JKycGSUQkQuCDCRdnhAQeRvHezasengfCko3mV9KOp1rMwf10Nn0EsWcvNEUI7QJnE0iYZgZo2OTbyBDDV6FrjdEDrAWLtYQaG4CIaPu8Z2hpqej3gqICJuiZoSgaQLDUN8Uo026RyUG6Askye5uwKKQYzouHylMWWP7ZMwmyMvpJvfrN9avd7311T7hRvfsM0nuK9YhFjYTCiSeWYyvnRscBODTFzgqnEyRKzvHjEpkdMdsiXfQ9Mb9R1wItpsrUqWUvfTCliFWgiwaoIpuqvQ7cJTyseO9j6NnDMPpbSViCWPyPvx3Hc1R39ncVMDtEMmlnA29hgZppaVH2vooIdysi03pHgnATf9G71k7wRBXXXPQqBABVtAkC0mPFpQl9nJLMe6UXaPZGS67Gj1LXTQ5i2Lel9BEgSF81GquWpf15j0CWOUJPt6088MHhTX2pLZFy3bzTQvPTA3R9Qr30hWxgItUB",
+      "partId": "f0ac7933-0b9b-4bb1-ab6d-97f0635c21c2",
+      "description": "Manages power from the generator to efficiently charge the battery, optimized for maximum power point tracking.",
+      "imageUrl": "https://m.media-amazon.com/images/I/412rCWBKtLL._SL500_.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxw5CCfNZHbkRViGUC8WQKKOiPpxfeq940MzXBuCwxTh0xllbyraAtKuRvp7T1QLqFaBXne5hQCUiqn0oM2JfUVvHN3n1FSi0K4lin2Pb11xoMfXNXcdF9T2pLeEYkKq93yMZIY3ENYnRC7mnTL6fOeAP7DUTHAQ7LgqCyI8YaHcE1b0sDNIamrasRc9JKycGSUQkQuCDCRdnhAQeRvHezasengfCko3mV9KOp1rMwf10Nn0EsWcvNEUI7QJnE0iYZgZo2OTbyBDDV6FrjdEDrAWLtYQaG4CIaPu8Z2hpqej3gqICJuiZoSgaQLDUN8Uo026RyUG6Askye5uwKKQYzouHylMWWP7ZMwmyMvpJvfrN9avd7311T7hRvfsM0nuK9YhFjYTCiSeWYyvnRscBODTFzgqnEyRKzvHjEpkdMdsiXfQ9Mb9R1wItpsrUqWUvfTCliFWgiwaoIpuqvQ7cJTyseO9j6NnDMPpbSViCWPyPvx3Hc1R39ncVMDtEMmlnA29hgZppaVH2vooIdysi03pHgnATf9G71k7wRBXXXPQqBABVtAkC0mPFpQl9nJLMe6UXaPZGS67Gj1LXTQ5i2Lel9BEgSF81GquWpf15j0CWOUJPt6088MHhTX2pLZFy3bzTQvPTA3R9Qr30hWxgItUB",
+      "research": {
+        "sourcing": [
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0D8JVBN94?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$13.99"
+          },
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/item/1005007355378997.html?pdp_npi=6%40dis%21USD%212.58%212.58%21%21%2117.44%2117.44%21%402140d33617794341365301392e11cf%2112000040400693770%21affd%21%21%21%211%210%21",
+            "price": "$2.58"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B082W6MDKQ?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$7.69"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=CN3791+MPPT+Solar+Charger+Module&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "amazonUrl": "https://www.amazon.com/dp/B0D8JVBN94?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+      "boundingBox": {
+        "width": 38,
+        "height": 38,
+        "depth": 12
+      },
+      "position3d": {
+        "x": 50.8,
+        "y": 120,
+        "z": 30
+      }
+    },
+    {
+      "id": "bms_18650",
+      "name": "18650 BMS for 2S/3S",
+      "productName": "2S/3S Li-ion BMS (e.g., HX-3S-FL25A)",
+      "category": "electrical",
+      "type": "power",
+      "pins": [
+        "B+",
+        "B-",
+        "P+",
+        "P-",
+        "Balance"
+      ],
+      "dimensions": "56x45x4mm",
+      "quantity": 1,
+      "estimatedCost": 3,
+      "purchaseUrl": "https://www.amazon.com/dp/B0F9Y7BFCH?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+      "partId": "51838f90-d0f9-4305-b164-7c228fde0b8f",
+      "imageUrl": "https://m.media-amazon.com/images/I/51GZnWOj5IL._SL500_.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/e/_c3zL1buz",
+      "research": {
+        "sourcing": [
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/w/wholesale-3s-li-ion-bms-e-g-hx-3s-fl25a.html"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0F9Y7BFCH?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$5.99"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=2S%2F3S+Li-ion+BMS+%28e.g.%2C+HX-3S-FL25A%29&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "amazonUrl": "https://www.amazon.com/dp/B0F9Y7BFCH?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+      "boundingBox": {
+        "width": 56,
+        "height": 45,
+        "depth": 4
+      },
+      "position3d": {
+        "x": 50.8,
+        "y": 80,
+        "z": 30
+      }
+    },
+    {
+      "id": "li_ion_18650_cell_1",
+      "name": "18650 Li-ion Battery Cell",
+      "productName": "Samsung 18650 3.7V 3000mAh",
+      "category": "electrical",
+      "type": "power",
+      "pins": [
+        "POS",
+        "NEG"
+      ],
+      "dimensions": "18x65x18mm",
+      "quantity": 1,
+      "estimatedCost": 5,
+      "purchaseUrl": "https://www.digikey.com/en/products/result?keywords=samsung+18650+3000mAh",
+      "partId": "548e1dc3-7c66-4a5d-b33b-76987e01dc20",
+      "description": "Rechargeable Li-ion battery for portable power.",
+      "imageUrl": "https://imgs.search.brave.com/7dVn9vOhvRDxv23_k52H06G0FJ0wDHBDVGfOBfe15Pc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zLmFs/aWNkbi5jb20vQHNj/MDQva2YvSDY1NDc4/NjlhMWQ4ZjRhYWNh/ODQyZTQ0ZjA2NTc1/MTgzRC5wbmdfMzAw/eDMwMC5qcGc",
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=Samsung+18650+3.7V+3000mAh&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "aliexpressUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxRv1xY3HcQWQbaPl5sA9ETjsPVZcL6j2LxMaupfo942j8K2fV3LmbnF3cbPT6I3ux81G380sOTbxSE7THAMimtNstahkBMzwtT7flrCGm4lZ9zgoLLoW9Z8rikxzfopGC0CNTmSf0eA0b7JrCuGYEFuzkgJwbsLxXjpxnvL45MRBENWk2EiloWfmL21TIUIXEiCmX8FEmoaCUujGB6RBHfZnWHzCU38YxtklKzDZa0jzbYfCaI0jRq3VEhGHNRLzJmeKwqHqlB6fLDwxjzHK5reVylwIWCyWWgInqxyYQjdKSh3PDk3QjUpY7au8QWeOJJfH8Zw8cRRfK4JpA9zVNTAAO83O5HpI3NNxFMdHyR3BRBtGXLfbOB09b2UQnujtEpM59dV7p6932MFF0U6Q6jtKD6GKQiyvD4eVwId0lFl62bXo9icQWtYKt6OWue5pJqw8ErUq2Xi20NOoOmjJzgFwEmA5nNpEjOeuBIxBRWKZ0Zs8DS8IRNCg7S8Ur9UDAfdSWV0J97JeEL6WL1K0NwQ8rYjrQb7erx4l9petzwUknHHZJgdTQqqHr3bwxjITcWHTKoK8gWs6WzQGroPMCdoVaaWLH1RGReEYrJ7pCOCTNU68N48ZV86wbViyGxrFGFKleS3ZeTUWQfxI8nagIAPD",
+      "boundingBox": {
+        "width": 18,
+        "height": 65,
+        "depth": 18
+      },
+      "position3d": {
+        "x": 25,
+        "y": 30,
+        "z": 20
+      },
+      "amazonUrl": "https://www.amazon.com/s?k=Samsung%2018650%203.7V%203000mAh&tag=blueprintam-20"
+    },
+    {
+      "id": "li_ion_18650_cell_2",
+      "name": "18650 Li-ion Battery Cell",
+      "productName": "Samsung 18650 3.7V 3000mAh",
+      "category": "electrical",
+      "type": "power",
+      "pins": [
+        "POS",
+        "NEG"
+      ],
+      "dimensions": "18x65x18mm",
+      "quantity": 1,
+      "estimatedCost": 5,
+      "purchaseUrl": "https://www.digikey.com/en/products/result?keywords=samsung+18650+3000mAh",
+      "partId": "548e1dc3-7c66-4a5d-b33b-76987e01dc20",
+      "description": "Rechargeable Li-ion battery for portable power.",
+      "imageUrl": "https://imgs.search.brave.com/7dVn9vOhvRDxv23_k52H06G0FJ0wDHBDVGfOBfe15Pc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zLmFs/aWNkbi5jb20vQHNj/MDQva2YvSDY1NDc4/NjlhMWQ4ZjRhYWNh/ODQyZTQ0ZjA2NTc1/MTgzRC5wbmdfMzAw/eDMwMC5qcGc",
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=Samsung+18650+3.7V+3000mAh&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "aliexpressUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxRv1xY3HcQWQbaPl5sA9ETjsPVZcL6j2LxMaupfo942j8K2fV3LmbnF3cbPT6I3ux81G380sOTbxSE7THAMimtNstahkBMzwtT7flrCGm4lZ9zgoLLoW9Z8rikxzfopGC0CNTmSf0eA0b7JrCuGYEFuzkgJwbsLxXjpxnvL45MRBENWk2EiloWfmL21TIUIXEiCmX8FEmoaCUujGB6RBHfZnWHzCU38YxtklKzDZa0jzbYfCaI0jRq3VEhGHNRLzJmeKwqHqlB6fLDwxjzHK5reVylwIWCyWWgInqxyYQjdKSh3PDk3QjUpY7au8QWeOJJfH8Zw8cRRfK4JpA9zVNTAAO83O5HpI3NNxFMdHyR3BRBtGXLfbOB09b2UQnujtEpM59dV7p6932MFF0U6Q6jtKD6GKQiyvD4eVwId0lFl62bXo9icQWtYKt6OWue5pJqw8ErUq2Xi20NOoOmjJzgFwEmA5nNpEjOeuBIxBRWKZ0Zs8DS8IRNCg7S8Ur9UDAfdSWV0J97JeEL6WL1K0NwQ8rYjrQb7erx4l9petzwUknHHZJgdTQqqHr3bwxjITcWHTKoK8gWs6WzQGroPMCdoVaaWLH1RGReEYrJ7pCOCTNU68N48ZV86wbViyGxrFGFKleS3ZeTUWQfxI8nagIAPD",
+      "boundingBox": {
+        "width": 18,
+        "height": 65,
+        "depth": 18
+      },
+      "position3d": {
+        "x": 75,
+        "y": 30,
+        "z": 20
+      },
+      "amazonUrl": "https://www.amazon.com/s?k=Samsung%2018650%203.7V%203000mAh&tag=blueprintam-20"
+    },
+    {
+      "id": "temperature_humidity_sensor",
+      "name": "Temperature & Humidity Sensor",
+      "productName": "SHT40",
+      "category": "electrical",
+      "type": "sensor",
+      "pins": [
+        "SDA",
+        "SCL",
+        "VCC",
+        "GND"
+      ],
+      "dimensions": "8x8x2.5mm",
+      "quantity": 1,
+      "estimatedCost": 6,
+      "purchaseUrl": "https://www.digikey.com/en/products/detail/sensirion-ag/SHT40-AD1B-R2/14589255",
+      "partId": "aec07717-8672-455b-93d3-59a2f7f754e5",
+      "description": "Integrated temperature and humidity sensor for monitoring micro-environment conditions.",
+      "imageUrl": "https://m.media-amazon.com/images/I/514DBjKbRpL._SL500_.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JyaemS1vhI31NiaUm0a3pRxcUtWNONn4NdpaqRxljYixCYMM1s08qscexA0SIo4hmWUMMpEPm0r98LadXkaitjY4RcFwZaV8qEqYf3BbDMVDSODJK2tLP2rxAEDBQUfviWvObwUX235zFPFFE4lIdXJ7GbCTkyy9FnmZC3jhAYnB1v2LYNV3WAa1oLJWBCv8Z4ujWrVozIw3sSh0IVJgfd2vE1u9X8EJTWJBqCFCcjNm1CF8wMT9z9McHE9QkNu6fsf3z9D567cDuDsUXVZV5i2cwUam7nkwVQRDfHCIiLIbQKZXrwZRJBCeZbdMKokd8389nrbvQoYPjhXKLtfjP9ygDduZmD42dYD7dVW5yJfny9qQTb5hV1X2e6Eg5UajOn5qMSOPKBvgDpVtpoeS35eViTyfRQfecuYf5to7SCZNqeiQoNwTGd0LZC6vmNaXr1cuTRRRLbQQCl2mBHEputgk5eoneZcI3sgrBHDePS7BysgXBCufL2mLNr668IQ126zVCT9C1Jc7qaARVsOEPvFE0v249HzyVQzHzLbleRClGHKwSDApunu5KObF0odtM5uXGnwFhRkTK4InTn2KCCkBfTWj4YggmkJ3U7Lb6lN0pAYxCAGzGmCFcGADN5NAwoAPOf2vlIcW2MHGQPBpTVsan",
+      "research": {
+        "sourcing": [
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0F26YY34Z?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$13.99"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0C61LLH4T?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$14.88"
+          },
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/item/1005010487407245.html?pdp_npi=6%40dis%21USD%217.70%213.85%21%21%2152.12%2126.06%21%40214114e317795769970384261e0f3e%2112000057709975620%21affd%21%21%21%211%210%21",
+            "price": "$3.85"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0FR8DFSLZ?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$8.99"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=SHT40&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "amazonUrl": "https://www.amazon.com/dp/B0F26YY34Z?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+      "boundingBox": {
+        "width": 8,
+        "height": 8,
+        "depth": 2.5
+      },
+      "position3d": {
+        "x": 25,
+        "y": 60,
+        "z": 50
+      }
+    },
+    {
+      "id": "pm25_co2_sensor",
+      "name": "PM2.5 & CO2 Sensor",
+      "productName": "SCD40 (CO2) + PMS5003 (PM2.5)",
+      "category": "electrical",
+      "type": "sensor",
+      "pins": [
+        "I2C",
+        "UART",
+        "VCC",
+        "GND"
+      ],
+      "dimensions": "35x23x7mm (SCD40) + 50x38x21mm (PMS5003)",
+      "quantity": 1,
+      "estimatedCost": 65,
+      "purchaseUrl": "https://www.digikey.com/en/products/detail/sensirion-ag/SCD40/13926526 AND https://www.digikey.com/en/products/detail/plantower/PMS5003/11623869",
+      "partId": "406af746-647c-44a7-a251-70e63a4aa9ae",
+      "imageUrl": "https://imgs.search.brave.com/K-q4p1W9LQHOHEOXmX9OcMPLjKTsPtyVqvHWGNbQ4mQ/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4t/c2hvcC5hZGFmcnVp/dC5jb20vcHJvZHVj/dC12aWRlb3MvNjQw/eDQ4MC8zNjg2LTA0/LmpwZw",
+      "aliexpressUrl": "https://s.click.aliexpress.com/e/_c45uGRxJ",
+      "research": {
+        "sourcing": [
+          {
+            "vendor": "Amazon",
+            "url": ""
+          },
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/w/wholesale-sgp40-pm2-5-pms5003-or-similar.html"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=SCD40+%28CO2%29+%2B+PMS5003+%28PM2.5%29&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "boundingBox": {
+        "width": 50,
+        "height": 38,
+        "depth": 21
+      },
+      "position3d": {
+        "x": 50.8,
+        "y": 30,
+        "z": 50
+      },
+      "amazonUrl": "https://www.amazon.com/s?k=SGP40%20%2B%20PM2.5%20(PMS5003%20or%20similar)&tag=blueprintam-20"
+    },
+    {
+      "id": "uv_sensor",
+      "name": "UV Index Sensor",
+      "productName": "VEML6075",
+      "category": "electrical",
+      "type": "sensor",
+      "pins": [
+        "SDA",
+        "SCL",
+        "VCC",
+        "GND"
+      ],
+      "dimensions": "5x5x1.5mm",
+      "quantity": 1,
+      "estimatedCost": 4,
+      "purchaseUrl": "https://www.digikey.com/en/products/detail/vishay-semi-opt-div/VEML6075/6215359",
+      "partId": "a02ad813-a883-4bb1-b7d9-ca199891ea74",
+      "description": "Measures ambient light for automatic brightness adjustment.",
+      "imageUrl": "https://m.media-amazon.com/images/I/41cIZ07tzuL._SL500_.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHtxmkNV1xmR1dODW3paRayBfxvp7dvvD1Ay8fZ9eQj8ZmoiSkid0qRPODtYA66baP7ETX5nBrs0ME3kH0oSNE0m4npo7y7Q80EaConlRVBwUuFJfcPd4l9dPEKAMAHDn5JVcqMJQXItzaxJxE5tHNthVkVlLbdRFhRrQUg2lAHtzy4rmxuhayMMVL1OGOpDNTJBRi3GB54GBiJpqi9nxvVKt2s5KyDv01MvbncsPBz5gfCVVQeqLFPhwtE78yb79cOlnciYW2v5X2TpshDyZDMZH4cWvOMMYPwf0Hz36dWAcDRuaqYHLa101di71KoWxbxN9w9byVpSZwO1jNLKDP87vEDSLW5cVTVbst0w8p006ksABY1SR0TGPZPxG74jHPracVXpKTis7604ERESH524GkdMG8nqYItWt6DElhr9O6boFjBAogDSQbM4Bau5lzUrKIf2DTBguLQ6HVNWI2cDbYgc7yBnjk2RZWVNYtMzvbpdPjM5q4JHOW6TiP7BmbJ0MnNM9KfonWUD9sKgUjtdbbBqvmD53kiDuFQCb0Yfg9FUjxmY4Is1vmFUwFPn1MPQj6OOg9EVPxcDP9MW9ZPrsx4QASWgkRiUIGDhM2XOyMzOjpChEILtbevtFT9pU2wIjZ0WH1zLT89iQdw7whqL",
+      "research": {
+        "sourcing": [
+          {
+            "vendor": "ODG (Origin Data Global)",
+            "url": "https://octopart.com/opatz8j6/a1?t=uJscewRiJuH5sj5_43YlQkeMoj7K_gMy2ABmnJFnJPjidfB1jyblwg4hUcmqkSuIIZ7RKd-CmOdShDiy1wMSqG_mklLfmAigGFYNlnxSftTNgXQIdGHswY8u0OgNSatJfN2WmLIYaJR7vGF8rMaxQsn1rPEw0D0rlg68j1Deu6BNbQtOocPCxyFgMD4OiqJB17tt-Ek3GuOpuDSHDvZTyDLe_UHA_8iOQiEscZ_HWgw9nRi5XLIS7Pt7UX9H9TcdBLr983QLFWtaaDly1prFKTTfaff7",
+            "price": "$29.1045"
+          },
+          {
+            "vendor": "Abacus Technologies",
+            "url": "https://octopart.com/opatz8j6/a1?t=fV_5ApVYkoe8Q5MLilccUzDX6qy2Wzk5XD43x41x3KCQbUOq4dqMNVVNQmfzz0cLFZLkzVi_sOP58ObYSUQ2Uj2ASFmOIf13TYJeaiS7mxBMmHTVBY8BitxdQ4i-WCpeJuV1UzFVcbuh-Nkaq5NBxqHiDItp0TS3GXMmBBqE4I3drzeZXFjmOU9VdJbVWKJNN1CRxlWChnmURaGglOtiY6FMufBzOnbbg5ejBR5ro70c8oYPSGhJm8RfFCLbSmFfmhqfMbklYziBJdeSwahgKY66qvvv"
+          },
+          {
+            "vendor": "Augswan",
+            "url": "https://octopart.com/opatz8j6/a1?t=bfLMIEv_FwWF_xAWt4jtUGn3BlnXLAL7rDpohsFWkJnXjNd8_Lxn3RYg9YMD70YlMOD8ah6fQ3sBJWwsmPSYhr6E-RyYReqXUc5vRrTbHpvP2CBy3TpANnxAOF35m9B3MPwcdYxpKXinKlFx_JfwldPnTJ9AOTO6Ly4JkCYyP_bugDIvA-i3E9mlk6ktQEL1Zd54tVxq39TdqeR9XDBusQnRGs-7yWaYsrWa8yg1MmnihAiZYERBSNOU2Lsxxl28Ly00adpvpGr8uUBUrYcjR8DNxGWG"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0GTWLR2LP?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$28.28"
+          },
+          {
+            "vendor": "Microchip USA",
+            "url": "https://octopart.com/opatz8j6/a1?t=9VD2xDXNPvqOPZtEOmsA-Rta7t9lh3Mtyg-BLUSQOF1Nxn9CZxxCMpGFbWCHHRflE2jziwvffaiNuhxu44CNJKJ3G4lLRYitfhlqgBixFCqv6hFSd1gbq8CYfEI786ydQxVh_oncoqqXufmfwSV3rDp267ta33WdOIwWM8SXwSts-89hhjp1SSVrsiEhm3bH6wgGAGdk8ydifvmsqBuySTknY78uBZiTfouZbVqRBOfBpXJhT6fvpTmmq_GTYvhTQJOXgMPEivQOz0-2zpNOWpn1Tc56",
+            "price": "$1.559472"
+          },
+          {
+            "vendor": "Component Stockers USA",
+            "url": "https://octopart.com/opatz8j6/a1?t=eooEKNtuATE484fzhhUWkasg-o2wVzL-KXdG6xVhUiCAiGhd4K2rg4dJpbvJZ0B6zP8nhNxteUpiXIfD7rx_v0jVfSutOSMlefkDOZIoqWvoiY_42nXpZHMjp49ZzrN_IJukZhLwRjY6__1tnBUgXPY-OlB1pGmkHfrnJLZWOzWmzy_tqTOjm-oVSUYALiYytY3UbFPnk-W57wChiS_Mos6hsXzCGUVuVrAC9G9ga0ObRI_KYbw6llDv3gTgMjnofCbJcXm60fhiptYJoXKpY1mEhz7u",
+            "price": "$99.99"
+          },
+          {
+            "vendor": "Win Source",
+            "url": "https://octopart.com/opatz8j6/a1?t=zpfAR621tLDy79lMOqyfXhu6Nla180KrFIBZdTSlDuNYlOdeYZGPUHZjyziuNJge2-Yf8XYc3r0yut9XRxlJ7t-Q5egrEGrGYdJVJTSsdUgrc81SkkW84pED5WNTj7xAKs_-vpPeKNQFxhFcglURUVTd6OFw1F8qGJpe3odcPdeBmjpc-F26DqwHrkdaH1zUoN_gbJPzFXjHZh1rIKqqbn8itByauvnXPaQNvd3gUh3JZpwFLAnMoVJ-nMLmIBDPzdwIrp5r1YZbpgIvHLt0N9Fn_lz0",
+            "price": "$54.5454"
+          },
+          {
+            "vendor": "IC Components Ltd.",
+            "url": "https://octopart.com/opatz8j6/a1?t=3XUII7DTCjsd3cNZnyoLEMOuEgHNQcI5HnF2V80xgIV4iVUPhcqbY22wFry6gBoqvudfk2dGwYkqWwIYXBIPcwe7IyKdaZnu2nb7MeyYcDgXwLoa2Xd7pKZy_jj7hvSDYQcd5UpjkdL4Qisxux0I8dq-i2CsWZvwt-E6Rbk113FK7JWX8KjiJXl9SK5VUzQqh9_sIMh9l4DpHKUwR3ipdo4zmEdX9uXQpwD_gv5kIyMxjzCXpeTX8-ptW6cFKnpIV-MfuPeYlhiMCtOoWpCbFB9x2UTt",
+            "price": "$60.78"
+          },
+          {
+            "vendor": "Aztech",
+            "url": "https://octopart.com/opatz8j6/a1?t=u4f2ZzWYWFxmV-owX0cOtfxGu_4kskJzMZ53WyzU5verIO4HXZkUds6zK23RQSRCT_3FN_PS6b8ni1M9CWFGM3BBBpSNVRk_aXBN-BLET5D-6rERmrEg4hXIbIAYfTgfg2Ar9-WAU5Rzi7AlxVB0_zrSkbKC2ZQG7zcoeSiB6OD1cdkRMPXKL5Ok7K3bxuz7hAXD3za6i9V0xw3ASSfE05jyE2JcU34SFEnc2kPbtEIPkERXybCApUFwlV-zga_YLCK91I1wsrkue-qcp9pruBALCY1y",
+            "price": "$9.76"
+          },
+          {
+            "vendor": "AAA CHIPS",
+            "url": "https://octopart.com/opatz8j6/a1?t=geJ01iXXbXLBioJhDHIN4DHwx2B7SmTtUVbgfWO7LdIEKi8Eddys9inYbHurI5r4-MVoSvD-MnJzXY6L3kqJo5UDfgLl35FYltQ-bhXgVywxtPJAamo-9zlVQsPTLdPVu2bokoR5wlXV5WhM43OnUgLROwU5SqvtSZMkqbUUas2YbEghMRf5DsUoNpT8Q1nQ9xPPcQnxkDcq87EBy1_UPJhR5b35zP0YZEY_rq4zbfT3yNGig1TXnvsugLc8jR33syDl_tYZyify2Qy9B4PlOzDlUce0",
+            "price": "$71.462895"
+          },
+          {
+            "vendor": "Chipsmall Limited",
+            "url": "https://octopart.com/opatz8j6/a1?t=x9zk0UBX1W6WtCDwt62o48umAPOK3AC8Xe7fgWM1CwzJMICfjySkH0Oos_zFEEi-d-qUl657LmoOWvpu3WOexyd1Ivh82sQTv2tggY12KjetjZwMT1QI3DwBY0m-rBppPXfxt9owncq5Ik8WgSSxegxa5lvuY2FwwYzPfYgA06lPcoaKcFNwDi5bZk9TAteBMr16RInzneubqAOJV6kU8KEBNr60BM64i6MSD-EBj_ARKcRp7r73t_qlXzOqzy99RjbqQmihRZAMeQnGXlmeqVWNwR75",
+            "price": "$8.5"
+          },
+          {
+            "vendor": "Anlinkda",
+            "url": "https://octopart.com/opatz8j6/a1?t=C6ic90bL28UtEvlt6-ojEuxbBZUhnn0aY-N9p-KecLsOwWQlViKarelhEZGIosjUDesTzmktpHIcZ05ft0JmjjW7KjvXEIc7XfrV1yLId8CMkZRokG9vOPXQ94saXsMDz0FQdyW7dHPhSfncBgN1OaDwhglbdkMIQkDS0Rfm55ioH_IJeHPlr4H6H6RBcuyLBCGhHuZQSeCWSwFrwIxVbQFEndm_kLRL4Sx8VOC497mb7NREhS51qzzz4wxOAZDHQYEx7dRHdacePAWJ6I6TgEQkCVEH",
+            "price": "$2.952"
+          },
+          {
+            "vendor": "SHENGYU ELECTRONICS",
+            "url": "https://octopart.com/opatz8j6/a1?t=5Yxk4t232DfYaF-1jaj5Y41DNEgzG5JvKqAH15EDeUsyz5z1YeqNnx-qqlFQjMfLQeOcW7lidqwQ-MrPZBK0gzV_cRgbJkZ8ojF8c0wVJWx9dgOUnXJuKVSBLP3EibXykKBiqtaccKPVHO7lO_Hf8WBalTAPU8TlclkO-Bt-M1JkIqmVX-o94VAVYo-Vz5KKNRXg6txUdWlVviqBV7mC-r4KZPIXEJ0BiNZSnw0EX1E_FuSFZj900H6umFsDKvfj7y1FevXpew_L1YS9ULIz8PYY5ogG",
+            "price": "$5.5482"
+          },
+          {
+            "vendor": "ALLICDATA ELECTRONICS",
+            "url": "https://octopart.com/opatz8j6/a1?t=22dJSg3kdIJz4o4kONKqNQ4ySfb9i6x8uo1dptp5k2T09dtsjuicXhZyXb1ATMrXY6ETzNbWv6LeP14V9OBPktCpwUDU7sXJ9YtyUAbbpVpGx_yvMhO_sARzs2e8P3SB2cVdpEzL-Ytx3ikDOd1uQ1fAXrjXLYyfEt8GuZJduLut9KGRUG1ME_mIY2nXqpc-lRfRdfhyLNZpZo0a6rtkjlZavkBoVxLOX2F7ReRU2iUPbsG_wIzwHXvOZS4OUDe-il4PwS2c4lscsSTHgMCeCN5zUTjX",
+            "price": "$81.25"
+          },
+          {
+            "vendor": "RC Electronics",
+            "url": "https://octopart.com/opatz8j6/a1?t=QvBvy0gERzRBa2RiEomeEa_xf4-EVHU-Pgo_L1BmTZTJBSBf0vRUE09U7RPBYb4bEWpnrrsn9dfNeApm2og-__npnP07Xri76FDVi2HLaeU-4TewmNnr62rvEMAG6DosIaox73yOYTgilKkz-Yjv0dKvVFkd1hoBk4h2-qAE-N36dO2zvg8h2_q_WnxOfMHVkm-SrlxwXvIu6ZqJQl82Unbi5qVWBt-q7o9Vfw4phcGMJI57fm6trGGSAEYhZWzayn2xPX5SYp_sRTyhR6p-lLmM7dGK",
+            "price": "$3.01"
+          },
+          {
+            "vendor": "Bettlink",
+            "url": "https://octopart.com/opatz8j6/a1?t=06WEiBK6Mi4B4Ot5GGUJe1XIvjYyMVCNQcVd33QRi1iI2yg0x2IusP_E7b12_kdlq0UDl7CJKoCxTzbmgOeAdZuvuvcLwf9n5KG0ObmLvYtZa-Nqcj7Qx1bC6x1Z6f0VM5vHoIXqAt3VhSAektqkv_6wJCHfuYA-TchKu2Txh8hnYTcUl335Avgk5Wlsp6Ad4vmOln5i6GW58uaTPv3Ubr8hUqsmMOKR05ImOenWawnjhbtEq_N3gHdpSLU3A-JGnx-ahW87gVIBDlR7uPVI3MkpF8SQ",
+            "price": "$24.6609"
+          },
+          {
+            "vendor": "Fly-Wing Technology",
+            "url": "https://octopart.com/opatz8j6/a1?t=6yBbhZtOv1S3eOJ1uO0nLy7-scaJ-Mz62IosmIQXyXaa9qJ8sSKBWom2zUIvEj7ErDDuxB1RU7Q2q5839RAcBJD3igGT0HlLyk0On4nTXIED5nLdokpEJjJZ-olm7DRJ82p72YaeJxeRTu7-rztY2ml9XUurC6vNaw_WP62yLwof_zGpqZlKzPpucI-kN-PoFAGvZciaH5Z_C2y3DDgDO-ESHd5AAFztrJODrqtkFIMmyqHJz2pxl4GQaGKg4JIDCTIftHYUM-eP3lZlz1sGsdfWEqa3",
+            "price": "$68.0599"
+          },
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/item/1005009475676953.html?pdp_npi=6%40dis%21USD%2122.80%2122.80%21%21%2122.80%2122.80%21%40214114e317798107072131386e0edb%2112000049218988125%21affd%21%21%21%211%210%21",
+            "price": "$22.8"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0DRRGVTLH?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$9.58"
+          }
+        ],
+        "specs": [
+          {
+            "label": "pins",
+            "value": "VCC,GND,SDA,SCL"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=VEML6075&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "boundingBox": {
+        "width": 5,
+        "height": 5,
+        "depth": 1.5
+      },
+      "position3d": {
+        "x": 75,
+        "y": 60,
+        "z": 50
+      },
+      "amazonUrl": "https://www.amazon.com/dp/B0GTWLR2LP?tag=blueprintam-20&linkCode=osi&th=1&psc=1"
+    },
+    {
+      "id": "rainfall_sensor",
+      "name": "Rainfall Sensor",
+      "productName": "FC-37 Rain Sensor Module",
+      "category": "electrical",
+      "type": "sensor",
+      "pins": [
+        "DO",
+        "AO",
+        "VCC",
+        "GND"
+      ],
+      "dimensions": "32x14x8mm",
+      "quantity": 1,
+      "estimatedCost": 3,
+      "purchaseUrl": "https://s.click.aliexpress.com/s/2YgDK2cRCyl9WNkj7vsiSgwQncOI32ZVsrEzbicWkRKbFTNMQbqbkcFOG1OBsMpz0QZ56yDUfJ22csduZdiHbgpEF7Ex3UKlAchlGNBsOXNNF88rwsDtIBwGctERXF9F8Kr7I88X0k96g6ZMhkO3P6ToLVxDdHRMGJpxZpIjxnmHAvyJtyadmk38EGe6i2o8G7iaV7tYZArmhfSTEi2pVyWdpS5Ka22Bg1szqfWcQUeNEjawjvRvXvFLTCW8qblr7wOZUa4C5MI6y0qLQDHLWOVtAJdfQPdCb8vktGCgRVEzXU0o73Nnj48MsQmrZkvAmDDb5SXJOv3489jMaJgFdxzHHKpUdKcx8VAXbdBZUps5xCHGUe5aIM9CNIjZKaYlgXStg7P5KmTTSDzsLM75NHt5234ZfTxejylB3AboI8z7qu6TlEb0HIpD6AhGMCiqak5qjQyZY21pDc2fa0nAgooCGjfM6LFf9IPAOQonKdvSuj2M2KgbZiGfs0R0qWu2oLs3DjyKcgOiWKqpgg8ztZpvGbeZwH14THCRv9S6wvitg8A5S6zES2zzgsaq1RdO9G2d0SWEOD6grcbIsLJjyNGh9kM0nv8gY2dLXnQwDXmwqYV7xTPJw0PiPnuitL1teVLuTZCRS1EViGh7GKt2fMUEH0wpU0Rf6mZ2pNpSjP3D8VYwTihOplNKodrDwpIKKf0QzcqY6eh52Ih1YANUk6u17wKiirpFVUA1uGIAgAFEAlCyJpIBhit8VgpB6sD9surBoqMm2JAgfm4YeoJ693bXfQEcPxt8tC2BiblBECRWwdfwqCfWEvt8RZfcsA0gJeJT2T0fpJX2fxRUsBG6v2fGCR0qoihVdO0w2UWXUvbNmadaXD6YJRxvkMTkBDZ1PKy8IOXGeDxqD6wNSnA6kEz82zzpzVDJeAkExXmgk3W2oOEsb2",
+      "partId": "8f3aa74f-2336-4aba-bcb6-29b543d2a453",
+      "description": "Detects the presence of rain to activate the roof collection system and adjust irrigation.",
+      "imageUrl": "https://m.media-amazon.com/images/I/51DwfWUG9BL._SL500_.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/s/2YgDK2cRCyl9WNkj7vsiSgwQncOI32ZVsrEzbicWkRKbFTNMQbqbkcFOG1OBsMpz0QZ56yDUfJ22csduZdiHbgpEF7Ex3UKlAchlGNBsOXNNF88rwsDtIBwGctERXF9F8Kr7I88X0k96g6ZMhkO3P6ToLVxDdHRMGJpxZpIjxnmHAvyJtyadmk38EGe6i2o8G7iaV7tYZArmhfSTEi2pVyWdpS5Ka22Bg1szqfWcQUeNEjawjvRvXvFLTCW8qblr7wOZUa4C5MI6y0qLQDHLWOVtAJdfQPdCb8vktGCgRVEzXU0o73Nnj48MsQmrZkvAmDDb5SXJOv3489jMaJgFdxzHHKpUdKcx8VAXbdBZUps5xCHGUe5aIM9CNIjZKaYlgXStg7P5KmTTSDzsLM75NHt5234ZfTxejylB3AboI8z7qu6TlEb0HIpD6AhGMCiqak5qjQyZY21pDc2fa0nAgooCGjfM6LFf9IPAOQonKdvSuj2M2KgbZiGfs0R0qWu2oLs3DjyKcgOiWKqpgg8ztZpvGbeZwH14THCRv9S6wvitg8A5S6zES2zzgsaq1RdO9G2d0SWEOD6grcbIsLJjyNGh9kM0nv8gY2dLXnQwDXmwqYV7xTPJw0PiPnuitL1teVLuTZCRS1EViGh7GKt2fMUEH0wpU0Rf6mZ2pNpSjP3D8VYwTihOplNKodrDwpIKKf0QzcqY6eh52Ih1YANUk6u17wKiirpFVUA1uGIAgAFEAlCyJpIBhit8VgpB6sD9surBoqMm2JAgfm4YeoJ693bXfQEcPxt8tC2BiblBECRWwdfwqCfWEvt8RZfcsA0gJeJT2T0fpJX2fxRUsBG6v2fGCR0qoihVdO0w2UWXUvbNmadaXD6YJRxvkMTkBDZ1PKy8IOXGeDxqD6wNSnA6kEz82zzpzVDJeAkExXmgk3W2oOEsb2",
+      "research": {
+        "sourcing": [
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/item/1876718841.html?pdp_npi=6%40dis%21USD%212.64%212.64%21%21%212.64%212.64%21%402141149b17794272354284316e1050%2112000033330668438%21affd%21%21%21%211%210%21",
+            "price": "$2.64"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0B2W76MB1?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$6.99"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=FC-37+Rain+Sensor+Module&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "amazonUrl": "https://www.amazon.com/dp/B0B2W76MB1?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+      "boundingBox": {
+        "width": 32,
+        "height": 14,
+        "depth": 8
+      },
+      "position3d": {
+        "x": 25,
+        "y": 90,
+        "z": 50
+      }
+    },
+    {
+      "id": "ambient_light_sensor",
+      "name": "Ambient Light Sensor",
+      "productName": "BH1750FVI",
+      "category": "electrical",
+      "type": "sensor",
+      "pins": [
+        "SDA",
+        "SCL",
+        "VCC",
+        "GND"
+      ],
+      "dimensions": "10x10x2mm",
+      "quantity": 1,
+      "estimatedCost": 2.5,
+      "purchaseUrl": "https://www.digikey.com/en/products/detail/rohm-semiconductor/BH1750FVI-TR/2042730",
+      "partId": "b8374b19-ca43-493b-a15a-b64c3cf13899",
+      "description": "监测环境光照强度。",
+      "imageUrl": "https://ae-pic-a1.aliexpress-media.com/kf/S005d6158f9994e7b87df8f3f358dd446a.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxhklc955JVl28RX0WiYss7RLoLKAYiudbEtne8i7tfNrgJjqaZVDKHNQVwaHehdt5eYUNzT7guZKZlj4slxrkSGFeSiJg9i6V9Je1xttbjd89WLDOfscvcu9i17iQQJ0H1ZxKqs2wqzlLh07hnhEMj8FZv3aH10t3wdb6YoWVVdVWL6azqC9K1uKAAE2N40Q0Jx553mu3C6jj4acegIqjdLJRyKrYJx2NUD1W208q8u8pfximDFy43cMjAkAMQn8zv3bJYf0tcVDFw7cH0doTBjCxEBhy4zO2oyPgHJqYP5ARwx89RzZUQ2hIpVns5j3koki823v3QUGs29MSFOZ4yj476cTSAzlfXElG3vPIU06oNsYl0iwL3WHeMMlXGBAA1tqrDbo8KgXVJHYfUCZRab34tIYb0Gj65kCDQ0u7dJ0fYBj5oAMltUMRmmBswSqG24T03BsaiEi6FUIIXNiquoQZNOG00B6vQwHGnnieAN3hVXhvLhVw5KygrWrV2KTJNPEccgaJGG93x5sOjH0oW12XyxSAmaJeispAFxi8M2aHDlXVQFbrE96XeH3NgoSdl7lxhWaawUR6gLmaA3iskTkxzxIAaBeOI28WVBzD5fGOy3MhlP18DdyX7uUTVVjWWYSD0Bia7oRQJiTSG6v6ek3",
+      "research": {
+        "sourcing": [
+          {
+            "vendor": "Amazon",
+            "url": ""
+          },
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/item/1005009671465215.html?pdp_npi=6%40dis%21USD%211.73%211.68%21%21%2111.76%2111.43%21%402140d36217793289071152660e0fa7%2112000049823605480%21affd%21%21%21%211%210%21",
+            "price": "$1.68"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=BH1750FVI&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "boundingBox": {
+        "width": 10,
+        "height": 10,
+        "depth": 2
+      },
+      "position3d": {
+        "x": 75,
+        "y": 90,
+        "z": 50
+      },
+      "amazonUrl": "https://www.amazon.com/s?k=BH1750FVI%20%E5%85%89%E7%85%A7%E5%BC%BA%E5%BA%A6%E4%BC%A0%E6%84%9F%E5%99%A8%E6%A8%A1%E5%9D%97&tag=blueprintam-20"
+    },
+    {
+      "id": "occupancy_sensor",
+      "name": "Occupancy (PIR) Sensor",
+      "productName": "HC-SR501 PIR Motion Sensor",
+      "category": "electrical",
+      "type": "sensor",
+      "pins": [
+        "OUT",
+        "VCC",
+        "GND"
+      ],
+      "dimensions": "32x24x20mm",
+      "quantity": 1,
+      "estimatedCost": 2,
+      "purchaseUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxg7IKX4TJZeTmLFdtJ3519Z7IK2PIUYbQsE5RLmFbLTvxmmlhqdS0upY8cdUAYDe47GHxAqN57Rcg23K1jMeEGyWhBRgTLEsvnG7kp3eG15DQqQaYlFvtk0qz7W28xMk9Q9j63Bvn3dHzDWvHaQ54Co0KtksQn3FeVRDksbXIJMamVufrvxyGkyHPk0Uy5CqfKL28XNVBuXAqKlwUKDl4UDspsezb8PIQWYBYoqykUliRaJ5Cx34LAGoiLruT83VyQlSxswF8RTbBRmElwt65vYC1X5JsLMKPDTUvRjPbESSFA4xUCSyC3hEwWJbMugshjF0oKysCQUqtnd1kWl70i8Op6pMzmSbpnU4pd1dCRAUteQRX7XkVvhEG8cfG3ZREcfGDR1Xh3A45EJXDLrAuhyzzFS45uehkH1ydtEgRH1BmrIBVNUMTi1dSwCXSCF40YHwKFwPrDPnhGfADSQfDm72lTuYSN6HIgM5JAcnlA1IMqT6PpU3DJhjUXDtRCOvHeePjb9nJTe1J3Fk4XhBETCsgQd4q9vUnLorb7fyjYHk8JMaH9UsS8hLK2PpkJJ8yRRTcTDPpUzNjIJWopiL0hGm3nSHZoQij8QWqzx9TwV0hq29sNGBaTbcy0hbiGk7ruwCvGRDV5DJKDfAndtgZi4L",
+      "partId": "f5ced0bd-3802-4dbd-acd3-8628f6612ca5",
+      "description": "Passive Infrared (PIR) sensor for detecting motion and occupancy.",
+      "imageUrl": "https://cdn-shop.adafruit.com/640x480/189-04.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxg7IKX4TJZeTmLFdtJ3519Z7IK2PIUYbQsE5RLmFbLTvxmmlhqdS0upY8cdUAYDe47GHxAqN57Rcg23K1jMeEGyWhBRgTLEsvnG7kp3eG15DQqQaYlFvtk0qz7W28xMk9Q9j63Bvn3dHzDWvHaQ54Co0KtksQn3FeVRDksbXIJMamVufrvxyGkyHPk0Uy5CqfKL28XNVBuXAqKlwUKDl4UDspsezb8PIQWYBYoqykUliRaJ5Cx34LAGoiLruT83VyQlSxswF8RTbBRmElwt65vYC1X5JsLMKPDTUvRjPbESSFA4xUCSyC3hEwWJbMugshjF0oKysCQUqtnd1kWl70i8Op6pMzmSbpnU4pd1dCRAUteQRX7XkVvhEG8cfG3ZREcfGDR1Xh3A45EJXDLrAuhyzzFS45uehkH1ydtEgRH1BmrIBVNUMTi1dSwCXSCF40YHwKFwPrDPnhGfADSQfDm72lTuYSN6HIgM5JAcnlA1IMqT6PpU3DJhjUXDtRCOvHeePjb9nJTe1J3Fk4XhBETCsgQd4q9vUnLorb7fyjYHk8JMaH9UsS8hLK2PpkJJ8yRRTcTDPpUzNjIJWopiL0hGm3nSHZoQij8QWqzx9TwV0hq29sNGBaTbcy0hbiGk7ruwCvGRDV5DJKDfAndtgZi4L",
+      "research": {
+        "documentationUrls": [
+          {
+            "url": "https://www.adafruit.com/product/189",
+            "title": "Product Page (Adafruit)"
+          }
+        ],
+        "sourcing": [
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/item/1005007039302894.html?pdp_npi=6%40dis%21USD%216.78%213.18%21%21%2145.86%2121.55%21%402140d36217793758903498434e0f03%2112000039183363022%21affd%21%21%21%211%210%21",
+            "price": "$3.18"
+          },
+          {
+            "vendor": "Adafruit",
+            "url": "https://www.adafruit.com/product/189",
+            "price": "$9.95"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0DBZGPCVR?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$8.19"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B07KZW86YR?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$8.49"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0CCF3HYT9?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$8.99"
+          }
+        ],
+        "specs": [
+          {
+            "label": "pins",
+            "value": "VCC,GND,OUT"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=HC-SR501+PIR+Motion+Sensor&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "boundingBox": {
+        "width": 32,
+        "height": 24,
+        "depth": 20
+      },
+      "position3d": {
+        "x": 50.8,
+        "y": 10,
+        "z": 140
+      },
+      "amazonUrl": "https://www.amazon.com/dp/B0DBZGPCVR?tag=blueprintam-20&linkCode=osi&th=1&psc=1"
+    },
+    {
+      "id": "oled_display",
+      "name": "OLED Status Display",
+      "productName": "SSD1306 0.96 inch OLED",
+      "category": "electrical",
+      "type": "display",
+      "pins": [
+        "SDA",
+        "SCL",
+        "VCC",
+        "GND"
+      ],
+      "dimensions": "27x27x4mm",
+      "quantity": 1,
+      "estimatedCost": 5,
+      "purchaseUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxRyxAvUSPUSjPHUTr77M9a5gaHAkY8zttMepDjVK7dGrvo244ugf65QsqLKk6RaFpQv6ezSmVyecQADFvedRg8da83RnzVs7HhpmvfCXSv5kZ7bX8JFCWLERS0GJKWeODyHS2IzBn3tOQfIMW7SYq83njneQ3Ptptor4abF2sWF5sU7TypilOLtBlemsbwsuskEW2iBQisP0qtVMZgzdnYXblXW3b4nPRMPf6DUhz03GmhO5MGEPjHVeNTtM86r0MWHjQnXTGNrbQziesJPQqR3RqwHfjrwFaM2jFcUthtLV7I7kUtiBU2UDgZ0HSW24E2Y8rVrRI9rwBoTwhfHZSlGy4YoonC8OVfl2G36sMKYRJ2bOeRbTAVjcqTq0obz6x28hfTVHLbitupFUMNjBZYsb1EdK957r8Em33oVViz8y24MsE20T6rzxo1TrfcEzaQkViSkjLmV9FwAJqYyYAx4ll8yUzhoVbmWe9WJqJV0lHhp9dfgLqzgPkbUI7QigdXBegnJyykjCPO0NBT4bnHNkZ075JuyfpV8iNbvCwFla4ILhMYvybiFHZpwYZII016KZvwE0H7RfnHJK0am0cnjQAkPs3ENFJVGkcGXvItPVVUiu9jsXJlzdFQicHcxk8mp6vKGeZbeFusWMELgSmjYX",
+      "partId": "378cfbf8-be4d-4e73-bd55-09d3ccb87640",
+      "description": "Small OLED display for system status and feedback. Located on the handheld head.",
+      "imageUrl": "https://m.media-amazon.com/images/I/413fgWCvyzL._SL500_.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxRyxAvUSPUSjPHUTr77M9a5gaHAkY8zttMepDjVK7dGrvo244ugf65QsqLKk6RaFpQv6ezSmVyecQADFvedRg8da83RnzVs7HhpmvfCXSv5kZ7bX8JFCWLERS0GJKWeODyHS2IzBn3tOQfIMW7SYq83njneQ3Ptptor4abF2sWF5sU7TypilOLtBlemsbwsuskEW2iBQisP0qtVMZgzdnYXblXW3b4nPRMPf6DUhz03GmhO5MGEPjHVeNTtM86r0MWHjQnXTGNrbQziesJPQqR3RqwHfjrwFaM2jFcUthtLV7I7kUtiBU2UDgZ0HSW24E2Y8rVrRI9rwBoTwhfHZSlGy4YoonC8OVfl2G36sMKYRJ2bOeRbTAVjcqTq0obz6x28hfTVHLbitupFUMNjBZYsb1EdK957r8Em33oVViz8y24MsE20T6rzxo1TrfcEzaQkViSkjLmV9FwAJqYyYAx4ll8yUzhoVbmWe9WJqJV0lHhp9dfgLqzgPkbUI7QigdXBegnJyykjCPO0NBT4bnHNkZ075JuyfpV8iNbvCwFla4ILhMYvybiFHZpwYZII016KZvwE0H7RfnHJK0am0cnjQAkPs3ENFJVGkcGXvItPVVUiu9jsXJlzdFQicHcxk8mp6vKGeZbeFusWMELgSmjYX",
+      "research": {
+        "sourcing": [
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/item/1005007389730469.html?pdp_npi=6%40dis%21USD%215.64%213.67%21%21%2138.12%2124.78%21%402151fd3a17793676216956054e0ee5%2112000040552517464%21affd%21%21%21%211%210%21",
+            "price": "$3.67"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B09T6SJBV5?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$14.99"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0D2RMQQHR?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$9.99"
+          }
+        ],
+        "specs": [
+          {
+            "label": "pins",
+            "value": "SDA,SCL,VCC,GND"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=SSD1306+0.96+inch+OLED&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "amazonUrl": "https://www.amazon.com/dp/B09T6SJBV5?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+      "boundingBox": {
+        "width": 27,
+        "height": 27,
+        "depth": 4
+      },
+      "position3d": {
+        "x": 50.8,
+        "y": 160,
+        "z": 147
+      }
+    },
+    {
+      "id": "led_alert_red",
+      "name": "Red Alert LED",
+      "productName": "5mm Red LED",
+      "category": "electrical",
+      "type": "display",
+      "pins": [
+        "ANODE",
+        "CATHODE"
+      ],
+      "dimensions": "5x5x8mm",
+      "quantity": 1,
+      "estimatedCost": 0.1,
+      "purchaseUrl": "https://www.digikey.com/en/products/result?keywords=5mm+red+led",
+      "partId": "566771ee-69de-4057-8edf-cd350543886a",
+      "description": "Standard 5mm through-hole red LED for indicator purposes.",
+      "imageUrl": "https://m.media-amazon.com/images/I/41zoD-QTquL._SL500_.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHX4XkUIACHeL1e31u3iLxkALwGbKN9HGE0Fk1GBGeg7jjOreyyhV7v6dPNb8SE9G79qtf2raKdgL3kXM5epODc5CsyoaBLKu7Zw7quBzN6IeeVGtsJmFR4ptthOaUMOtkvPrpLzjOUyRXIDmJFAkye5GtV9QS2Rph3rKGMWjj2FN78v77rwGoid7VcGDq3sOBiRg3l151noNlTyGaWewZeIogU0EPQNOWDlDwu7xgKu2qGlHJ2wsbEpuFJEBj3mxxfjPQQ1EVUEvcx2obN7ShrV4Uopcnc0oM3fBVguzJxK1KzYlT712zcViXRK3D3RF7XhwsnTnQxdZFoJHgzNTvLQ4Ezxs0xUfErsHjupGr6yejMz42STDroFh2sTek5s1UTeb3KOK1dREEPIu4YMxDUjmqZMx8eh4emtk8WgZjRNZ3Np7bA6oGjGwCHRyFFQuNfaUCrcXQsCFDmvHiA9AVGs1b0nuXqdS5ocwiiuxuJlzAe1K886EKCKJzwKcJ3se0wjmz5uTHR9H0bVLnuBQ8GjROgzccxxGODYcgciOlleh6xqXyS0yfKu862mW1fMtwhB8NSuDt5uXcgkJwackO7g43Sg00lbjf0EH4vYJ1wM2Z3EAtLmQhwcb71vXkeG6K0w2675PHvZ9WJaJU2HtoCL",
+      "research": {
+        "sourcing": [
+          {
+            "vendor": "Sager Electronics",
+            "url": "https://octopart.com/opatz8j6/a1?t=stt38LdXSloNBywjW6RF5NHFW0lHYPXLKQ4DaGkTzd8FfpXPctXHGWhdi9BuXwAoqeVGehvBsyk8y5ErLXHzyYQveNy4a0jOh-RnpnS87l4x09_Luh4tPQ6nRztLR_ef8D7-1NXdgn8tgtc7-SK5uYqgMqU5s2L5Z-FBI5B36EDzRiThh6q6zIgBnODrEuBQ3WBIcrXJMoM9niLw5deUnPzE8UKpvvoA-wTSFKoheAr_vD_8lCqrPukKxq4uTWGnQwmGknGz7qwMpo3d9hkHTVot5f9oNg"
+          },
+          {
+            "vendor": "RS (Formerly Allied Electronics)",
+            "url": "https://octopart.com/opatz8j6/a1?t=GBmbZJ75MH18MOjPDdA09K5xc0Ny5piHzncAWdq5Oa4CB36YPNj65DkvoHxGYPiYqafWGqgi_b9C9WCwgraKxFZeAkYUZ0DzHM3SrrCYhgJC-BcSiznC7Uj3dxBI4QMUEyL779aCzGvTbcTHK57qFebl5PpBDLMekfBPn6UkFjdHO-hC3jSnENkOj3cw0SkUgnIdROGj8Fp-E1KbqESQZU-9gcucBDdNB606QCvIy9RUYXtrdYkK9q2I7_NYpYtCat1uxwltleJiefxX-AzLvSX6ww",
+            "price": "$1817.09"
+          },
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/item/1005012172879983.html?pdp_npi=6%40dis%21USD%2134.47%2117.23%21%21%21233.08%21116.54%21%40214114e317793343750933040e0fc2%2112000057698814305%21affd%21%21%21%211%210%21",
+            "price": "$17.23"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B09B9BYS8V?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$5.99"
+          }
+        ],
+        "specs": [
+          {
+            "label": "pins",
+            "value": "Anode,Cathode"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=5mm+Red+LED&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "amazonUrl": "https://www.amazon.com/dp/B09B9BYS8V?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+      "boundingBox": {
+        "width": 5,
+        "height": 5,
+        "depth": 8
+      },
+      "position3d": {
+        "x": 25,
+        "y": 190,
+        "z": 147
+      }
+    },
+    {
+      "id": "led_alert_green",
+      "name": "Green Alert LED",
+      "productName": "5mm Green LED",
+      "category": "electrical",
+      "type": "display",
+      "pins": [
+        "ANODE",
+        "CATHODE"
+      ],
+      "dimensions": "5x5x8mm",
+      "quantity": 1,
+      "estimatedCost": 0.1,
+      "purchaseUrl": "https://www.digikey.com/en/products/result?keywords=5mm+green+led",
+      "partId": "a5b54536-cebe-4c7a-a73b-cfff8f7e6fa9",
+      "description": "Indicates system running status.",
+      "imageUrl": "https://cdn-shop.adafruit.com/640x480/298-00.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHX4XkUIACHeL1e31u3iLxkALwGbKN9HGE0Fk1GBGeg7jjOreyyhV7v6dPNb8SE9G79qtf2raKdgL3kXM5epODc5CsyoaBLKu7Zw7quBzN6IeeVGtsJmFR4ptthOaUMOtkvPrpLzjOUyRXIDmJFAkye5GtV9QS2Rph3rKGMWjj2FN78v77rwGoid7VcGDq3sOBiRg3l150zdwqv7LAXMzakdVdyqGL1uSUxMFHiiX6vqYD2aaedMYwosuZCsACEVv6JpSopURB45cK1oJmDUUiAjXgryAjFGTXOLiimUBTqYEWnaBPgRnVeH6FASFyVPFJeqWc9qYcyeqwjWjWykY11eCndnPAgu3RVnCVQKEcwsPkOwjebRQ92zLgcR3qefRiwj226Y2CvDH1t18iPCRQ3tg1WK1Wa2tN8RXo1zgUdfhuZQJsi3dks4zRhXp9jocYGSJBs5NpUvjApJ4xJIcnRniK29UR0u2GIZRV2CMrpjo0xlxMPnNTAKrb21Haf6cOZZa39EpzrHa7hCvXNOQVn5HgTNALckw8yUDZlR6bwnfdmg9MNnJSlYWkVhV1sGctt8LyLRJG4rDNDbBThNiYprSWDszeXmV6KmxVe1WPo29InlFCnGnT770X58ATgLB27iZrvLAZgEFRatJXfSj4gx",
+      "research": {
+        "documentationUrls": [
+          {
+            "url": "https://www.adafruit.com/product/298",
+            "title": "Product Page (Adafruit)"
+          }
+        ],
+        "sourcing": [
+          {
+            "vendor": "Adafruit",
+            "url": "https://www.adafruit.com/product/298",
+            "price": "$4"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B01AUI4VVA?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$6.99"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B09B9FD3Z3?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$6.99"
+          },
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/item/1005012172879983.html?pdp_npi=6%40dis%21USD%2134.47%2117.23%21%21%21233.08%21116.54%21%402101611117793343751152446e0ee2%2112000057698814305%21affd%21%21%21%211%210%21",
+            "price": "$17.23"
+          }
+        ],
+        "specs": [
+          {
+            "label": "pins",
+            "value": "Anode,Cathode"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=5mm+Green+LED&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "amazonUrl": "https://www.amazon.com/dp/B01AUI4VVA?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+      "boundingBox": {
+        "width": 5,
+        "height": 5,
+        "depth": 8
+      },
+      "position3d": {
+        "x": 75,
+        "y": 190,
+        "z": 147
+      }
+    },
+    {
+      "id": "mini_gsm_antenna",
+      "name": "Mini GSM/4G Antenna",
+      "productName": "GSM 4G LTE SMA Antenna",
+      "category": "electrical",
+      "type": "module",
+      "pins": [
+        "SMA"
+      ],
+      "dimensions": "50x10x10mm",
+      "quantity": 1,
+      "estimatedCost": 5,
+      "purchaseUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxhlXbTlkc0muRjj18lRONlqihFdkItTbaWYOnGaM8eVilVae3odL5sJVnX2peb7HpZKmfXLBsBGI9XAMlWo5JJ6ge4FmZqOkwLP8Cm661DnTL8IltacXZRiPPSbq1hfBUb0tkCNm0FmixQ806iOtUIQcQLCX0BwRD2TtM1QvAoiYZENLIOaDOcVxgZSbDGykayrvniB5KmHvelcuSXAKvmurQjIr8XffIlmDbStg3FjdJfOOsj9DJrrbDGRG7DK9tgXBFXXi5dByBC0J6BKZsSNELVpWOblZsomilHaOOGgmxsBBndGeTaBTNZ1E27h2sOR6VqkuXQzJRjXIRZBfA8Ms2IMfq1EDxIzjVHV6Q7sKjSplsCQad1BNsqLZXBerpZIhNw8otF9j7VzvZbWazWQqN3XCeLc7sZm9XJHAoDVOapbLfcTHEu9XC6qN4aZaYsrm4rr5xI4k1Eie09Oo5U6Fo4URjpKv8Ckj8TRGUsRl0x9UgFWS6hZUOAMgnjxng94bVFZl6jjTLYsBjwwEeUD4quWmci0JU8EegZrJYGepKNMkxMph6aECRWodxyPT8U2NabAOnTEAODqbpIG4t9ncL2qCS6jki3tHrzALCY3b9QlFN8gmYqdA9rbtmJ5yIsg1vGg99rYJHq6ot9KcN82f",
+      "partId": "e91fdbbc-e499-4392-9178-c37f72564d03",
+      "imageUrl": "https://m.media-amazon.com/images/I/41rl3MgdLrL._SL500_.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxhlXbTlkc0muRjj18lRONlqihFdkItTbaWYOnGaM8eVilVae3odL5sJVnX2peb7HpZKmfXLBsBGI9XAMlWo5JJ6ge4FmZqOkwLP8Cm661DnTL8IltacXZRiPPSbq1hfBUb0tkCNm0FmixQ806iOtUIQcQLCX0BwRD2TtM1QvAoiYZENLIOaDOcVxgZSbDGykayrvniB5KmHvelcuSXAKvmurQjIr8XffIlmDbStg3FjdJfOOsj9DJrrbDGRG7DK9tgXBFXXi5dByBC0J6BKZsSNELVpWOblZsomilHaOOGgmxsBBndGeTaBTNZ1E27h2sOR6VqkuXQzJRjXIRZBfA8Ms2IMfq1EDxIzjVHV6Q7sKjSplsCQad1BNsqLZXBerpZIhNw8otF9j7VzvZbWazWQqN3XCeLc7sZm9XJHAoDVOapbLfcTHEu9XC6qN4aZaYsrm4rr5xI4k1Eie09Oo5U6Fo4URjpKv8Ckj8TRGUsRl0x9UgFWS6hZUOAMgnjxng94bVFZl6jjTLYsBjwwEeUD4quWmci0JU8EegZrJYGepKNMkxMph6aECRWodxyPT8U2NabAOnTEAODqbpIG4t9ncL2qCS6jki3tHrzALCY3b9QlFN8gmYqdA9rbtmJ5yIsg1vGg99rYJHq6ot9KcN82f",
+      "research": {
+        "sourcing": [
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0CRDQ1DKV?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$8.99"
+          },
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/item/1005001386722339.html?pdp_npi=6%40dis%21USD%214.88%214.88%21%21%214.88%214.88%21%402140d36217800192206187323e123b%2112000015894897375%21affd%21%21%21%211%210%21",
+            "price": "$4.88"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0F6YDLGZS?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$16.99"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=GSM+4G+LTE+SMA+Antenna&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "amazonUrl": "https://www.amazon.com/dp/B0CRDQ1DKV?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+      "boundingBox": {
+        "width": 10,
+        "height": 50,
+        "depth": 10
+      },
+      "position3d": {
+        "x": 25,
+        "y": 280,
+        "z": 140
+      }
+    },
+    {
+      "id": "mini_lora_antenna",
+      "name": "Mini LoRa Antenna",
+      "productName": "LoRa 868MHz/915MHz SMA Antenna",
+      "category": "electrical",
+      "type": "module",
+      "pins": [
+        "SMA"
+      ],
+      "dimensions": "50x10x10mm",
+      "quantity": 1,
+      "estimatedCost": 4,
+      "purchaseUrl": "https://www.amazon.com/dp/B0D29CMH6C?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+      "partId": "32d3d8ae-e2c6-4980-b97a-c29d00841c8b",
+      "imageUrl": "https://m.media-amazon.com/images/I/41hB+j7uQVL._SL500_.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/e/_c3AJIP1X",
+      "research": {
+        "sourcing": [
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/w/wholesale-868-915mhz-lora-antenna-u-fl-ipex.html"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0CTXL61LY?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$11.49"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0C1N1FTSV?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$9.98"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0FRGD4MNB?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$8.99"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0D29CMH6C?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$7.98"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0BXWX9DF4?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$11.98"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=LoRa+868MHz%2F915MHz+SMA+Antenna&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "amazonUrl": "https://www.amazon.com/dp/B0CTXL61LY?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+      "boundingBox": {
+        "width": 10,
+        "height": 50,
+        "depth": 10
+      },
+      "position3d": {
+        "x": 50.8,
+        "y": 280,
+        "z": 140
+      }
+    },
+    {
+      "id": "mini_gps_antenna",
+      "name": "Mini GPS Antenna",
+      "productName": "Active GPS SMA Antenna",
+      "category": "electrical",
+      "type": "module",
+      "pins": [
+        "SMA"
+      ],
+      "dimensions": "30x30x10mm",
+      "quantity": 1,
+      "estimatedCost": 7,
+      "purchaseUrl": "https://www.amazon.com/dp/B07R7RC96G?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+      "partId": "37039c18-47f0-4bb8-8515-8b725e0db8d9",
+      "imageUrl": "https://cdn-shop.adafruit.com/640x480/960-04.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxRSS27410TU7ob4fzeq0YxmjQJQbRu951PcxIv9mNqZVWBpfNVsPZQGrLTRAxiXxyzDPLOjk5ZiEbuDPzjwBsuvwdPrQM0MjZwzudL6whxLiUGj1L0GixfISjvUm0ZXuDQcuTcHvdbBUSRhIa4yHCgLxbnvmHeomadk2gw9Nhc961Oqq2BliXOToZ7Hwa0la23sImXotP18m1olV9IC2horZUOavXV7Zo36nJleQt5Cs4JSRfiN5f8CdTuApawK0JAptwQrbMsWYD4Nqv869RsnxbNH7vW1oZEwy9zuR0Sa8Ptt0NNOteUWY3myHsF2mv9I7ly1D8W8GdtiAgQx4NzLRRlaGsJzvi56E6ZuCiIIcjSqK1BempuOJoL3ORY0V9vcwia5UDOc582ykYTwmssz2KQLUziHPTppmhQiugOtWbUM9TW6DL1CEsYBap7mK3MDe5VOQcOuqohlWsR4WNUUkKEOWpZzFtIUYuX4k8d0zFb2P7NvHNkoFED5IqPqg8yHpwHluXn8Nzo5DrdxBYxs7IU32IDxGyQmWFxOaKXgZTKWU0M4Og5VOe9ZgwE3VW9ssDUACeCJDzKhSsL4QOYH3UIOEJc0P8LdfEh6ktGdEIOYTVj8Y0RxykM9MzuZJaHqEsUID2Zd0TxUZiPnptMXD",
+      "research": {
+        "documentationUrls": [
+          {
+            "url": "https://www.adafruit.com/product/960",
+            "title": "Product Page (Adafruit)"
+          }
+        ],
+        "sourcing": [
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0D9JQGQ97?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$13.98"
+          },
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/item/1005009152422221.html?pdp_npi=6%40dis%21USD%2120.19%2114.54%21%21%2120.19%2114.54%21%40214114e317795185138762748e0edb%2112000048110246664%21affd%21%21%21%211%210%21",
+            "price": "$14.54"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B07R7RC96G?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$8.99"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B00LXRQY9A?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$14.99"
+          },
+          {
+            "vendor": "Adafruit",
+            "url": "https://www.adafruit.com/product/960",
+            "price": "$21.5"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=Active+GPS+SMA+Antenna&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "amazonUrl": "https://www.amazon.com/dp/B0D9JQGQ97?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+      "boundingBox": {
+        "width": 30,
+        "height": 30,
+        "depth": 10
+      },
+      "position3d": {
+        "x": 75,
+        "y": 260,
+        "z": 140
+      }
+    },
+    {
+      "id": "dc_barrel_jack",
+      "name": "DC Input Jack",
+      "productName": "5.5x2.1mm DC Power Jack",
+      "category": "electrical",
+      "type": "power",
+      "pins": [
+        "VIN",
+        "GND"
+      ],
+      "dimensions": "12x10x10mm",
+      "quantity": 1,
+      "estimatedCost": 0.5,
+      "purchaseUrl": "https://www.digikey.com/en/products/result?keywords=5.5x2.1mm+dc+jack",
+      "partId": "e1570f86-9a48-46c1-b5a8-f9e683a6770a",
+      "description": "5.5x2.1mm DC power female jack with fixed mounting, anti-reverse polarity design.",
+      "imageUrl": "https://m.media-amazon.com/images/I/51LRYI0qL-L._SL500_.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxR0bCmCJtLClUFGP6m82mjLWtZoJW77FdVKQqWiP50POLSumxhh73RfyEgiv69n2kFgkfiMABhcyyl6PYH4smVRv4b1CvJvHTVjW4yQKZfGFwBtAQKSDFaKWjy0TvWyALr6CgJLVzcOe6vHjZ40ULquahq6sZwPHCyyuMHhVKjgQYMquHrZJUwAdL4spshRBez5J7TkRLudrDRA3RHpYp8sKiYBpduVGzSQyEURnemROhENiXQR7y3qb6ERvMOwIG6vYGzLG0CyHt5z2uvZ8mXZjXFDTRt9vttfuTYdrarSwaro7bpRQdKRNpSoV6CEzB7k0t1eak53lixEy5unSRBx1TU2pzYHFB0r3tqSkQ6rbIiLOsdt78r02KkPgeATaR6sdiaz52VuC4JKCSEnUuoZswYYTAYv5mbX5bVVEYMCxLysngSuoMvJSm9LZJq3uc0lBrKTx7Gh6suvkIf8Hpsp2RevutIDXVSpwszKDJykICcalGnoY2RlywgrfmkCeKe8z2j46Cpi4L6VCX2RmldCepUeVB10Fv6fuL3qIf1fxtaSVBOIP5N3pkJ7d7RO9uSlWLdXbb6xWYUqiPbVfkNmHM9Tk51DljFv0YysmA5Tj3AtJejaKTdIPEnjHQbh9h2a5rQf28FJmAFHX1Z0jYjaL",
+      "research": {
+        "sourcing": [
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/item/1005006472747217.html?pdp_npi=6%40dis%21USD%211.21%211.21%21%21%211.21%211.21%21%402151fce817794527093351632e0f14%2112000037321758211%21affd%21%21%21%211%210%21",
+            "price": "$1.21"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0D9B7WR23?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$9.99"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B09H5L3KN5?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$9.99"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=5.5x2.1mm+DC+Power+Jack&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "amazonUrl": "https://www.amazon.com/dp/B0D9B7WR23?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+      "boundingBox": {
+        "width": 12,
+        "height": 10,
+        "depth": 10
+      },
+      "position3d": {
+        "x": 50.8,
+        "y": 249,
+        "z": 76.2
+      }
+    },
+    {
+      "id": "scheb_main_enclosure",
+      "name": "SCHEB Main Enclosure",
+      "productName": "IP65 ABS/Polycarbonate Project Box",
+      "category": "mechanical",
+      "type": "enclosure",
+      "description": "Durable, weather-resistant enclosure for SCHEB electronics, sized for 10x4x6 inches (254x101.6x152.4mm).",
+      "dimensions": "254x101.6x152.4mm",
+      "quantity": 1,
+      "estimatedCost": 45,
+      "purchaseUrl": "https://www.amazon.com/s?k=ip65+abs+polycarbonate+enclosure+250x100x150mm",
+      "partId": "c61418b4-9d84-4d3e-ab78-a4e05455465d",
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=IP65+ABS%2FPolycarbonate+Project+Box&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "aliexpressUrl": "https://s.click.aliexpress.com/e/_c4NJdVE7",
+      "boundingBox": {
+        "width": 101.6,
+        "height": 254,
+        "depth": 152.4
+      },
+      "position3d": {
+        "x": 50.8,
+        "y": 127,
+        "z": 76.2
+      },
+      "amazonUrl": "https://www.amazon.com/dp/B07RPNWD47?tag=blueprintam-20&linkCode=osi&th=1&psc=1"
+    },
+    {
+      "id": "enclosure_front_panel",
+      "name": "Enclosure Front Panel",
+      "productName": "IP65 ABS/Polycarbonate Project Box Lid",
+      "category": "mechanical",
+      "type": "enclosure",
+      "description": "Front panel of the enclosure with cutouts for display, LEDs, and sensor openings.",
+      "dimensions": "254x101.6x3mm",
+      "quantity": 1,
+      "estimatedCost": 15,
+      "purchaseUrl": "https://www.amazon.com/dp/B075X17M4T?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+      "partId": "78646411-5953-406c-9070-b6d5b244015a",
+      "imageUrl": "https://m.media-amazon.com/images/I/310tp79WjdL._SL500_.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/e/_c359wVkt",
+      "research": {
+        "sourcing": [
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B075X17M4T?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$6.99"
+          },
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/w/wholesale-ip65-abs-project-box-lid.html"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B07RTYYHK7?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$8.49"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B08N1DD5WJ?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$8.99"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=IP65+ABS%2FPolycarbonate+Project+Box+Lid&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "amazonUrl": "https://www.amazon.com/dp/B075X17M4T?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+      "boundingBox": {
+        "width": 101.6,
+        "height": 254,
+        "depth": 3
+      },
+      "position3d": {
+        "x": 50.8,
+        "y": 127,
+        "z": 151
+      }
+    },
+    {
+      "id": "scheb_wall_mounting_plate",
+      "name": "SCHEB Wall Mounting Plate",
+      "productName": "Heavy-Duty Sliding Wall Mount Plate",
+      "category": "mechanical",
+      "type": "structural",
+      "description": "Heavy-duty sliding mounting plate for securely attaching the SCHEB unit to a wall.",
+      "dimensions": "200x80x5mm",
+      "quantity": 1,
+      "estimatedCost": 12,
+      "purchaseUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxwcol64cuiw9w5iAMSSpWJHLKuWleJ4guDYl4LfvTKdIoBiQcPIGN7xsLLS1a4yWVcKfys9OpYBj177GBXB6mFZ5B98uJDHxviyUQz7MSMrtFWCW1C40VaYtodsaI7muHSnD7XzXmTdtzOTEfFlERUmEJSLENkUQasl0h4FzACOQLHLFCQwwUJW3vVgLOVd5LLqcxn3C9A4kWuuw6ZcNHcEGR8TSA7kLE9bjselB2FkAaq9SMQ6cN1eeYCneL18fuWLjhwYmmwGJDUrfpgqVaRRyPYKoaMgXxsrQzWihqWNGd33bMPLNZ6TdXBEX2T7Qr9ybAOULWhPNvD9LrfIgA3Ul2aB6ZcbVoY0IdlFbs993eBLDx0VZ59Pr7YjqSdN5Vw8GUr1cdksPB4fhz4e6X2GhQ5NlJgcYh64r2kKSAmeYfGH34wnOd7qbg1wS50niaNBXr519FzLe5QiWFwKSg5uiUE134GWu5EC7X9XgL8dtbivWhnZ977JU1vd2efk2UvHpNbYOpHzfhGWiQ9A350G9aHIeGoyZzFTFzjtmuEiiYEbSIAQFecFqufvisnK9CCgaQV8cyhWOArV4vGB8xYc5uHOBrD9F8HimBToaCocfJ9Vx70MgO7nqMLHCeykoQOH9o6jV7Gsk7gdvUeJ9QKZz",
+      "partId": "cc121311-c9cd-47b8-9235-e7194bfd7dd2",
+      "imageUrl": "https://m.media-amazon.com/images/I/41nFWVAbSyL._SL500_.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxwcol64cuiw9w5iAMSSpWJHLKuWleJ4guDYl4LfvTKdIoBiQcPIGN7xsLLS1a4yWVcKfys9OpYBj177GBXB6mFZ5B98uJDHxviyUQz7MSMrtFWCW1C40VaYtodsaI7muHSnD7XzXmTdtzOTEfFlERUmEJSLENkUQasl0h4FzACOQLHLFCQwwUJW3vVgLOVd5LLqcxn3C9A4kWuuw6ZcNHcEGR8TSA7kLE9bjselB2FkAaq9SMQ6cN1eeYCneL18fuWLjhwYmmwGJDUrfpgqVaRRyPYKoaMgXxsrQzWihqWNGd33bMPLNZ6TdXBEX2T7Qr9ybAOULWhPNvD9LrfIgA3Ul2aB6ZcbVoY0IdlFbs993eBLDx0VZ59Pr7YjqSdN5Vw8GUr1cdksPB4fhz4e6X2GhQ5NlJgcYh64r2kKSAmeYfGH34wnOd7qbg1wS50niaNBXr519FzLe5QiWFwKSg5uiUE134GWu5EC7X9XgL8dtbivWhnZ977JU1vd2efk2UvHpNbYOpHzfhGWiQ9A350G9aHIeGoyZzFTFzjtmuEiiYEbSIAQFecFqufvisnK9CCgaQV8cyhWOArV4vGB8xYc5uHOBrD9F8HimBToaCocfJ9Vx70MgO7nqMLHCeykoQOH9o6jV7Gsk7gdvUeJ9QKZz",
+      "research": {
+        "sourcing": [
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B08GLMJ4WQ?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$89.99"
+          },
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/item/1005012174692536.html?pdp_npi=6%40dis%21USD%2134.54%2134.54%21%21%21232.59%21232.59%21%402102f1cd17842024533637843e0e4c%2112000057691962719%21affd%21%21%21%211%210%21",
+            "price": "$34.54"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=Heavy-Duty+Sliding+Wall+Mount+Plate&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "amazonUrl": "https://www.amazon.com/dp/B08GLMJ4WQ?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+      "boundingBox": {
+        "width": 80,
+        "height": 200,
+        "depth": 5
+      },
+      "position3d": {
+        "x": 50.8,
+        "y": 127,
+        "z": -2.5
+      }
+    },
+    {
+      "id": "security_screw_m4",
+      "name": "Security Screw for Wall Mount",
+      "productName": "M4x10mm Hex Socket Security Screw",
+      "category": "mechanical",
+      "type": "misc",
+      "description": "M4 security screw to lock the SCHEB unit onto the wall mounting plate, preventing theft.",
+      "dimensions": "M4x10mm",
+      "quantity": 1,
+      "estimatedCost": 0.5,
+      "purchaseUrl": "https://www.amazon.com/dp/B0BC8M3YZW?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+      "partId": "5e9dacdb-a304-4c34-9c45-d2d2a80b803d",
+      "imageUrl": "https://m.media-amazon.com/images/I/31uGrVmCvVL._SL500_.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/e/_c3pNZ8GL",
+      "research": {
+        "sourcing": [
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0BC8M3YZW?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$5.99"
+          },
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/w/wholesale-m4x10mm-torx-security-screw.html"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=M4x10mm+Hex+Socket+Security+Screw&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "amazonUrl": "https://www.amazon.com/dp/B0BC8M3YZW?tag=blueprintam-20&linkCode=osi&th=1&psc=1"
+    },
+    {
+      "id": "ventilation_grille_top",
+      "name": "Top Ventilation Grille",
+      "productName": "IP65 Ventilation Grille with Filter",
+      "category": "mechanical",
+      "type": "enclosure",
+      "description": "Weather-resistant louvered ventilation grille for the top section of the enclosure.",
+      "dimensions": "60x40x10mm",
+      "quantity": 1,
+      "estimatedCost": 4,
+      "purchaseUrl": "https://www.amazon.com/dp/B0968RDYR2?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+      "partId": "80c5bec9-8a52-47fb-bef3-9355c948db25",
+      "imageUrl": "https://m.media-amazon.com/images/I/41YSOUnxbqL._SL500_.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxRd0nga2Ogo47PhkcN3AEF68JMHBz6kJigOsstzZHRkyLi7yGIhDE1uMjH2gv89x2jN0FUE6z2Yo20KHQfzf9pE4FtOC6fu46HwBM4eH8xHsQcDDzwvorkaFwMLdEnji99sqNVaW85V3ImgYgFBBUW3OXoy7huRz8bLhWHMiTcy9BvDONFVsq7uqEyFaFMnBkZ1fUQl026LHZSGndUpW23WWnJWqNNK2Dl7WsHnIHdSNuOXF28Q9d9aZpQaKmXvBjwUzSmxWueMKGLPKd8lYmg4PZ0KX0oZF6eqO0LRgjbE5oBLObNa1lxlPxIkubl3QTFO7n2Z1ZL2fZwzFtwRLGSPhmqqSivmAg9YgnLnFEI1XB397PXv5FsbFlp3l7oOfQdCp6n6O3Z0IWPYVMU5FK1Jvr3YiZIvxxhKFdPGYeRUh4Nso31Ynr9tJ3iMfX9tEi0clV1EAZ6XYtdjNLkSruiOJBvcdXOoIOobfGScm7jPBEu3lc1Txs4hOHgF9fWNx85WcDH3RhCo6zMgdA41Z5bw1M3PRmv3y3J1iZlHIQyyzVroedd6AFB6SBABgsHoScwtCMDLpkVhlXx6PgE4xwUOND9nPRTdkZNTvIvDrMCLkY0AwqFXKmeuSNzIT9EiawDJl0cOZc1heFpBm7kJynBND",
+      "research": {
+        "sourcing": [
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B09N3RK1KG?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$16.47"
+          },
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/item/1005011750097465.html?pdp_npi=6%40dis%21USD%2131.74%2115.87%21%21%21215.19%21107.59%21%402140f88817824008257177359e124b%2112000056435996650%21affd%21%21%21%211%210%21",
+            "price": "$15.87"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0968RDYR2?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$8.99"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B08L72L849?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$19.99"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=IP65+Ventilation+Grille+with+Filter&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "amazonUrl": "https://www.amazon.com/dp/B09N3RK1KG?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+      "boundingBox": {
+        "width": 60,
+        "height": 40,
+        "depth": 10
+      },
+      "position3d": {
+        "x": 50.8,
+        "y": 250,
+        "z": 76.2
+      }
+    },
+    {
+      "id": "ventilation_grille_bottom",
+      "name": "Bottom Ventilation Grille",
+      "productName": "IP65 Ventilation Grille with Filter",
+      "category": "mechanical",
+      "type": "enclosure",
+      "description": "Weather-resistant louvered ventilation grille for the bottom section of the enclosure, above sensors.",
+      "dimensions": "60x40x10mm",
+      "quantity": 1,
+      "estimatedCost": 4,
+      "purchaseUrl": "https://www.amazon.com/dp/B0968RDYR2?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+      "partId": "80c5bec9-8a52-47fb-bef3-9355c948db25",
+      "imageUrl": "https://m.media-amazon.com/images/I/41YSOUnxbqL._SL500_.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxRd0nga2Ogo47PhkcN3AEF68JMHBz6kJigOsstzZHRkyLi7yGIhDE1uMjH2gv89x2jN0FUE6z2Yo20KHQfzf9pE4FtOC6fu46HwBM4eH8xHsQcDDzwvorkaFwMLdEnji99sqNVaW85V3ImgYgFBBUW3OXoy7huRz8bLhWHMiTcy9BvDONFVsq7uqEyFaFMnBkZ1fUQl026LHZSGndUpW23WWnJWqNNK2Dl7WsHnIHdSNuOXF28Q9d9aZpQaKmXvBjwUzSmxWueMKGLPKd8lYmg4PZ0KX0oZF6eqO0LRgjbE5oBLObNa1lxlPxIkubl3QTFO7n2Z1ZL2fZwzFtwRLGSPhmqqSivmAg9YgnLnFEI1XB397PXv5FsbFlp3l7oOfQdCp6n6O3Z0IWPYVMU5FK1Jvr3YiZIvxxhKFdPGYeRUh4Nso31Ynr9tJ3iMfX9tEi0clV1EAZ6XYtdjNLkSruiOJBvcdXOoIOobfGScm7jPBEu3lc1Txs4hOHgF9fWNx85WcDH3RhCo6zMgdA41Z5bw1M3PRmv3y3J1iZlHIQyyzVroedd6AFB6SBABgsHoScwtCMDLpkVhlXx6PgE4xwUOND9nPRTdkZNTvIvDrMCLkY0AwqFXKmeuSNzIT9EiawDJl0cOZc1heFpBm7kJynBND",
+      "research": {
+        "sourcing": [
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B09N3RK1KG?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$16.47"
+          },
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/item/1005011750097465.html?pdp_npi=6%40dis%21USD%2131.74%2115.87%21%21%21215.19%21107.59%21%402140f88817824008257177359e124b%2112000056435996650%21affd%21%21%21%211%210%21",
+            "price": "$15.87"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0968RDYR2?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$8.99"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B08L72L849?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$19.99"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=IP65+Ventilation+Grille+with+Filter&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "amazonUrl": "https://www.amazon.com/dp/B09N3RK1KG?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+      "boundingBox": {
+        "width": 60,
+        "height": 40,
+        "depth": 10
+      },
+      "position3d": {
+        "x": 50.8,
+        "y": 4,
+        "z": 76.2
+      }
+    },
+    {
+      "id": "dust_filter_vent_top",
+      "name": "Dust Filter for Top Vent",
+      "productName": "Fine Mesh Dust Filter",
+      "category": "mechanical",
+      "type": "misc",
+      "description": "Fine mesh filter to prevent dust and insects from entering the top ventilation port.",
+      "dimensions": "55x35x1mm",
+      "quantity": 1,
+      "estimatedCost": 1,
+      "purchaseUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxGymkQYZeBtCUD6aT8E1ovAp6tB9ahbNQV3szx13YSYOSu68mlQ9ce7U1JIuO4mPbwCXXoVWNALH6q3fm1ATETWZFApuEKq2Jbd8mFvY7VKm7T2en30TBXwGjhTKEi4gEnqOt2KwLp9m7gW5I4Zc3WYCrOj3mIdi542xd7oQxRYFBM16ykNjgm9LAxV9QDO1CMIAtSXSSVqkXsYfqXN6mknicA3c7zBliI6uFNXroQJK8IM4E5uQMiDuVvPPWFQQQQUKQhqSeFMMvgkXkX4DKzAGhfWy6RA2BhfRZIqRJsWSGlv1qsnMZJu0wO3z3eqQROtu89VstAQKsQcr9GqstAgfGiY0O8ig6BLCDd0KwZhtNNi4iYbIN7MZV0qdhyJhPzYpRpmjtfw9rMA4V4QITBJTNNxaKOxdhFSo1K5xna0Kkh53X25VMTWDH3qLuejmkpZjiWjvVi9rMPvALaU3kzGvmTK0SWz4t4LywcIzIyzi611VhqbqxAaZVlUdYLU2Bmp520CoA0yCSexOdZwrqsKmWRkPZwC41cabDyUIKARWrLYa2JSu501xZ7c4KjxPqfMDUtFySlP75KgwHLFUcQGqa6FnyoSkPnHg79dMEPUe775mXIlqVtoqj5mPB4KVEAasLSgklIyalHWI0CJHn6mn",
+      "partId": "b22216ba-2bb3-4a71-859d-27b52a6ca9b0",
+      "material": "Nylon Mesh",
+      "imageUrl": "https://m.media-amazon.com/images/I/61aJ1rreFkL._SL500_.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxGymkQYZeBtCUD6aT8E1ovAp6tB9ahbNQV3szx13YSYOSu68mlQ9ce7U1JIuO4mPbwCXXoVWNALH6q3fm1ATETWZFApuEKq2Jbd8mFvY7VKm7T2en30TBXwGjhTKEi4gEnqOt2KwLp9m7gW5I4Zc3WYCrOj3mIdi542xd7oQxRYFBM16ykNjgm9LAxV9QDO1CMIAtSXSSVqkXsYfqXN6mknicA3c7zBliI6uFNXroQJK8IM4E5uQMiDuVvPPWFQQQQUKQhqSeFMMvgkXkX4DKzAGhfWy6RA2BhfRZIqRJsWSGlv1qsnMZJu0wO3z3eqQROtu89VstAQKsQcr9GqstAgfGiY0O8ig6BLCDd0KwZhtNNi4iYbIN7MZV0qdhyJhPzYpRpmjtfw9rMA4V4QITBJTNNxaKOxdhFSo1K5xna0Kkh53X25VMTWDH3qLuejmkpZjiWjvVi9rMPvALaU3kzGvmTK0SWz4t4LywcIzIyzi611VhqbqxAaZVlUdYLU2Bmp520CoA0yCSexOdZwrqsKmWRkPZwC41cabDyUIKARWrLYa2JSu501xZ7c4KjxPqfMDUtFySlP75KgwHLFUcQGqa6FnyoSkPnHg79dMEPUe775mXIlqVtoqj5mPB4KVEAasLSgklIyalHWI0CJHn6mn",
+      "research": {
+        "sourcing": [
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0D6W21YKB?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$11.99"
+          },
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/item/1005006635651983.html?pdp_npi=6%40dis%21USD%2110.66%213.63%21%21%2171.86%2124.43%21%4021013cc017809873100173800e0dec%2112000038523071389%21affd%21%21%21%211%210%21",
+            "price": "$3.63"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0BHSS55RM?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$12.99"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=Fine+Mesh+Dust+Filter&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "amazonUrl": "https://www.amazon.com/dp/B0D6W21YKB?tag=blueprintam-20&linkCode=osi&th=1&psc=1"
+    },
+    {
+      "id": "dust_filter_vent_bottom",
+      "name": "Dust Filter for Bottom Vent",
+      "productName": "Fine Mesh Dust Filter",
+      "category": "mechanical",
+      "type": "misc",
+      "description": "Fine mesh filter to prevent dust and insects from entering the bottom ventilation port.",
+      "dimensions": "55x35x1mm",
+      "quantity": 1,
+      "estimatedCost": 1,
+      "purchaseUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxGymkQYZeBtCUD6aT8E1ovAp6tB9ahbNQV3szx13YSYOSu68mlQ9ce7U1JIuO4mPbwCXXoVWNALH6q3fm1ATETWZFApuEKq2Jbd8mFvY7VKm7T2en30TBXwGjhTKEi4gEnqOt2KwLp9m7gW5I4Zc3WYCrOj3mIdi542xd7oQxRYFBM16ykNjgm9LAxV9QDO1CMIAtSXSSVqkXsYfqXN6mknicA3c7zBliI6uFNXroQJK8IM4E5uQMiDuVvPPWFQQQQUKQhqSeFMMvgkXkX4DKzAGhfWy6RA2BhfRZIqRJsWSGlv1qsnMZJu0wO3z3eqQROtu89VstAQKsQcr9GqstAgfGiY0O8ig6BLCDd0KwZhtNNi4iYbIN7MZV0qdhyJhPzYpRpmjtfw9rMA4V4QITBJTNNxaKOxdhFSo1K5xna0Kkh53X25VMTWDH3qLuejmkpZjiWjvVi9rMPvALaU3kzGvmTK0SWz4t4LywcIzIyzi611VhqbqxAaZVlUdYLU2Bmp520CoA0yCSexOdZwrqsKmWRkPZwC41cabDyUIKARWrLYa2JSu501xZ7c4KjxPqfMDUtFySlP75KgwHLFUcQGqa6FnyoSkPnHg79dMEPUe775mXIlqVtoqj5mPB4KVEAasLSgklIyalHWI0CJHn6mn",
+      "partId": "b22216ba-2bb3-4a71-859d-27b52a6ca9b0",
+      "material": "Nylon Mesh",
+      "imageUrl": "https://m.media-amazon.com/images/I/61aJ1rreFkL._SL500_.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxGymkQYZeBtCUD6aT8E1ovAp6tB9ahbNQV3szx13YSYOSu68mlQ9ce7U1JIuO4mPbwCXXoVWNALH6q3fm1ATETWZFApuEKq2Jbd8mFvY7VKm7T2en30TBXwGjhTKEi4gEnqOt2KwLp9m7gW5I4Zc3WYCrOj3mIdi542xd7oQxRYFBM16ykNjgm9LAxV9QDO1CMIAtSXSSVqkXsYfqXN6mknicA3c7zBliI6uFNXroQJK8IM4E5uQMiDuVvPPWFQQQQUKQhqSeFMMvgkXkX4DKzAGhfWy6RA2BhfRZIqRJsWSGlv1qsnMZJu0wO3z3eqQROtu89VstAQKsQcr9GqstAgfGiY0O8ig6BLCDd0KwZhtNNi4iYbIN7MZV0qdhyJhPzYpRpmjtfw9rMA4V4QITBJTNNxaKOxdhFSo1K5xna0Kkh53X25VMTWDH3qLuejmkpZjiWjvVi9rMPvALaU3kzGvmTK0SWz4t4LywcIzIyzi611VhqbqxAaZVlUdYLU2Bmp520CoA0yCSexOdZwrqsKmWRkPZwC41cabDyUIKARWrLYa2JSu501xZ7c4KjxPqfMDUtFySlP75KgwHLFUcQGqa6FnyoSkPnHg79dMEPUe775mXIlqVtoqj5mPB4KVEAasLSgklIyalHWI0CJHn6mn",
+      "research": {
+        "sourcing": [
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0D6W21YKB?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$11.99"
+          },
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/item/1005006635651983.html?pdp_npi=6%40dis%21USD%2110.66%213.63%21%21%2171.86%2124.43%21%4021013cc017809873100173800e0dec%2112000038523071389%21affd%21%21%21%211%210%21",
+            "price": "$3.63"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0BHSS55RM?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$12.99"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=Fine+Mesh+Dust+Filter&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "amazonUrl": "https://www.amazon.com/dp/B0D6W21YKB?tag=blueprintam-20&linkCode=osi&th=1&psc=1"
+    },
+    {
+      "id": "carry_handle",
+      "name": "Carry Handle",
+      "productName": "Heavy Duty ABS Carry Handle",
+      "category": "mechanical",
+      "type": "enclosure",
+      "description": "Durable carry handle for portability, integrated into the top of the enclosure.",
+      "dimensions": "120x30x20mm",
+      "quantity": 1,
+      "estimatedCost": 7,
+      "purchaseUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxQuWHURZOZhB1OP2hxVIz8CACOHTaNlTat0Kk07eojHSqF9pfjXfYfy08AaL3URAbpsGSxD6eA1Z11epVd35qDlXoK7DhTU4taaLqPI7S5qrDp1XRmSvEYMkIZz16NAHBRSTW0doyZPR4qxezZasxMWe9rsMRVj0Yj2h3QJXrqiewjatZvXaQjomnI0Kc5oLIqIwO1uxKiBCyjTwqS3FzS2UCc6cZCWMvKWqjFOdIaq2YGK6HoQk97ihPoSMjzW3OG3y3kMMekPIzQVqbEfkfgj943TCICeyhbjQn52HAYlGsclnBwBVg2cW1va9Pq0qOOzOOF4KGG1uqfLpXesFvdntLkODspCIHc02zImQfixdxd7yJV14DCHgQapTqX5y4QTY5Qdcfg4rdP0KydUdYOWKPeRUqdfnuuHAEhoo5miUJbEhB3kIudUJuTKw3wJ2ZJtjjLiFQ6AmKnU7dPqz80liH4UyoUsLLkIaay8gYYL6I1Q9VITWuuKqj8d1Etd0VrTnZiNAVcnUYSJ1hRBOtNtsG0fVOk66DLqYLBn9ZMDWAbQ3CmnoWrUtDB3OoWOCcy0Z0JK79tLKMIAJ5acicEjeeIP02p91PExfjtU41zLotb2Egn33Xje7lKgrgr761pym9U1paXfF9Rl8e9uVRKhH",
+      "partId": "1070eb10-71ee-470a-ae82-c17b5d195ccd",
+      "imageUrl": "https://m.media-amazon.com/images/I/41jyg4SCRfL._SL500_.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxQuWHURZOZhB1OP2hxVIz8CACOHTaNlTat0Kk07eojHSqF9pfjXfYfy08AaL3URAbpsGSxD6eA1Z11epVd35qDlXoK7DhTU4taaLqPI7S5qrDp1XRmSvEYMkIZz16NAHBRSTW0doyZPR4qxezZasxMWe9rsMRVj0Yj2h3QJXrqiewjatZvXaQjomnI0Kc5oLIqIwO1uxKiBCyjTwqS3FzS2UCc6cZCWMvKWqjFOdIaq2YGK6HoQk97ihPoSMjzW3OG3y3kMMekPIzQVqbEfkfgj943TCICeyhbjQn52HAYlGsclnBwBVg2cW1va9Pq0qOOzOOF4KGG1uqfLpXesFvdntLkODspCIHc02zImQfixdxd7yJV14DCHgQapTqX5y4QTY5Qdcfg4rdP0KydUdYOWKPeRUqdfnuuHAEhoo5miUJbEhB3kIudUJuTKw3wJ2ZJtjjLiFQ6AmKnU7dPqz80liH4UyoUsLLkIaay8gYYL6I1Q9VITWuuKqj8d1Etd0VrTnZiNAVcnUYSJ1hRBOtNtsG0fVOk66DLqYLBn9ZMDWAbQ3CmnoWrUtDB3OoWOCcy0Z0JK79tLKMIAJ5acicEjeeIP02p91PExfjtU41zLotb2Egn33Xje7lKgrgr761pym9U1paXfF9Rl8e9uVRKhH",
+      "research": {
+        "sourcing": [
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/item/1005012172907595.html?pdp_npi=6%40dis%21USD%2142.49%2121.25%21%21%21287.46%21143.73%21%40210152bd17824953059264826e0e6e%2112000057681215539%21affd%21%21%21%211%210%21",
+            "price": "$21.25"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0DXPN8NM6?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$31.99"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=Heavy+Duty+ABS+Carry+Handle&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "boundingBox": {
+        "width": 120,
+        "height": 30,
+        "depth": 20
+      },
+      "position3d": {
+        "x": 50.8,
+        "y": 230,
+        "z": 162.4
+      },
+      "amazonUrl": "https://www.amazon.com/dp/B0DXPN8NM6?tag=blueprintam-20&linkCode=osi&th=1&psc=1"
+    },
+    {
+      "id": "cable_gland_dc_input",
+      "name": "DC Input Cable Gland",
+      "productName": "M16 IP68 Cable Gland",
+      "category": "mechanical",
+      "type": "misc",
+      "description": "Waterproof M16 cable gland for securing the solar panel DC input cable.",
+      "dimensions": "M16",
+      "mountsFor": "dc_barrel_jack",
+      "quantity": 1,
+      "estimatedCost": 3,
+      "purchaseUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxhe2P6Z08XGzzv6NGZPWaeO327MKJsIZwMchiMp00BqtKgYn08awKFWFaQjIL6Bp89pWJuyV00q7qSq2s5KKxdozD2VDe9mpfBbRPFHpyY0S3lA4AwYiVuY3Vodmp6BFvJSe4BTR5x4j2PAjwzPHKTFztWgNIOLpdnesZ6oGt94ou7vLUiGB2dVqNUtkB2KLFQqEYD7F0yYwbyyylDGtVdiYb3s1by0MidNOjD0fv2JsFDWWUmVh8AUqbdP2H0nPyXDEWrr2TPZJwJNRkPxb0kWUdFnp1i9VQIk0DLhYCqc5wiUCCkg9pF9eqb4UbKphP3G1QM4LzQKg4bkrnhgpbhOdtbgzAnGF3Siojc67Uyy5WLJnbZdwRwUny4FZFu3K5COFsILs1fPfAamCDhxuWAQIek8OOA0Kgtvn4ljSkFasz2zq5wwJoWG7ZDZ5m6LTMAjUDJMOUo89T4rqWC2xBn018lWpGoz4nDf6htMW3WnCYF8AmedqJ6qfEQciNW5I5FeKysNqrJQyRgIkRbMFgqv9qeBCZRpcvD4K3RbAYoX5YXtz514OpSuSFqt2I9F1XDlEkiPfbL4wawebDHbtUG6UGXWBj3ufIF7T1HTztlade86T9ufqMyr7CB94GOMfLHF2p3kRjd20tWzIkjuBPQhd",
+      "partId": "07bc0f26-2738-4142-bae0-5b327bdde38c",
+      "material": "Nylon",
+      "imageUrl": "https://m.media-amazon.com/images/I/51sR6l+hKbL._SL500_.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxhe2P6Z08XGzzv6NGZPWaeO327MKJsIZwMchiMp00BqtKgYn08awKFWFaQjIL6Bp89pWJuyV00q7qSq2s5KKxdozD2VDe9mpfBbRPFHpyY0S3lA4AwYiVuY3Vodmp6BFvJSe4BTR5x4j2PAjwzPHKTFztWgNIOLpdnesZ6oGt94ou7vLUiGB2dVqNUtkB2KLFQqEYD7F0yYwbyyylDGtVdiYb3s1by0MidNOjD0fv2JsFDWWUmVh8AUqbdP2H0nPyXDEWrr2TPZJwJNRkPxb0kWUdFnp1i9VQIk0DLhYCqc5wiUCCkg9pF9eqb4UbKphP3G1QM4LzQKg4bkrnhgpbhOdtbgzAnGF3Siojc67Uyy5WLJnbZdwRwUny4FZFu3K5COFsILs1fPfAamCDhxuWAQIek8OOA0Kgtvn4ljSkFasz2zq5wwJoWG7ZDZ5m6LTMAjUDJMOUo89T4rqWC2xBn018lWpGoz4nDf6htMW3WnCYF8AmedqJ6qfEQciNW5I5FeKysNqrJQyRgIkRbMFgqv9qeBCZRpcvD4K3RbAYoX5YXtz514OpSuSFqt2I9F1XDlEkiPfbL4wawebDHbtUG6UGXWBj3ufIF7T1HTztlade86T9ufqMyr7CB94GOMfLHF2p3kRjd20tWzIkjuBPQhd",
+      "research": {
+        "sourcing": [
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0FCS66WW1?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$7.29"
+          },
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/item/1005003093251442.html?pdp_npi=6%40dis%21USD%213.01%212.96%21%21%213.01%212.96%21%4021013cc017794180592685097e0f36%2112000024037775981%21affd%21%21%21%211%210%21",
+            "price": "$2.96"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0FCS8RD96?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$9.99"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=M16+IP68+Cable+Gland&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "amazonUrl": "https://www.amazon.com/dp/B0FCS66WW1?tag=blueprintam-20&linkCode=osi&th=1&psc=1"
+    },
+    {
+      "id": "internal_frame_back_pcb_mount",
+      "name": "Internal Backplate/PCB Frame",
+      "category": "mechanical",
+      "type": "3d_printed",
+      "description": "3D-printed internal backplate providing structural support, PCB mounting, and integrated 18650 battery slots.",
+      "dimensions": "240x90x20mm",
+      "material": "PETG",
+      "printSettings": "30% infill, 0.2mm layer",
+      "quantity": 1,
+      "estimatedCost": 8,
+      "purchaseUrl": "https://www.amazon.com/s?k=petg+filament",
+      "boundingBox": {
+        "width": 90,
+        "height": 240,
+        "depth": 20
+      },
+      "position3d": {
+        "x": 50.8,
+        "y": 127,
+        "z": 10
+      }
+    },
+    {
+      "id": "battery_slot_1",
+      "name": "18650 Battery Slot 1",
+      "category": "mechanical",
+      "type": "3d_printed",
+      "description": "Integrated slot in the internal backplate for holding the first 18650 Li-ion battery.",
+      "dimensions": "70x20x20mm",
+      "material": "PETG",
+      "printSettings": "30% infill, 0.2mm layer",
+      "mountsFor": "li_ion_18650_cell_1",
+      "quantity": 1,
+      "estimatedCost": 1,
+      "purchaseUrl": "https://www.amazon.com/s?k=petg+filament",
+      "boundingBox": {
+        "width": 70,
+        "height": 20,
+        "depth": 20
+      },
+      "position3d": {
+        "x": 25,
+        "y": 30,
+        "z": 20
+      }
+    },
+    {
+      "id": "battery_slot_2",
+      "name": "18650 Battery Slot 2",
+      "category": "mechanical",
+      "type": "3d_printed",
+      "description": "Integrated slot in the internal backplate for holding the second 18650 Li-ion battery.",
+      "dimensions": "70x20x20mm",
+      "material": "PETG",
+      "printSettings": "30% infill, 0.2mm layer",
+      "mountsFor": "li_ion_18650_cell_2",
+      "quantity": 1,
+      "estimatedCost": 1,
+      "purchaseUrl": "https://www.amazon.com/s?k=petg+filament",
+      "boundingBox": {
+        "width": 70,
+        "height": 20,
+        "depth": 20
+      },
+      "position3d": {
+        "x": 75,
+        "y": 30,
+        "z": 20
+      }
+    },
+    {
+      "id": "pcb_vertical_mount",
+      "name": "Vertical PCB Mount",
+      "category": "mechanical",
+      "type": "3d_printed",
+      "description": "Set of standoffs and guides to securely mount the single main PCB vertically within the enclosure.",
+      "dimensions": "240x90x10mm",
+      "material": "PETG",
+      "printSettings": "20% infill, 0.2mm layer",
+      "quantity": 1,
+      "estimatedCost": 3,
+      "purchaseUrl": "https://www.amazon.com/s?k=petg+filament",
+      "boundingBox": {
+        "width": 90,
+        "height": 240,
+        "depth": 10
+      },
+      "position3d": {
+        "x": 50.8,
+        "y": 127,
+        "z": 25
+      }
+    },
+    {
+      "id": "rf_module_standoffs",
+      "name": "RF Module Standoffs",
+      "category": "mechanical",
+      "type": "3d_printed",
+      "description": "Small 3D-printed standoffs/brackets to position RF modules (GSM/4G, LoRa, Wi-Fi/BT) in the top section.",
+      "dimensions": "40x30x15mm",
+      "material": "PETG",
+      "printSettings": "20% infill, 0.2mm layer",
+      "mountsFor": "cellular_module",
+      "quantity": 1,
+      "estimatedCost": 0.5,
+      "purchaseUrl": "https://www.amazon.com/s?k=petg+filament"
+    },
+    {
+      "id": "oled_display_bezel",
+      "name": "OLED Display Bezel",
+      "category": "mechanical",
+      "type": "3d_printed",
+      "description": "3D-printed bezel and mount for the OLED status display on the front panel.",
+      "dimensions": "40x30x5mm",
+      "material": "PETG",
+      "printSettings": "15% infill, 0.2mm layer",
+      "mountsFor": "oled_display",
+      "quantity": 1,
+      "estimatedCost": 1,
+      "purchaseUrl": "https://www.amazon.com/s?k=petg+filament",
+      "boundingBox": {
+        "width": 40,
+        "height": 30,
+        "depth": 5
+      },
+      "position3d": {
+        "x": 50.8,
+        "y": 160,
+        "z": 148.5
+      }
+    },
+    {
+      "id": "led_alert_red_mount",
+      "name": "Red LED Mount",
+      "category": "mechanical",
+      "type": "3d_printed",
+      "description": "Small 3D-printed mount for the red alert LED on the front panel.",
+      "dimensions": "10x10x5mm",
+      "material": "PETG",
+      "printSettings": "15% infill, 0.2mm layer",
+      "mountsFor": "led_alert_red",
+      "quantity": 1,
+      "estimatedCost": 0.2,
+      "purchaseUrl": "https://www.amazon.com/s?k=petg+filament",
+      "boundingBox": {
+        "width": 10,
+        "height": 10,
+        "depth": 5
+      },
+      "position3d": {
+        "x": 25,
+        "y": 190,
+        "z": 148.5
+      }
+    },
+    {
+      "id": "led_alert_green_mount",
+      "name": "Green LED Mount",
+      "category": "mechanical",
+      "type": "3d_printed",
+      "description": "Small 3D-printed mount for the green alert LED on the front panel.",
+      "dimensions": "10x10x5mm",
+      "material": "PETG",
+      "printSettings": "15% infill, 0.2mm layer",
+      "mountsFor": "led_alert_green",
+      "quantity": 1,
+      "estimatedCost": 0.2,
+      "purchaseUrl": "https://www.amazon.com/s?k=petg+filament",
+      "boundingBox": {
+        "width": 10,
+        "height": 10,
+        "depth": 5
+      },
+      "position3d": {
+        "x": 75,
+        "y": 190,
+        "z": 148.5
+      }
+    },
+    {
+      "id": "sensor_pm25_co2_mount",
+      "name": "PM2.5/CO2 Sensor Mount",
+      "category": "mechanical",
+      "type": "3d_printed",
+      "description": "3D-printed bracket for mounting the PM2.5 and CO2 sensor near the bottom ventilation port.",
+      "dimensions": "50x30x20mm",
+      "material": "PETG",
+      "printSettings": "20% infill, 0.2mm layer",
+      "mountsFor": "pm25_co2_sensor",
+      "quantity": 1,
+      "estimatedCost": 1.5,
+      "purchaseUrl": "https://www.amazon.com/s?k=petg+filament",
+      "boundingBox": {
+        "width": 50,
+        "height": 30,
+        "depth": 20
+      },
+      "position3d": {
+        "x": 50.8,
+        "y": 30,
+        "z": 50
+      }
+    },
+    {
+      "id": "sensor_temp_humidity_mount",
+      "name": "Temp/Humidity Sensor Mount",
+      "category": "mechanical",
+      "type": "3d_printed",
+      "description": "Small 3D-printed bracket for mounting the temperature and humidity sensor.",
+      "dimensions": "20x15x10mm",
+      "material": "PETG",
+      "printSettings": "20% infill, 0.2mm layer",
+      "mountsFor": "temperature_humidity_sensor",
+      "quantity": 1,
+      "estimatedCost": 0.5,
+      "purchaseUrl": "https://www.amazon.com/s?k=petg+filament",
+      "boundingBox": {
+        "width": 20,
+        "height": 15,
+        "depth": 10
+      },
+      "position3d": {
+        "x": 25,
+        "y": 60,
+        "z": 50
+      }
+    },
+    {
+      "id": "sensor_uv_mount",
+      "name": "UV Sensor Mount",
+      "category": "mechanical",
+      "type": "3d_printed",
+      "description": "Small 3D-printed holder for the UV radiation sensor, positioned to face outwards.",
+      "dimensions": "15x15x10mm",
+      "material": "PETG",
+      "printSettings": "20% infill, 0.2mm layer",
+      "mountsFor": "uv_sensor",
+      "quantity": 1,
+      "estimatedCost": 0.4,
+      "purchaseUrl": "https://www.amazon.com/s?k=petg+filament",
+      "boundingBox": {
+        "width": 15,
+        "height": 15,
+        "depth": 10
+      },
+      "position3d": {
+        "x": 75,
+        "y": 60,
+        "z": 50
+      }
+    },
+    {
+      "id": "sensor_ambient_light_mount",
+      "name": "Ambient Light Sensor Mount",
+      "category": "mechanical",
+      "type": "3d_printed",
+      "description": "Small 3D-printed holder for the ambient light sensor, positioned to face outwards.",
+      "dimensions": "15x15x10mm",
+      "material": "PETG",
+      "printSettings": "20% infill, 0.2mm layer",
+      "mountsFor": "ambient_light_sensor",
+      "quantity": 1,
+      "estimatedCost": 0.4,
+      "purchaseUrl": "https://www.amazon.com/s?k=petg+filament",
+      "boundingBox": {
+        "width": 15,
+        "height": 15,
+        "depth": 10
+      },
+      "position3d": {
+        "x": 75,
+        "y": 90,
+        "z": 50
+      }
+    },
+    {
+      "id": "sensor_occupancy_mount",
+      "name": "Occupancy Sensor Mount",
+      "category": "mechanical",
+      "type": "3d_printed",
+      "description": "3D-printed bracket for mounting the PIR occupancy sensor with a clear line of sight.",
+      "dimensions": "30x25x15mm",
+      "material": "PETG",
+      "printSettings": "20% infill, 0.2mm layer",
+      "mountsFor": "occupancy_sensor",
+      "quantity": 1,
+      "estimatedCost": 0.8,
+      "purchaseUrl": "https://www.amazon.com/s?k=petg+filament",
+      "boundingBox": {
+        "width": 30,
+        "height": 25,
+        "depth": 15
+      },
+      "position3d": {
+        "x": 50.8,
+        "y": 10,
+        "z": 140
+      }
+    },
+    {
+      "id": "solar_panel_assembly",
+      "name": "External 5W Solar Panel Assembly",
+      "productName": "5W 12V Mini Solar Panel Kit",
+      "category": "mechanical",
+      "type": "structural",
+      "description": "External solar panel (10\"x7\"x0.7\") with anodized aluminum frame, pre-drilled mounting holes, and IP67 junction box.",
+      "dimensions": "250x180x17mm",
+      "quantity": 1,
+      "estimatedCost": 35,
+      "purchaseUrl": "https://www.amazon.com/s?k=5w+12v+mini+solar+panel+kit",
+      "partId": "f74fd305-d389-4e44-ba73-9e7f925b1fac",
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=5W+12V+Mini+Solar+Panel+Kit&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "aliexpressUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0Jxfi2P33K579Wh4PM6KcLqToroNBHEg8Ol1K4EZWISlCMOYkKEilRJr1QrSeKgM2wITdVx5XtpCG8fefTJ9Nnc9ikddbtWsQHivjdhWIL5gecihJkygRgX8aGHrKAnz4Np6P1FsHG2lBXB2xIsKq4gv5vjZ3zXMaatpQlO5bv2V7HnCDpW6r2VWfId0KSUe4I7EIruMeGbKXdLKgrtZr2BbKaEX9Lz5caSu62rsJRgSnb0aQUDW1S5cY0MwPCZpqdhwUCHt71bxTGV5OlwdflzSdOl7AFuQ9zyS1aSuFm9HsohZ34gAcDSigseFPj5zvwSdQx6K6DB44NeqSI3i7oCzPoEB6KhZN4m9x5VDebcAOo8x20rmkBom4OWo2j1nqUcahTcAwWD17d3jT5h0zyBbTY2TiUPyvQt6mddrdHZexfm65lsw0o0dAa7rQcEoUHlaUJYXXwAWDoWPT0CNVhfH1N133wX4TKgzTtqzFXIebDVDKnSeN8GXagGqmzpbb5M2ccb1ULQiIJfaUGuKOUWqDOfgYN65lD40ePOENRUA38LBZEazOhIQOKf2e70ksAetvqWAlIg1GBwPuMxYB1YAeSuQ9VVvAv1tEGAWTPoXzVG4Uf0StKuCISOHjTmjQqOvuTa9aFbfTJc5t4C66Ruu3Z",
+      "boundingBox": {
+        "width": 250,
+        "height": 180,
+        "depth": 17
+      },
+      "position3d": {
+        "x": 250,
+        "y": 100,
+        "z": 0
+      },
+      "amazonUrl": "https://www.amazon.com/dp/B0FC6XR2MW?tag=blueprintam-20&linkCode=osi&th=1&psc=1"
+    },
+    {
+      "id": "solar_panel_mounting_bracket",
+      "name": "Solar Panel Mounting Bracket",
+      "productName": "Adjustable Solar Panel Wall/Roof Mount",
+      "category": "mechanical",
+      "type": "structural",
+      "description": "Heavy-duty tilt-adjustable wall/roof mounting arm for the solar panel, allowing 360° rotation and 90° tilt.",
+      "dimensions": "200x150x100mm",
+      "quantity": 1,
+      "estimatedCost": 20,
+      "purchaseUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHXlxUDxBd5p4Pw7sXma3tr0DJS1gDhE7rxDIMjwOFX5UmpiwE0c7b63y9uRfBFxWZqSPYA8bxhVsH3aGoE22O8EsRFFu7yygpRh6clXwEWkgSGmB5qe40pHEkviQaTlkSlduqSGcmEK7IrCLAWwYZdqmkpYmOyvoUzUe6JYNb8m4tNkC8ikoqcz8fkoIdrw8oGgpG8dMgBwLSBxHS6VjdCpgSIjQK0xjgvzZVUIpxSt4jRpqYLYgVwSdhp5v7XPV1kTF3e4AqOlFNdhZq5sFhdkWXY0iXqfp5ShoorQc1MupzJdO4hFOzfI1ARPBKptZhv3HhigJgAHerqC7T9a1JSORbeQz3yrkA35UbZNbyexMsTbWbdXbompGidXDuEKxQ5tqU8SX218vbJk7WOahAzoWCJPsND7GS72dLazcDJMPYsRdb9mMxI2Q8gfvW4RDMp6inl9L4L5LsKy8tZwx56oZXOJqkMqE1lMx93WNrURjJwDlqc9TcaMyjoebCMKohbjHeUus0EMdkdAQXow8XLcwtWUV9f8EzRtWV6RwFteooWaWX7t6tbdIqB1MliebA3QdFxnFYgIvI4INsae0ViwYALenm0Vau9esWenV6aLrDzInqpKSNQjOsCRG9l9qpV6HcCsaBQtx939OsB4KlS3",
+      "partId": "e1b9dee7-7770-4bb8-9775-a1d492487454",
+      "material": "Aluminum",
+      "imageUrl": "https://m.media-amazon.com/images/I/21JQSRffv3L._SL500_.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxHXlxUDxBd5p4Pw7sXma3tr0DJS1gDhE7rxDIMjwOFX5UmpiwE0c7b63y9uRfBFxWZqSPYA8bxhVsH3aGoE22O8EsRFFu7yygpRh6clXwEWkgSGmB5qe40pHEkviQaTlkSlduqSGcmEK7IrCLAWwYZdqmkpYmOyvoUzUe6JYNb8m4tNkC8ikoqcz8fkoIdrw8oGgpG8dMgBwLSBxHS6VjdCpgSIjQK0xjgvzZVUIpxSt4jRpqYLYgVwSdhp5v7XPV1kTF3e4AqOlFNdhZq5sFhdkWXY0iXqfp5ShoorQc1MupzJdO4hFOzfI1ARPBKptZhv3HhigJgAHerqC7T9a1JSORbeQz3yrkA35UbZNbyexMsTbWbdXbompGidXDuEKxQ5tqU8SX218vbJk7WOahAzoWCJPsND7GS72dLazcDJMPYsRdb9mMxI2Q8gfvW4RDMp6inl9L4L5LsKy8tZwx56oZXOJqkMqE1lMx93WNrURjJwDlqc9TcaMyjoebCMKohbjHeUus0EMdkdAQXow8XLcwtWUV9f8EzRtWV6RwFteooWaWX7t6tbdIqB1MliebA3QdFxnFYgIvI4INsae0ViwYALenm0Vau9esWenV6aLrDzInqpKSNQjOsCRG9l9qpV6HcCsaBQtx939OsB4KlS3",
+      "research": {
+        "sourcing": [
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0BKGCFNTD?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$17.99"
+          },
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/item/1005009983850746.html?pdp_npi=6%40dis%21USD%2113.92%216.96%21%21%2194.18%2147.09%21%402151fd3a17794218976392505e0faa%2112000050759727146%21affd%21%21%21%211%210%21",
+            "price": "$6.96"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=Adjustable+Solar+Panel+Wall%2FRoof+Mount&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "amazonUrl": "https://www.amazon.com/dp/B0BKGCFNTD?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+      "boundingBox": {
+        "width": 200,
+        "height": 150,
+        "depth": 100
+      },
+      "position3d": {
+        "x": 250,
+        "y": 75,
+        "z": -50
+      }
+    },
+    {
+      "id": "solar_panel_cable",
+      "name": "Solar Panel Extension Cable",
+      "productName": "3m UV-Resistant DC Extension Cable",
+      "category": "mechanical",
+      "type": "misc",
+      "description": "3m UV-resistant, double-insulated cable with 5.5x2.1mm male DC barrel connector for solar panel.",
+      "dimensions": "3000mm length, 5.5x2.1mm DC",
+      "quantity": 1,
+      "estimatedCost": 10,
+      "purchaseUrl": "https://www.amazon.com/s?k=3m+uv+resistant+dc+cable+5.5x2.1mm",
+      "partId": "1f948f44-8193-41da-b9fb-fcab2678c347",
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=3m+UV-Resistant+DC+Extension+Cable&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "aliexpressUrl": "https://s.click.aliexpress.com/e/_c3ACBSkL",
+      "amazonUrl": "https://www.amazon.com/s?k=3m%20UV-Resistant%20DC%20Extension%20Cable&tag=blueprintam-20"
+    },
+    {
+      "id": "m3_mounting_screws",
+      "name": "M3 PCB Mounting Screws",
+      "productName": "M3x6mm Phillips Head Screws",
+      "category": "mechanical",
+      "type": "misc",
+      "description": "Screws for mounting the PCB and other internal components to 3D-printed parts.",
+      "dimensions": "M3x6mm",
+      "quantity": 10,
+      "estimatedCost": 0.1,
+      "purchaseUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxR1m64YeugrXRXe9HisYVtou6iC2Kk3xAOMlepM9UNlxv8bj8VTt3waS2daRwQGJ7NAvrkr3jbqenqfXEQLFEynK4FrFFnYrZKcQMTTLEGqNVippJiD4B1ATYQKn35NKeXDKqcS47KNsrtIFIW2zigBwdMtnUyrQ5k93FykuLVvuxciH9l7TQMuniGBp3lOBXzI5BUqWNvODrojUIafD5817GydGjvpeHrETNwonZhsM2VuWP5rZc6o9WuIYBXfUEktUPBlsMsdOaNURZXHKhdQG0WWrXh5ojryBvB5SNXB4zs2BgY64aKxmzm2Ot0UAtHYqcyf39lFSOLIf76nrIs7nKnSXF44jlcxeFrh7tyvK33aESU7SHzmhsD8u06fB8K8PPAPAAZkaXUcnFHT0yCcUu897vvpuZ4r44x0LigeHD8qtXnAQBNiUcCgE0HhKAbLZvEvPeJhItDY5ZWEL4Sw3gW031uLTRsw5qLEIzJLnqfYD5aweCVHzW73dcY2IkZYCSHWZDqSYK6itP663xAyZXroIJxgZqxVJL9cx0BlNk6mUS4IKygruknODEFJupNx2CHVZttaCn7esI5GXLH5jLeapvQ0svGxQlUoDD6KWEnCeB4iAf9QV7BqI6ezzTsOj9MZkg53jTBy9HMDGCWcT",
+      "partId": "b9176cca-7f23-4e48-addc-df122fbaec36",
+      "imageUrl": "https://m.media-amazon.com/images/I/41bMey70TtL._SL500_.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxR1m64YeugrXRXe9HisYVtou6iC2Kk3xAOMlepM9UNlxv8bj8VTt3waS2daRwQGJ7NAvrkr3jbqenqfXEQLFEynK4FrFFnYrZKcQMTTLEGqNVippJiD4B1ATYQKn35NKeXDKqcS47KNsrtIFIW2zigBwdMtnUyrQ5k93FykuLVvuxciH9l7TQMuniGBp3lOBXzI5BUqWNvODrojUIafD5817GydGjvpeHrETNwonZhsM2VuWP5rZc6o9WuIYBXfUEktUPBlsMsdOaNURZXHKhdQG0WWrXh5ojryBvB5SNXB4zs2BgY64aKxmzm2Ot0UAtHYqcyf39lFSOLIf76nrIs7nKnSXF44jlcxeFrh7tyvK33aESU7SHzmhsD8u06fB8K8PPAPAAZkaXUcnFHT0yCcUu897vvpuZ4r44x0LigeHD8qtXnAQBNiUcCgE0HhKAbLZvEvPeJhItDY5ZWEL4Sw3gW031uLTRsw5qLEIzJLnqfYD5aweCVHzW73dcY2IkZYCSHWZDqSYK6itP663xAyZXroIJxgZqxVJL9cx0BlNk6mUS4IKygruknODEFJupNx2CHVZttaCn7esI5GXLH5jLeapvQ0svGxQlUoDD6KWEnCeB4iAf9QV7BqI6ezzTsOj9MZkg53jTBy9HMDGCWcT",
+      "research": {
+        "sourcing": [
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B012TE12CY?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$5.29"
+          },
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/item/1005006638485902.html?pdp_npi=6%40dis%21USD%210.41%210.37%21%21%212.77%212.47%21%402151fd3a17793303605001822e0fed%2112000037896037213%21affd%21%21%21%211%210%21",
+            "price": "$0.37"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B07VJFRKNS?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$8.09"
+          }
+        ],
+        "specs": [
+          {
+            "label": "material",
+            "value": "Unspecified (commonly stainless steel or zinc-plated steel)"
+          },
+          {
+            "label": "head_type",
+            "value": "Pan Head"
+          },
+          {
+            "label": "length_mm",
+            "value": "6"
+          },
+          {
+            "label": "drive_type",
+            "value": "Phillips"
+          },
+          {
+            "label": "thread_size",
+            "value": "M3"
+          },
+          {
+            "label": "thread_pitch_mm",
+            "value": "0.5"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=M3x6mm+Phillips+Head+Screws&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "amazonUrl": "https://www.amazon.com/dp/B012TE12CY?tag=blueprintam-20&linkCode=osi&th=1&psc=1"
+    },
+    {
+      "id": "m4_enclosure_screws",
+      "name": "M4 Enclosure Screws",
+      "productName": "M4x12mm Pan Head Machine Screws",
+      "category": "mechanical",
+      "type": "misc",
+      "description": "Screws for securing the enclosure lid and other external components.",
+      "dimensions": "M4x12mm",
+      "quantity": 6,
+      "estimatedCost": 0.15,
+      "purchaseUrl": "https://www.amazon.com/dp/B07M6RT1JT?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+      "partId": "1075a4e1-d7c3-4b54-a21a-7ec278f57c67",
+      "material": "Stainless Steel",
+      "imageUrl": "https://m.media-amazon.com/images/I/31zrQZopQNL._SL500_.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/e/_c3WF12UH",
+      "research": {
+        "sourcing": [
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0CLD1LJWS?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$7.19"
+          },
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/w/wholesale-m4x12mm-pan-head-machine-screws.html"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B07MPK48ND?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$6.49"
+          },
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B07M6RT1JT?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$5.52"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=M4x12mm+Pan+Head+Machine+Screws&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "amazonUrl": "https://www.amazon.com/dp/B0CLD1LJWS?tag=blueprintam-20&linkCode=osi&th=1&psc=1"
+    },
+    {
+      "id": "adhesive_weather_seal",
+      "name": "Adhesive Weather Seal",
+      "productName": "EPDM Rubber Foam Weather Strip",
+      "category": "mechanical",
+      "type": "misc",
+      "description": "Self-adhesive weather stripping to enhance IP65 rating around seams and openings.",
+      "dimensions": "5000x10x3mm",
+      "quantity": 1,
+      "estimatedCost": 6,
+      "purchaseUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxRQniz0GzstFYec7uyfGRbkaT3MAiEqG7H69YsVh6c4TepTLFc8NzwLhq8P4y7I7uh0YTotxoSJJrjHlHTnTsk3kCaKFYBQp0vF9zuLoYs07oGNFbAkpG0MecPPSPdj9Enjdqxtj1Nddvs4xm0sMR3VsI283qm2ZBSgNoa91JVOxYoHJdjAs0zIJObT83KK0ylYvUiK6B9LTQbcok8eSjU1ieyQYgUocftjxv19cyk8RgZlQZ1PCLk05m4W8GYNQIt8Zeq6fS24xhgsKL0WhsSWk0XQB8FetTNReB0FL2YtBdxRs3TJhdeICksEegPAWsAxqCJvQjw1iubxZjQIxBfCJgNz0RcNjhDxr6ZzHy7XhijUi0RiGHL0wtipOzDWrxxAdx70dkF3TZAOtZSCJUKNZKfIZFbraqsomV8pCL4ehmplRC3JOg6ww6LbZb7HI007S3siyT6rM59KYJ4mtywSkSXkPerRp9wTrYm8yKKUnETul1BEwkpwGh5pygXL7ITVcbCrWQW7yLvuX2ezmLQcIO0SZkrvPUexin6FQqv6zfRPyZrukQNiIxkmGHAIg2K3AKo6oMNmwrAbss1V4DcIEysqn9hU71l6dMjgALO5ysXqtUSttFHA8VnwZFcTxoGC6Kci3oZcO828qVYSPDbib",
+      "partId": "14e3958d-43ef-490c-87e3-3101bf475d9d",
+      "material": "EPDM Rubber",
+      "imageUrl": "https://m.media-amazon.com/images/I/41sn+G5l0NL._SL500_.jpg",
+      "aliexpressUrl": "https://s.click.aliexpress.com/s/fwx308cRD9Eny963e3KDdYxyIpNj8TXVr7saiF9Um5rMUg1kZtJALLnfa2LNXtiVgnxdD8Og6MmvwBoxhnSYQGM6r0c08U4TfX8DFGo7vviCuu3q62Q60OAhRZcqm3G8PtwM69xY7TOEWRrvulP5ukZQ4uQbBBtaVsdr6EffAqVmp3O5GyUANU2DoA3dJufNhDfh7KOlLgKIvRVhDxRESHLmea6fTE26gLUqKEUuuizJiLENrCbax94DZHDu8WhaXM9vQ86gzlqceNPO5w3vwXm4VrBF3x2lAMEl06wgNdTSMiT7cNG4HIdW0JxRQniz0GzstFYec7uyfGRbkaT3MAiEqG7H69YsVh6c4TepTLFc8NzwLhq8P4y7I7uh0YTotxoSJJrjHlHTnTsk3kCaKFYBQp0vF9zuLoYs07oGNFbAkpG0MecPPSPdj9Enjdqxtj1Nddvs4xm0sMR3VsI283qm2ZBSgNoa91JVOxYoHJdjAs0zIJObT83KK0ylYvUiK6B9LTQbcok8eSjU1ieyQYgUocftjxv19cyk8RgZlQZ1PCLk05m4W8GYNQIt8Zeq6fS24xhgsKL0WhsSWk0XQB8FetTNReB0FL2YtBdxRs3TJhdeICksEegPAWsAxqCJvQjw1iubxZjQIxBfCJgNz0RcNjhDxr6ZzHy7XhijUi0RiGHL0wtipOzDWrxxAdx70dkF3TZAOtZSCJUKNZKfIZFbraqsomV8pCL4ehmplRC3JOg6ww6LbZb7HI007S3siyT6rM59KYJ4mtywSkSXkPerRp9wTrYm8yKKUnETul1BEwkpwGh5pygXL7ITVcbCrWQW7yLvuX2ezmLQcIO0SZkrvPUexin6FQqv6zfRPyZrukQNiIxkmGHAIg2K3AKo6oMNmwrAbss1V4DcIEysqn9hU71l6dMjgALO5ysXqtUSttFHA8VnwZFcTxoGC6Kci3oZcO828qVYSPDbib",
+      "research": {
+        "sourcing": [
+          {
+            "vendor": "Amazon",
+            "url": "https://www.amazon.com/dp/B0F211C2VF?tag=blueprintam-20&linkCode=osi&th=1&psc=1",
+            "price": "$16.99"
+          },
+          {
+            "vendor": "AliExpress",
+            "url": "https://www.aliexpress.com/item/1005005872356522.html?pdp_npi=6%40dis%21USD%213.46%213.36%21%21%213.46%213.36%21%402140da8b17829157867876903e0e65%2112000034651481032%21affd%21%21%21%211%210%21",
+            "price": "$3.36"
+          }
+        ]
+      },
+      "ebayUrl": "https://www.ebay.com/sch/i.html?_nkw=EPDM+Rubber+Foam+Weather+Strip&_sacat=0&_from=R40&mkcid=1&mkrid=711-53200-19255-0&siteid=0&campid=5339153059&customid=blueprint&toolid=10001&mkevt=1",
+      "amazonUrl": "https://www.amazon.com/dp/B0F211C2VF?tag=blueprintam-20&linkCode=osi&th=1&psc=1"
+    },
+    {
+      "id": "main_mcu_mount",
+      "name": "Main Controller Mount",
+      "category": "mechanical",
+      "type": "3d_printed",
+      "mountsFor": "main_mcu",
+      "description": "Standoff bracket sized to the Main Controller's mounting hole pattern. M2.5 holes for board fasteners; vented underside for airflow.",
+      "material": "PETG",
+      "printSettings": "30% infill, 0.2mm layer, 4 perimeters",
+      "quantity": 1,
+      "estimatedCost": 2,
+      "purchaseUrl": "",
+      "dimensions": "60x40x12mm",
+      "boundingBox": {
+        "width": 60,
+        "height": 40,
+        "depth": 12
+      },
+      "position3d": {
+        "x": 50.8,
+        "y": 160,
+        "z": 30
+      }
+    },
+    {
+      "id": "lora_module_mount",
+      "name": "LoRa Transceiver Module Mount",
+      "category": "mechanical",
+      "type": "3d_printed",
+      "mountsFor": "lora_module",
+      "description": "Adapter plate for the LoRa Transceiver Module that bolts to the main chassis with M3 hardware. Includes wire-routing channels.",
+      "material": "PETG",
+      "printSettings": "30% infill, 0.2mm layer, 4 perimeters",
+      "quantity": 1,
+      "estimatedCost": 2,
+      "purchaseUrl": "",
+      "dimensions": "50x40x12mm",
+      "boundingBox": {
+        "width": 50,
+        "height": 40,
+        "depth": 12
+      },
+      "position3d": {
+        "x": 25,
+        "y": 230,
+        "z": 30
+      }
+    },
+    {
+      "id": "gps_module_mount",
+      "name": "GPS Module Mount",
+      "category": "mechanical",
+      "type": "3d_printed",
+      "mountsFor": "gps_module",
+      "description": "Adapter plate for the GPS Module that bolts to the main chassis with M3 hardware. Includes wire-routing channels.",
+      "material": "PETG",
+      "printSettings": "30% infill, 0.2mm layer, 4 perimeters",
+      "quantity": 1,
+      "estimatedCost": 2,
+      "purchaseUrl": "",
+      "dimensions": "50x40x12mm",
+      "boundingBox": {
+        "width": 50,
+        "height": 40,
+        "depth": 12
+      },
+      "position3d": {
+        "x": 75,
+        "y": 230,
+        "z": 30
+      }
+    },
+    {
+      "id": "rainfall_sensor_mount",
+      "name": "Rainfall Sensor Mount",
+      "category": "mechanical",
+      "type": "3d_printed",
+      "mountsFor": "rainfall_sensor",
+      "description": "Form-fitting cradle for the Rainfall Sensor that holds the sensing surface in its rated orientation. Snap-fit retention so it can be removed for calibration without tools.",
+      "material": "PETG",
+      "printSettings": "30% infill, 0.2mm layer, 4 perimeters",
+      "quantity": 1,
+      "estimatedCost": 2,
+      "purchaseUrl": "",
+      "dimensions": "30x30x15mm",
+      "boundingBox": {
+        "width": 30,
+        "height": 30,
+        "depth": 15
+      },
+      "position3d": {
+        "x": 25,
+        "y": 90,
+        "z": 50
+      }
+    },
+    {
+      "id": "mini_gsm_antenna_mount",
+      "name": "Mini GSM/4G Antenna Mount",
+      "category": "mechanical",
+      "type": "3d_printed",
+      "mountsFor": "mini_gsm_antenna",
+      "description": "Adapter plate for the Mini GSM/4G Antenna that bolts to the main chassis with M3 hardware. Includes wire-routing channels.",
+      "material": "PETG",
+      "printSettings": "30% infill, 0.2mm layer, 4 perimeters",
+      "quantity": 1,
+      "estimatedCost": 2,
+      "purchaseUrl": "",
+      "dimensions": "50x40x12mm",
+      "boundingBox": {
+        "width": 50,
+        "height": 40,
+        "depth": 12
+      },
+      "position3d": {
+        "x": 25,
+        "y": 250,
+        "z": 140
+      }
+    },
+    {
+      "id": "mini_lora_antenna_mount",
+      "name": "Mini LoRa Antenna Mount",
+      "category": "mechanical",
+      "type": "3d_printed",
+      "mountsFor": "mini_lora_antenna",
+      "description": "Adapter plate for the Mini LoRa Antenna that bolts to the main chassis with M3 hardware. Includes wire-routing channels.",
+      "material": "PETG",
+      "printSettings": "30% infill, 0.2mm layer, 4 perimeters",
+      "quantity": 1,
+      "estimatedCost": 2,
+      "purchaseUrl": "",
+      "dimensions": "50x40x12mm",
+      "boundingBox": {
+        "width": 50,
+        "height": 40,
+        "depth": 12
+      },
+      "position3d": {
+        "x": 50.8,
+        "y": 250,
+        "z": 140
+      }
+    },
+    {
+      "id": "mini_gps_antenna_mount",
+      "name": "Mini GPS Antenna Mount",
+      "category": "mechanical",
+      "type": "3d_printed",
+      "mountsFor": "mini_gps_antenna",
+      "description": "Adapter plate for the Mini GPS Antenna that bolts to the main chassis with M3 hardware. Includes wire-routing channels.",
+      "material": "PETG",
+      "printSettings": "30% infill, 0.2mm layer, 4 perimeters",
+      "quantity": 1,
+      "estimatedCost": 2,
+      "purchaseUrl": "",
+      "dimensions": "50x40x12mm",
+      "boundingBox": {
+        "width": 50,
+        "height": 40,
+        "depth": 12
+      },
+      "position3d": {
+        "x": 75,
+        "y": 250,
+        "z": 140
+      }
+    }
+  ],
+  "electricalConnections": [
+    {
+      "source": "dc_barrel_jack",
+      "target": "solar_charge_controller",
+      "type": "power",
+      "voltage": "5-12V",
+      "current": "500mA-1A",
+      "label": "Solar Panel Input"
+    },
+    {
+      "source": "solar_charge_controller",
+      "target": "bms_18650",
+      "type": "power",
+      "voltage": "8.4V",
+      "current": "1A",
+      "label": "Charge to BMS"
+    },
+    {
+      "source": "li_ion_18650_cell_1",
+      "target": "bms_18650",
+      "type": "power",
+      "voltage": "3.7V",
+      "current": "2.5A",
+      "label": "Cell 1 to BMS (B-)"
+    },
+    {
+      "source": "li_ion_18650_cell_2",
+      "target": "bms_18650",
+      "type": "power",
+      "voltage": "3.7V",
+      "current": "2.5A",
+      "label": "Cell 2 to BMS (B+)"
+    },
+    {
+      "source": "li_ion_18650_cell_1",
+      "target": "li_ion_18650_cell_2",
+      "type": "power",
+      "voltage": "3.7V",
+      "current": "2.5A",
+      "label": "Series Connection"
+    },
+    {
+      "source": "bms_18650",
+      "target": "main_mcu",
+      "type": "power",
+      "voltage": "7.4V",
+      "current": "2A",
+      "label": "Main System Power"
+    },
+    {
+      "source": "main_mcu",
+      "target": "cellular_module",
+      "type": "power",
+      "voltage": "3.3V",
+      "current": "1A",
+      "label": "Cellular Module Power"
+    },
+    {
+      "source": "main_mcu",
+      "target": "lora_module",
+      "type": "power",
+      "voltage": "3.3V",
+      "current": "100mA",
+      "label": "LoRa Module Power"
+    },
+    {
+      "source": "main_mcu",
+      "target": "gps_module",
+      "type": "power",
+      "voltage": "3.3V",
+      "current": "50mA",
+      "label": "GPS Module Power"
+    },
+    {
+      "source": "main_mcu",
+      "target": "temperature_humidity_sensor",
+      "type": "power",
+      "voltage": "3.3V",
+      "current": "10mA",
+      "label": "Temp/Hum Sensor Power"
+    },
+    {
+      "source": "main_mcu",
+      "target": "pm25_co2_sensor",
+      "type": "power",
+      "voltage": "3.3V",
+      "current": "100mA",
+      "label": "PM2.5/CO2 Sensor Power"
+    },
+    {
+      "source": "main_mcu",
+      "target": "uv_sensor",
+      "type": "power",
+      "voltage": "3.3V",
+      "current": "5mA",
+      "label": "UV Sensor Power"
+    },
+    {
+      "source": "main_mcu",
+      "target": "rainfall_sensor",
+      "type": "power",
+      "voltage": "3.3V",
+      "current": "5mA",
+      "label": "Rainfall Sensor Power"
+    },
+    {
+      "source": "main_mcu",
+      "target": "ambient_light_sensor",
+      "type": "power",
+      "voltage": "3.3V",
+      "current": "5mA",
+      "label": "Ambient Light Sensor Power"
+    },
+    {
+      "source": "main_mcu",
+      "target": "occupancy_sensor",
+      "type": "power",
+      "voltage": "3.3V",
+      "current": "15mA",
+      "label": "Occupancy Sensor Power"
+    },
+    {
+      "source": "main_mcu",
+      "target": "oled_display",
+      "type": "power",
+      "voltage": "3.3V",
+      "current": "20mA",
+      "label": "OLED Display Power"
+    },
+    {
+      "source": "main_mcu",
+      "target": "led_alert_red",
+      "type": "power",
+      "voltage": "3.3V",
+      "current": "10mA",
+      "label": "Red LED Power"
+    },
+    {
+      "source": "main_mcu",
+      "target": "led_alert_green",
+      "type": "power",
+      "voltage": "3.3V",
+      "current": "10mA",
+      "label": "Green LED Power"
+    },
+    {
+      "source": "main_mcu",
+      "target": "cellular_module",
+      "type": "data",
+      "protocol": "uart",
+      "sourcePin": "UART_TX",
+      "targetPin": "RX",
+      "label": "MCU to Cellular TX"
+    },
+    {
+      "source": "cellular_module",
+      "target": "main_mcu",
+      "type": "data",
+      "protocol": "uart",
+      "sourcePin": "TX",
+      "targetPin": "UART_RX",
+      "label": "Cellular to MCU RX"
+    },
+    {
+      "source": "cellular_module",
+      "target": "mini_gsm_antenna",
+      "type": "data",
+      "protocol": "rf",
+      "sourcePin": "ANT",
+      "targetPin": "SMA",
+      "label": "Cellular Antenna"
+    },
+    {
+      "source": "main_mcu",
+      "target": "lora_module",
+      "type": "data",
+      "protocol": "spi",
+      "sourcePin": "SPI_MOSI",
+      "targetPin": "MOSI",
+      "label": "MCU to LoRa MOSI"
+    },
+    {
+      "source": "lora_module",
+      "target": "main_mcu",
+      "type": "data",
+      "protocol": "spi",
+      "sourcePin": "MISO",
+      "targetPin": "SPI_MISO",
+      "label": "LoRa to MCU MISO"
+    },
+    {
+      "source": "main_mcu",
+      "target": "lora_module",
+      "type": "data",
+      "protocol": "spi",
+      "sourcePin": "SPI_SCK",
+      "targetPin": "SCK",
+      "label": "MCU to LoRa SCK"
+    },
+    {
+      "source": "main_mcu",
+      "target": "lora_module",
+      "type": "data",
+      "protocol": "gpio",
+      "sourcePin": "GPIO_CS",
+      "targetPin": "CS",
+      "label": "MCU to LoRa CS"
+    },
+    {
+      "source": "main_mcu",
+      "target": "lora_module",
+      "type": "data",
+      "protocol": "gpio",
+      "sourcePin": "GPIO_DIO0",
+      "targetPin": "DIO0",
+      "label": "MCU to LoRa DIO0"
+    },
+    {
+      "source": "main_mcu",
+      "target": "lora_module",
+      "type": "data",
+      "protocol": "gpio",
+      "sourcePin": "GPIO_RESET",
+      "targetPin": "RESET",
+      "label": "MCU to LoRa Reset"
+    },
+    {
+      "source": "lora_module",
+      "target": "mini_lora_antenna",
+      "type": "data",
+      "protocol": "rf",
+      "sourcePin": "ANT",
+      "targetPin": "SMA",
+      "label": "LoRa Antenna"
+    },
+    {
+      "source": "main_mcu",
+      "target": "gps_module",
+      "type": "data",
+      "protocol": "uart",
+      "sourcePin": "UART2_TX",
+      "targetPin": "RX",
+      "label": "MCU to GPS TX"
+    },
+    {
+      "source": "gps_module",
+      "target": "main_mcu",
+      "type": "data",
+      "protocol": "uart",
+      "sourcePin": "TX",
+      "targetPin": "UART2_RX",
+      "label": "GPS to MCU RX"
+    },
+    {
+      "source": "gps_module",
+      "target": "mini_gps_antenna",
+      "type": "data",
+      "protocol": "rf",
+      "sourcePin": "ANT",
+      "targetPin": "SMA",
+      "label": "GPS Antenna"
+    },
+    {
+      "source": "main_mcu",
+      "target": "temperature_humidity_sensor",
+      "type": "data",
+      "protocol": "i2c",
+      "sourcePin": "I2C_SDA",
+      "targetPin": "SDA",
+      "label": "MCU to Temp/Hum SDA"
+    },
+    {
+      "source": "main_mcu",
+      "target": "temperature_humidity_sensor",
+      "type": "data",
+      "protocol": "i2c",
+      "sourcePin": "I2C_SCL",
+      "targetPin": "SCL",
+      "label": "MCU to Temp/Hum SCL"
+    },
+    {
+      "source": "main_mcu",
+      "target": "pm25_co2_sensor",
+      "type": "data",
+      "protocol": "uart",
+      "sourcePin": "UART3_TX",
+      "targetPin": "RX",
+      "label": "MCU to PM2.5/CO2 TX"
+    },
+    {
+      "source": "pm25_co2_sensor",
+      "target": "main_mcu",
+      "type": "data",
+      "protocol": "uart",
+      "sourcePin": "TX",
+      "targetPin": "UART3_RX",
+      "label": "PM2.5/CO2 to MCU RX"
+    },
+    {
+      "source": "main_mcu",
+      "target": "uv_sensor",
+      "type": "data",
+      "protocol": "i2c",
+      "sourcePin": "I2C_SDA",
+      "targetPin": "SDA",
+      "label": "MCU to UV SDA"
+    },
+    {
+      "source": "main_mcu",
+      "target": "uv_sensor",
+      "type": "data",
+      "protocol": "i2c",
+      "sourcePin": "I2C_SCL",
+      "targetPin": "SCL",
+      "label": "MCU to UV SCL"
+    },
+    {
+      "source": "main_mcu",
+      "target": "rainfall_sensor",
+      "type": "data",
+      "protocol": "gpio",
+      "sourcePin": "GPIO_RAIN_DO",
+      "targetPin": "DO",
+      "label": "MCU to Rainfall Digital Out"
+    },
+    {
+      "source": "main_mcu",
+      "target": "rainfall_sensor",
+      "type": "data",
+      "protocol": "analog",
+      "sourcePin": "ADC_RAIN_AO",
+      "targetPin": "AO",
+      "label": "MCU to Rainfall Analog Out"
+    },
+    {
+      "source": "main_mcu",
+      "target": "ambient_light_sensor",
+      "type": "data",
+      "protocol": "i2c",
+      "sourcePin": "I2C_SDA",
+      "targetPin": "SDA",
+      "label": "MCU to Light SDA"
+    },
+    {
+      "source": "main_mcu",
+      "target": "ambient_light_sensor",
+      "type": "data",
+      "protocol": "i2c",
+      "sourcePin": "I2C_SCL",
+      "targetPin": "SCL",
+      "label": "MCU to Light SCL"
+    },
+    {
+      "source": "main_mcu",
+      "target": "occupancy_sensor",
+      "type": "data",
+      "protocol": "gpio",
+      "sourcePin": "GPIO_PIR_OUT",
+      "targetPin": "OUT",
+      "label": "MCU to PIR Out"
+    },
+    {
+      "source": "main_mcu",
+      "target": "oled_display",
+      "type": "data",
+      "protocol": "i2c",
+      "sourcePin": "I2C_SDA",
+      "targetPin": "SDA",
+      "label": "MCU to OLED SDA"
+    },
+    {
+      "source": "main_mcu",
+      "target": "oled_display",
+      "type": "data",
+      "protocol": "i2c",
+      "sourcePin": "I2C_SCL",
+      "targetPin": "SCL",
+      "label": "MCU to OLED SCL"
+    },
+    {
+      "source": "main_mcu",
+      "target": "led_alert_red",
+      "type": "data",
+      "protocol": "gpio",
+      "sourcePin": "GPIO_LED_RED",
+      "targetPin": "CATHODE",
+      "label": "MCU to Red LED"
+    },
+    {
+      "source": "main_mcu",
+      "target": "led_alert_green",
+      "type": "data",
+      "protocol": "gpio",
+      "sourcePin": "GPIO_LED_GREEN",
+      "targetPin": "CATHODE",
+      "label": "MCU to Green LED"
+    }
+  ],
+  "mechanicalConnections": [
+    {
+      "source": "scheb_main_enclosure",
+      "target": "enclosure_front_panel",
+      "label": "M4 enclosure screws and adhesive weather seal for IP65"
+    },
+    {
+      "source": "scheb_main_enclosure",
+      "target": "scheb_wall_mounting_plate",
+      "label": "Sliding mechanism, locks with security screw"
+    },
+    {
+      "source": "scheb_main_enclosure",
+      "target": "security_screw_m4",
+      "label": "M4 screw for theft prevention"
+    },
+    {
+      "source": "scheb_main_enclosure",
+      "target": "ventilation_grille_top",
+      "label": "Integrated/snap-fit into enclosure opening"
+    },
+    {
+      "source": "scheb_main_enclosure",
+      "target": "ventilation_grille_bottom",
+      "label": "Integrated/snap-fit into enclosure opening"
+    },
+    {
+      "source": "ventilation_grille_top",
+      "target": "dust_filter_vent_top",
+      "label": "Snap-fit/press-fit"
+    },
+    {
+      "source": "ventilation_grille_bottom",
+      "target": "dust_filter_vent_bottom",
+      "label": "Snap-fit/press-fit"
+    },
+    {
+      "source": "scheb_main_enclosure",
+      "target": "carry_handle",
+      "label": "M4 screws/integrated mounts"
+    },
+    {
+      "source": "scheb_main_enclosure",
+      "target": "cable_gland_dc_input",
+      "label": "Threaded into enclosure top/side opening with seal"
+    },
+    {
+      "source": "internal_frame_back_pcb_mount",
+      "target": "scheb_main_enclosure",
+      "label": "M3 screws to internal standoffs"
+    },
+    {
+      "source": "pcb_vertical_mount",
+      "target": "internal_frame_back_pcb_mount",
+      "label": "Guide rails and M3 screws"
+    },
+    {
+      "source": "rf_module_standoffs",
+      "target": "pcb_vertical_mount",
+      "label": "M2 screws for module mounting"
+    },
+    {
+      "source": "oled_display_bezel",
+      "target": "enclosure_front_panel",
+      "label": "Snap-fit/M2 screws from inside"
+    },
+    {
+      "source": "led_alert_red_mount",
+      "target": "enclosure_front_panel",
+      "label": "Snap-fit/press-fit"
+    },
+    {
+      "source": "led_alert_green_mount",
+      "target": "enclosure_front_panel",
+      "label": "Snap-fit/press-fit"
+    },
+    {
+      "source": "sensor_pm25_co2_mount",
+      "target": "pcb_vertical_mount",
+      "label": "M2 screws"
+    },
+    {
+      "source": "sensor_temp_humidity_mount",
+      "target": "pcb_vertical_mount",
+      "label": "M2 screws"
+    },
+    {
+      "source": "sensor_uv_mount",
+      "target": "pcb_vertical_mount",
+      "label": "M2 screws"
+    },
+    {
+      "source": "sensor_ambient_light_mount",
+      "target": "pcb_vertical_mount",
+      "label": "M2 screws"
+    },
+    {
+      "source": "sensor_occupancy_mount",
+      "target": "pcb_vertical_mount",
+      "label": "M2 screws"
+    },
+    {
+      "source": "solar_panel_assembly",
+      "target": "solar_panel_mounting_bracket",
+      "label": "M6 bolts into pre-drilled holes"
+    },
+    {
+      "source": "solar_panel_assembly",
+      "target": "solar_panel_cable",
+      "label": "IP67 junction box connection"
+    },
+    {
+      "source": "main_mcu_mount",
+      "target": "pcb_vertical_mount",
+      "label": "M2 screws"
+    },
+    {
+      "source": "lora_module_mount",
+      "target": "rf_module_standoffs",
+      "label": "M2 screws for module mounting"
+    },
+    {
+      "source": "gps_module_mount",
+      "target": "rf_module_standoffs",
+      "label": "M2 screws for module mounting"
+    },
+    {
+      "source": "rainfall_sensor_mount",
+      "target": "pcb_vertical_mount",
+      "label": "M2 screws"
+    },
+    {
+      "source": "mini_gsm_antenna_mount",
+      "target": "scheb_main_enclosure",
+      "label": "Threaded into enclosure top with lock nut"
+    },
+    {
+      "source": "mini_lora_antenna_mount",
+      "target": "scheb_main_enclosure",
+      "label": "Threaded into enclosure top with lock nut"
+    },
+    {
+      "source": "mini_gps_antenna_mount",
+      "target": "scheb_main_enclosure",
+      "label": "Threaded into enclosure top with lock nut"
+    },
+    {
+      "source": "cable_gland_dc_input",
+      "target": "dc_barrel_jack",
+      "label": "mount"
+    },
+    {
+      "source": "battery_slot_1",
+      "target": "li_ion_18650_cell_1",
+      "label": "mount"
+    },
+    {
+      "source": "battery_slot_2",
+      "target": "li_ion_18650_cell_2",
+      "label": "mount"
+    },
+    {
+      "source": "rf_module_standoffs",
+      "target": "cellular_module",
+      "label": "mount"
+    },
+    {
+      "source": "oled_display_bezel",
+      "target": "oled_display",
+      "label": "mount"
+    },
+    {
+      "source": "led_alert_red_mount",
+      "target": "led_alert_red",
+      "label": "mount"
+    },
+    {
+      "source": "led_alert_green_mount",
+      "target": "led_alert_green",
+      "label": "mount"
+    },
+    {
+      "source": "sensor_pm25_co2_mount",
+      "target": "pm25_co2_sensor",
+      "label": "mount"
+    },
+    {
+      "source": "sensor_temp_humidity_mount",
+      "target": "temperature_humidity_sensor",
+      "label": "mount"
+    },
+    {
+      "source": "sensor_uv_mount",
+      "target": "uv_sensor",
+      "label": "mount"
+    },
+    {
+      "source": "sensor_ambient_light_mount",
+      "target": "ambient_light_sensor",
+      "label": "mount"
+    },
+    {
+      "source": "sensor_occupancy_mount",
+      "target": "occupancy_sensor",
+      "label": "mount"
+    },
+    {
+      "source": "main_mcu_mount",
+      "target": "main_mcu",
+      "label": "mount"
+    },
+    {
+      "source": "lora_module_mount",
+      "target": "lora_module",
+      "label": "mount"
+    },
+    {
+      "source": "gps_module_mount",
+      "target": "gps_module",
+      "label": "mount"
+    },
+    {
+      "source": "rainfall_sensor_mount",
+      "target": "rainfall_sensor",
+      "label": "mount"
+    },
+    {
+      "source": "mini_gsm_antenna_mount",
+      "target": "mini_gsm_antenna",
+      "label": "mount"
+    },
+    {
+      "source": "mini_lora_antenna_mount",
+      "target": "mini_lora_antenna",
+      "label": "mount"
+    },
+    {
+      "source": "mini_gps_antenna_mount",
+      "target": "mini_gps_antenna",
+      "label": "mount"
+    }
+  ],
+  "projectDescription": "The Smart Child Health Box is an IP65, solar-powered IoT device featuring an ESP32-S3 with 4G/LoRa/GPS and environmental sensors for PM2.5/CO2, temperature, humidity, UV, rain, light, and occupancy. Powered by 18650 batteries, it includes an OLED display, status LEDs, and a rugged wall-mount enclosure for rural health monitoring.",
+  "imagePromptSnapshot": {
+    "description": "Project idea: use the modal model and design of the product in this image URL (https://img-cdn.flux.ai/eyJidWNrZXQiOiJncmF2aXRvbi1lbGVjdHJpYy1zeW1ib2xzIiwia2V5IjoicHJvamVjdC9jaGF0L2F0dGFjaG1lbnRzL1NtYXJ0LUNoaWxkLUhlYWx0aC1Cb3gtYTcyODU5NzktMDZkMy00NDNlLTkwODMtNWY3Zjc4YmZhZTI2LnBuZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6NzIwLCJoZWlnaHQiOjcyMCwiZml0IjoiaW5zaWRlIiwiYmFja2dyb3VuZCI6eyJyIjowLCJnIjowLCJiIjowLCJhbHBoYSI6MH19fSwib3V0cHV0Rm9ybWF0Ijoid2VicCJ9) to create Smart Child Health Box with the following features; create a simple hardware design of The Smart Child Health Box (SCHEB) is a low-cost child climate-health protection system built for African schools, clinics, and rural communities. It’s an integrated child climate-health intelligence system that combines smart hardware, AI software, and community action tools into one unified platform designed for rural and underserved communities. Instead of running multiple disconnected solutions, SCHEB merges disease forecasting, environmental sensing, and emergency preparedness into a single ecosystem focused on protecting children from climate-sensitive health threats.\n. It is designed to be mounted on the wall while its mini solar is mounted outside. It houses sensors for temperature, humidity, air quality (PM2.5/CO₂), UV radiation, rainfall, ambient light, and optional occupancy monitoring. Powered by a rechargeable battery with an integrated solar panel, it supports Wi-Fi, GSM/4G, LoRa, Bluetooth, GPS, and offline data storage for continuous operation. The enclosure is a durable, weather-resistant (IP65-rated) ABS/polycarbonate case with ventilation ports protected by filters, a small LCD/OLED status display, LED alert indicators, and a carry handle for portability. Its modular design allows easy sensor replacement, maintenance, and future upgrades without replacing the entire unit. Also design the case, note that solar panel is not attached to the product, also the product should come with height of 10 inches, width of 4 inches and length of 6 inches and will have 18650 lithium battery slot, mini antennal and mini screen that displays temperature, humidity, air quality (PM2.5/CO₂), UV radiation, rainfall, ambient light, and optional occupancy monitoring. it should have a wall hanger as its designed for users in rural areas and it should come with a single PCB. Adhere strictly too this design specification: 1. Component Technical Specifications\nA. The External 5W Solar Panel Assembly\n\tDimensions: Approximately 10\" in\"×7\" in\"×0.7\" in\"  (250\" mm\"×180\" mm\"×17\" mm\" ).\n\tFrame: Corrosion-resistant anodized aluminum frame with pre-drilled mounting holes.\n\tMounting Bracket: Heavy-duty tilt-adjustable wall/roof mounting arm (allows 360^∘ rotation and 90^∘ tilt to optimize angle relative to the equator).\n\tCabling: A 3\"m\"  to 5\"m\"  UV-resistant, double-insulated cable pre-installed via an IP67 junction box on the back of the panel. It terminates in a threaded, waterproof male DC barrel connector (5.5\" mm\"×2.1\" mm\" ).\nB. The SCHEB Enclosure (Wall-Mounted)\n\tForm Factor: 10\" in\"  Height, 4\" in\"  Width, 6\" in\"  Length/Depth.\n\tWall Mounting Mechanism: A heavy-duty sliding mounting plate. The plate is screwed directly into the concrete, brick, or wooden school wall. The SCHEB unit then slides downward onto the plate and locks in place with a security screw at the bottom to prevent theft.\n\tCable Entrance & Drip Loop: The DC input port is positioned on the top or upper-side edge. It is recessed and features a threaded mating collar to lock the solar panel cable in place. The cable should be installed with a \"drip loop\" (a downward U-bend) just before entering the building to prevent rainwater from running down the cable and into the wall hole or the device port.\n2. Internal Structural Layout (Single PCB & Battery Slot)\nInside the 10×4×6\"-inch\"  enclosure, the architecture is partitioned to optimize thermal isolation and RF performance:\n\tThe Backplate: Features the guide rails for the sliding wall hanger. Inside, the 18650 lithium battery slot is integrated directly onto the back wall or the lower half of the single PCB, keeping the heaviest component securely anchored close to the wall.\n\tThe Single PCB: Mounted vertically.\n\tTop Section: House the wireless RF modules (GSM/4G, LoRa, Wi-Fi/Bluetooth) closest to the top-mounted external SMA antenna to minimize signal loss.\n\tMiddle Section: Houses the main microcontroller, power management unit (MPPT charger), and connects directly to the front-facing mini screen.\n\tBottom Section: Holds the environmental sensors (PM2.5, CO₂, Temperature, Humidity). This places them directly above the bottom louvered air vents, isolated from any rising heat generated by the power regulation circuitry or the cellular transmitter.\n\nDesign notes: compact form factor, rugged design, solar-powered, IoT device, weather-resistant IP65, modular design, 18650 battery slots, mini antenna, mini screen, wall hanger, single PCB, 10x4x6 inch dimensions\n\nElectrical components (current): Main Controller (mcu, 18x25.5x3mm); 6x module: GSM/4G Module, LoRa Transceiver Module, GPS Module, Mini GSM/4G Antenna +2 more; 5x power: MPPT Solar Charge Controller, 18650 BMS for 2S/3S, 18650 Li-ion Battery Cell, 18650 Li-ion Battery Cell +1 more; 6x sensor: Temperature & Humidity Sensor, PM2.5 & CO2 Sensor, UV Index Sensor, Rainfall Sensor +2 more; 3x display: OLED Status Display, Red Alert LED, Green Alert LED\n\nMechanical/structural parts (current): 5x enclosure: SCHEB Main Enclosure, Enclosure Front Panel, Top Ventilation Grille, Bottom Ventilation Grille +1 more; 3x structural: SCHEB Wall Mounting Plate, External 5W Solar Panel Assembly, Solar Panel Mounting Bracket; 8x misc: Security Screw for Wall Mount, Dust Filter for Top Vent, Dust Filter for Bottom Vent, DC Input Cable Gland +4 more; 20x 3d_printed: Internal Backplate/PCB Frame, 18650 Battery Slot 1, 18650 Battery Slot 2, Vertical PCB Mount +16 more\n\nAssembly: SCHEB Main Enclosure → Enclosure Front Panel (M4 enclosure screws and adhesive weather seal for IP65); SCHEB Main Enclosure → SCHEB Wall Mounting Plate (Sliding mechanism, locks with security screw); SCHEB Main Enclosure → Security Screw for Wall Mount (M4 screw for theft prevention); SCHEB Main Enclosure → Top Ventilation Grille (Integrated/snap-fit into enclosure opening); SCHEB Main Enclosure → Bottom Ventilation Grille (Integrated/snap-fit into enclosure opening); Top Ventilation Grille → Dust Filter for Top Vent (Snap-fit/press-fit); Bottom Ventilation Grille → Dust Filter for Bottom Vent (Snap-fit/press-fit); SCHEB Main Enclosure → Carry Handle (M4 screws/integrated mounts); SCHEB Main Enclosure → DC Input Cable Gland (Threaded into enclosure top/side opening with seal); Internal Backplate/PCB Frame → SCHEB Main Enclosure (M3 screws to internal standoffs); Vertical PCB Mount → Internal Backplate/PCB Frame (Guide rails and M3 screws); RF Module Standoffs → Vertical PCB Mount (M2 screws for module mounting); OLED Display Bezel → Enclosure Front Panel (Snap-fit/M2 screws from inside); Red LED Mount → Enclosure Front Panel (Snap-fit/press-fit); Green LED Mount → Enclosure Front Panel (Snap-fit/press-fit) (+33 more connections)",
+    "tags": [
+      "compact form factor",
+      "rugged design",
+      "solar-powered",
+      "IoT device",
+      "weather-resistant IP65",
+      "modular design",
+      "18650 battery slots",
+      "mini antenna",
+      "mini screen",
+      "wall hanger",
+      "single PCB",
+      "10x4x6 inch dimensions"
+    ]
+  },
+  "originalPrompt": "use the modal model and design of the product in this image URL (https://img-cdn.flux.ai/eyJidWNrZXQiOiJncmF2aXRvbi1lbGVjdHJpYy1zeW1ib2xzIiwia2V5IjoicHJvamVjdC9jaGF0L2F0dGFjaG1lbnRzL1NtYXJ0LUNoaWxkLUhlYWx0aC1Cb3gtYTcyODU5NzktMDZkMy00NDNlLTkwODMtNWY3Zjc4YmZhZTI2LnBuZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6NzIwLCJoZWlnaHQiOjcyMCwiZml0IjoiaW5zaWRlIiwiYmFja2dyb3VuZCI6eyJyIjowLCJnIjowLCJiIjowLCJhbHBoYSI6MH19fSwib3V0cHV0Rm9ybWF0Ijoid2VicCJ9) to create Smart Child Health Box with the following features; create a simple hardware design of The Smart Child Health Box (SCHEB) is a low-cost child climate-health protection system built for African schools, clinics, and rural communities. It’s an integrated child climate-health intelligence system that combines smart hardware, AI software, and community action tools into one unified platform designed for rural and underserved communities. Instead of running multiple disconnected solutions, SCHEB merges disease forecasting, environmental sensing, and emergency preparedness into a single ecosystem focused on protecting children from climate-sensitive health threats.\n. It is designed to be mounted on the wall while its mini solar is mounted outside. It houses sensors for temperature, humidity, air quality (PM2.5/CO₂), UV radiation, rainfall, ambient light, and optional occupancy monitoring. Powered by a rechargeable battery with an integrated solar panel, it supports Wi-Fi, GSM/4G, LoRa, Bluetooth, GPS, and offline data storage for continuous operation. The enclosure is a durable, weather-resistant (IP65-rated) ABS/polycarbonate case with ventilation ports protected by filters, a small LCD/OLED status display, LED alert indicators, and a carry handle for portability. Its modular design allows easy sensor replacement, maintenance, and future upgrades without replacing the entire unit. Also design the case, note that solar panel is not attached to the product, also the product should come with height of 10 inches, width of 4 inches and length of 6 inches and will have 18650 lithium battery slot, mini antennal and mini screen that displays temperature, humidity, air quality (PM2.5/CO₂), UV radiation, rainfall, ambient light, and optional occupancy monitoring. it should have a wall hanger as its designed for users in rural areas and it should come with a single PCB. Adhere strictly too this design specification: 1. Component Technical Specifications\nA. The External 5W Solar Panel Assembly\n\tDimensions: Approximately 10\" in\"×7\" in\"×0.7\" in\"  (250\" mm\"×180\" mm\"×17\" mm\" ).\n\tFrame: Corrosion-resistant anodized aluminum frame with pre-drilled mounting holes.\n\tMounting Bracket: Heavy-duty tilt-adjustable wall/roof mounting arm (allows 360^∘ rotation and 90^∘ tilt to optimize angle relative to the equator).\n\tCabling: A 3\"m\"  to 5\"m\"  UV-resistant, double-insulated cable pre-installed via an IP67 junction box on the back of the panel. It terminates in a threaded, waterproof male DC barrel connector (5.5\" mm\"×2.1\" mm\" ).\nB. The SCHEB Enclosure (Wall-Mounted)\n\tForm Factor: 10\" in\"  Height, 4\" in\"  Width, 6\" in\"  Length/Depth.\n\tWall Mounting Mechanism: A heavy-duty sliding mounting plate. The plate is screwed directly into the concrete, brick, or wooden school wall. The SCHEB unit then slides downward onto the plate and locks in place with a security screw at the bottom to prevent theft.\n\tCable Entrance & Drip Loop: The DC input port is positioned on the top or upper-side edge. It is recessed and features a threaded mating collar to lock the solar panel cable in place. The cable should be installed with a \"drip loop\" (a downward U-bend) just before entering the building to prevent rainwater from running down the cable and into the wall hole or the device port.\n2. Internal Structural Layout (Single PCB & Battery Slot)\nInside the 10×4×6\"-inch\"  enclosure, the architecture is partitioned to optimize thermal isolation and RF performance:\n\tThe Backplate: Features the guide rails for the sliding wall hanger. Inside, the 18650 lithium battery slot is integrated directly onto the back wall or the lower half of the single PCB, keeping the heaviest component securely anchored close to the wall.\n\tThe Single PCB: Mounted vertically.\n\tTop Section: House the wireless RF modules (GSM/4G, LoRa, Wi-Fi/Bluetooth) closest to the top-mounted external SMA antenna to minimize signal loss.\n\tMiddle Section: Houses the main microcontroller, power management unit (MPPT charger), and connects directly to the front-facing mini screen.\n\tBottom Section: Holds the environmental sensors (PM2.5, CO₂, Temperature, Humidity). This places them directly above the bottom louvered air vents, isolated from any rising heat generated by the power regulation circuitry or the cellular transmitter.",
+  "plan": "- Main components: ESP32-S3 MCU with LoRa/LTE/GPS, 18650 Li-ion batteries, MPPT solar charge controller, PM2.5/CO2, Temp/Humidity, UV, Rainfall, Ambient Light, PIR sensors, OLED display, status LEDs.\n- Communication: Integrated Wi-Fi, GSM/4G, LoRa, Bluetooth, GPS, with external mini antennas.\n- Enclosure: Weather-resistant IP65 ABS/Polycarbonate (10x4x6 inches) with integrated ventilation, dust filters, recessed DC input with cable gland, and carry handle.\n- Mounting: External 5W solar panel with adjustable mounting bracket, and a heavy-duty sliding wall mounting plate for the main unit with security screw.\n- Internal structure: Single vertical PCB, 3D-printed internal backplate with integrated 18650 battery slots and sensor mounts, internal thermal partitioning.",
+  "notes": [
+    "compact form factor",
+    "rugged design",
+    "solar-powered",
+    "IoT device",
+    "weather-resistant IP65",
+    "modular design",
+    "18650 battery slots",
+    "mini antenna",
+    "mini screen",
+    "wall hanger",
+    "single PCB",
+    "10x4x6 inch dimensions"
+  ],
+  "projectId": "09e6f576-a147-4482-9af7-a52555a8cbbf",
+  "instructionPreamble": {
+    "tools": [
+      "3D printer (PETG capable)",
+      "Soldering iron with fine tip",
+      "Wire strippers and cutters",
+      "Screwdriver set (Phillips, Flat, Security Torx for M4)",
+      "Multimeter",
+      "M2, M3, M4 Hex/Allen keys",
+      "Adjustable wrench or spanner set",
+      "Drill and drill bits (for antenna/cable gland holes)",
+      "Adhesive applicator (for weather seal)"
+    ],
+    "assumptions": [
+      "Basic soldering proficiency for component connections.",
+      "Familiarity with microcontroller programming environments (e.g., Arduino IDE, PlatformIO).",
+      "Access to a computer with serial communication software for debugging.",
+      "Ability to troubleshoot basic electrical circuits.",
+      "Appropriate power supply for initial testing (e.g., 5-12V DC bench power supply)."
+    ]
+  },
+  "instructionSteps": [
+    {
+      "id": "fabricate",
+      "subSteps": [
+        {
+          "id": "fabricate_1",
+          "title": "3D Print all custom mounting brackets and bezels",
+          "partIds": [
+            "internal_frame_back_pcb_mount",
+            "battery_slot_1",
+            "battery_slot_2",
+            "pcb_vertical_mount",
+            "rf_module_standoffs",
+            "oled_display_bezel",
+            "led_alert_red_mount",
+            "led_alert_green_mount",
+            "sensor_pm25_co2_mount",
+            "sensor_temp_humidity_mount",
+            "sensor_uv_mount",
+            "sensor_ambient_light_mount",
+            "sensor_occupancy_mount",
+            "main_mcu_mount",
+            "lora_module_mount",
+            "gps_module_mount",
+            "rainfall_sensor_mount",
+            "mini_gsm_antenna_mount",
+            "mini_lora_antenna_mount",
+            "mini_gps_antenna_mount"
+          ]
+        },
+        {
+          "id": "fabricate_2",
+          "title": "Prepare SCHEB Main Enclosure for component integration",
+          "partIds": [
+            "scheb_main_enclosure",
+            "cable_gland_dc_input",
+            "mini_gsm_antenna_mount",
+            "mini_lora_antenna_mount",
+            "mini_gps_antenna_mount"
+          ]
+        },
+        {
+          "id": "fabricate_3",
+          "title": "Install ventilation grilles and dust filters",
+          "partIds": [
+            "ventilation_grille_top",
+            "ventilation_grille_bottom",
+            "dust_filter_vent_top",
+            "dust_filter_vent_bottom",
+            "scheb_main_enclosure"
+          ]
+        },
+        {
+          "id": "fabricate_4",
+          "title": "Attach carry handle to the main enclosure",
+          "partIds": [
+            "carry_handle",
+            "scheb_main_enclosure"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wire",
+      "subSteps": [
+        {
+          "id": "wire_1",
+          "title": "Solder all power connections (DC Jack, Solar Charge Controller, BMS, Main MCU)",
+          "partIds": [
+            "dc_barrel_jack",
+            "solar_charge_controller",
+            "bms_18650",
+            "main_mcu",
+            "li_ion_18650_cell_1",
+            "li_ion_18650_cell_2"
+          ]
+        },
+        {
+          "id": "wire_2",
+          "title": "Solder UART and Power connections for Cellular, GPS, and PM2.5/CO2 Modules to Main MCU",
+          "partIds": [
+            "main_mcu",
+            "cellular_module",
+            "gps_module",
+            "pm25_co2_sensor"
+          ]
+        },
+        {
+          "id": "wire_3",
+          "title": "Solder SPI and Power connections for LoRa Module to Main MCU",
+          "partIds": [
+            "main_mcu",
+            "lora_module"
+          ]
+        },
+        {
+          "id": "wire_4",
+          "title": "Solder I2C and Power connections for Temperature/Humidity, UV, Ambient Light, and OLED Display",
+          "partIds": [
+            "main_mcu",
+            "temperature_humidity_sensor",
+            "uv_sensor",
+            "ambient_light_sensor",
+            "oled_display"
+          ]
+        },
+        {
+          "id": "wire_5",
+          "title": "Solder GPIO and Power connections for Rainfall Sensor and Occupancy Sensor",
+          "partIds": [
+            "main_mcu",
+            "rainfall_sensor",
+            "occupancy_sensor"
+          ]
+        },
+        {
+          "id": "wire_6",
+          "title": "Solder Alert LEDs and their power/GPIO connections",
+          "partIds": [
+            "main_mcu",
+            "led_alert_red",
+            "led_alert_green"
+          ]
+        },
+        {
+          "id": "wire_7",
+          "title": "Connect RF modules to their respective mini antennas",
+          "partIds": [
+            "cellular_module",
+            "mini_gsm_antenna",
+            "lora_module",
+            "mini_lora_antenna",
+            "gps_module",
+            "mini_gps_antenna"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bringup",
+      "subSteps": [
+        {
+          "id": "bringup_1",
+          "title": "Perform continuity check on all soldered power and data lines",
+          "partIds": [
+            "main_mcu",
+            "solar_charge_controller",
+            "bms_18650",
+            "cellular_module",
+            "lora_module",
+            "gps_module",
+            "temperature_humidity_sensor",
+            "pm25_co2_sensor",
+            "uv_sensor",
+            "rainfall_sensor",
+            "ambient_light_sensor",
+            "occupancy_sensor",
+            "oled_display",
+            "led_alert_red",
+            "led_alert_green"
+          ]
+        },
+        {
+          "id": "bringup_2",
+          "title": "Upload base firmware to Main Controller and verify power rails",
+          "partIds": [
+            "main_mcu"
+          ]
+        },
+        {
+          "id": "bringup_3",
+          "title": "Test I2C sensors and OLED Display for correct recognition and data output",
+          "partIds": [
+            "main_mcu",
+            "temperature_humidity_sensor",
+            "uv_sensor",
+            "ambient_light_sensor",
+            "oled_display"
+          ]
+        },
+        {
+          "id": "bringup_4",
+          "title": "Test UART modules (Cellular, GPS, PM2.5/CO2) for communication and data reception",
+          "partIds": [
+            "main_mcu",
+            "cellular_module",
+            "gps_module",
+            "pm25_co2_sensor"
+          ]
+        },
+        {
+          "id": "bringup_5",
+          "title": "Verify SPI communication with LoRa module",
+          "partIds": [
+            "main_mcu",
+            "lora_module"
+          ]
+        },
+        {
+          "id": "bringup_6",
+          "title": "Test GPIO-based sensors (Rainfall, Occupancy) and Alert LEDs",
+          "partIds": [
+            "main_mcu",
+            "rainfall_sensor",
+            "occupancy_sensor",
+            "led_alert_red",
+            "led_alert_green"
+          ]
+        },
+        {
+          "id": "bringup_7",
+          "title": "Initial battery charging test via DC input and solar panel",
+          "partIds": [
+            "solar_charge_controller",
+            "bms_18650",
+            "li_ion_18650_cell_1",
+            "li_ion_18650_cell_2",
+            "dc_barrel_jack",
+            "solar_panel_assembly",
+            "solar_panel_cable"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "assemble",
+      "subSteps": [
+        {
+          "id": "assemble_1",
+          "title": "Mount Main Controller and other modules to their 3D printed mounts",
+          "partIds": [
+            "main_mcu",
+            "main_mcu_mount",
+            "cellular_module",
+            "lora_module",
+            "lora_module_mount",
+            "gps_module",
+            "gps_module_mount",
+            "rf_module_standoffs"
+          ]
+        },
+        {
+          "id": "assemble_2",
+          "title": "Mount sensors and OLED display to their respective 3D printed mounts and bezels",
+          "partIds": [
+            "temperature_humidity_sensor",
+            "sensor_temp_humidity_mount",
+            "pm25_co2_sensor",
+            "sensor_pm25_co2_mount",
+            "uv_sensor",
+            "sensor_uv_mount",
+            "rainfall_sensor",
+            "rainfall_sensor_mount",
+            "ambient_light_sensor",
+            "sensor_ambient_light_mount",
+            "occupancy_sensor",
+            "sensor_occupancy_mount",
+            "oled_display",
+            "oled_display_bezel",
+            "led_alert_red",
+            "led_alert_red_mount",
+            "led_alert_green",
+            "led_alert_green_mount"
+          ]
+        },
+        {
+          "id": "assemble_3",
+          "title": "Install 18650 batteries into their slots and integrate BMS/Charge Controller",
+          "partIds": [
+            "li_ion_18650_cell_1",
+            "li_ion_18650_cell_2",
+            "battery_slot_1",
+            "battery_slot_2",
+            "bms_18650",
+            "solar_charge_controller"
+          ]
+        },
+        {
+          "id": "assemble_4",
+          "title": "Mount PCB frame and vertical mounts inside the main enclosure",
+          "partIds": [
+            "internal_frame_back_pcb_mount",
+            "pcb_vertical_mount",
+            "scheb_main_enclosure",
+            "m3_mounting_screws"
+          ]
+        },
+        {
+          "id": "assemble_5",
+          "title": "Install DC barrel jack, antenna mounts and cable gland into enclosure openings",
+          "partIds": [
+            "dc_barrel_jack",
+            "cable_gland_dc_input",
+            "mini_gsm_antenna_mount",
+            "mini_lora_antenna_mount",
+            "mini_gps_antenna_mount",
+            "scheb_main_enclosure"
+          ]
+        },
+        {
+          "id": "assemble_6",
+          "title": "Route all internal wiring, ensuring strain relief and proper organization",
+          "partIds": [
+            "main_mcu",
+            "cellular_module",
+            "lora_module",
+            "gps_module",
+            "temperature_humidity_sensor",
+            "pm25_co2_sensor",
+            "uv_sensor",
+            "rainfall_sensor",
+            "ambient_light_sensor",
+            "occupancy_sensor",
+            "oled_display",
+            "led_alert_red",
+            "led_alert_green",
+            "dc_barrel_jack",
+            "solar_charge_controller",
+            "bms_18650",
+            "mini_gsm_antenna",
+            "mini_lora_antenna",
+            "mini_gps_antenna"
+          ]
+        },
+        {
+          "id": "assemble_7",
+          "title": "Mount external solar panel assembly to its bracket and connect cable",
+          "partIds": [
+            "solar_panel_assembly",
+            "solar_panel_mounting_bracket",
+            "solar_panel_cable"
+          ]
+        },
+        {
+          "id": "assemble_8",
+          "title": "Secure enclosure front panel with weather seal and screws, then attach wall mounting plate",
+          "partIds": [
+            "scheb_main_enclosure",
+            "enclosure_front_panel",
+            "adhesive_weather_seal",
+            "m4_enclosure_screws",
+            "scheb_wall_mounting_plate",
+            "security_screw_m4"
+          ]
+        }
+      ]
+    }
+  ],
+  "mechLayoutHash": "ambient_light_sensor:sensor:10x10x2mm,battery_slot_1:3d_printed:70x20x20mm,battery_slot_2:3d_printed:70x20x20mm,bms_18650:power:56x45x4mm,carry_handle:enclosure:120x30x20mm,cellular_module:module:30x30x2.9mm,dc_barrel_jack:power:12x10x10mm,enclosure_front_panel:enclosure:254x101.6x3mm,gps_module:module:25x35x5mm,gps_module_mount:3d_printed:50x40x12mm,internal_frame_back_pcb_mount:3d_printed:240x90x20mm,led_alert_green:display:5x5x8mm,led_alert_green_mount:3d_printed:10x10x5mm,led_alert_red:display:5x5x8mm,led_alert_red_mount:3d_printed:10x10x5mm,li_ion_18650_cell_1:power:18x65x18mm,li_ion_18650_cell_2:power:18x65x18mm,lora_module:module:16x16x2.5mm,lora_module_mount:3d_printed:50x40x12mm,main_mcu:mcu:18x25.5x3mm,main_mcu_mount:3d_printed:60x40x12mm,mini_gps_antenna:module:30x30x10mm,mini_gps_antenna_mount:3d_printed:50x40x12mm,mini_gsm_antenna:module:50x10x10mm,mini_gsm_antenna_mount:3d_printed:50x40x12mm,mini_lora_antenna:module:50x10x10mm,mini_lora_antenna_mount:3d_printed:50x40x12mm,occupancy_sensor:sensor:32x24x20mm,oled_display:display:27x27x4mm,oled_display_bezel:3d_printed:40x30x5mm,pcb_vertical_mount:3d_printed:240x90x10mm,pm25_co2_sensor:sensor:35x23x7mm (SCD40) + 50x38x21mm (PMS5003),rainfall_sensor:sensor:32x14x8mm,rainfall_sensor_mount:3d_printed:30x30x15mm,scheb_main_enclosure:enclosure:254x101.6x152.4mm,scheb_wall_mounting_plate:structural:200x80x5mm,sensor_ambient_light_mount:3d_printed:15x15x10mm,sensor_occupancy_mount:3d_printed:30x25x15mm,sensor_pm25_co2_mount:3d_printed:50x30x20mm,sensor_temp_humidity_mount:3d_printed:20x15x10mm,sensor_uv_mount:3d_printed:15x15x10mm,solar_charge_controller:power:38x38x12mm,solar_panel_assembly:structural:250x180x17mm,solar_panel_mounting_bracket:structural:200x150x100mm,temperature_humidity_sensor:sensor:8x8x2.5mm,uv_sensor:sensor:5x5x1.5mm,ventilation_grille_bottom:enclosure:60x40x10mm,ventilation_grille_top:enclosure:60x40x10mm::battery_slot_1|li_ion_18650_cell_1;battery_slot_2|li_ion_18650_cell_2;gps_module_mount|gps_module;internal_frame_back_pcb_mount|scheb_main_enclosure;led_alert_green_mount|enclosure_front_panel;led_alert_green_mount|led_alert_green;led_alert_red_mount|enclosure_front_panel;led_alert_red_mount|led_alert_red;lora_module_mount|lora_module;main_mcu_mount|main_mcu;main_mcu_mount|pcb_vertical_mount;mini_gps_antenna_mount|mini_gps_antenna;mini_gps_antenna_mount|scheb_main_enclosure;mini_gsm_antenna_mount|mini_gsm_antenna;mini_gsm_antenna_mount|scheb_main_enclosure;mini_lora_antenna_mount|mini_lora_antenna;mini_lora_antenna_mount|scheb_main_enclosure;oled_display_bezel|enclosure_front_panel;oled_display_bezel|oled_display;pcb_vertical_mount|internal_frame_back_pcb_mount;rainfall_sensor_mount|pcb_vertical_mount;rainfall_sensor_mount|rainfall_sensor;scheb_main_enclosure|carry_handle;scheb_main_enclosure|enclosure_front_panel;scheb_main_enclosure|scheb_wall_mounting_plate;scheb_main_enclosure|ventilation_grille_bottom;scheb_main_enclosure|ventilation_grille_top;sensor_ambient_light_mount|ambient_light_sensor;sensor_ambient_light_mount|pcb_vertical_mount;sensor_occupancy_mount|occupancy_sensor;sensor_occupancy_mount|pcb_vertical_mount;sensor_pm25_co2_mount|pcb_vertical_mount;sensor_pm25_co2_mount|pm25_co2_sensor;sensor_temp_humidity_mount|pcb_vertical_mount;sensor_temp_humidity_mount|temperature_humidity_sensor;sensor_uv_mount|pcb_vertical_mount;sensor_uv_mount|uv_sensor;solar_panel_assembly|solar_panel_mounting_bracket"
+}

@@ -7,7 +7,7 @@ By integrating **IoT Environmental Sensors**, **Crowdsourced Community Health Re
 
 ---
 
-## 🏗️ System Architecture
+## System Architecture
 
 The KHG Africa ecosystem is composed of three primary decoupled layers, orchestrating a seamless flow from field capture to administrative oversight.
 
@@ -55,7 +55,7 @@ graph TD
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 The workspace is organized into three main component folders:
 
@@ -87,7 +87,7 @@ An Expo React Native mobile application built for community health workers and l
 
 ---
 
-## 🗄️ Database Schema & PostGIS Geo-Intelligence
+## Database Schema & PostGIS Geo-Intelligence
 
 The Supabase PostgreSQL database leverages the **PostGIS** extension to calculate localized risk bounds.
 
@@ -240,7 +240,7 @@ The Supabase PostgreSQL database leverages the **PostGIS** extension to calculat
 
 ---
 
-## 🛡️ Gitignore Standards
+## Gitignore Standards
 
 This project utilizes a workspace-wide **Master `.gitignore`** at the root level which seamlessly filters:
 - OS-specific junk (`.DS_Store`, `Thumbs.db`)

@@ -36,7 +36,7 @@ export default function IndexSplash() {
       <View className="pt-16 px-4 items-center">
         <View className="bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 rounded-full flex-row items-center gap-1.5 mb-6">
           <View className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-          <Text className="text-emerald-400 text-[10px] font-black uppercase tracking-wider">
+          <Text className="text-emerald-400 text-[10px] font-black uppercase">
             KHG Africa Field Companion v2.4
           </Text>
         </View>
@@ -45,17 +45,17 @@ export default function IndexSplash() {
           <Ionicons name="shield-checkmark-sharp" size={44} color={COLORS.primary} />
         </View>
 
-        <Text className="text-white text-3xl font-black text-center uppercase tracking-widest leading-none">
+        <Text className="text-white text-2xl font-black text-center uppercase  leading-none">
           Kid-Health-Guard
         </Text>
-        <Text className="text-emerald-400 text-[11px] font-bold tracking-widest uppercase mt-2.5">
+        <Text className="text-emerald-400 text-[10px] font-bold  mt-2.5">
           Climate-Health Early Warning
         </Text>
       </View>
 
       {/* Center Intelligence Preview Widget */}
       <View className="items-center px-6">
-        <View className="w-full bg-slate-950/80 border border-blue-950/60 rounded-3xl p-6 shadow-2xl relative overflow-hidden">
+        <View className="w-full  border border-blue-950/60 rounded-lg p-6 shadow-2xl relative overflow-hidden">
           <View className="flex-row justify-between items-center mb-4">
             <View className="flex-row items-center gap-2">
               <Ionicons name="pulse" size={20} color={COLORS.risk.critical} />
@@ -67,21 +67,21 @@ export default function IndexSplash() {
           </View>
 
           <Text className="text-slate-300 text-xs leading-relaxed mb-4">
-            "Stagnant water reports and sudden humidity increase predict vector surges in the school playground. Distribute mosquito netting immediately."
+            Stagnant water reports and sudden humidity increase predict vector surges in the school playground. Distribute mosquito netting immediately.
           </Text>
 
           <View className="flex-row gap-3">
             <View className="flex-1 bg-slate-900 border border-blue-900/10 rounded-xl p-3 items-center">
-              <Text className="text-white text-lg font-extrabold">74%</Text>
-              <Text className="text-slate-500 text-[8px] uppercase font-bold mt-0.5">Malaria Prob</Text>
+              <Text className="text-white text-base font-extrabold">74%</Text>
+              <Text className="text-slate-500 text-[8px] font-bold mt-0.5">Malaria Prob</Text>
             </View>
             <View className="flex-1 bg-slate-900 border border-blue-900/10 rounded-xl p-3 items-center">
-              <Text className="text-white text-lg font-extrabold">32.8°C</Text>
-              <Text className="text-slate-500 text-[8px] uppercase font-bold mt-0.5">Temp Feed</Text>
+              <Text className="text-white text-base font-extrabold">32.8°C</Text>
+              <Text className="text-slate-500 text-[8px] font-bold mt-0.5">Temp Feed</Text>
             </View>
             <View className="flex-1 bg-slate-900 border border-blue-900/10 rounded-xl p-3 items-center">
-              <Text className="text-white text-lg font-extrabold">79%</Text>
-              <Text className="text-slate-500 text-[8px] uppercase font-bold mt-0.5">Humidity</Text>
+              <Text className="text-white text-base font-extrabold">79%</Text>
+              <Text className="text-slate-500 text-[8px] font-bold mt-0.5">Humidity</Text>
             </View>
           </View>
         </View>
@@ -91,10 +91,10 @@ export default function IndexSplash() {
       <View className="px-4 gap-4">
         <Pressable
           onPress={handleGetStarted}
-          className="py-4 bg-emerald-500 rounded-2xl items-center justify-center active:opacity-85 shadow-lg flex-row gap-2"
+          className="py-4 bg-emerald-500 rounded items-center justify-center active:opacity-85 shadow-lg flex-row gap-2"
         >
-          <Text className="text-white text-base font-black uppercase tracking-widest">
-            Enter Field Portal
+          <Text className="text-white text-base font-black">
+            Enter Field Portal 
           </Text>
           <Ionicons name="arrow-forward" size={18} color="white" />
         </Pressable>

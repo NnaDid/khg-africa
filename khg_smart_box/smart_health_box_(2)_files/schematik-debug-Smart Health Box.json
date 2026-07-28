@@ -1,0 +1,4411 @@
+{
+  "version": "3",
+  "appVersion": "cbd4abd-dirty",
+  "exportedAt": "2026-07-18T17:38:48.910Z",
+  "environment": {
+    "runtime": "web",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "platform": "esp32",
+    "model": "openai/gpt-5.6-terra"
+  },
+  "compileServer": {
+    "status": "reachable",
+    "gitDescribe": "cbd4abd9700b3e3cf1ebabf447484077f84db69e",
+    "gitSha": "cbd4abd9700b3e3cf1ebabf447484077f84db69e",
+    "builtAt": "unknown",
+    "platformio": "PlatformIO Core, version 6.1.19"
+  },
+  "project": {
+    "code": {
+      "code": "#include <Arduino.h>\n#include <Wire.h>\n#include <Adafruit_GFX.h>\n#include <Adafruit_SSD1306.h>\n#include <SensirionI2cScd4x.h>\n#include <Adafruit_PM25AQI.h>\n#include <BH1750.h>\n#include <Adafruit_VEML6075.h>\n\n#define I2C_SDA 21\n#define I2C_SCL 22\n#define PM_RX_PIN 16\n#define PIR_PIN 25\n#define RAIN_PIN 32\n#define OLED_ADDR 0x3C\n\n\n// Forward declarations\nvoid sampleSensors();\nvoid drawScreen();\n\nAdafruit_SSD1306 display(128, 64, &Wire, -1);\nSensirionI2cScd4x scd4x;\nAdafruit_PM25AQI pm;\nHardwareSerial pmSerial(2);\nBH1750 lightMeter;\nAdafruit_VEML6075 uv;\n\nuint16_t co2ppm = 0;\nfloat tempC = NAN, humidity = NAN, lux = NAN, uvi = NAN;\nuint16_t pm25 = 0;\nuint32_t rainTips = 0;\nbool lastRain = HIGH;\nuint32_t lastSample = 0;\nuint32_t lastScreen = 0;\n\nvoid sampleSensors() {\n  uint16_t error;\n  char errorMessage[64];\n  error = scd4x.readMeasurement(co2ppm, tempC, humidity);\n  if (error && error != 0x0000) { co2ppm = 0; }\n  PM25_AQI_Data data;\n  if (pm.read(&data)) pm25 = data.pm25_env;\n  lux = lightMeter.readLightLevel();\n  uvi = uv.readUVI();\n}\n\nvoid drawScreen() {\n  display.clearDisplay();\n  display.setTextColor(SSD1306_WHITE);\n  display.setTextSize(1);\n  display.setCursor(0, 0); display.println(\"SCHEB CHILD HEALTH\");\n  display.printf(\"T: %.1f C  RH: %.0f%%\\n\", tempC, humidity);\n  display.printf(\"PM2.5: %u ug/m3\\n\", pm25);\n  display.printf(\"CO2: %u ppm\\n\", co2ppm);\n  display.printf(\"UV: %.1f  Lux: %.0f\\n\", uvi, lux);\n  display.printf(\"Rain: %lu tips\\n\", (unsigned long)rainTips);\n  display.printf(\"Occupancy: %s\", digitalRead(PIR_PIN) ? \"MOTION\" : \"clear\");\n  display.display();\n}\n\nvoid setup() {\n  pinMode(PIR_PIN, INPUT);\n  pinMode(RAIN_PIN, INPUT_PULLUP);\n  Wire.begin(I2C_SDA, I2C_SCL);\n  display.begin(SSD1306_SWITCHCAPVCC, OLED_ADDR);\n  display.clearDisplay(); display.display();\n  scd4x.begin(Wire);\n  scd4x.stopPeriodicMeasurement();\n  scd4x.startPeriodicMeasurement();\n  lightMeter.begin(BH1750::CONTINUOUS_HIGH_RES_MODE, 0x23, &Wire);\n  uv.begin();\n  pmSerial.begin(9600, SERIAL_8N1, PM_RX_PIN, -1);\n  pm.begin_UART(&pmSerial);\n}\n\nvoid loop() {\n  bool rainNow = digitalRead(RAIN_PIN);\n  if (lastRain == HIGH && rainNow == LOW) rainTips++;\n  lastRain = rainNow;\n  uint32_t now = millis();\n  if (now - lastSample >= 5000) { lastSample = now; sampleSensors(); }\n  if (now - lastScreen >= 1000) { lastScreen = now; drawScreen(); }\n}",
+      "platform": "esp32",
+      "libraries": [
+        {
+          "name": "Adafruit SSD1306",
+          "installCommand": "adafruit/Adafruit SSD1306",
+          "version": "2.5.13"
+        },
+        {
+          "name": "Adafruit GFX Library",
+          "installCommand": "adafruit/Adafruit GFX Library",
+          "version": "1.12.1"
+        },
+        {
+          "name": "Sensirion I2C SCD4x",
+          "installCommand": "Sensirion I2C SCD4x",
+          "version": "0.4.0"
+        },
+        {
+          "name": "Adafruit PM25 AQI Sensor",
+          "installCommand": "adafruit/Adafruit PM25 AQI Sensor",
+          "version": "1.0.6"
+        },
+        {
+          "name": "BH1750",
+          "installCommand": "claws/BH1750",
+          "version": "1.3.0"
+        },
+        {
+          "name": "Adafruit VEML6075",
+          "installCommand": "adafruit/Adafruit VEML6075",
+          "version": "2.0.0"
+        }
+      ],
+      "pinDefinitions": {
+        "I2C_SDA": 21,
+        "I2C_SCL": 22,
+        "PM_RX_PIN": 16,
+        "PIR_PIN": 25,
+        "RAIN_PIN": 32
+      },
+      "runtime": "arduino-cpp",
+      "editorLanguage": "cpp",
+      "sourceFilename": "firmware.cpp",
+      "resolvedBoardId": "esp32"
+    },
+    "diagram": {
+      "nodes": [
+        {
+          "id": "scd41_1",
+          "type": "component",
+          "position": {
+            "x": 130,
+            "y": 100
+          },
+          "data": {
+            "component": {
+              "id": "scd41",
+              "name": "Sensirion SCD41",
+              "partSlug": "scd-41-true-co2-temperature-and-humidity-sensor",
+              "canonicalPartId": "prt_e3ce8c79908681fde31c",
+              "partNumber": "SCD41",
+              "retrievalTerms": [
+                "scd41",
+                "prt_e3ce8c79908681fde31c",
+                "scd-41-true-co2-temperature-and-humidity-sensor",
+                "Sensirion SCD41",
+                "5190",
+                "1528-5190-ND",
+                "5190"
+              ],
+              "aliases": [
+                "SCD-41",
+                "SCD41",
+                "Sensirion SCD41",
+                "scd41 co2 sensor"
+              ],
+              "type": "sensor",
+              "description": "Sensirion SCD41 true-CO₂, temperature and humidity sensor (photoacoustic NDIR, I²C). Pin- and library-compatible with the SCD40.",
+              "pinRequirements": [
+                {
+                  "name": "VCC",
+                  "type": "power",
+                  "voltage": 3.3,
+                  "required": true,
+                  "description": "Supply voltage, 2.4V-5.5V; use a clean, stable 3.3V or 5V rail with enough peak-current margin"
+                },
+                {
+                  "name": "GND",
+                  "type": "ground",
+                  "required": true,
+                  "description": "Ground"
+                },
+                {
+                  "name": "SDA",
+                  "type": "i2c",
+                  "required": true,
+                  "description": "I2C data line; I2C address 0x62"
+                },
+                {
+                  "name": "SCL",
+                  "type": "i2c",
+                  "required": true,
+                  "description": "I2C clock line"
+                }
+              ],
+              "libraries": [
+                {
+                  "name": "Sensirion I2C SCD4x",
+                  "version": "1.1.0",
+                  "installCommand": "sensirion/Sensirion I2C SCD4x"
+                }
+              ],
+              "pinConfiguration": {
+                "i2cAddress": "0x62"
+              },
+              "datasheetUrl": "https://sensirion.com/media/documents/48C4B7FB/64C134E7/Sensirion_SCD4x_Datasheet.pdf",
+              "purchaseLinks": {
+                "digikey": {
+                  "partNumber": "1528-5190-ND",
+                  "productUrl": "https://www.digikey.com/en/products/detail/adafruit-industries-llc/5190/15194670",
+                  "manufacturerPartNumber": "5190"
+                }
+              }
+            },
+            "instanceId": "scd41_1",
+            "label": "Sensirion SCD41"
+          }
+        },
+        {
+          "id": "pm25_1",
+          "type": "component",
+          "position": {
+            "x": 1170,
+            "y": 100
+          },
+          "data": {
+            "component": {
+              "id": "pms5003-particulate-matter-sensor",
+              "name": "PMS5003 Particulate Matter Sensor",
+              "partSlug": "pms5003-particulate-matter-sensor",
+              "canonicalPartId": "pms5003-particulate-matter-sensor",
+              "retrievalTerms": [
+                "pms5003-particulate-matter-sensor",
+                "pms5003-particulate-matter-sensor",
+                "pms5003-particulate-matter-sensor",
+                "PMS5003 Particulate Matter Sensor",
+                "1528-2509-ND",
+                "3686"
+              ],
+              "aliases": [
+                "Pm10 Sensor",
+                "air quality dust sensor",
+                "dust sensor",
+                "particulate matter sensor",
+                "particulate sensor",
+                "plantower pms5003",
+                "pm2.5 dust sensor",
+                "pm2.5 sensor",
+                "pms5003",
+                "pms5003 particulate sensor",
+                "pms5003 pm2.5 sensor",
+                "pms7003",
+                "uart particulate sensor"
+              ],
+              "type": "sensor",
+              "description": "Plantower PMS5003 laser particulate matter sensor. Reports PM1.0, PM2.5, and PM10 concentrations (plus six particle-size bins) once per second over a 9600-baud UART. The fan and laser diode run on 5V while the SET/RXD/TXD/RESET control and data pins are 3.3V TTL, so only power plus the sensor TX-to-MCU RX line is needed for basic readings. Ships on an 8-pin, 1.25mm-pitch cable; Adafruit sells it with a 0.1in breadboard adapter. PMS7003 is the compact-form-factor sibling in the same family and shares the same wiring/protocol.",
+              "pinRequirements": [
+                {
+                  "name": "VCC",
+                  "type": "power",
+                  "required": true
+                },
+                {
+                  "name": "GND",
+                  "type": "ground",
+                  "required": true
+                },
+                {
+                  "name": "TX",
+                  "type": "data",
+                  "required": true
+                },
+                {
+                  "name": "RX",
+                  "type": "data",
+                  "required": false
+                },
+                {
+                  "name": "SET",
+                  "type": "data",
+                  "required": false
+                },
+                {
+                  "name": "RESET",
+                  "type": "data",
+                  "required": false
+                }
+              ],
+              "libraries": [
+                {
+                  "name": "Adafruit PM25 AQI Sensor"
+                }
+              ],
+              "purchaseLinks": {
+                "digikey": {
+                  "partNumber": "1528-2509-ND",
+                  "productUrl": "https://www.digikey.com/en/products/detail/adafruit-industries-llc/3686/8119211",
+                  "manufacturerPartNumber": "3686"
+                }
+              }
+            },
+            "instanceId": "pm25_1",
+            "label": "PMS5003 Particulate Matter Sensor"
+          }
+        },
+        {
+          "id": "uv_1",
+          "type": "component",
+          "position": {
+            "x": 130,
+            "y": 320
+          },
+          "data": {
+            "component": {
+              "id": "bh1750",
+              "name": "BH1750",
+              "partSlug": "bh1750",
+              "canonicalPartId": "app-component-bh1750",
+              "partNumber": "bh1750",
+              "retrievalTerms": [
+                "bh1750",
+                "app-component-bh1750",
+                "bh1750",
+                "BH1750",
+                "bh1750",
+                "1528-4681-ND",
+                "4681"
+              ],
+              "aliases": [
+                "BH1750FVI",
+                "BH1750FVI-E",
+                "GY-302",
+                "bh1750 ambient light",
+                "gy302",
+                "i2c light sensor",
+                "i2c lux sensor",
+                "rohm bh1750"
+              ],
+              "type": "sensor",
+              "description": "Rohm BH1750FVI 16-bit digital ambient light sensor with I2C interface. Measures illuminance from 1 to 65535 lux. Two selectable I2C addresses (0x23 / 0x5C) via ADDR pin.",
+              "pinRequirements": [
+                {
+                  "name": "VCC",
+                  "type": "power",
+                  "voltage": 3.3,
+                  "required": true,
+                  "description": "Supply voltage (3.3 V when used with ESP32)"
+                },
+                {
+                  "name": "GND",
+                  "type": "ground",
+                  "required": true,
+                  "description": "Ground reference"
+                },
+                {
+                  "name": "SDA",
+                  "type": "i2c",
+                  "required": true,
+                  "description": "I2C data line"
+                },
+                {
+                  "name": "SCL",
+                  "type": "i2c",
+                  "required": true,
+                  "description": "I2C clock line"
+                },
+                {
+                  "name": "ADDR",
+                  "type": "digital",
+                  "required": false,
+                  "description": "I2C address select: LOW → 0x23, HIGH → 0x5C"
+                }
+              ],
+              "libraries": [
+                {
+                  "name": "BH1750",
+                  "version": "1.3.0",
+                  "installCommand": "claws/BH1750"
+                }
+              ],
+              "pinConfiguration": {
+                "i2cAddress": "0x23"
+              },
+              "datasheetUrl": "https://www.mouser.com/datasheet/2/348/bh1750fvi-e-186247.pdf",
+              "purchaseLinks": {
+                "digikey": {
+                  "partNumber": "1528-4681-ND",
+                  "productUrl": "https://www.digikey.com/en/products/detail/adafruit-industries-llc/4681/12760934",
+                  "manufacturerPartNumber": "4681"
+                }
+              }
+            },
+            "instanceId": "uv_1",
+            "label": "BH1750"
+          }
+        },
+        {
+          "id": "lux_1",
+          "type": "component",
+          "position": {
+            "x": 1170,
+            "y": 320
+          },
+          "data": {
+            "component": {
+              "id": "bh1750",
+              "name": "BH1750",
+              "partSlug": "bh1750",
+              "canonicalPartId": "app-component-bh1750",
+              "partNumber": "bh1750",
+              "retrievalTerms": [
+                "bh1750",
+                "app-component-bh1750",
+                "bh1750",
+                "BH1750",
+                "bh1750",
+                "1528-4681-ND",
+                "4681"
+              ],
+              "aliases": [
+                "BH1750FVI",
+                "BH1750FVI-E",
+                "GY-302",
+                "bh1750 ambient light",
+                "gy302",
+                "i2c light sensor",
+                "i2c lux sensor",
+                "rohm bh1750"
+              ],
+              "type": "sensor",
+              "description": "Rohm BH1750FVI 16-bit digital ambient light sensor with I2C interface. Measures illuminance from 1 to 65535 lux. Two selectable I2C addresses (0x23 / 0x5C) via ADDR pin.",
+              "pinRequirements": [
+                {
+                  "name": "VCC",
+                  "type": "power",
+                  "voltage": 3.3,
+                  "required": true,
+                  "description": "Supply voltage (3.3 V when used with ESP32)"
+                },
+                {
+                  "name": "GND",
+                  "type": "ground",
+                  "required": true,
+                  "description": "Ground reference"
+                },
+                {
+                  "name": "SDA",
+                  "type": "i2c",
+                  "required": true,
+                  "description": "I2C data line"
+                },
+                {
+                  "name": "SCL",
+                  "type": "i2c",
+                  "required": true,
+                  "description": "I2C clock line"
+                },
+                {
+                  "name": "ADDR",
+                  "type": "digital",
+                  "required": false,
+                  "description": "I2C address select: LOW → 0x23, HIGH → 0x5C"
+                }
+              ],
+              "libraries": [
+                {
+                  "name": "BH1750",
+                  "version": "1.3.0",
+                  "installCommand": "claws/BH1750"
+                }
+              ],
+              "pinConfiguration": {
+                "i2cAddress": "0x23"
+              },
+              "datasheetUrl": "https://www.mouser.com/datasheet/2/348/bh1750fvi-e-186247.pdf",
+              "purchaseLinks": {
+                "digikey": {
+                  "partNumber": "1528-4681-ND",
+                  "productUrl": "https://www.digikey.com/en/products/detail/adafruit-industries-llc/4681/12760934",
+                  "manufacturerPartNumber": "4681"
+                }
+              }
+            },
+            "instanceId": "lux_1",
+            "label": "BH1750"
+          }
+        },
+        {
+          "id": "oled_1",
+          "type": "component",
+          "position": {
+            "x": 130,
+            "y": 540
+          },
+          "data": {
+            "component": {
+              "id": "ssd1306-oled",
+              "name": "SSD1306 OLED",
+              "partSlug": "ssd1306-oled",
+              "canonicalPartId": "app-component-ssd1306-oled",
+              "partNumber": "56574",
+              "retrievalTerms": [
+                "ssd1306-oled",
+                "app-component-ssd1306-oled",
+                "ssd1306-oled",
+                "SSD1306 OLED",
+                "56574",
+                "1528-1220-ND",
+                "326"
+              ],
+              "aliases": [
+                "0.96 inch OLED",
+                "128x64 OLED",
+                "128x64 ssd1306 oled",
+                "SSD1306",
+                "SSD1306 OLED",
+                "oled",
+                "oled display",
+                "oled screen",
+                "ssd 1306",
+                "ssd 1306 oled",
+                "ssd1306 128x64 oled display",
+                "ssd1306 oled display",
+                "ssd1306 oled display 128x64"
+              ],
+              "type": "display",
+              "description": "0.96 inch 128x64 OLED display with I2C interface",
+              "pinRequirements": [
+                {
+                  "name": "VCC",
+                  "type": "power",
+                  "voltage": 3.3,
+                  "required": true
+                },
+                {
+                  "name": "GND",
+                  "type": "ground",
+                  "required": true
+                },
+                {
+                  "name": "SDA",
+                  "type": "i2c",
+                  "required": true
+                },
+                {
+                  "name": "SCL",
+                  "type": "i2c",
+                  "required": true
+                }
+              ],
+              "libraries": [
+                {
+                  "name": "Adafruit SSD1306",
+                  "version": "2.5.7",
+                  "installCommand": "Adafruit SSD1306"
+                },
+                {
+                  "name": "Adafruit GFX Library",
+                  "version": "1.11.5",
+                  "installCommand": "Adafruit GFX Library"
+                }
+              ],
+              "pinConfiguration": {
+                "i2cAddress": "0x3C",
+                "recommendedPins": []
+              },
+              "physicalDimensions": {
+                "unit": "mm",
+                "width": 27.3,
+                "height": 27.8
+              },
+              "exampleUsage": "Displays text and graphics",
+              "datasheetUrl": "https://learn.adafruit.com/monochrome-oled-breakouts",
+              "purchaseLinks": {
+                "digikey": {
+                  "partNumber": "1528-1220-ND",
+                  "productUrl": "https://www.digikey.com/en/products/detail/adafruit-industries-llc/326/5353680",
+                  "manufacturerPartNumber": "326"
+                }
+              }
+            },
+            "instanceId": "oled_1",
+            "label": "SSD1306 OLED"
+          }
+        },
+        {
+          "id": "pir_1",
+          "type": "component",
+          "position": {
+            "x": 1170,
+            "y": 540
+          },
+          "data": {
+            "component": {
+              "id": "hc-sr501-pir-motion-sensor",
+              "name": "HC-SR501 PIR Motion Sensor",
+              "partSlug": "hc-sr501-pir-motion-sensor",
+              "canonicalPartId": "app-component-hc-sr501-pir-motion-sensor",
+              "partNumber": "hc-sr501-pir-motion-sensor",
+              "retrievalTerms": [
+                "hc-sr501-pir-motion-sensor",
+                "app-component-hc-sr501-pir-motion-sensor",
+                "hc-sr501-pir-motion-sensor",
+                "HC-SR501 PIR Motion Sensor",
+                "hc-sr501-pir-motion-sensor",
+                "269-4955-ND",
+                "ZRE200GE"
+              ],
+              "aliases": [
+                "HC-SR501 PIR Motion Sensor",
+                "HCSR501",
+                "PIR Motion Sensor",
+                "Passive Infrared Sensor HC-SR501",
+                "hc-sr501",
+                "hc-sr501-pir-motion-sensor",
+                "sr501"
+              ],
+              "type": "sensor",
+              "description": "Passive Infrared (PIR) motion detection module with adjustable sensitivity and delay potentiometers. Operates on 5V supply; digital output is nominally 3.3V or 5V depending on module variant (verify before connecting directly to ESP32 3.3V GPIO — use a voltage divider if output is 5V). Outputs HIGH when motion is detected, LOW when idle. Ideal for triggering countdown timer resets in Focus Mode applications. No firmware library required — output read via standard GPIO digitalRead().",
+              "pinRequirements": [
+                {
+                  "name": "VCC",
+                  "type": "power",
+                  "voltage": 5,
+                  "required": true,
+                  "description": "Module supply. Most HC-SR501 boards use 5 V input."
+                },
+                {
+                  "name": "GND",
+                  "type": "ground",
+                  "required": true,
+                  "description": "Ground reference shared with the MCU."
+                },
+                {
+                  "name": "OUT",
+                  "type": "digital",
+                  "required": true,
+                  "description": "Motion-detect output. Verify output level on the specific module before connecting to 3.3 V-only GPIO; add level shifting if needed."
+                }
+              ],
+              "libraries": [],
+              "datasheetUrl": "http://www.handsontec.com/dataspecs/SR501%20Motion%20Sensor.pdf",
+              "purchaseLinks": {
+                "digikey": {
+                  "partNumber": "269-4955-ND",
+                  "productUrl": "https://www.digikey.com/en/products/detail/zilog/ZRE200GE/5147335",
+                  "manufacturerPartNumber": "ZRE200GE"
+                }
+              }
+            },
+            "instanceId": "pir_1",
+            "label": "HC-SR501 PIR Motion Sensor"
+          }
+        },
+        {
+          "id": "lora_1",
+          "type": "component",
+          "position": {
+            "x": 130,
+            "y": 760
+          },
+          "data": {
+            "component": {
+              "id": "rfm95w-sx1276-lora",
+              "name": "RFM95W LoRa Transceiver Module (SX1276)",
+              "partSlug": "rfm95w-lora-radio-transceiver-breakout-868-or-915-mhz-radiofruit",
+              "canonicalPartId": "prt_b6042d1a550c4beffa75",
+              "partNumber": "3072",
+              "retrievalTerms": [
+                "rfm95w-sx1276-lora",
+                "prt_b6042d1a550c4beffa75",
+                "rfm95w-lora-radio-transceiver-breakout-868-or-915-mhz-radiofruit",
+                "RFM95W LoRa Transceiver Module (SX1276)",
+                "3072",
+                "1528-1667-ND",
+                "3072"
+              ],
+              "aliases": [
+                "868MHz LoRa Module",
+                "915MHz LoRa Module",
+                "HopeRF RFM95W",
+                "LoRa RFM95W",
+                "LoRa SX1276",
+                "RFM95",
+                "RFM95W",
+                "RFM95W LoRa",
+                "RFM95W LoRa Transceiver Module (SX1276)",
+                "SX1276"
+              ],
+              "type": "other",
+              "description": "HopeRF RFM95W long-range LoRa/LoRaWAN radio module based on Semtech SX1276. Typically used at 868 MHz (EU) or 915 MHz (US) ISM bands. SPI interface plus RESET and DIO interrupt lines. 3.3 V logic only. Requires an external antenna — never transmit without one.",
+              "pinRequirements": [
+                {
+                  "name": "VCC",
+                  "type": "power",
+                  "voltage": 3.3,
+                  "required": true,
+                  "description": "3.3V supply only."
+                },
+                {
+                  "name": "GND",
+                  "type": "ground",
+                  "required": true,
+                  "description": "Ground reference"
+                },
+                {
+                  "name": "MOSI",
+                  "type": "spi",
+                  "required": true,
+                  "description": "SPI MOSI from MCU."
+                },
+                {
+                  "name": "MISO",
+                  "type": "spi",
+                  "required": true,
+                  "description": "SPI MISO to MCU."
+                },
+                {
+                  "name": "SCK",
+                  "type": "spi",
+                  "required": true,
+                  "description": "SPI clock."
+                },
+                {
+                  "name": "NSS",
+                  "type": "spi",
+                  "required": true,
+                  "description": "SPI chip select, also called CS."
+                },
+                {
+                  "name": "RESET",
+                  "type": "digital",
+                  "required": true,
+                  "description": "Module reset (active low)."
+                },
+                {
+                  "name": "DIO0",
+                  "type": "digital",
+                  "required": true,
+                  "description": "Primary interrupt line — TxDone/RxDone flag used by common LoRa libraries."
+                },
+                {
+                  "name": "DIO1",
+                  "type": "digital",
+                  "required": false,
+                  "description": "Optional interrupt — RxTimeout / FHSS."
+                },
+                {
+                  "name": "DIO2",
+                  "type": "digital",
+                  "required": false,
+                  "description": "Optional interrupt — FHSS channel change."
+                }
+              ],
+              "libraries": [
+                {
+                  "name": "RadioLib",
+                  "version": "6.6.0",
+                  "installCommand": "jgromes/RadioLib"
+                },
+                {
+                  "name": "LoRa",
+                  "installCommand": "sandeepmistry/LoRa"
+                }
+              ],
+              "datasheetUrl": "https://cdn.sparkfun.com/assets/a/9/6/1/0/RFM95W-V2.0.pdf",
+              "purchaseLinks": {
+                "digikey": {
+                  "partNumber": "1528-1667-ND",
+                  "productUrl": "https://www.digikey.com/en/products/detail/adafruit-industries-llc/3072/6005357",
+                  "manufacturerPartNumber": "3072"
+                }
+              }
+            },
+            "instanceId": "lora_1",
+            "label": "RFM95W LoRa Transceiver Module (SX1276)"
+          }
+        },
+        {
+          "id": "lte_gps_1",
+          "type": "component",
+          "position": {
+            "x": 1170,
+            "y": 760
+          },
+          "data": {
+            "component": {
+              "id": "sim7600-lte-cat4-module",
+              "name": "SIM7600 LTE CAT-4 Module",
+              "partSlug": "sim7600-lte-cat4-module",
+              "canonicalPartId": "app-component-sim7600-lte-cat4-module",
+              "partNumber": "sim7600-lte-cat4-module",
+              "retrievalTerms": [
+                "sim7600-lte-cat4-module",
+                "app-component-sim7600-lte-cat4-module",
+                "sim7600-lte-cat4-module",
+                "SIM7600 LTE CAT-4 Module",
+                "sim7600-lte-cat4-module",
+                "1738-TEL0124-ND",
+                "TEL0124"
+              ],
+              "aliases": [
+                "SIM7600",
+                "SIM7600 4G Module",
+                "SIM7600 LTE CAT-4 Module",
+                "SIM7600 LTE Module",
+                "SIM7600A",
+                "SIM7600E"
+              ],
+              "type": "other",
+              "description": "SIMCom SIM7600-series LTE CAT-4 cellular module or breakout. It is typically controlled over UART with AT commands and needs a stable high-current cellular supply; many maker boards accept 5V input but the bare module uses a lower VBAT rail.",
+              "pinRequirements": [
+                {
+                  "name": "VCC",
+                  "type": "power",
+                  "voltage": 5,
+                  "required": true,
+                  "description": "Breakout-board supply input. Confirm the exact board; cellular transmit bursts require a stable high-current supply."
+                },
+                {
+                  "name": "GND",
+                  "type": "ground",
+                  "required": true,
+                  "description": "Common ground with MCU and external supply."
+                },
+                {
+                  "name": "TXD",
+                  "type": "uart",
+                  "required": true,
+                  "description": "Module UART transmit to MCU RX."
+                },
+                {
+                  "name": "RXD",
+                  "type": "uart",
+                  "required": true,
+                  "description": "Module UART receive from MCU TX. Use 3.3V-compatible logic or level shifting as required by the breakout."
+                },
+                {
+                  "name": "PWRKEY",
+                  "type": "digital",
+                  "required": true,
+                  "description": "Power-key control input used to turn the modem on/off."
+                },
+                {
+                  "name": "RESET",
+                  "type": "digital",
+                  "required": false,
+                  "description": "Optional reset control input."
+                },
+                {
+                  "name": "RI",
+                  "type": "digital",
+                  "required": false,
+                  "description": "Optional ring indicator output."
+                }
+              ],
+              "libraries": [
+                {
+                  "name": "TinyGSM",
+                  "version": "0.12.0",
+                  "installCommand": "vshymanskyy/TinyGSM"
+                }
+              ],
+              "datasheetUrl": "https://www.waveshare.com/w/upload/6/6d/SIM7600_Series_AT_Command_Manual_V1.12.pdf",
+              "purchaseLinks": {
+                "digikey": {
+                  "partNumber": "1738-TEL0124-ND",
+                  "productUrl": "https://www.digikey.com/en/products/detail/dfrobot/TEL0124/10055687",
+                  "manufacturerPartNumber": "TEL0124"
+                }
+              }
+            },
+            "instanceId": "lte_gps_1",
+            "label": "SIM7600 LTE CAT-4 Module"
+          }
+        },
+        {
+          "id": "solar_1",
+          "type": "power",
+          "position": {
+            "x": 130,
+            "y": 980
+          },
+          "data": {
+            "component": {
+              "id": "solar-5v-1w",
+              "name": "5V / 1W Solar Panel",
+              "partSlug": "solar-5v-1w",
+              "canonicalPartId": "app-power-solar-5v-1w",
+              "partNumber": "solar-5v-1w",
+              "retrievalTerms": [
+                "solar-5v-1w",
+                "app-power-solar-5v-1w",
+                "solar-5v-1w",
+                "5V / 1W Solar Panel",
+                "solar-5v-1w"
+              ],
+              "aliases": [
+                "5v solar",
+                "photovoltaic panel",
+                "pv panel",
+                "small solar panel",
+                "solar",
+                "solar panel"
+              ],
+              "type": "power",
+              "description": "Small 5 V / ~200 mA peak solar panel. Used as the upstream input to a TP4056 (or solar charge controller) for off-grid / outdoor projects.",
+              "pinRequirements": [
+                {
+                  "name": "+5V",
+                  "type": "power",
+                  "voltage": 5,
+                  "required": true,
+                  "description": "Panel +; under direct sun, ~5-6 V open circuit."
+                },
+                {
+                  "name": "GND",
+                  "type": "ground",
+                  "required": true,
+                  "description": "Panel -."
+                }
+              ],
+              "libraries": []
+            },
+            "instanceId": "solar_1",
+            "label": "5V / 1W Solar Panel"
+          }
+        },
+        {
+          "id": "charger_1",
+          "type": "power",
+          "position": {
+            "x": 1170,
+            "y": 980
+          },
+          "data": {
+            "component": {
+              "id": "cn3791-mppt-liion-solar-charger",
+              "name": "CN3791 MPPT Solar Charger",
+              "partSlug": "consonance-cn3791-mppt-liion-solar-charger",
+              "canonicalPartId": "cn3791-mppt-liion-solar-charger",
+              "partNumber": "CN3791",
+              "retrievalTerms": [
+                "cn3791-mppt-liion-solar-charger",
+                "cn3791-mppt-liion-solar-charger",
+                "consonance-cn3791-mppt-liion-solar-charger",
+                "CN3791 MPPT Solar Charger",
+                "CN3791"
+              ],
+              "aliases": [
+                "Cn3791 Mppt Charger",
+                "cn3791",
+                "cn3791 charger module",
+                "cn3791 solar charger",
+                "mppt li-ion charger",
+                "mppt lithium charger",
+                "single-cell solar charger",
+                "solar battery charger",
+                "solar charge controller"
+              ],
+              "type": "power",
+              "description": "CN3791-based MPPT-style switch-mode charger module for single-cell Li-ion/LiPo solar charging. Routes solar input to battery charge terminals and needs a downstream regulator/load path for stable MCU power.",
+              "pinRequirements": [
+                {
+                  "name": "SOLAR+",
+                  "type": "power",
+                  "required": true
+                },
+                {
+                  "name": "SOLAR-",
+                  "type": "ground",
+                  "required": true
+                },
+                {
+                  "name": "BAT+",
+                  "type": "power",
+                  "required": true
+                },
+                {
+                  "name": "BAT-",
+                  "type": "ground",
+                  "required": true
+                },
+                {
+                  "name": "OUT+",
+                  "type": "power",
+                  "required": false
+                },
+                {
+                  "name": "OUT-",
+                  "type": "ground",
+                  "required": false
+                }
+              ],
+              "libraries": [],
+              "datasheetUrl": "https://files.waveshare.com/wiki/Solar-Power-Manager-(D)/CN3791_Datasheet_EN.pdf"
+            },
+            "instanceId": "charger_1",
+            "label": "CN3791 MPPT Solar Charger"
+          }
+        },
+        {
+          "id": "battery_1",
+          "type": "power",
+          "position": {
+            "x": 130,
+            "y": 1200
+          },
+          "data": {
+            "component": {
+              "id": "18650-cell",
+              "name": "18650 Li-ion Cell",
+              "partSlug": "18650-cell",
+              "canonicalPartId": "app-power-18650-cell",
+              "partNumber": "18650-cell",
+              "retrievalTerms": [
+                "18650-cell",
+                "app-power-18650-cell",
+                "18650-cell",
+                "18650 Li-ion Cell",
+                "18650-cell",
+                "12354030",
+                "ICR18650-2600-B"
+              ],
+              "aliases": [
+                "18650",
+                "18650 battery",
+                "18650 li-ion",
+                "battery",
+                "li-ion 18650",
+                "li-ion battery",
+                "li-ion cell",
+                "lithium ion cell",
+                "rechargeable battery"
+              ],
+              "type": "power",
+              "description": "18650 lithium-ion cell, nominal 3.7 V, ~2500 mAh. Common for higher-capacity portable / battery-bank style projects; needs a holder and protection / charger circuit.",
+              "pinRequirements": [
+                {
+                  "name": "+V",
+                  "type": "power",
+                  "voltage": 3.7,
+                  "required": true,
+                  "description": "Positive cell terminal."
+                },
+                {
+                  "name": "GND",
+                  "type": "ground",
+                  "required": true,
+                  "description": "Negative cell terminal."
+                }
+              ],
+              "libraries": [],
+              "purchaseLinks": {
+                "digikey": {
+                  "partNumber": "12354030",
+                  "productUrl": "https://www.digikey.com/en/products/detail/pkcell/ICR18650-2600-B/12354030",
+                  "manufacturerPartNumber": "ICR18650-2600-B"
+                }
+              }
+            },
+            "instanceId": "battery_1",
+            "label": "18650 Li-ion Cell"
+          }
+        },
+        {
+          "id": "reg_3v3_1",
+          "type": "power",
+          "position": {
+            "x": 1170,
+            "y": 1200
+          },
+          "data": {
+            "component": {
+              "id": "tp4056-lipo-charger",
+              "name": "TP4056 Li-Ion/LiPo charger module with protection",
+              "partSlug": "tp4056-lipo-charger",
+              "canonicalPartId": "tp4056-lipo-charger",
+              "partNumber": "TP4056-protected-6-pad-module",
+              "retrievalTerms": [
+                "tp4056-lipo-charger",
+                "tp4056-lipo-charger",
+                "tp4056-lipo-charger",
+                "TP4056 Li-Ion/LiPo charger module with protection",
+                "TP4056-protected-6-pad-module"
+              ],
+              "aliases": [
+                "1a lipo charger",
+                "LiPo Charging Module",
+                "Lithium Ion Polymer Battery Charger",
+                "TP4056",
+                "TP4056 Charging Module",
+                "TP4056 Li-Ion Charger Module",
+                "TP4056 LiPo Charger Module",
+                "Tp4056 Module",
+                "USB Charging Module",
+                "USB-C Charging Module",
+                "li-ion charger module",
+                "lipo charger module",
+                "tp4056",
+                "tp4056 charger",
+                "tp4056 charging board",
+                "tp4056 module"
+              ],
+              "type": "power",
+              "description": "TP4056 single-cell Li-Ion/LiPo linear charger module, 5V USB input, 1A charge current (programmable). Common variants ship with DW01 protection. Pair with battery_lipo_storage for the cell.",
+              "pinRequirements": [
+                {
+                  "name": "IN+",
+                  "type": "power",
+                  "aliases": [
+                    "USB+",
+                    "5V+"
+                  ],
+                  "voltage": 5,
+                  "required": true,
+                  "description": "5V charge input positive."
+                },
+                {
+                  "name": "IN-",
+                  "type": "ground",
+                  "aliases": [
+                    "USB-",
+                    "GND"
+                  ],
+                  "required": true,
+                  "description": "Charge input negative / ground."
+                },
+                {
+                  "name": "B+",
+                  "type": "power",
+                  "aliases": [
+                    "BAT+"
+                  ],
+                  "voltage": 3.7,
+                  "required": true,
+                  "description": "Single-cell battery positive."
+                },
+                {
+                  "name": "B-",
+                  "type": "ground",
+                  "aliases": [
+                    "BAT-"
+                  ],
+                  "required": true,
+                  "description": "Single-cell battery negative."
+                },
+                {
+                  "name": "OUT+",
+                  "type": "power",
+                  "required": true,
+                  "description": "Protected load output positive on six-pad protected modules."
+                },
+                {
+                  "name": "OUT-",
+                  "type": "ground",
+                  "required": true,
+                  "description": "Protected load output negative on six-pad protected modules."
+                }
+              ],
+              "libraries": [],
+              "datasheetUrl": "https://www.digikey.com/htmldatasheets/production/2049110/0/0/1/tp4056.html"
+            },
+            "instanceId": "reg_3v3_1",
+            "label": "TP4056 Li-Ion/LiPo charger module with protection"
+          }
+        },
+        {
+          "id": "reg_4v0_1",
+          "type": "power",
+          "position": {
+            "x": 130,
+            "y": 1420
+          },
+          "data": {
+            "component": {
+              "id": "tp4056-lipo-charger",
+              "name": "TP4056 Li-Ion/LiPo charger module with protection",
+              "partSlug": "tp4056-lipo-charger",
+              "canonicalPartId": "tp4056-lipo-charger",
+              "partNumber": "TP4056-protected-6-pad-module",
+              "retrievalTerms": [
+                "tp4056-lipo-charger",
+                "tp4056-lipo-charger",
+                "tp4056-lipo-charger",
+                "TP4056 Li-Ion/LiPo charger module with protection",
+                "TP4056-protected-6-pad-module"
+              ],
+              "aliases": [
+                "1a lipo charger",
+                "LiPo Charging Module",
+                "Lithium Ion Polymer Battery Charger",
+                "TP4056",
+                "TP4056 Charging Module",
+                "TP4056 Li-Ion Charger Module",
+                "TP4056 LiPo Charger Module",
+                "Tp4056 Module",
+                "USB Charging Module",
+                "USB-C Charging Module",
+                "li-ion charger module",
+                "lipo charger module",
+                "tp4056",
+                "tp4056 charger",
+                "tp4056 charging board",
+                "tp4056 module"
+              ],
+              "type": "power",
+              "description": "TP4056 single-cell Li-Ion/LiPo linear charger module, 5V USB input, 1A charge current (programmable). Common variants ship with DW01 protection. Pair with battery_lipo_storage for the cell.",
+              "pinRequirements": [
+                {
+                  "name": "IN+",
+                  "type": "power",
+                  "aliases": [
+                    "USB+",
+                    "5V+"
+                  ],
+                  "voltage": 5,
+                  "required": true,
+                  "description": "5V charge input positive."
+                },
+                {
+                  "name": "IN-",
+                  "type": "ground",
+                  "aliases": [
+                    "USB-",
+                    "GND"
+                  ],
+                  "required": true,
+                  "description": "Charge input negative / ground."
+                },
+                {
+                  "name": "B+",
+                  "type": "power",
+                  "aliases": [
+                    "BAT+"
+                  ],
+                  "voltage": 3.7,
+                  "required": true,
+                  "description": "Single-cell battery positive."
+                },
+                {
+                  "name": "B-",
+                  "type": "ground",
+                  "aliases": [
+                    "BAT-"
+                  ],
+                  "required": true,
+                  "description": "Single-cell battery negative."
+                },
+                {
+                  "name": "OUT+",
+                  "type": "power",
+                  "required": true,
+                  "description": "Protected load output positive on six-pad protected modules."
+                },
+                {
+                  "name": "OUT-",
+                  "type": "ground",
+                  "required": true,
+                  "description": "Protected load output negative on six-pad protected modules."
+                }
+              ],
+              "libraries": [],
+              "datasheetUrl": "https://www.digikey.com/htmldatasheets/production/2049110/0/0/1/tp4056.html"
+            },
+            "instanceId": "reg_4v0_1",
+            "label": "TP4056 Li-Ion/LiPo charger module with protection"
+          }
+        },
+        {
+          "id": "rain_1",
+          "type": "component",
+          "position": {
+            "x": 1170,
+            "y": 1420
+          },
+          "data": {
+            "component": {
+              "id": "hc-sr501-pir-motion-sensor",
+              "name": "HC-SR501 PIR Motion Sensor",
+              "partSlug": "hc-sr501-pir-motion-sensor",
+              "canonicalPartId": "app-component-hc-sr501-pir-motion-sensor",
+              "partNumber": "hc-sr501-pir-motion-sensor",
+              "retrievalTerms": [
+                "hc-sr501-pir-motion-sensor",
+                "app-component-hc-sr501-pir-motion-sensor",
+                "hc-sr501-pir-motion-sensor",
+                "HC-SR501 PIR Motion Sensor",
+                "hc-sr501-pir-motion-sensor",
+                "269-4955-ND",
+                "ZRE200GE"
+              ],
+              "aliases": [
+                "HC-SR501 PIR Motion Sensor",
+                "HCSR501",
+                "PIR Motion Sensor",
+                "Passive Infrared Sensor HC-SR501",
+                "hc-sr501",
+                "hc-sr501-pir-motion-sensor",
+                "sr501"
+              ],
+              "type": "sensor",
+              "description": "Passive Infrared (PIR) motion detection module with adjustable sensitivity and delay potentiometers. Operates on 5V supply; digital output is nominally 3.3V or 5V depending on module variant (verify before connecting directly to ESP32 3.3V GPIO — use a voltage divider if output is 5V). Outputs HIGH when motion is detected, LOW when idle. Ideal for triggering countdown timer resets in Focus Mode applications. No firmware library required — output read via standard GPIO digitalRead().",
+              "pinRequirements": [
+                {
+                  "name": "VCC",
+                  "type": "power",
+                  "voltage": 5,
+                  "required": true,
+                  "description": "Module supply. Most HC-SR501 boards use 5 V input."
+                },
+                {
+                  "name": "GND",
+                  "type": "ground",
+                  "required": true,
+                  "description": "Ground reference shared with the MCU."
+                },
+                {
+                  "name": "OUT",
+                  "type": "digital",
+                  "required": true,
+                  "description": "Motion-detect output. Verify output level on the specific module before connecting to 3.3 V-only GPIO; add level shifting if needed."
+                }
+              ],
+              "libraries": [],
+              "datasheetUrl": "http://www.handsontec.com/dataspecs/SR501%20Motion%20Sensor.pdf",
+              "purchaseLinks": {
+                "digikey": {
+                  "partNumber": "269-4955-ND",
+                  "productUrl": "https://www.digikey.com/en/products/detail/zilog/ZRE200GE/5147335",
+                  "manufacturerPartNumber": "ZRE200GE"
+                }
+              }
+            },
+            "instanceId": "rain_1",
+            "label": "HC-SR501 PIR Motion Sensor"
+          }
+        },
+        {
+          "id": "board",
+          "type": "board",
+          "position": {
+            "x": 650,
+            "y": 760
+          },
+          "data": {
+            "component": {
+              "id": "board",
+              "name": "ESP32 DevKit v1",
+              "aliases": [],
+              "type": "board",
+              "description": "Microcontroller board",
+              "pinRequirements": [],
+              "libraries": []
+            },
+            "instanceId": "board",
+            "label": "ESP32 DevKit v1",
+            "pins": [
+              {
+                "gpio": 0,
+                "label": "GPIO0",
+                "notes": "Boot button, use with caution",
+                "functions": [
+                  "gpio",
+                  "pwm"
+                ],
+                "recommended": false,
+                "reservedReason": "boot"
+              },
+              {
+                "gpio": 1,
+                "label": "GPIO1",
+                "notes": "TX0",
+                "functions": [
+                  "gpio",
+                  "uart",
+                  "pwm"
+                ],
+                "recommended": false,
+                "reservedReason": "serial"
+              },
+              {
+                "gpio": 2,
+                "label": "GPIO2",
+                "notes": "ADC2_CH2, built-in LED, boot strapping pin",
+                "functions": [
+                  "gpio",
+                  "adc",
+                  "pwm"
+                ],
+                "recommended": false,
+                "reservedReason": "boot"
+              },
+              {
+                "gpio": 3,
+                "label": "GPIO3",
+                "notes": "RX0",
+                "functions": [
+                  "gpio",
+                  "uart",
+                  "pwm"
+                ],
+                "recommended": false,
+                "reservedReason": "serial"
+              },
+              {
+                "gpio": 4,
+                "label": "GPIO4",
+                "notes": "ADC2_CH0",
+                "functions": [
+                  "gpio",
+                  "adc",
+                  "pwm"
+                ],
+                "recommended": true
+              },
+              {
+                "gpio": 5,
+                "label": "GPIO5",
+                "notes": "SPI CS, boot strapping pin, no ADC",
+                "functions": [
+                  "gpio",
+                  "pwm"
+                ],
+                "recommended": false,
+                "reservedReason": "boot"
+              },
+              {
+                "gpio": 12,
+                "label": "GPIO12",
+                "notes": "ADC2_CH5, boot strapping pin",
+                "functions": [
+                  "gpio",
+                  "adc",
+                  "pwm"
+                ],
+                "recommended": false,
+                "reservedReason": "boot"
+              },
+              {
+                "gpio": 13,
+                "label": "GPIO13",
+                "notes": "ADC2_CH4",
+                "functions": [
+                  "gpio",
+                  "adc",
+                  "pwm"
+                ],
+                "recommended": true
+              },
+              {
+                "gpio": 14,
+                "label": "GPIO14",
+                "notes": "ADC2_CH6",
+                "functions": [
+                  "gpio",
+                  "adc",
+                  "pwm"
+                ],
+                "recommended": true
+              },
+              {
+                "gpio": 15,
+                "label": "GPIO15",
+                "notes": "ADC2_CH3, boot strapping pin",
+                "functions": [
+                  "gpio",
+                  "adc",
+                  "pwm"
+                ],
+                "recommended": false,
+                "reservedReason": "boot"
+              },
+              {
+                "gpio": 16,
+                "label": "GPIO16",
+                "notes": "UART2 RX (default Serial2 RX). Avoid on ESP32-WROVER (used for PSRAM).",
+                "functions": [
+                  "gpio",
+                  "uart",
+                  "pwm"
+                ],
+                "recommended": true
+              },
+              {
+                "gpio": 17,
+                "label": "GPIO17",
+                "notes": "UART2 TX (default Serial2 TX). Avoid on ESP32-WROVER (used for PSRAM).",
+                "functions": [
+                  "gpio",
+                  "uart",
+                  "pwm"
+                ],
+                "recommended": true
+              },
+              {
+                "gpio": 18,
+                "label": "GPIO18",
+                "notes": "SPI SCK",
+                "functions": [
+                  "gpio",
+                  "spi",
+                  "pwm"
+                ],
+                "recommended": true
+              },
+              {
+                "gpio": 19,
+                "label": "GPIO19",
+                "notes": "SPI MISO",
+                "functions": [
+                  "gpio",
+                  "spi",
+                  "pwm"
+                ],
+                "recommended": true
+              },
+              {
+                "gpio": 21,
+                "label": "GPIO21",
+                "notes": "I2C SDA",
+                "functions": [
+                  "gpio",
+                  "i2c",
+                  "pwm"
+                ],
+                "recommended": true
+              },
+              {
+                "gpio": 22,
+                "label": "GPIO22",
+                "notes": "I2C SCL",
+                "functions": [
+                  "gpio",
+                  "i2c",
+                  "pwm"
+                ],
+                "recommended": true
+              },
+              {
+                "gpio": 23,
+                "label": "GPIO23",
+                "notes": "SPI MOSI",
+                "functions": [
+                  "gpio",
+                  "spi",
+                  "pwm"
+                ],
+                "recommended": true
+              },
+              {
+                "gpio": 25,
+                "label": "GPIO25",
+                "notes": "ADC2_CH8, DAC_1; ESP32 GPIO matrix supports remapping any UART here",
+                "functions": [
+                  "gpio",
+                  "adc",
+                  "uart",
+                  "pwm"
+                ],
+                "recommended": true
+              },
+              {
+                "gpio": 26,
+                "label": "GPIO26",
+                "notes": "ADC2_CH9, DAC_2; ESP32 GPIO matrix supports remapping any UART here",
+                "functions": [
+                  "gpio",
+                  "adc",
+                  "uart",
+                  "pwm"
+                ],
+                "recommended": true
+              },
+              {
+                "gpio": 27,
+                "label": "GPIO27",
+                "notes": "ADC2_CH7; ESP32 GPIO matrix supports remapping any UART here",
+                "functions": [
+                  "gpio",
+                  "adc",
+                  "uart",
+                  "pwm"
+                ],
+                "recommended": true
+              },
+              {
+                "gpio": 32,
+                "label": "GPIO32",
+                "notes": "ADC1_CH4; ESP32 GPIO matrix supports remapping any UART here",
+                "functions": [
+                  "gpio",
+                  "adc",
+                  "uart",
+                  "pwm"
+                ],
+                "recommended": true
+              },
+              {
+                "gpio": 33,
+                "label": "GPIO33",
+                "notes": "ADC1_CH5; ESP32 GPIO matrix supports remapping any UART here",
+                "functions": [
+                  "gpio",
+                  "adc",
+                  "uart",
+                  "pwm"
+                ],
+                "recommended": true
+              },
+              {
+                "gpio": 34,
+                "label": "GPIO34",
+                "notes": "Input only, ADC1_CH6",
+                "functions": [
+                  "gpio",
+                  "adc"
+                ],
+                "recommended": false,
+                "reservedReason": "input_only"
+              },
+              {
+                "gpio": 35,
+                "label": "GPIO35",
+                "notes": "Input only, ADC1_CH7",
+                "functions": [
+                  "gpio",
+                  "adc"
+                ],
+                "recommended": false,
+                "reservedReason": "input_only"
+              },
+              {
+                "gpio": 36,
+                "label": "GPIO36",
+                "notes": "Input only, ADC1_CH0 (VP)",
+                "functions": [
+                  "gpio",
+                  "adc"
+                ],
+                "recommended": false,
+                "reservedReason": "input_only"
+              },
+              {
+                "gpio": 39,
+                "label": "GPIO39",
+                "notes": "Input only, ADC1_CH3 (VN)",
+                "functions": [
+                  "gpio",
+                  "adc"
+                ],
+                "recommended": false,
+                "reservedReason": "input_only"
+              }
+            ],
+            "specialPins": {
+              "i2c": {
+                "scl": 22,
+                "sda": 21
+              },
+              "spi": {
+                "cs": 5,
+                "sck": 18,
+                "miso": 19,
+                "mosi": 23
+              },
+              "power": {
+                "gnd": 0,
+                "vcc": 3.3,
+                "vin": 5
+              },
+              "ledBuiltin": 2
+            },
+            "powerRails": [
+              {
+                "id": "power-3v3",
+                "label": "3V3",
+                "voltage": 3.3,
+                "kind": "power"
+              },
+              {
+                "id": "power-5v",
+                "label": "5V",
+                "voltage": 5,
+                "kind": "power"
+              },
+              {
+                "id": "ground",
+                "label": "GND",
+                "kind": "ground"
+              },
+              {
+                "id": "power-4v0",
+                "label": "4V",
+                "voltage": 4,
+                "kind": "power"
+              }
+            ],
+            "boardId": "esp32",
+            "platformFamily": "esp32"
+          }
+        }
+      ],
+      "edges": [
+        {
+          "id": "edge-solar_1:+5V->charger_1:SOLAR+",
+          "source": "solar_1",
+          "target": "charger_1",
+          "sourceHandle": "+5V",
+          "targetHandle": "SOLAR+",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "power",
+            "label": "+5V → CN3791 MPPT Solar Charger SOLAR+",
+            "color": "#ef4444"
+          }
+        },
+        {
+          "id": "edge-solar_1:GND->charger_1:SOLAR-",
+          "source": "solar_1",
+          "target": "charger_1",
+          "sourceHandle": "GND",
+          "targetHandle": "SOLAR-",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "ground",
+            "label": "GND → CN3791 MPPT Solar Charger SOLAR-",
+            "color": "#000000"
+          }
+        },
+        {
+          "id": "edge-battery_1:+V->charger_1:BAT+",
+          "source": "battery_1",
+          "target": "charger_1",
+          "sourceHandle": "+V",
+          "targetHandle": "BAT+",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "power",
+            "label": "+V → CN3791 MPPT Solar Charger BAT+",
+            "color": "#ef4444"
+          }
+        },
+        {
+          "id": "edge-battery_1:GND->charger_1:BAT-",
+          "source": "battery_1",
+          "target": "charger_1",
+          "sourceHandle": "GND",
+          "targetHandle": "BAT-",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "ground",
+            "label": "GND → CN3791 MPPT Solar Charger BAT-",
+            "color": "#000000"
+          }
+        },
+        {
+          "id": "edge-charger_1:OUT+->reg_3v3_1:IN+",
+          "source": "charger_1",
+          "target": "reg_3v3_1",
+          "sourceHandle": "OUT+",
+          "targetHandle": "IN+",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "power",
+            "label": "OUT+ → TP4056 Li-Ion/LiPo charger module with protection IN+",
+            "color": "#ef4444"
+          }
+        },
+        {
+          "id": "edge-charger_1:OUT-->reg_3v3_1:IN-",
+          "source": "charger_1",
+          "target": "reg_3v3_1",
+          "sourceHandle": "OUT-",
+          "targetHandle": "IN-",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "ground",
+            "label": "OUT- → TP4056 Li-Ion/LiPo charger module with protection IN-",
+            "color": "#000000"
+          }
+        },
+        {
+          "id": "edge-reg_3v3_1:B+->charger_1:OUT+",
+          "source": "reg_3v3_1",
+          "target": "charger_1",
+          "sourceHandle": "B+",
+          "targetHandle": "OUT+",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "power",
+            "label": "B+ → CN3791 MPPT Solar Charger OUT+",
+            "color": "#ef4444"
+          }
+        },
+        {
+          "id": "edge-reg_3v3_1:B-->board:ground",
+          "source": "reg_3v3_1",
+          "target": "board",
+          "sourceHandle": "B-",
+          "targetHandle": "ground",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "ground",
+            "label": "B- → GND",
+            "color": "#000000"
+          }
+        },
+        {
+          "id": "edge-reg_3v3_1:OUT+->board:power-3v3",
+          "source": "reg_3v3_1",
+          "target": "board",
+          "sourceHandle": "OUT+",
+          "targetHandle": "power-3v3",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "power",
+            "color": "#ef4444",
+            "label": "OUT+ → 3V3"
+          }
+        },
+        {
+          "id": "edge-reg_3v3_1:OUT-->board:ground",
+          "source": "reg_3v3_1",
+          "target": "board",
+          "sourceHandle": "OUT-",
+          "targetHandle": "ground",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "ground",
+            "label": "OUT- → GND",
+            "color": "#000000"
+          }
+        },
+        {
+          "id": "edge-reg_4v0_1:IN+->charger_1:OUT+",
+          "source": "reg_4v0_1",
+          "target": "charger_1",
+          "sourceHandle": "IN+",
+          "targetHandle": "OUT+",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "power",
+            "label": "IN+ → CN3791 MPPT Solar Charger OUT+",
+            "color": "#ef4444"
+          }
+        },
+        {
+          "id": "edge-reg_4v0_1:IN-->board:ground",
+          "source": "reg_4v0_1",
+          "target": "board",
+          "sourceHandle": "IN-",
+          "targetHandle": "ground",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "ground",
+            "label": "IN- → GND",
+            "color": "#000000"
+          }
+        },
+        {
+          "id": "edge-reg_4v0_1:B+->charger_1:OUT+",
+          "source": "reg_4v0_1",
+          "target": "charger_1",
+          "sourceHandle": "B+",
+          "targetHandle": "OUT+",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "power",
+            "label": "B+ → CN3791 MPPT Solar Charger OUT+",
+            "color": "#ef4444"
+          }
+        },
+        {
+          "id": "edge-reg_4v0_1:B-->board:ground",
+          "source": "reg_4v0_1",
+          "target": "board",
+          "sourceHandle": "B-",
+          "targetHandle": "ground",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "ground",
+            "label": "B- → GND",
+            "color": "#000000"
+          }
+        },
+        {
+          "id": "edge-reg_4v0_1:OUT+->board:power-4v0",
+          "source": "reg_4v0_1",
+          "target": "board",
+          "sourceHandle": "OUT+",
+          "targetHandle": "power-4v0",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "power",
+            "color": "#ef4444",
+            "label": "OUT+ → 4V"
+          }
+        },
+        {
+          "id": "edge-reg_4v0_1:OUT-->board:ground",
+          "source": "reg_4v0_1",
+          "target": "board",
+          "sourceHandle": "OUT-",
+          "targetHandle": "ground",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "ground",
+            "label": "OUT- → GND",
+            "color": "#000000"
+          }
+        },
+        {
+          "id": "edge-scd41_1:VCC->board:power-3v3",
+          "source": "scd41_1",
+          "target": "board",
+          "sourceHandle": "VCC",
+          "targetHandle": "power-3v3",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "power",
+            "color": "#ef4444",
+            "label": "VCC → 3V3"
+          }
+        },
+        {
+          "id": "edge-scd41_1:GND->board:ground",
+          "source": "scd41_1",
+          "target": "board",
+          "sourceHandle": "GND",
+          "targetHandle": "ground",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "ground",
+            "label": "GND → GND",
+            "color": "#000000"
+          }
+        },
+        {
+          "id": "edge-scd41_1:SDA->board:pin-21",
+          "source": "scd41_1",
+          "target": "board",
+          "sourceHandle": "SDA",
+          "targetHandle": "pin-21",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "i2c",
+            "label": "SDA → GPIO21",
+            "color": "#84cc16"
+          }
+        },
+        {
+          "id": "edge-scd41_1:SCL->board:pin-22",
+          "source": "scd41_1",
+          "target": "board",
+          "sourceHandle": "SCL",
+          "targetHandle": "pin-22",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "i2c",
+            "label": "SCL → GPIO22",
+            "color": "#f43f5e"
+          }
+        },
+        {
+          "id": "edge-pm25_1:VCC->board:power-5v",
+          "source": "pm25_1",
+          "target": "board",
+          "sourceHandle": "VCC",
+          "targetHandle": "power-5v",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "power",
+            "color": "#ef4444",
+            "label": "VCC → 5V"
+          }
+        },
+        {
+          "id": "edge-pm25_1:GND->board:ground",
+          "source": "pm25_1",
+          "target": "board",
+          "sourceHandle": "GND",
+          "targetHandle": "ground",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "ground",
+            "label": "GND → GND",
+            "color": "#000000"
+          }
+        },
+        {
+          "id": "edge-pm25_1:TX->board:pin-16",
+          "source": "pm25_1",
+          "target": "board",
+          "sourceHandle": "TX",
+          "targetHandle": "pin-16",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "digital",
+            "label": "TX → GPIO16",
+            "color": "#6366f1"
+          }
+        },
+        {
+          "id": "edge-uv_1:VCC->board:power-3v3",
+          "source": "uv_1",
+          "target": "board",
+          "sourceHandle": "VCC",
+          "targetHandle": "power-3v3",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "power",
+            "color": "#ef4444",
+            "label": "VCC → 3V3"
+          }
+        },
+        {
+          "id": "edge-uv_1:GND->board:ground",
+          "source": "uv_1",
+          "target": "board",
+          "sourceHandle": "GND",
+          "targetHandle": "ground",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "ground",
+            "label": "GND → GND",
+            "color": "#000000"
+          }
+        },
+        {
+          "id": "edge-uv_1:SDA->board:pin-21",
+          "source": "uv_1",
+          "target": "board",
+          "sourceHandle": "SDA",
+          "targetHandle": "pin-21",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "i2c",
+            "label": "SDA → GPIO21",
+            "color": "#9ae723"
+          }
+        },
+        {
+          "id": "edge-uv_1:SCL->board:pin-22",
+          "source": "uv_1",
+          "target": "board",
+          "sourceHandle": "SCL",
+          "targetHandle": "pin-22",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "i2c",
+            "label": "SCL → GPIO22",
+            "color": "#f55671"
+          }
+        },
+        {
+          "id": "edge-lux_1:VCC->board:power-3v3",
+          "source": "lux_1",
+          "target": "board",
+          "sourceHandle": "VCC",
+          "targetHandle": "power-3v3",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "power",
+            "color": "#ef4444",
+            "label": "VCC → 3V3"
+          }
+        },
+        {
+          "id": "edge-lux_1:GND->board:ground",
+          "source": "lux_1",
+          "target": "board",
+          "sourceHandle": "GND",
+          "targetHandle": "ground",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "ground",
+            "label": "GND → GND",
+            "color": "#000000"
+          }
+        },
+        {
+          "id": "edge-lux_1:SDA->board:pin-21",
+          "source": "lux_1",
+          "target": "board",
+          "sourceHandle": "SDA",
+          "targetHandle": "pin-21",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "i2c",
+            "label": "SDA → GPIO21",
+            "color": "#6ca712"
+          }
+        },
+        {
+          "id": "edge-lux_1:SCL->board:pin-22",
+          "source": "lux_1",
+          "target": "board",
+          "sourceHandle": "SCL",
+          "targetHandle": "pin-22",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "i2c",
+            "label": "SCL → GPIO22",
+            "color": "#f2183e"
+          }
+        },
+        {
+          "id": "edge-oled_1:VCC->board:power-3v3",
+          "source": "oled_1",
+          "target": "board",
+          "sourceHandle": "VCC",
+          "targetHandle": "power-3v3",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "power",
+            "color": "#ef4444",
+            "label": "VCC → 3V3"
+          }
+        },
+        {
+          "id": "edge-oled_1:GND->board:ground",
+          "source": "oled_1",
+          "target": "board",
+          "sourceHandle": "GND",
+          "targetHandle": "ground",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "ground",
+            "label": "GND → GND",
+            "color": "#000000"
+          }
+        },
+        {
+          "id": "edge-oled_1:SDA->board:pin-21",
+          "source": "oled_1",
+          "target": "board",
+          "sourceHandle": "SDA",
+          "targetHandle": "pin-21",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "i2c",
+            "label": "SDA → GPIO21",
+            "color": "#abeb48"
+          }
+        },
+        {
+          "id": "edge-oled_1:SCL->board:pin-22",
+          "source": "oled_1",
+          "target": "board",
+          "sourceHandle": "SCL",
+          "targetHandle": "pin-22",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "i2c",
+            "label": "SCL → GPIO22",
+            "color": "#f55671"
+          }
+        },
+        {
+          "id": "edge-pir_1:VCC->board:power-3v3",
+          "source": "pir_1",
+          "target": "board",
+          "sourceHandle": "VCC",
+          "targetHandle": "power-3v3",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "power",
+            "color": "#ef4444",
+            "label": "VCC → 3V3"
+          }
+        },
+        {
+          "id": "edge-pir_1:GND->board:ground",
+          "source": "pir_1",
+          "target": "board",
+          "sourceHandle": "GND",
+          "targetHandle": "ground",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "ground",
+            "label": "GND → GND",
+            "color": "#000000"
+          }
+        },
+        {
+          "id": "edge-pir_1:OUT->board:pin-25",
+          "source": "pir_1",
+          "target": "board",
+          "sourceHandle": "OUT",
+          "targetHandle": "pin-25",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "digital",
+            "label": "OUT → GPIO25",
+            "color": "#2563eb"
+          }
+        },
+        {
+          "id": "edge-rain_1:VCC->board:power-3v3",
+          "source": "rain_1",
+          "target": "board",
+          "sourceHandle": "VCC",
+          "targetHandle": "power-3v3",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "power",
+            "color": "#ef4444",
+            "label": "VCC → 3V3"
+          }
+        },
+        {
+          "id": "edge-rain_1:GND->board:ground",
+          "source": "rain_1",
+          "target": "board",
+          "sourceHandle": "GND",
+          "targetHandle": "ground",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "ground",
+            "label": "GND → GND",
+            "color": "#000000"
+          }
+        },
+        {
+          "id": "edge-rain_1:OUT->board:pin-32",
+          "source": "rain_1",
+          "target": "board",
+          "sourceHandle": "OUT",
+          "targetHandle": "pin-32",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "digital",
+            "label": "OUT → GPIO32",
+            "color": "#16a34a"
+          }
+        },
+        {
+          "id": "edge-lora_1:VCC->board:power-3v3",
+          "source": "lora_1",
+          "target": "board",
+          "sourceHandle": "VCC",
+          "targetHandle": "power-3v3",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "power",
+            "color": "#ef4444",
+            "label": "VCC → 3V3"
+          }
+        },
+        {
+          "id": "edge-lora_1:GND->board:ground",
+          "source": "lora_1",
+          "target": "board",
+          "sourceHandle": "GND",
+          "targetHandle": "ground",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "ground",
+            "label": "GND → GND",
+            "color": "#000000"
+          }
+        },
+        {
+          "id": "edge-lora_1:MOSI->board:pin-23",
+          "source": "lora_1",
+          "target": "board",
+          "sourceHandle": "MOSI",
+          "targetHandle": "pin-23",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "spi",
+            "label": "MOSI → GPIO23",
+            "color": "#d946ef"
+          }
+        },
+        {
+          "id": "edge-lora_1:MISO->board:pin-19",
+          "source": "lora_1",
+          "target": "board",
+          "sourceHandle": "MISO",
+          "targetHandle": "pin-19",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "spi",
+            "label": "MISO → GPIO19",
+            "color": "#f97316"
+          }
+        },
+        {
+          "id": "edge-lora_1:SCK->board:pin-18",
+          "source": "lora_1",
+          "target": "board",
+          "sourceHandle": "SCK",
+          "targetHandle": "pin-18",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "spi",
+            "label": "SCK → GPIO18",
+            "color": "#14b8a6"
+          }
+        },
+        {
+          "id": "edge-lora_1:NSS->board:pin-13",
+          "source": "lora_1",
+          "target": "board",
+          "sourceHandle": "NSS",
+          "targetHandle": "pin-13",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "spi",
+            "label": "NSS → GPIO13",
+            "color": "#eab308"
+          }
+        },
+        {
+          "id": "edge-lora_1:RESET->board:pin-14",
+          "source": "lora_1",
+          "target": "board",
+          "sourceHandle": "RESET",
+          "targetHandle": "pin-14",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "digital",
+            "label": "RESET → GPIO14",
+            "color": "#8b5cf6"
+          }
+        },
+        {
+          "id": "edge-lora_1:DIO0->board:pin-4",
+          "source": "lora_1",
+          "target": "board",
+          "sourceHandle": "DIO0",
+          "targetHandle": "pin-4",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "digital",
+            "label": "DIO0 → GPIO4",
+            "color": "#ec4899"
+          }
+        },
+        {
+          "id": "edge-lte_gps_1:VCC->board:power-4v0",
+          "source": "lte_gps_1",
+          "target": "board",
+          "sourceHandle": "VCC",
+          "targetHandle": "power-4v0",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "power",
+            "color": "#ef4444",
+            "label": "VCC → 4V"
+          }
+        },
+        {
+          "id": "edge-lte_gps_1:GND->board:ground",
+          "source": "lte_gps_1",
+          "target": "board",
+          "sourceHandle": "GND",
+          "targetHandle": "ground",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "ground",
+            "label": "GND → GND",
+            "color": "#000000"
+          }
+        },
+        {
+          "id": "edge-lte_gps_1:TXD->board:pin-26",
+          "source": "lte_gps_1",
+          "target": "board",
+          "sourceHandle": "TXD",
+          "targetHandle": "pin-26",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "data",
+            "label": "TXD → GPIO26",
+            "color": "#06b6d4"
+          }
+        },
+        {
+          "id": "edge-lte_gps_1:RXD->board:pin-27",
+          "source": "lte_gps_1",
+          "target": "board",
+          "sourceHandle": "RXD",
+          "targetHandle": "pin-27",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "data",
+            "label": "RXD → GPIO27",
+            "color": "#84cc16"
+          }
+        },
+        {
+          "id": "edge-lte_gps_1:PWRKEY->board:pin-33",
+          "source": "lte_gps_1",
+          "target": "board",
+          "sourceHandle": "PWRKEY",
+          "targetHandle": "pin-33",
+          "type": "smoothstep",
+          "data": {
+            "wireType": "digital",
+            "label": "PWRKEY → GPIO33",
+            "color": "#f43f5e"
+          }
+        }
+      ]
+    },
+    "pinTable": [
+      {
+        "componentId": "solar_1",
+        "pinName": "+5V",
+        "boardPin": -3,
+        "function": "power",
+        "connectsTo": "CN3791 MPPT Solar Charger SOLAR+",
+        "viaComponentId": "charger_1",
+        "viaPinName": "SOLAR+"
+      },
+      {
+        "componentId": "solar_1",
+        "pinName": "GND",
+        "boardPin": -3,
+        "function": "ground",
+        "connectsTo": "CN3791 MPPT Solar Charger SOLAR-",
+        "viaComponentId": "charger_1",
+        "viaPinName": "SOLAR-"
+      },
+      {
+        "componentId": "battery_1",
+        "pinName": "+V",
+        "boardPin": -3,
+        "function": "power",
+        "connectsTo": "CN3791 MPPT Solar Charger BAT+",
+        "viaComponentId": "charger_1",
+        "viaPinName": "BAT+"
+      },
+      {
+        "componentId": "battery_1",
+        "pinName": "GND",
+        "boardPin": -3,
+        "function": "ground",
+        "connectsTo": "CN3791 MPPT Solar Charger BAT-",
+        "viaComponentId": "charger_1",
+        "viaPinName": "BAT-"
+      },
+      {
+        "componentId": "charger_1",
+        "pinName": "OUT+",
+        "boardPin": -3,
+        "function": "power",
+        "connectsTo": "TP4056 Li-Ion/LiPo charger module with protection IN+",
+        "viaComponentId": "reg_3v3_1",
+        "viaPinName": "IN+"
+      },
+      {
+        "componentId": "charger_1",
+        "pinName": "OUT-",
+        "boardPin": -3,
+        "function": "ground",
+        "connectsTo": "TP4056 Li-Ion/LiPo charger module with protection IN-",
+        "viaComponentId": "reg_3v3_1",
+        "viaPinName": "IN-"
+      },
+      {
+        "componentId": "reg_3v3_1",
+        "pinName": "B+",
+        "boardPin": -3,
+        "function": "power",
+        "connectsTo": "CN3791 MPPT Solar Charger OUT+",
+        "viaComponentId": "charger_1",
+        "viaPinName": "OUT+"
+      },
+      {
+        "componentId": "reg_3v3_1",
+        "pinName": "B-",
+        "boardPin": -2,
+        "function": "ground",
+        "powerDomain": "gnd",
+        "voltage": 0
+      },
+      {
+        "componentId": "reg_3v3_1",
+        "pinName": "OUT+",
+        "boardPin": -1,
+        "function": "power",
+        "powerDomain": "3v3",
+        "voltage": 3.3
+      },
+      {
+        "componentId": "reg_3v3_1",
+        "pinName": "OUT-",
+        "boardPin": -2,
+        "function": "ground",
+        "powerDomain": "gnd",
+        "voltage": 0
+      },
+      {
+        "componentId": "reg_4v0_1",
+        "pinName": "IN+",
+        "boardPin": -3,
+        "function": "power",
+        "connectsTo": "CN3791 MPPT Solar Charger OUT+",
+        "viaComponentId": "charger_1",
+        "viaPinName": "OUT+"
+      },
+      {
+        "componentId": "reg_4v0_1",
+        "pinName": "IN-",
+        "boardPin": -2,
+        "function": "ground",
+        "powerDomain": "gnd",
+        "voltage": 0
+      },
+      {
+        "componentId": "reg_4v0_1",
+        "pinName": "B+",
+        "boardPin": -3,
+        "function": "power",
+        "connectsTo": "CN3791 MPPT Solar Charger OUT+",
+        "viaComponentId": "charger_1",
+        "viaPinName": "OUT+"
+      },
+      {
+        "componentId": "reg_4v0_1",
+        "pinName": "B-",
+        "boardPin": -2,
+        "function": "ground",
+        "powerDomain": "gnd",
+        "voltage": 0
+      },
+      {
+        "componentId": "reg_4v0_1",
+        "pinName": "OUT+",
+        "boardPin": -1,
+        "function": "power",
+        "powerDomain": "4v0",
+        "voltage": 4
+      },
+      {
+        "componentId": "reg_4v0_1",
+        "pinName": "OUT-",
+        "boardPin": -2,
+        "function": "ground",
+        "powerDomain": "gnd",
+        "voltage": 0
+      },
+      {
+        "componentId": "scd41_1",
+        "pinName": "VCC",
+        "boardPin": -1,
+        "function": "power",
+        "powerDomain": "3v3",
+        "voltage": 3.3
+      },
+      {
+        "componentId": "scd41_1",
+        "pinName": "GND",
+        "boardPin": -2,
+        "function": "ground",
+        "powerDomain": "gnd",
+        "voltage": 0
+      },
+      {
+        "componentId": "scd41_1",
+        "pinName": "SDA",
+        "boardPin": 21,
+        "function": "i2c"
+      },
+      {
+        "componentId": "scd41_1",
+        "pinName": "SCL",
+        "boardPin": 22,
+        "function": "i2c"
+      },
+      {
+        "componentId": "pm25_1",
+        "pinName": "VCC",
+        "boardPin": -1,
+        "function": "power",
+        "powerDomain": "5v",
+        "voltage": 5
+      },
+      {
+        "componentId": "pm25_1",
+        "pinName": "GND",
+        "boardPin": -2,
+        "function": "ground",
+        "powerDomain": "gnd",
+        "voltage": 0
+      },
+      {
+        "componentId": "pm25_1",
+        "pinName": "TX",
+        "boardPin": 16,
+        "function": "data"
+      },
+      {
+        "componentId": "uv_1",
+        "pinName": "VCC",
+        "boardPin": -1,
+        "function": "power",
+        "powerDomain": "3v3",
+        "voltage": 3.3
+      },
+      {
+        "componentId": "uv_1",
+        "pinName": "GND",
+        "boardPin": -2,
+        "function": "ground",
+        "powerDomain": "gnd",
+        "voltage": 0
+      },
+      {
+        "componentId": "uv_1",
+        "pinName": "SDA",
+        "boardPin": 21,
+        "function": "i2c"
+      },
+      {
+        "componentId": "uv_1",
+        "pinName": "SCL",
+        "boardPin": 22,
+        "function": "i2c"
+      },
+      {
+        "componentId": "lux_1",
+        "pinName": "VCC",
+        "boardPin": -1,
+        "function": "power",
+        "powerDomain": "3v3",
+        "voltage": 3.3
+      },
+      {
+        "componentId": "lux_1",
+        "pinName": "GND",
+        "boardPin": -2,
+        "function": "ground",
+        "powerDomain": "gnd",
+        "voltage": 0
+      },
+      {
+        "componentId": "lux_1",
+        "pinName": "SDA",
+        "boardPin": 21,
+        "function": "i2c"
+      },
+      {
+        "componentId": "lux_1",
+        "pinName": "SCL",
+        "boardPin": 22,
+        "function": "i2c"
+      },
+      {
+        "componentId": "oled_1",
+        "pinName": "VCC",
+        "boardPin": -1,
+        "function": "power",
+        "powerDomain": "3v3",
+        "voltage": 3.3
+      },
+      {
+        "componentId": "oled_1",
+        "pinName": "GND",
+        "boardPin": -2,
+        "function": "ground",
+        "powerDomain": "gnd",
+        "voltage": 0
+      },
+      {
+        "componentId": "oled_1",
+        "pinName": "SDA",
+        "boardPin": 21,
+        "function": "i2c"
+      },
+      {
+        "componentId": "oled_1",
+        "pinName": "SCL",
+        "boardPin": 22,
+        "function": "i2c"
+      },
+      {
+        "componentId": "pir_1",
+        "pinName": "VCC",
+        "boardPin": -1,
+        "function": "power",
+        "powerDomain": "3v3",
+        "voltage": 3.3
+      },
+      {
+        "componentId": "pir_1",
+        "pinName": "GND",
+        "boardPin": -2,
+        "function": "ground",
+        "powerDomain": "gnd",
+        "voltage": 0
+      },
+      {
+        "componentId": "pir_1",
+        "pinName": "OUT",
+        "boardPin": 25,
+        "function": "digital"
+      },
+      {
+        "componentId": "rain_1",
+        "pinName": "VCC",
+        "boardPin": -1,
+        "function": "power",
+        "powerDomain": "3v3",
+        "voltage": 3.3
+      },
+      {
+        "componentId": "rain_1",
+        "pinName": "GND",
+        "boardPin": -2,
+        "function": "ground",
+        "powerDomain": "gnd",
+        "voltage": 0
+      },
+      {
+        "componentId": "rain_1",
+        "pinName": "OUT",
+        "boardPin": 32,
+        "function": "digital"
+      },
+      {
+        "componentId": "lora_1",
+        "pinName": "VCC",
+        "boardPin": -1,
+        "function": "power",
+        "powerDomain": "3v3",
+        "voltage": 3.3
+      },
+      {
+        "componentId": "lora_1",
+        "pinName": "GND",
+        "boardPin": -2,
+        "function": "ground",
+        "powerDomain": "gnd",
+        "voltage": 0
+      },
+      {
+        "componentId": "lora_1",
+        "pinName": "MOSI",
+        "boardPin": 23,
+        "function": "spi"
+      },
+      {
+        "componentId": "lora_1",
+        "pinName": "MISO",
+        "boardPin": 19,
+        "function": "spi"
+      },
+      {
+        "componentId": "lora_1",
+        "pinName": "SCK",
+        "boardPin": 18,
+        "function": "spi"
+      },
+      {
+        "componentId": "lora_1",
+        "pinName": "NSS",
+        "boardPin": 13,
+        "function": "spi"
+      },
+      {
+        "componentId": "lora_1",
+        "pinName": "RESET",
+        "boardPin": 14,
+        "function": "digital"
+      },
+      {
+        "componentId": "lora_1",
+        "pinName": "DIO0",
+        "boardPin": 4,
+        "function": "digital"
+      },
+      {
+        "componentId": "lte_gps_1",
+        "pinName": "VCC",
+        "boardPin": -1,
+        "function": "power",
+        "powerDomain": "4v0",
+        "voltage": 4
+      },
+      {
+        "componentId": "lte_gps_1",
+        "pinName": "GND",
+        "boardPin": -2,
+        "function": "ground",
+        "powerDomain": "gnd",
+        "voltage": 0
+      },
+      {
+        "componentId": "lte_gps_1",
+        "pinName": "TXD",
+        "boardPin": 26,
+        "function": "uart"
+      },
+      {
+        "componentId": "lte_gps_1",
+        "pinName": "RXD",
+        "boardPin": 27,
+        "function": "uart"
+      },
+      {
+        "componentId": "lte_gps_1",
+        "pinName": "PWRKEY",
+        "boardPin": 33,
+        "function": "digital"
+      }
+    ],
+    "components": [
+      {
+        "component": {
+          "id": "scd41",
+          "name": "Sensirion SCD41",
+          "partSlug": "scd-41-true-co2-temperature-and-humidity-sensor",
+          "canonicalPartId": "prt_e3ce8c79908681fde31c",
+          "partNumber": "SCD41",
+          "retrievalTerms": [
+            "scd41",
+            "prt_e3ce8c79908681fde31c",
+            "scd-41-true-co2-temperature-and-humidity-sensor",
+            "Sensirion SCD41",
+            "5190",
+            "1528-5190-ND",
+            "5190"
+          ],
+          "aliases": [
+            "SCD-41",
+            "SCD41",
+            "Sensirion SCD41",
+            "scd41 co2 sensor"
+          ],
+          "type": "sensor",
+          "description": "Sensirion SCD41 true-CO₂, temperature and humidity sensor (photoacoustic NDIR, I²C). Pin- and library-compatible with the SCD40.",
+          "pinRequirements": [
+            {
+              "name": "VCC",
+              "type": "power",
+              "voltage": 3.3,
+              "required": true,
+              "description": "Supply voltage, 2.4V-5.5V; use a clean, stable 3.3V or 5V rail with enough peak-current margin"
+            },
+            {
+              "name": "GND",
+              "type": "ground",
+              "required": true,
+              "description": "Ground"
+            },
+            {
+              "name": "SDA",
+              "type": "i2c",
+              "required": true,
+              "description": "I2C data line; I2C address 0x62"
+            },
+            {
+              "name": "SCL",
+              "type": "i2c",
+              "required": true,
+              "description": "I2C clock line"
+            }
+          ],
+          "libraries": [
+            {
+              "name": "Sensirion I2C SCD4x",
+              "version": "1.1.0",
+              "installCommand": "sensirion/Sensirion I2C SCD4x"
+            }
+          ],
+          "pinConfiguration": {
+            "i2cAddress": "0x62"
+          },
+          "datasheetUrl": "https://sensirion.com/media/documents/48C4B7FB/64C134E7/Sensirion_SCD4x_Datasheet.pdf",
+          "purchaseLinks": {
+            "digikey": {
+              "partNumber": "1528-5190-ND",
+              "productUrl": "https://www.digikey.com/en/products/detail/adafruit-industries-llc/5190/15194670",
+              "manufacturerPartNumber": "5190"
+            }
+          }
+        },
+        "instanceId": "scd41_1",
+        "pinAssignments": [
+          {
+            "componentId": "scd41_1",
+            "pinName": "VCC",
+            "boardPin": -1,
+            "function": "power",
+            "powerDomain": "3v3",
+            "voltage": 3.3
+          },
+          {
+            "componentId": "scd41_1",
+            "pinName": "GND",
+            "boardPin": -2,
+            "function": "ground",
+            "powerDomain": "gnd",
+            "voltage": 0
+          },
+          {
+            "componentId": "scd41_1",
+            "pinName": "SDA",
+            "boardPin": 21,
+            "function": "i2c"
+          },
+          {
+            "componentId": "scd41_1",
+            "pinName": "SCL",
+            "boardPin": 22,
+            "function": "i2c"
+          }
+        ],
+        "quantity": 1,
+        "value": "CO2 / temperature / RH",
+        "matchStrategy": "exact"
+      },
+      {
+        "component": {
+          "id": "pms5003-particulate-matter-sensor",
+          "name": "PMS5003 Particulate Matter Sensor",
+          "partSlug": "pms5003-particulate-matter-sensor",
+          "canonicalPartId": "pms5003-particulate-matter-sensor",
+          "retrievalTerms": [
+            "pms5003-particulate-matter-sensor",
+            "pms5003-particulate-matter-sensor",
+            "pms5003-particulate-matter-sensor",
+            "PMS5003 Particulate Matter Sensor",
+            "1528-2509-ND",
+            "3686"
+          ],
+          "aliases": [
+            "Pm10 Sensor",
+            "air quality dust sensor",
+            "dust sensor",
+            "particulate matter sensor",
+            "particulate sensor",
+            "plantower pms5003",
+            "pm2.5 dust sensor",
+            "pm2.5 sensor",
+            "pms5003",
+            "pms5003 particulate sensor",
+            "pms5003 pm2.5 sensor",
+            "pms7003",
+            "uart particulate sensor"
+          ],
+          "type": "sensor",
+          "description": "Plantower PMS5003 laser particulate matter sensor. Reports PM1.0, PM2.5, and PM10 concentrations (plus six particle-size bins) once per second over a 9600-baud UART. The fan and laser diode run on 5V while the SET/RXD/TXD/RESET control and data pins are 3.3V TTL, so only power plus the sensor TX-to-MCU RX line is needed for basic readings. Ships on an 8-pin, 1.25mm-pitch cable; Adafruit sells it with a 0.1in breadboard adapter. PMS7003 is the compact-form-factor sibling in the same family and shares the same wiring/protocol.",
+          "pinRequirements": [
+            {
+              "name": "VCC",
+              "type": "power",
+              "required": true
+            },
+            {
+              "name": "GND",
+              "type": "ground",
+              "required": true
+            },
+            {
+              "name": "TX",
+              "type": "data",
+              "required": true
+            },
+            {
+              "name": "RX",
+              "type": "data",
+              "required": false
+            },
+            {
+              "name": "SET",
+              "type": "data",
+              "required": false
+            },
+            {
+              "name": "RESET",
+              "type": "data",
+              "required": false
+            }
+          ],
+          "libraries": [
+            {
+              "name": "Adafruit PM25 AQI Sensor"
+            }
+          ],
+          "purchaseLinks": {
+            "digikey": {
+              "partNumber": "1528-2509-ND",
+              "productUrl": "https://www.digikey.com/en/products/detail/adafruit-industries-llc/3686/8119211",
+              "manufacturerPartNumber": "3686"
+            }
+          }
+        },
+        "instanceId": "pm25_1",
+        "pinAssignments": [
+          {
+            "componentId": "pm25_1",
+            "pinName": "VCC",
+            "boardPin": -1,
+            "function": "power",
+            "powerDomain": "5v",
+            "voltage": 5
+          },
+          {
+            "componentId": "pm25_1",
+            "pinName": "GND",
+            "boardPin": -2,
+            "function": "ground",
+            "powerDomain": "gnd",
+            "voltage": 0
+          },
+          {
+            "componentId": "pm25_1",
+            "pinName": "TX",
+            "boardPin": 16,
+            "function": "data"
+          }
+        ],
+        "quantity": 1,
+        "value": "PM1/PM2.5/PM10",
+        "matchStrategy": "exact"
+      },
+      {
+        "component": {
+          "id": "bh1750",
+          "name": "BH1750",
+          "partSlug": "bh1750",
+          "canonicalPartId": "app-component-bh1750",
+          "partNumber": "bh1750",
+          "retrievalTerms": [
+            "bh1750",
+            "app-component-bh1750",
+            "bh1750",
+            "BH1750",
+            "bh1750",
+            "1528-4681-ND",
+            "4681"
+          ],
+          "aliases": [
+            "BH1750FVI",
+            "BH1750FVI-E",
+            "GY-302",
+            "bh1750 ambient light",
+            "gy302",
+            "i2c light sensor",
+            "i2c lux sensor",
+            "rohm bh1750"
+          ],
+          "type": "sensor",
+          "description": "Rohm BH1750FVI 16-bit digital ambient light sensor with I2C interface. Measures illuminance from 1 to 65535 lux. Two selectable I2C addresses (0x23 / 0x5C) via ADDR pin.",
+          "pinRequirements": [
+            {
+              "name": "VCC",
+              "type": "power",
+              "voltage": 3.3,
+              "required": true,
+              "description": "Supply voltage (3.3 V when used with ESP32)"
+            },
+            {
+              "name": "GND",
+              "type": "ground",
+              "required": true,
+              "description": "Ground reference"
+            },
+            {
+              "name": "SDA",
+              "type": "i2c",
+              "required": true,
+              "description": "I2C data line"
+            },
+            {
+              "name": "SCL",
+              "type": "i2c",
+              "required": true,
+              "description": "I2C clock line"
+            },
+            {
+              "name": "ADDR",
+              "type": "digital",
+              "required": false,
+              "description": "I2C address select: LOW → 0x23, HIGH → 0x5C"
+            }
+          ],
+          "libraries": [
+            {
+              "name": "BH1750",
+              "version": "1.3.0",
+              "installCommand": "claws/BH1750"
+            }
+          ],
+          "pinConfiguration": {
+            "i2cAddress": "0x23"
+          },
+          "datasheetUrl": "https://www.mouser.com/datasheet/2/348/bh1750fvi-e-186247.pdf",
+          "purchaseLinks": {
+            "digikey": {
+              "partNumber": "1528-4681-ND",
+              "productUrl": "https://www.digikey.com/en/products/detail/adafruit-industries-llc/4681/12760934",
+              "manufacturerPartNumber": "4681"
+            }
+          }
+        },
+        "instanceId": "uv_1",
+        "pinAssignments": [
+          {
+            "componentId": "uv_1",
+            "pinName": "VCC",
+            "boardPin": -1,
+            "function": "power",
+            "powerDomain": "3v3",
+            "voltage": 3.3
+          },
+          {
+            "componentId": "uv_1",
+            "pinName": "GND",
+            "boardPin": -2,
+            "function": "ground",
+            "powerDomain": "gnd",
+            "voltage": 0
+          },
+          {
+            "componentId": "uv_1",
+            "pinName": "SDA",
+            "boardPin": 21,
+            "function": "i2c"
+          },
+          {
+            "componentId": "uv_1",
+            "pinName": "SCL",
+            "boardPin": 22,
+            "function": "i2c"
+          }
+        ],
+        "quantity": 1,
+        "value": "UV index",
+        "matchStrategy": "exact"
+      },
+      {
+        "component": {
+          "id": "bh1750",
+          "name": "BH1750",
+          "partSlug": "bh1750",
+          "canonicalPartId": "app-component-bh1750",
+          "partNumber": "bh1750",
+          "retrievalTerms": [
+            "bh1750",
+            "app-component-bh1750",
+            "bh1750",
+            "BH1750",
+            "bh1750",
+            "1528-4681-ND",
+            "4681"
+          ],
+          "aliases": [
+            "BH1750FVI",
+            "BH1750FVI-E",
+            "GY-302",
+            "bh1750 ambient light",
+            "gy302",
+            "i2c light sensor",
+            "i2c lux sensor",
+            "rohm bh1750"
+          ],
+          "type": "sensor",
+          "description": "Rohm BH1750FVI 16-bit digital ambient light sensor with I2C interface. Measures illuminance from 1 to 65535 lux. Two selectable I2C addresses (0x23 / 0x5C) via ADDR pin.",
+          "pinRequirements": [
+            {
+              "name": "VCC",
+              "type": "power",
+              "voltage": 3.3,
+              "required": true,
+              "description": "Supply voltage (3.3 V when used with ESP32)"
+            },
+            {
+              "name": "GND",
+              "type": "ground",
+              "required": true,
+              "description": "Ground reference"
+            },
+            {
+              "name": "SDA",
+              "type": "i2c",
+              "required": true,
+              "description": "I2C data line"
+            },
+            {
+              "name": "SCL",
+              "type": "i2c",
+              "required": true,
+              "description": "I2C clock line"
+            },
+            {
+              "name": "ADDR",
+              "type": "digital",
+              "required": false,
+              "description": "I2C address select: LOW → 0x23, HIGH → 0x5C"
+            }
+          ],
+          "libraries": [
+            {
+              "name": "BH1750",
+              "version": "1.3.0",
+              "installCommand": "claws/BH1750"
+            }
+          ],
+          "pinConfiguration": {
+            "i2cAddress": "0x23"
+          },
+          "datasheetUrl": "https://www.mouser.com/datasheet/2/348/bh1750fvi-e-186247.pdf",
+          "purchaseLinks": {
+            "digikey": {
+              "partNumber": "1528-4681-ND",
+              "productUrl": "https://www.digikey.com/en/products/detail/adafruit-industries-llc/4681/12760934",
+              "manufacturerPartNumber": "4681"
+            }
+          }
+        },
+        "instanceId": "lux_1",
+        "pinAssignments": [
+          {
+            "componentId": "lux_1",
+            "pinName": "VCC",
+            "boardPin": -1,
+            "function": "power",
+            "powerDomain": "3v3",
+            "voltage": 3.3
+          },
+          {
+            "componentId": "lux_1",
+            "pinName": "GND",
+            "boardPin": -2,
+            "function": "ground",
+            "powerDomain": "gnd",
+            "voltage": 0
+          },
+          {
+            "componentId": "lux_1",
+            "pinName": "SDA",
+            "boardPin": 21,
+            "function": "i2c"
+          },
+          {
+            "componentId": "lux_1",
+            "pinName": "SCL",
+            "boardPin": 22,
+            "function": "i2c"
+          }
+        ],
+        "quantity": 1,
+        "value": "Illuminance",
+        "matchStrategy": "exact"
+      },
+      {
+        "component": {
+          "id": "ssd1306-oled",
+          "name": "SSD1306 OLED",
+          "partSlug": "ssd1306-oled",
+          "canonicalPartId": "app-component-ssd1306-oled",
+          "partNumber": "56574",
+          "retrievalTerms": [
+            "ssd1306-oled",
+            "app-component-ssd1306-oled",
+            "ssd1306-oled",
+            "SSD1306 OLED",
+            "56574",
+            "1528-1220-ND",
+            "326"
+          ],
+          "aliases": [
+            "0.96 inch OLED",
+            "128x64 OLED",
+            "128x64 ssd1306 oled",
+            "SSD1306",
+            "SSD1306 OLED",
+            "oled",
+            "oled display",
+            "oled screen",
+            "ssd 1306",
+            "ssd 1306 oled",
+            "ssd1306 128x64 oled display",
+            "ssd1306 oled display",
+            "ssd1306 oled display 128x64"
+          ],
+          "type": "display",
+          "description": "0.96 inch 128x64 OLED display with I2C interface",
+          "pinRequirements": [
+            {
+              "name": "VCC",
+              "type": "power",
+              "voltage": 3.3,
+              "required": true
+            },
+            {
+              "name": "GND",
+              "type": "ground",
+              "required": true
+            },
+            {
+              "name": "SDA",
+              "type": "i2c",
+              "required": true
+            },
+            {
+              "name": "SCL",
+              "type": "i2c",
+              "required": true
+            }
+          ],
+          "libraries": [
+            {
+              "name": "Adafruit SSD1306",
+              "version": "2.5.7",
+              "installCommand": "Adafruit SSD1306"
+            },
+            {
+              "name": "Adafruit GFX Library",
+              "version": "1.11.5",
+              "installCommand": "Adafruit GFX Library"
+            }
+          ],
+          "pinConfiguration": {
+            "i2cAddress": "0x3C",
+            "recommendedPins": []
+          },
+          "physicalDimensions": {
+            "unit": "mm",
+            "width": 27.3,
+            "height": 27.8
+          },
+          "exampleUsage": "Displays text and graphics",
+          "datasheetUrl": "https://learn.adafruit.com/monochrome-oled-breakouts",
+          "purchaseLinks": {
+            "digikey": {
+              "partNumber": "1528-1220-ND",
+              "productUrl": "https://www.digikey.com/en/products/detail/adafruit-industries-llc/326/5353680",
+              "manufacturerPartNumber": "326"
+            }
+          }
+        },
+        "instanceId": "oled_1",
+        "pinAssignments": [
+          {
+            "componentId": "oled_1",
+            "pinName": "VCC",
+            "boardPin": -1,
+            "function": "power",
+            "powerDomain": "3v3",
+            "voltage": 3.3
+          },
+          {
+            "componentId": "oled_1",
+            "pinName": "GND",
+            "boardPin": -2,
+            "function": "ground",
+            "powerDomain": "gnd",
+            "voltage": 0
+          },
+          {
+            "componentId": "oled_1",
+            "pinName": "SDA",
+            "boardPin": 21,
+            "function": "i2c"
+          },
+          {
+            "componentId": "oled_1",
+            "pinName": "SCL",
+            "boardPin": 22,
+            "function": "i2c"
+          }
+        ],
+        "quantity": 1,
+        "value": "128x64 status display",
+        "matchStrategy": "exact"
+      },
+      {
+        "component": {
+          "id": "hc-sr501-pir-motion-sensor",
+          "name": "HC-SR501 PIR Motion Sensor",
+          "partSlug": "hc-sr501-pir-motion-sensor",
+          "canonicalPartId": "app-component-hc-sr501-pir-motion-sensor",
+          "partNumber": "hc-sr501-pir-motion-sensor",
+          "retrievalTerms": [
+            "hc-sr501-pir-motion-sensor",
+            "app-component-hc-sr501-pir-motion-sensor",
+            "hc-sr501-pir-motion-sensor",
+            "HC-SR501 PIR Motion Sensor",
+            "hc-sr501-pir-motion-sensor",
+            "269-4955-ND",
+            "ZRE200GE"
+          ],
+          "aliases": [
+            "HC-SR501 PIR Motion Sensor",
+            "HCSR501",
+            "PIR Motion Sensor",
+            "Passive Infrared Sensor HC-SR501",
+            "hc-sr501",
+            "hc-sr501-pir-motion-sensor",
+            "sr501"
+          ],
+          "type": "sensor",
+          "description": "Passive Infrared (PIR) motion detection module with adjustable sensitivity and delay potentiometers. Operates on 5V supply; digital output is nominally 3.3V or 5V depending on module variant (verify before connecting directly to ESP32 3.3V GPIO — use a voltage divider if output is 5V). Outputs HIGH when motion is detected, LOW when idle. Ideal for triggering countdown timer resets in Focus Mode applications. No firmware library required — output read via standard GPIO digitalRead().",
+          "pinRequirements": [
+            {
+              "name": "VCC",
+              "type": "power",
+              "voltage": 5,
+              "required": true,
+              "description": "Module supply. Most HC-SR501 boards use 5 V input."
+            },
+            {
+              "name": "GND",
+              "type": "ground",
+              "required": true,
+              "description": "Ground reference shared with the MCU."
+            },
+            {
+              "name": "OUT",
+              "type": "digital",
+              "required": true,
+              "description": "Motion-detect output. Verify output level on the specific module before connecting to 3.3 V-only GPIO; add level shifting if needed."
+            }
+          ],
+          "libraries": [],
+          "datasheetUrl": "http://www.handsontec.com/dataspecs/SR501%20Motion%20Sensor.pdf",
+          "purchaseLinks": {
+            "digikey": {
+              "partNumber": "269-4955-ND",
+              "productUrl": "https://www.digikey.com/en/products/detail/zilog/ZRE200GE/5147335",
+              "manufacturerPartNumber": "ZRE200GE"
+            }
+          }
+        },
+        "instanceId": "pir_1",
+        "pinAssignments": [
+          {
+            "componentId": "pir_1",
+            "pinName": "VCC",
+            "boardPin": -1,
+            "function": "power",
+            "powerDomain": "3v3",
+            "voltage": 3.3
+          },
+          {
+            "componentId": "pir_1",
+            "pinName": "GND",
+            "boardPin": -2,
+            "function": "ground",
+            "powerDomain": "gnd",
+            "voltage": 0
+          },
+          {
+            "componentId": "pir_1",
+            "pinName": "OUT",
+            "boardPin": 25,
+            "function": "digital"
+          }
+        ],
+        "quantity": 1,
+        "value": "Optional occupancy",
+        "matchStrategy": "exact"
+      },
+      {
+        "component": {
+          "id": "rfm95w-sx1276-lora",
+          "name": "RFM95W LoRa Transceiver Module (SX1276)",
+          "partSlug": "rfm95w-lora-radio-transceiver-breakout-868-or-915-mhz-radiofruit",
+          "canonicalPartId": "prt_b6042d1a550c4beffa75",
+          "partNumber": "3072",
+          "retrievalTerms": [
+            "rfm95w-sx1276-lora",
+            "prt_b6042d1a550c4beffa75",
+            "rfm95w-lora-radio-transceiver-breakout-868-or-915-mhz-radiofruit",
+            "RFM95W LoRa Transceiver Module (SX1276)",
+            "3072",
+            "1528-1667-ND",
+            "3072"
+          ],
+          "aliases": [
+            "868MHz LoRa Module",
+            "915MHz LoRa Module",
+            "HopeRF RFM95W",
+            "LoRa RFM95W",
+            "LoRa SX1276",
+            "RFM95",
+            "RFM95W",
+            "RFM95W LoRa",
+            "RFM95W LoRa Transceiver Module (SX1276)",
+            "SX1276"
+          ],
+          "type": "other",
+          "description": "HopeRF RFM95W long-range LoRa/LoRaWAN radio module based on Semtech SX1276. Typically used at 868 MHz (EU) or 915 MHz (US) ISM bands. SPI interface plus RESET and DIO interrupt lines. 3.3 V logic only. Requires an external antenna — never transmit without one.",
+          "pinRequirements": [
+            {
+              "name": "VCC",
+              "type": "power",
+              "voltage": 3.3,
+              "required": true,
+              "description": "3.3V supply only."
+            },
+            {
+              "name": "GND",
+              "type": "ground",
+              "required": true,
+              "description": "Ground reference"
+            },
+            {
+              "name": "MOSI",
+              "type": "spi",
+              "required": true,
+              "description": "SPI MOSI from MCU."
+            },
+            {
+              "name": "MISO",
+              "type": "spi",
+              "required": true,
+              "description": "SPI MISO to MCU."
+            },
+            {
+              "name": "SCK",
+              "type": "spi",
+              "required": true,
+              "description": "SPI clock."
+            },
+            {
+              "name": "NSS",
+              "type": "spi",
+              "required": true,
+              "description": "SPI chip select, also called CS."
+            },
+            {
+              "name": "RESET",
+              "type": "digital",
+              "required": true,
+              "description": "Module reset (active low)."
+            },
+            {
+              "name": "DIO0",
+              "type": "digital",
+              "required": true,
+              "description": "Primary interrupt line — TxDone/RxDone flag used by common LoRa libraries."
+            },
+            {
+              "name": "DIO1",
+              "type": "digital",
+              "required": false,
+              "description": "Optional interrupt — RxTimeout / FHSS."
+            },
+            {
+              "name": "DIO2",
+              "type": "digital",
+              "required": false,
+              "description": "Optional interrupt — FHSS channel change."
+            }
+          ],
+          "libraries": [
+            {
+              "name": "RadioLib",
+              "version": "6.6.0",
+              "installCommand": "jgromes/RadioLib"
+            },
+            {
+              "name": "LoRa",
+              "installCommand": "sandeepmistry/LoRa"
+            }
+          ],
+          "datasheetUrl": "https://cdn.sparkfun.com/assets/a/9/6/1/0/RFM95W-V2.0.pdf",
+          "purchaseLinks": {
+            "digikey": {
+              "partNumber": "1528-1667-ND",
+              "productUrl": "https://www.digikey.com/en/products/detail/adafruit-industries-llc/3072/6005357",
+              "manufacturerPartNumber": "3072"
+            }
+          }
+        },
+        "instanceId": "lora_1",
+        "pinAssignments": [
+          {
+            "componentId": "lora_1",
+            "pinName": "VCC",
+            "boardPin": -1,
+            "function": "power",
+            "powerDomain": "3v3",
+            "voltage": 3.3
+          },
+          {
+            "componentId": "lora_1",
+            "pinName": "GND",
+            "boardPin": -2,
+            "function": "ground",
+            "powerDomain": "gnd",
+            "voltage": 0
+          },
+          {
+            "componentId": "lora_1",
+            "pinName": "MOSI",
+            "boardPin": 23,
+            "function": "spi"
+          },
+          {
+            "componentId": "lora_1",
+            "pinName": "MISO",
+            "boardPin": 19,
+            "function": "spi"
+          },
+          {
+            "componentId": "lora_1",
+            "pinName": "SCK",
+            "boardPin": 18,
+            "function": "spi"
+          },
+          {
+            "componentId": "lora_1",
+            "pinName": "NSS",
+            "boardPin": 13,
+            "function": "spi"
+          },
+          {
+            "componentId": "lora_1",
+            "pinName": "RESET",
+            "boardPin": 14,
+            "function": "digital"
+          },
+          {
+            "componentId": "lora_1",
+            "pinName": "DIO0",
+            "boardPin": 4,
+            "function": "digital"
+          }
+        ],
+        "quantity": 1,
+        "value": "Regional LoRa",
+        "matchStrategy": "exact"
+      },
+      {
+        "component": {
+          "id": "sim7600-lte-cat4-module",
+          "name": "SIM7600 LTE CAT-4 Module",
+          "partSlug": "sim7600-lte-cat4-module",
+          "canonicalPartId": "app-component-sim7600-lte-cat4-module",
+          "partNumber": "sim7600-lte-cat4-module",
+          "retrievalTerms": [
+            "sim7600-lte-cat4-module",
+            "app-component-sim7600-lte-cat4-module",
+            "sim7600-lte-cat4-module",
+            "SIM7600 LTE CAT-4 Module",
+            "sim7600-lte-cat4-module",
+            "1738-TEL0124-ND",
+            "TEL0124"
+          ],
+          "aliases": [
+            "SIM7600",
+            "SIM7600 4G Module",
+            "SIM7600 LTE CAT-4 Module",
+            "SIM7600 LTE Module",
+            "SIM7600A",
+            "SIM7600E"
+          ],
+          "type": "other",
+          "description": "SIMCom SIM7600-series LTE CAT-4 cellular module or breakout. It is typically controlled over UART with AT commands and needs a stable high-current cellular supply; many maker boards accept 5V input but the bare module uses a lower VBAT rail.",
+          "pinRequirements": [
+            {
+              "name": "VCC",
+              "type": "power",
+              "voltage": 5,
+              "required": true,
+              "description": "Breakout-board supply input. Confirm the exact board; cellular transmit bursts require a stable high-current supply."
+            },
+            {
+              "name": "GND",
+              "type": "ground",
+              "required": true,
+              "description": "Common ground with MCU and external supply."
+            },
+            {
+              "name": "TXD",
+              "type": "uart",
+              "required": true,
+              "description": "Module UART transmit to MCU RX."
+            },
+            {
+              "name": "RXD",
+              "type": "uart",
+              "required": true,
+              "description": "Module UART receive from MCU TX. Use 3.3V-compatible logic or level shifting as required by the breakout."
+            },
+            {
+              "name": "PWRKEY",
+              "type": "digital",
+              "required": true,
+              "description": "Power-key control input used to turn the modem on/off."
+            },
+            {
+              "name": "RESET",
+              "type": "digital",
+              "required": false,
+              "description": "Optional reset control input."
+            },
+            {
+              "name": "RI",
+              "type": "digital",
+              "required": false,
+              "description": "Optional ring indicator output."
+            }
+          ],
+          "libraries": [
+            {
+              "name": "TinyGSM",
+              "version": "0.12.0",
+              "installCommand": "vshymanskyy/TinyGSM"
+            }
+          ],
+          "datasheetUrl": "https://www.waveshare.com/w/upload/6/6d/SIM7600_Series_AT_Command_Manual_V1.12.pdf",
+          "purchaseLinks": {
+            "digikey": {
+              "partNumber": "1738-TEL0124-ND",
+              "productUrl": "https://www.digikey.com/en/products/detail/dfrobot/TEL0124/10055687",
+              "manufacturerPartNumber": "TEL0124"
+            }
+          }
+        },
+        "instanceId": "lte_gps_1",
+        "pinAssignments": [
+          {
+            "componentId": "lte_gps_1",
+            "pinName": "VCC",
+            "boardPin": -1,
+            "function": "power",
+            "powerDomain": "4v0",
+            "voltage": 4
+          },
+          {
+            "componentId": "lte_gps_1",
+            "pinName": "GND",
+            "boardPin": -2,
+            "function": "ground",
+            "powerDomain": "gnd",
+            "voltage": 0
+          },
+          {
+            "componentId": "lte_gps_1",
+            "pinName": "TXD",
+            "boardPin": 26,
+            "function": "uart"
+          },
+          {
+            "componentId": "lte_gps_1",
+            "pinName": "RXD",
+            "boardPin": 27,
+            "function": "uart"
+          },
+          {
+            "componentId": "lte_gps_1",
+            "pinName": "PWRKEY",
+            "boardPin": 33,
+            "function": "digital"
+          }
+        ],
+        "quantity": 1,
+        "value": "4G / GNSS",
+        "matchStrategy": "exact"
+      },
+      {
+        "component": {
+          "id": "solar-5v-1w",
+          "name": "5V / 1W Solar Panel",
+          "partSlug": "solar-5v-1w",
+          "canonicalPartId": "app-power-solar-5v-1w",
+          "partNumber": "solar-5v-1w",
+          "retrievalTerms": [
+            "solar-5v-1w",
+            "app-power-solar-5v-1w",
+            "solar-5v-1w",
+            "5V / 1W Solar Panel",
+            "solar-5v-1w"
+          ],
+          "aliases": [
+            "5v solar",
+            "photovoltaic panel",
+            "pv panel",
+            "small solar panel",
+            "solar",
+            "solar panel"
+          ],
+          "type": "power",
+          "description": "Small 5 V / ~200 mA peak solar panel. Used as the upstream input to a TP4056 (or solar charge controller) for off-grid / outdoor projects.",
+          "pinRequirements": [
+            {
+              "name": "+5V",
+              "type": "power",
+              "voltage": 5,
+              "required": true,
+              "description": "Panel +; under direct sun, ~5-6 V open circuit."
+            },
+            {
+              "name": "GND",
+              "type": "ground",
+              "required": true,
+              "description": "Panel -."
+            }
+          ],
+          "libraries": []
+        },
+        "instanceId": "solar_1",
+        "pinAssignments": [
+          {
+            "componentId": "solar_1",
+            "pinName": "+5V",
+            "boardPin": -3,
+            "function": "power",
+            "connectsTo": "CN3791 MPPT Solar Charger SOLAR+",
+            "viaComponentId": "charger_1",
+            "viaPinName": "SOLAR+"
+          },
+          {
+            "componentId": "solar_1",
+            "pinName": "GND",
+            "boardPin": -3,
+            "function": "ground",
+            "connectsTo": "CN3791 MPPT Solar Charger SOLAR-",
+            "viaComponentId": "charger_1",
+            "viaPinName": "SOLAR-"
+          }
+        ],
+        "quantity": 1,
+        "value": "6 V, 5 W external",
+        "matchStrategy": "exact"
+      },
+      {
+        "component": {
+          "id": "cn3791-mppt-liion-solar-charger",
+          "name": "CN3791 MPPT Solar Charger",
+          "partSlug": "consonance-cn3791-mppt-liion-solar-charger",
+          "canonicalPartId": "cn3791-mppt-liion-solar-charger",
+          "partNumber": "CN3791",
+          "retrievalTerms": [
+            "cn3791-mppt-liion-solar-charger",
+            "cn3791-mppt-liion-solar-charger",
+            "consonance-cn3791-mppt-liion-solar-charger",
+            "CN3791 MPPT Solar Charger",
+            "CN3791"
+          ],
+          "aliases": [
+            "Cn3791 Mppt Charger",
+            "cn3791",
+            "cn3791 charger module",
+            "cn3791 solar charger",
+            "mppt li-ion charger",
+            "mppt lithium charger",
+            "single-cell solar charger",
+            "solar battery charger",
+            "solar charge controller"
+          ],
+          "type": "power",
+          "description": "CN3791-based MPPT-style switch-mode charger module for single-cell Li-ion/LiPo solar charging. Routes solar input to battery charge terminals and needs a downstream regulator/load path for stable MCU power.",
+          "pinRequirements": [
+            {
+              "name": "SOLAR+",
+              "type": "power",
+              "required": true
+            },
+            {
+              "name": "SOLAR-",
+              "type": "ground",
+              "required": true
+            },
+            {
+              "name": "BAT+",
+              "type": "power",
+              "required": true
+            },
+            {
+              "name": "BAT-",
+              "type": "ground",
+              "required": true
+            },
+            {
+              "name": "OUT+",
+              "type": "power",
+              "required": false
+            },
+            {
+              "name": "OUT-",
+              "type": "ground",
+              "required": false
+            }
+          ],
+          "libraries": [],
+          "datasheetUrl": "https://files.waveshare.com/wiki/Solar-Power-Manager-(D)/CN3791_Datasheet_EN.pdf"
+        },
+        "instanceId": "charger_1",
+        "pinAssignments": [
+          {
+            "componentId": "charger_1",
+            "pinName": "OUT+",
+            "boardPin": -3,
+            "function": "power",
+            "connectsTo": "TP4056 Li-Ion/LiPo charger module with protection IN+",
+            "viaComponentId": "reg_3v3_1",
+            "viaPinName": "IN+"
+          },
+          {
+            "componentId": "charger_1",
+            "pinName": "OUT-",
+            "boardPin": -3,
+            "function": "ground",
+            "connectsTo": "TP4056 Li-Ion/LiPo charger module with protection IN-",
+            "viaComponentId": "reg_3v3_1",
+            "viaPinName": "IN-"
+          }
+        ],
+        "quantity": 1,
+        "value": "MPPT solar charger",
+        "matchStrategy": "exact"
+      },
+      {
+        "component": {
+          "id": "18650-cell",
+          "name": "18650 Li-ion Cell",
+          "partSlug": "18650-cell",
+          "canonicalPartId": "app-power-18650-cell",
+          "partNumber": "18650-cell",
+          "retrievalTerms": [
+            "18650-cell",
+            "app-power-18650-cell",
+            "18650-cell",
+            "18650 Li-ion Cell",
+            "18650-cell",
+            "12354030",
+            "ICR18650-2600-B"
+          ],
+          "aliases": [
+            "18650",
+            "18650 battery",
+            "18650 li-ion",
+            "battery",
+            "li-ion 18650",
+            "li-ion battery",
+            "li-ion cell",
+            "lithium ion cell",
+            "rechargeable battery"
+          ],
+          "type": "power",
+          "description": "18650 lithium-ion cell, nominal 3.7 V, ~2500 mAh. Common for higher-capacity portable / battery-bank style projects; needs a holder and protection / charger circuit.",
+          "pinRequirements": [
+            {
+              "name": "+V",
+              "type": "power",
+              "voltage": 3.7,
+              "required": true,
+              "description": "Positive cell terminal."
+            },
+            {
+              "name": "GND",
+              "type": "ground",
+              "required": true,
+              "description": "Negative cell terminal."
+            }
+          ],
+          "libraries": [],
+          "purchaseLinks": {
+            "digikey": {
+              "partNumber": "12354030",
+              "productUrl": "https://www.digikey.com/en/products/detail/pkcell/ICR18650-2600-B/12354030",
+              "manufacturerPartNumber": "ICR18650-2600-B"
+            }
+          }
+        },
+        "instanceId": "battery_1",
+        "pinAssignments": [
+          {
+            "componentId": "battery_1",
+            "pinName": "+V",
+            "boardPin": -3,
+            "function": "power",
+            "connectsTo": "CN3791 MPPT Solar Charger BAT+",
+            "viaComponentId": "charger_1",
+            "viaPinName": "BAT+"
+          },
+          {
+            "componentId": "battery_1",
+            "pinName": "GND",
+            "boardPin": -3,
+            "function": "ground",
+            "connectsTo": "CN3791 MPPT Solar Charger BAT-",
+            "viaComponentId": "charger_1",
+            "viaPinName": "BAT-"
+          }
+        ],
+        "quantity": 1,
+        "value": "3.7V 3000mAh protected",
+        "matchStrategy": "exact"
+      },
+      {
+        "component": {
+          "id": "tp4056-lipo-charger",
+          "name": "TP4056 Li-Ion/LiPo charger module with protection",
+          "partSlug": "tp4056-lipo-charger",
+          "canonicalPartId": "tp4056-lipo-charger",
+          "partNumber": "TP4056-protected-6-pad-module",
+          "retrievalTerms": [
+            "tp4056-lipo-charger",
+            "tp4056-lipo-charger",
+            "tp4056-lipo-charger",
+            "TP4056 Li-Ion/LiPo charger module with protection",
+            "TP4056-protected-6-pad-module"
+          ],
+          "aliases": [
+            "1a lipo charger",
+            "LiPo Charging Module",
+            "Lithium Ion Polymer Battery Charger",
+            "TP4056",
+            "TP4056 Charging Module",
+            "TP4056 Li-Ion Charger Module",
+            "TP4056 LiPo Charger Module",
+            "Tp4056 Module",
+            "USB Charging Module",
+            "USB-C Charging Module",
+            "li-ion charger module",
+            "lipo charger module",
+            "tp4056",
+            "tp4056 charger",
+            "tp4056 charging board",
+            "tp4056 module"
+          ],
+          "type": "power",
+          "description": "TP4056 single-cell Li-Ion/LiPo linear charger module, 5V USB input, 1A charge current (programmable). Common variants ship with DW01 protection. Pair with battery_lipo_storage for the cell.",
+          "pinRequirements": [
+            {
+              "name": "IN+",
+              "type": "power",
+              "aliases": [
+                "USB+",
+                "5V+"
+              ],
+              "voltage": 5,
+              "required": true,
+              "description": "5V charge input positive."
+            },
+            {
+              "name": "IN-",
+              "type": "ground",
+              "aliases": [
+                "USB-",
+                "GND"
+              ],
+              "required": true,
+              "description": "Charge input negative / ground."
+            },
+            {
+              "name": "B+",
+              "type": "power",
+              "aliases": [
+                "BAT+"
+              ],
+              "voltage": 3.7,
+              "required": true,
+              "description": "Single-cell battery positive."
+            },
+            {
+              "name": "B-",
+              "type": "ground",
+              "aliases": [
+                "BAT-"
+              ],
+              "required": true,
+              "description": "Single-cell battery negative."
+            },
+            {
+              "name": "OUT+",
+              "type": "power",
+              "required": true,
+              "description": "Protected load output positive on six-pad protected modules."
+            },
+            {
+              "name": "OUT-",
+              "type": "ground",
+              "required": true,
+              "description": "Protected load output negative on six-pad protected modules."
+            }
+          ],
+          "libraries": [],
+          "datasheetUrl": "https://www.digikey.com/htmldatasheets/production/2049110/0/0/1/tp4056.html"
+        },
+        "instanceId": "reg_3v3_1",
+        "pinAssignments": [
+          {
+            "componentId": "reg_3v3_1",
+            "pinName": "B+",
+            "boardPin": -3,
+            "function": "power",
+            "connectsTo": "CN3791 MPPT Solar Charger OUT+",
+            "viaComponentId": "charger_1",
+            "viaPinName": "OUT+"
+          },
+          {
+            "componentId": "reg_3v3_1",
+            "pinName": "B-",
+            "boardPin": -2,
+            "function": "ground",
+            "powerDomain": "gnd",
+            "voltage": 0
+          },
+          {
+            "componentId": "reg_3v3_1",
+            "pinName": "OUT+",
+            "boardPin": -1,
+            "function": "power",
+            "powerDomain": "3v3",
+            "voltage": 3.3
+          },
+          {
+            "componentId": "reg_3v3_1",
+            "pinName": "OUT-",
+            "boardPin": -2,
+            "function": "ground",
+            "powerDomain": "gnd",
+            "voltage": 0
+          }
+        ],
+        "quantity": 1,
+        "value": "3.3V / 1A buck-boost",
+        "matchStrategy": "exact"
+      },
+      {
+        "component": {
+          "id": "tp4056-lipo-charger",
+          "name": "TP4056 Li-Ion/LiPo charger module with protection",
+          "partSlug": "tp4056-lipo-charger",
+          "canonicalPartId": "tp4056-lipo-charger",
+          "partNumber": "TP4056-protected-6-pad-module",
+          "retrievalTerms": [
+            "tp4056-lipo-charger",
+            "tp4056-lipo-charger",
+            "tp4056-lipo-charger",
+            "TP4056 Li-Ion/LiPo charger module with protection",
+            "TP4056-protected-6-pad-module"
+          ],
+          "aliases": [
+            "1a lipo charger",
+            "LiPo Charging Module",
+            "Lithium Ion Polymer Battery Charger",
+            "TP4056",
+            "TP4056 Charging Module",
+            "TP4056 Li-Ion Charger Module",
+            "TP4056 LiPo Charger Module",
+            "Tp4056 Module",
+            "USB Charging Module",
+            "USB-C Charging Module",
+            "li-ion charger module",
+            "lipo charger module",
+            "tp4056",
+            "tp4056 charger",
+            "tp4056 charging board",
+            "tp4056 module"
+          ],
+          "type": "power",
+          "description": "TP4056 single-cell Li-Ion/LiPo linear charger module, 5V USB input, 1A charge current (programmable). Common variants ship with DW01 protection. Pair with battery_lipo_storage for the cell.",
+          "pinRequirements": [
+            {
+              "name": "IN+",
+              "type": "power",
+              "aliases": [
+                "USB+",
+                "5V+"
+              ],
+              "voltage": 5,
+              "required": true,
+              "description": "5V charge input positive."
+            },
+            {
+              "name": "IN-",
+              "type": "ground",
+              "aliases": [
+                "USB-",
+                "GND"
+              ],
+              "required": true,
+              "description": "Charge input negative / ground."
+            },
+            {
+              "name": "B+",
+              "type": "power",
+              "aliases": [
+                "BAT+"
+              ],
+              "voltage": 3.7,
+              "required": true,
+              "description": "Single-cell battery positive."
+            },
+            {
+              "name": "B-",
+              "type": "ground",
+              "aliases": [
+                "BAT-"
+              ],
+              "required": true,
+              "description": "Single-cell battery negative."
+            },
+            {
+              "name": "OUT+",
+              "type": "power",
+              "required": true,
+              "description": "Protected load output positive on six-pad protected modules."
+            },
+            {
+              "name": "OUT-",
+              "type": "ground",
+              "required": true,
+              "description": "Protected load output negative on six-pad protected modules."
+            }
+          ],
+          "libraries": [],
+          "datasheetUrl": "https://www.digikey.com/htmldatasheets/production/2049110/0/0/1/tp4056.html"
+        },
+        "instanceId": "reg_4v0_1",
+        "pinAssignments": [
+          {
+            "componentId": "reg_4v0_1",
+            "pinName": "IN+",
+            "boardPin": -3,
+            "function": "power",
+            "connectsTo": "CN3791 MPPT Solar Charger OUT+",
+            "viaComponentId": "charger_1",
+            "viaPinName": "OUT+"
+          },
+          {
+            "componentId": "reg_4v0_1",
+            "pinName": "IN-",
+            "boardPin": -2,
+            "function": "ground",
+            "powerDomain": "gnd",
+            "voltage": 0
+          },
+          {
+            "componentId": "reg_4v0_1",
+            "pinName": "B+",
+            "boardPin": -3,
+            "function": "power",
+            "connectsTo": "CN3791 MPPT Solar Charger OUT+",
+            "viaComponentId": "charger_1",
+            "viaPinName": "OUT+"
+          },
+          {
+            "componentId": "reg_4v0_1",
+            "pinName": "B-",
+            "boardPin": -2,
+            "function": "ground",
+            "powerDomain": "gnd",
+            "voltage": 0
+          },
+          {
+            "componentId": "reg_4v0_1",
+            "pinName": "OUT+",
+            "boardPin": -1,
+            "function": "power",
+            "powerDomain": "4v0",
+            "voltage": 4
+          },
+          {
+            "componentId": "reg_4v0_1",
+            "pinName": "OUT-",
+            "boardPin": -2,
+            "function": "ground",
+            "powerDomain": "gnd",
+            "voltage": 0
+          }
+        ],
+        "quantity": 1,
+        "value": "4.0V / 2A peak buck-boost",
+        "matchStrategy": "exact"
+      },
+      {
+        "component": {
+          "id": "hc-sr501-pir-motion-sensor",
+          "name": "HC-SR501 PIR Motion Sensor",
+          "partSlug": "hc-sr501-pir-motion-sensor",
+          "canonicalPartId": "app-component-hc-sr501-pir-motion-sensor",
+          "partNumber": "hc-sr501-pir-motion-sensor",
+          "retrievalTerms": [
+            "hc-sr501-pir-motion-sensor",
+            "app-component-hc-sr501-pir-motion-sensor",
+            "hc-sr501-pir-motion-sensor",
+            "HC-SR501 PIR Motion Sensor",
+            "hc-sr501-pir-motion-sensor",
+            "269-4955-ND",
+            "ZRE200GE"
+          ],
+          "aliases": [
+            "HC-SR501 PIR Motion Sensor",
+            "HCSR501",
+            "PIR Motion Sensor",
+            "Passive Infrared Sensor HC-SR501",
+            "hc-sr501",
+            "hc-sr501-pir-motion-sensor",
+            "sr501"
+          ],
+          "type": "sensor",
+          "description": "Passive Infrared (PIR) motion detection module with adjustable sensitivity and delay potentiometers. Operates on 5V supply; digital output is nominally 3.3V or 5V depending on module variant (verify before connecting directly to ESP32 3.3V GPIO — use a voltage divider if output is 5V). Outputs HIGH when motion is detected, LOW when idle. Ideal for triggering countdown timer resets in Focus Mode applications. No firmware library required — output read via standard GPIO digitalRead().",
+          "pinRequirements": [
+            {
+              "name": "VCC",
+              "type": "power",
+              "voltage": 5,
+              "required": true,
+              "description": "Module supply. Most HC-SR501 boards use 5 V input."
+            },
+            {
+              "name": "GND",
+              "type": "ground",
+              "required": true,
+              "description": "Ground reference shared with the MCU."
+            },
+            {
+              "name": "OUT",
+              "type": "digital",
+              "required": true,
+              "description": "Motion-detect output. Verify output level on the specific module before connecting to 3.3 V-only GPIO; add level shifting if needed."
+            }
+          ],
+          "libraries": [],
+          "datasheetUrl": "http://www.handsontec.com/dataspecs/SR501%20Motion%20Sensor.pdf",
+          "purchaseLinks": {
+            "digikey": {
+              "partNumber": "269-4955-ND",
+              "productUrl": "https://www.digikey.com/en/products/detail/zilog/ZRE200GE/5147335",
+              "manufacturerPartNumber": "ZRE200GE"
+            }
+          }
+        },
+        "instanceId": "rain_1",
+        "pinAssignments": [
+          {
+            "componentId": "rain_1",
+            "pinName": "VCC",
+            "boardPin": -1,
+            "function": "power",
+            "powerDomain": "3v3",
+            "voltage": 3.3
+          },
+          {
+            "componentId": "rain_1",
+            "pinName": "GND",
+            "boardPin": -2,
+            "function": "ground",
+            "powerDomain": "gnd",
+            "voltage": 0
+          },
+          {
+            "componentId": "rain_1",
+            "pinName": "OUT",
+            "boardPin": 32,
+            "function": "digital"
+          }
+        ],
+        "quantity": 1,
+        "value": "0.2mm/tip",
+        "matchStrategy": "exact"
+      }
+    ],
+    "assemblyInstructions": [
+      {
+        "step": 1,
+        "title": "Prepare the enclosure and wall plate",
+        "description": "Use a 10 in high × 4 in wide × 6 in deep IP65 ABS/polycarbonate enclosure. Fit the sliding backplate rails, two keyhole wall slots, and a bottom security-screw hole. Install filtered downward-facing lower louvers; keep the sensor chamber thermally separated from the RF/power area.",
+        "components": [],
+        "tips": [
+          "Use a closed-cell gasket and stainless mounting screws.",
+          "Put a drip loop in the solar cable before the upper-side DC entry."
+        ],
+        "warnings": [
+          "Do not place the solar panel on the enclosure; mount it outside on its own tilt bracket.",
+          "Do not obstruct PM sensor airflow or cover the cellular/GNSS/LoRa antenna areas."
+        ]
+      },
+      {
+        "step": 2,
+        "title": "Install the single vertical PCB and electronics zones",
+        "description": "Mount one vertical PCB on standoffs: radios and antenna connectors at the top, ESP32/power/display connector in the middle, and SCD41/PMS5003 at the bottom directly above the filtered vents. Fix the protected 18650 holder close to the back wall/lower board.",
+        "components": [
+          "battery_1",
+          "charger_1",
+          "reg_3v3_1",
+          "reg_4v0_1",
+          "scd41_1",
+          "pm25_1",
+          "lora_1",
+          "lte_gps_1"
+        ],
+        "tips": [
+          "Keep the PM optical inlet/outlet aligned to separate lower vent paths.",
+          "Keep cellular supply traces short and use the modem manufacturer’s bulk capacitors at VCC."
+        ],
+        "warnings": [
+          "Use only a protected 18650 Li-ion cell of the specified type; observe holder polarity.",
+          "The SIM7600 needs a 4.0V rail able to tolerate 2A transmit pulses."
+        ]
+      },
+      {
+        "step": 3,
+        "title": "Connect front components and outdoor interfaces",
+        "description": "Mount the OLED, UV window, light aperture, PIR lens and alert light pipes in the front cover. Connect the tipping-bucket rain gauge through a weatherproof cable gland. Connect the detached panel to the recessed locking DC input and attach the approved regional LoRa, LTE and GNSS antennas to top SMA connectors.",
+        "components": [
+          "oled_1",
+          "uv_1",
+          "lux_1",
+          "pir_1",
+          "rain_1",
+          "solar_1"
+        ],
+        "tips": [
+          "Use a UV-transparent window only over the UV sensor.",
+          "Use a rain gauge with a dry-contact output and keep its cable away from antenna cables."
+        ],
+        "warnings": [
+          "Disconnect solar and remove the battery before servicing.",
+          "Use the legal LoRa frequency and certified cellular antenna/SIM for the deployment country."
+        ]
+      },
+      {
+        "step": 4,
+        "title": "Mount and commission",
+        "description": "Screw the plate securely to brick, concrete or wood, slide the unit down until seated, then fit the bottom security screw. Insert the battery, connect the solar panel, and use Schematik’s Deploy button to flash the supplied firmware. Confirm the display changes after each five-second sensor sampling cycle.",
+        "components": [
+          "solar_1",
+          "battery_1",
+          "oled_1"
+        ],
+        "tips": [
+          "Orient the external panel toward maximum daily sunlight and adjust its tilt seasonally.",
+          "Record rain-gauge millimetres-per-tip locally; the sample firmware currently reports raw tip count."
+        ],
+        "warnings": [
+          "The unit is weather-resistant only when the cover gasket, cable glands and unused ports are sealed.",
+          "Do not operate a cellular modem without its antenna connected."
+        ]
+      }
+    ],
+    "powerPlan": {
+      "mode": "battery",
+      "rationale": "A detached 6V/5W solar panel charges one protected 3000mAh 18650 cell; regulated 3.3V and isolated 4.0V rails supply sensing and the cellular modem.",
+      "sourceInstanceId": "solar_1",
+      "busVoltage": 3.3,
+      "estimatedCurrentMa": 550,
+      "capacityMah": 3000,
+      "runtimeHours": 4.5,
+      "regulatorInstanceIds": [
+        "reg_3v3_1",
+        "reg_4v0_1"
+      ],
+      "chargerInstanceId": "charger_1",
+      "userSpecifiedSourceId": "solar-5v-1w"
+    },
+    "projectPackage": {
+      "entrypoint": "src/main.cpp",
+      "files": [
+        {
+          "path": "src/main.cpp",
+          "content": "#include <Arduino.h>\n#include <Wire.h>\n#include <Adafruit_GFX.h>\n#include <Adafruit_SSD1306.h>\n#include <SensirionI2cScd4x.h>\n#include <Adafruit_PM25AQI.h>\n#include <BH1750.h>\n#include <Adafruit_VEML6075.h>\n\n#define I2C_SDA 21\n#define I2C_SCL 22\n#define PM_RX_PIN 16\n#define PIR_PIN 25\n#define RAIN_PIN 32\n#define OLED_ADDR 0x3C\n\n\n// Forward declarations\nvoid sampleSensors();\nvoid drawScreen();\n\nAdafruit_SSD1306 display(128, 64, &Wire, -1);\nSensirionI2cScd4x scd4x;\nAdafruit_PM25AQI pm;\nHardwareSerial pmSerial(2);\nBH1750 lightMeter;\nAdafruit_VEML6075 uv;\n\nuint16_t co2ppm = 0;\nfloat tempC = NAN, humidity = NAN, lux = NAN, uvi = NAN;\nuint16_t pm25 = 0;\nuint32_t rainTips = 0;\nbool lastRain = HIGH;\nuint32_t lastSample = 0;\nuint32_t lastScreen = 0;\n\nvoid sampleSensors() {\n  uint16_t error;\n  char errorMessage[64];\n  error = scd4x.readMeasurement(co2ppm, tempC, humidity);\n  if (error && error != 0x0000) { co2ppm = 0; }\n  PM25_AQI_Data data;\n  if (pm.read(&data)) pm25 = data.pm25_env;\n  lux = lightMeter.readLightLevel();\n  uvi = uv.readUVI();\n}\n\nvoid drawScreen() {\n  display.clearDisplay();\n  display.setTextColor(SSD1306_WHITE);\n  display.setTextSize(1);\n  display.setCursor(0, 0); display.println(\"SCHEB CHILD HEALTH\");\n  display.printf(\"T: %.1f C  RH: %.0f%%\\n\", tempC, humidity);\n  display.printf(\"PM2.5: %u ug/m3\\n\", pm25);\n  display.printf(\"CO2: %u ppm\\n\", co2ppm);\n  display.printf(\"UV: %.1f  Lux: %.0f\\n\", uvi, lux);\n  display.printf(\"Rain: %lu tips\\n\", (unsigned long)rainTips);\n  display.printf(\"Occupancy: %s\", digitalRead(PIR_PIN) ? \"MOTION\" : \"clear\");\n  display.display();\n}\n\nvoid setup() {\n  pinMode(PIR_PIN, INPUT);\n  pinMode(RAIN_PIN, INPUT_PULLUP);\n  Wire.begin(I2C_SDA, I2C_SCL);\n  display.begin(SSD1306_SWITCHCAPVCC, OLED_ADDR);\n  display.clearDisplay(); display.display();\n  scd4x.begin(Wire);\n  scd4x.stopPeriodicMeasurement();\n  scd4x.startPeriodicMeasurement();\n  lightMeter.begin(BH1750::CONTINUOUS_HIGH_RES_MODE, 0x23, &Wire);\n  uv.begin();\n  pmSerial.begin(9600, SERIAL_8N1, PM_RX_PIN, -1);\n  pm.begin_UART(&pmSerial);\n}\n\nvoid loop() {\n  bool rainNow = digitalRead(RAIN_PIN);\n  if (lastRain == HIGH && rainNow == LOW) rainTips++;\n  lastRain = rainNow;\n  uint32_t now = millis();\n  if (now - lastSample >= 5000) { lastSample = now; sampleSensors(); }\n  if (now - lastScreen >= 1000) { lastScreen = now; drawScreen(); }\n}",
+          "editable": true,
+          "source": "agent",
+          "mimeType": "text/x-c++src",
+          "role": "source"
+        }
+      ]
+    }
+  },
+  "draft": null,
+  "agentConversationId": null,
+  "messages": [
+    {
+      "role": "user",
+      "content": "Opened Smart Child Health Box."
+    },
+    {
+      "role": "assistant",
+      "content": "Project restored. You can continue editing or ask for changes."
+    }
+  ],
+  "activeFile": "code",
+  "deployRuns": []
+}
