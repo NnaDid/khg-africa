@@ -35,7 +35,7 @@ class RiskAlertBase(BaseModel):
     location_type: str
 
 class EmergencyInterventionCreate(BaseModel):
-    alert_id: str
+    alert_id: Optional[str] = None
     team_name: str
     action_taken: str
     lat: float

@@ -6,13 +6,16 @@ class EmergencyService:
         """
         Deploys an emergency response team to a location.
         """
-        res = supabase_admin.table("emergency_interventions").insert({
-            "alert_id": alert_id,
+        payload = {
             "team_name": team_name,
             "action_taken": action,
             "status": "DEPLOYED",
             "gps_coords": f"POINT({lng} {lat})"
-        }).execute()
+        }
+        if alert_id and alert_id.strip():
+            payload["alert_id"] = alert_id
+
+        res = supabase_admin.table("emergency_interventions").insert(payload).execute()
         return res.data
 
     @staticmethod

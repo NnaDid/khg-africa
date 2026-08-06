@@ -16,10 +16,12 @@ import {
   FormControl,
   FormLabel,
   Link,
+  SimpleGrid,
 } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { FiMail, FiShield, FiGlobe, FiAlertCircle, FiLock } from 'react-icons/fi';
 import { authService } from '../services/supabase';
+import { useAppStore } from '../store/useAppStore';
 import loginBg from '../assets/images/login-bg.png';
 
 const MotionBox = motion.create(Box);
@@ -35,6 +37,7 @@ const Login = () => {
   const [step, setStep] = useState<AuthStep>('login_email');
   const [loading, setLoading] = useState(false);
   const toast = useToast();
+  const { setUser, setProfile } = useAppStore();
 
   const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -616,6 +619,91 @@ const Login = () => {
                 </VStack>
               </form>
             )}
+          </Box>
+
+          {/* Quick Demo Selector */}
+          <Box
+            bg="bg.card"
+            p={6}
+            borderRadius="2xl"
+            border="1px solid"
+            borderColor="whiteAlpha.100"
+            shadow="xl"
+          >
+            <VStack spacing={3} align="stretch">
+              <Text fontSize="xs" fontWeight="bold" color="brand.400" align="center" mb={1} letterSpacing="wider">
+                ⚡ DEMO COMMAND CENTER QUICK ACCESS
+              </Text>
+              <SimpleGrid columns={2} spacing={2.5}>
+                {[
+                  { label: "Government Admin", email: "gov@khgafrica.org", role: "government_admin", name: "Dr. Adeola Okafor" },
+                  { label: "NGO Partner", email: "ngo@khgafrica.org", role: "ngo_admin", name: "Samuel Mensah" },
+                  { label: "School Admin", email: "school@khgafrica.org", role: "school_admin", name: "John Chukwuma" },
+                  { label: "Clinic Lead", email: "clinic@khgafrica.org", role: "clinic_staff", name: "Fatima Bello" },
+                  { label: "Health Worker", email: "worker@khgafrica.org", role: "community_health_worker", name: "Janet Kiprop" },
+                  { label: "Emergency Rep", email: "emergency@khgafrica.org", role: "emergency_officer", name: "Obi Nwosu" },
+                ].map((item) => (
+                  <Button
+                    key={item.email}
+                    size="sm"
+                    variant="outline"
+                    borderColor="whiteAlpha.200"
+                    _hover={{ borderColor: 'brand.500', bg: 'whiteAlpha.100' }}
+                    onClick={async () => {
+                      setEmail(item.email);
+                      toast({
+                        title: 'Initiating Demo Session',
+                        description: `Logging in as ${item.name} (${item.label})`,
+                        status: 'info',
+                        duration: 1500,
+                        isClosable: true,
+                      });
+                      
+                      const mockUser = { id: `demo-${item.role}`, email: item.email };
+                      const mockProfile = {
+                        id: mockUser.id,
+                        role: item.role,
+                        full_name: item.name,
+                        region: item.role === 'government_admin' ? 'Lagos Region' : 'Nairobi Region',
+                      };
+
+                      try {
+                        const { data, error } = await authService.verifyOtp(item.email, "123456");
+                        if (error) throw error;
+                        
+                        const loggedUser = data?.user || mockUser;
+                        setUser(loggedUser as any);
+                        setProfile(mockProfile as any);
+                        
+                        // Save demo session details in localStorage
+                        localStorage.setItem('khg_demo_user', JSON.stringify({ user: loggedUser, profile: mockProfile }));
+                        
+                        toast({
+                          title: 'Welcome Back',
+                          description: `Authenticated as ${item.name}`,
+                          status: 'success',
+                          duration: 3000,
+                          isClosable: true,
+                        });
+                      } catch (err: any) {
+                        toast({
+                          title: 'Connection Offline Fallback',
+                          description: `Active mock session established as ${item.name}`,
+                          status: 'warning',
+                          duration: 3000,
+                          isClosable: true,
+                        });
+                        setUser(mockUser as any);
+                        setProfile(mockProfile as any);
+                        localStorage.setItem('khg_demo_user', JSON.stringify({ user: mockUser, profile: mockProfile }));
+                      }
+                    }}
+                  >
+                    {item.label}
+                  </Button>
+                ))}
+              </SimpleGrid>
+            </VStack>
           </Box>
 
           <VStack spacing={4} pt={2}>

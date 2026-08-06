@@ -46,21 +46,93 @@ function RealtimeStream() {
   return null;
 }
 
+import type { User } from '@supabase/supabase-js';
+
 function App() {
-  const { setUser, setIsLoading, user } = useAppStore();
+  const { setUser, setProfile, setIsLoading, user } = useAppStore();
 
   useEffect(() => {
+    // Check if a demo session is saved in localStorage
+    const savedDemo = localStorage.getItem('khg_demo_user');
+    if (savedDemo) {
+      try {
+        const { user: demoUser, profile: demoProfile } = JSON.parse(savedDemo);
+        if (demoUser && demoProfile) {
+          setUser(demoUser);
+          setProfile(demoProfile);
+          setIsLoading(false);
+          return;
+        }
+      } catch (e) {
+        localStorage.removeItem('khg_demo_user');
+      }
+    }
+
+    const loadProfile = async (u: User | null) => {
+      if (!u) {
+        setProfile(null);
+        return;
+      }
+      const demoRoles: Record<string, any> = {
+        "gov@khgafrica.org": { role: "government_admin", full_name: "Dr. Adeola Okafor", region: "Lagos Region" },
+        "ngo@khgafrica.org": { role: "ngo_admin", full_name: "Samuel Mensah", region: "Sub-Saharan Africa" },
+        "school@khgafrica.org": { role: "school_admin", full_name: "John Chukwuma", region: "Epe Division" },
+        "clinic@khgafrica.org": { role: "clinic_staff", full_name: "Fatima Bello", region: "Ikorodu District" },
+        "worker@khgafrica.org": { role: "community_health_worker", full_name: "Janet Kiprop", region: "Nairobi West" },
+        "emergency@khgafrica.org": { role: "emergency_officer", full_name: "Obi Nwosu", region: "National Command" },
+      };
+
+      const matched = demoRoles[u.email?.toLowerCase().trim() || ""];
+
+      try {
+        const { data, error } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', u.id)
+          .maybeSingle();
+
+        if (data) {
+          setProfile({
+            id: data.id,
+            role: data.role,
+            full_name: data.full_name || matched?.full_name || "System Admin",
+            region: data.region || matched?.region || "Lagos",
+          } as any);
+          return;
+        }
+      } catch (err) {}
+
+      if (matched) {
+        setProfile({
+          id: u.id,
+          role: matched.role,
+          full_name: matched.full_name,
+          region: matched.region,
+        } as any);
+      } else {
+        setProfile({
+          id: u.id,
+          role: 'super_admin',
+          full_name: 'Super Admin',
+          region: 'All',
+        } as any);
+      }
+    };
+
     supabase.auth.getSession().then(({ data: { session } }) => {
-      setUser(session?.user ?? null);
-      setIsLoading(false);
+      const currentUser = session?.user ?? null;
+      setUser(currentUser);
+      loadProfile(currentUser).then(() => setIsLoading(false));
     });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
+      const currentUser = session?.user ?? null;
+      setUser(currentUser);
+      loadProfile(currentUser);
     });
 
     return () => subscription.unsubscribe();
-  }, [setUser, setIsLoading]);
+  }, [setUser, setProfile, setIsLoading]);
 
   return (
     <ChakraProvider theme={theme}>

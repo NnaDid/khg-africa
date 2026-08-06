@@ -95,6 +95,34 @@ interface SidebarProps extends BoxProps {
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   const location = useLocation();
+  const { profile } = useAppStore();
+
+  const filteredLinks = React.useMemo(() => {
+    const role = profile?.role || 'super_admin';
+    if (role === 'super_admin') return LinkItems;
+
+    return LinkItems.filter((link) => {
+      // Overview, Risk Map, and Alerts are fundamental to all dashboards
+      if (link.path === '/' || link.path === '/map' || link.path === '/alerts') return true;
+
+      switch (role) {
+        case 'government_admin':
+          return true; // Full access
+        case 'ngo_admin':
+          return ['Clinics', 'Reports', 'Emergency', 'Analytics'].includes(link.name);
+        case 'school_admin':
+          return ['Schools', 'Settings'].includes(link.name);
+        case 'clinic_staff':
+          return ['Clinics', 'Reports', 'Analytics'].includes(link.name);
+        case 'emergency_officer':
+          return ['Emergency'].includes(link.name);
+        case 'community_health_worker':
+          return ['Reports'].includes(link.name);
+        default:
+          return false;
+      }
+    });
+  }, [profile]);
 
   return (
     <Box
@@ -112,7 +140,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         </Text>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
-      {LinkItems.map((link) => (
+      {filteredLinks.map((link) => (
         <NavItem 
           key={link.name} 
           icon={link.icon} 
@@ -173,6 +201,10 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   const toast = useToast();
 
   const handleSignOut = async () => {
+    localStorage.removeItem('khg_demo_user');
+    useAppStore.getState().setUser(null);
+    useAppStore.getState().setProfile(null);
+
     try {
       const { error } = await authService.signOut();
       if (error) throw error;
@@ -185,10 +217,10 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       });
     } catch (err: any) {
       toast({
-        title: 'Sign Out Failed',
-        description: err.message || 'An error occurred during sign out.',
-        status: 'error',
-        duration: 5000,
+        title: 'Logged Out',
+        description: 'Your session has been closed locally.',
+        status: 'success',
+        duration: 3000,
         isClosable: true,
       });
     }

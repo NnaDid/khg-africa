@@ -175,6 +175,48 @@ export default function Login() {
         </Pressable>
       </View>
 
+      {/* Demo Quick Logins */}
+      <View className="my-4 p-4 bg-slate-950/40 border border-blue-950/20 rounded-2xl">
+        <Text className="text-slate-400 text-xs font-bold text-center mb-3 uppercase tracking-wider">
+          ⚡ Demo Command Access
+        </Text>
+        <View className="flex-row flex-wrap justify-between gap-2">
+          {[
+            { label: "Health Worker", email: "worker@khgafrica.org" },
+            { label: "School Admin", email: "school@khgafrica.org" },
+            { label: "Clinic Staff", email: "clinic@khgafrica.org" },
+            { label: "Emergency Rep", email: "emergency@khgafrica.org" }
+          ].map((item) => (
+            <Pressable
+              key={item.email}
+              onPress={() => {
+                setEmail(item.email);
+                setPassword("Password123!");
+                login(item.email, "Password123!").then((response) => {
+                  if (response?.error) {
+                    Toast.show({
+                      type: "error",
+                      text1: "Demo Login Failed",
+                      text2: response.error,
+                    });
+                  } else {
+                    Toast.show({
+                      type: "success",
+                      text1: "Welcome Back",
+                      text2: `Logged in as ${item.label}`,
+                    });
+                    router.replace("/(tab)");
+                  }
+                });
+              }}
+              className="w-[48%] py-2.5 bg-slate-900/80 border border-blue-950 rounded-xl items-center active:opacity-70"
+            >
+              <Text className="text-white text-[10px] font-bold">{item.label}</Text>
+            </Pressable>
+          ))}
+        </View>
+      </View>
+
       {/* Footer System Disclaimer */}
       <View className="items-center">
         <Text className="text-slate-500 text-[10px] text-center max-w-xs leading-relaxed">

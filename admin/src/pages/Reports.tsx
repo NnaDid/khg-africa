@@ -13,12 +13,14 @@ import {
   Avatar,
   Tag,
   Flex,
+  Spinner,
 } from '@chakra-ui/react';
 import { FiMapPin, FiClock } from 'react-icons/fi';
+import { useReports } from '../hooks/useApi';
 
-const reports = [
+const MOCK_REPORTS = [
   { 
-    id: 1, 
+    id: 'mock-1', 
     type: 'Stagnant Water', 
     reporter: 'John Doe', 
     location: 'Makoko', 
@@ -28,7 +30,7 @@ const reports = [
     description: 'Large pool of standing water after heavy rain. High mosquito activity reported.'
   },
   { 
-    id: 2, 
+    id: 'mock-2', 
     type: 'Sick Children', 
     reporter: 'Jane Smith', 
     location: 'Lagos Island', 
@@ -38,7 +40,7 @@ const reports = [
     description: '3 children showing cholera symptoms (vomiting/diarrhea) in Sector 4.'
   },
   { 
-    id: 3, 
+    id: 'mock-3', 
     type: 'Waste Buildup', 
     reporter: 'Ali Musa', 
     location: 'Ikeja', 
@@ -90,19 +92,70 @@ const ReportCard = ({ report }: any) => (
 );
 
 const Reports = () => {
+  const { data: dbReports, isLoading } = useReports();
+
+  const reportList = React.useMemo(() => {
+    const dbReportsMapped = (dbReports || []).map((r: any) => {
+      const typeLabels: Record<string, string> = {
+        STAGNANT_WATER: 'Stagnant Water',
+        WASTE_BUILDUP: 'Waste Accumulation',
+        FLOODING: 'Localized Flooding',
+        SICK_CHILD: 'Sick Child Cluster',
+        MOSQUITO_BREEDING: 'Mosquito Breeding Site',
+      };
+
+      let timeStr = 'Just now';
+      if (r.created_at) {
+        try {
+          const diffMs = Date.now() - new Date(r.created_at).getTime();
+          const diffMins = Math.floor(diffMs / 60000);
+          if (diffMins < 1) timeStr = 'Just now';
+          else if (diffMins < 60) timeStr = `${diffMins} mins ago`;
+          else {
+            const diffHours = Math.floor(diffMins / 60);
+            if (diffHours < 24) timeStr = `${diffHours} hours ago`;
+            else timeStr = new Date(r.created_at).toLocaleDateString();
+          }
+        } catch (e) {}
+      }
+
+      return {
+        id: r.id,
+        type: typeLabels[r.type] || r.type,
+        reporter: r.reporter_id ? `Officer ${r.reporter_id.slice(0, 4).toUpperCase()}` : 'Field Officer',
+        location: r.location?.coordinates 
+          ? `GPS: ${r.location.coordinates[1].toFixed(4)}, ${r.location.coordinates[0].toFixed(4)}`
+          : 'Nairobi Region',
+        severity: r.severity ? r.severity.charAt(0) + r.severity.slice(1).toLowerCase() : 'Moderate',
+        time: timeStr,
+        image: r.image_url || 'https://images.unsplash.com/photo-1541604193435-22587c32c782?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80',
+        description: r.description || 'No description details provided.',
+        status: r.status,
+      };
+    });
+
+    return [...dbReportsMapped, ...MOCK_REPORTS];
+  }, [dbReports]);
+
+  const pendingCount = reportList.filter(r => r.status !== 'RESOLVED').length;
+
   return (
     <Box>
       <Flex justify="space-between" align="center" mb={6}>
         <Heading size="lg">Community Reporting Center</Heading>
         <HStack>
-          <Tag size="lg" variant="subtle" colorScheme="orange">24 Pending</Tag>
+          <Tag size="lg" variant="subtle" colorScheme="orange">{pendingCount} Pending</Tag>
           <Tag size="lg" variant="subtle" colorScheme="green">142 Resolved</Tag>
         </HStack>
       </Flex>
       
-      <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
-        {reports.map(r => <ReportCard key={r.id} report={r} />)}
-      </SimpleGrid>
+      {isLoading ? (
+        <Spinner size="lg" color="brand.500" />
+      ) : (
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={6}>
+          {reportList.map(r => <ReportCard key={r.id} report={r} />)}
+        </SimpleGrid>
+      )}
     </Box>
   );
 };

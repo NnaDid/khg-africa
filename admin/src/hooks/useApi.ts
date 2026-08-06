@@ -71,16 +71,39 @@ export function useSchools() {
     queryKey: ['locations', 'schools'],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from('locations')
+        .from('schools')
         .select(`
-          id, name, region, gps_lat, gps_lng, total_children,
+          id, name, address, location, student_count,
           safety_scores(score, level, timestamp)
         `)
-        .eq('type', 'school')
         .order('name');
 
       if (error) throw error;
-      return data || [];
+      return (data || []).map((school: any) => {
+        let gps_lat = 0;
+        let gps_lng = 0;
+        if (school.location) {
+          if (typeof school.location === 'string') {
+            const match = school.location.match(/POINT\(([^ ]+) ([^ ]+)\)/);
+            if (match) {
+              gps_lng = parseFloat(match[1]);
+              gps_lat = parseFloat(match[2]);
+            }
+          } else if (school.location.coordinates) {
+            gps_lng = school.location.coordinates[0];
+            gps_lat = school.location.coordinates[1];
+          }
+        }
+        return {
+          id: school.id,
+          name: school.name,
+          region: school.address,
+          gps_lat,
+          gps_lng,
+          total_children: school.student_count,
+          safety_scores: school.safety_scores,
+        };
+      });
     },
     refetchInterval: 60_000,
     retry: 2,
@@ -94,16 +117,39 @@ export function useClinics() {
     queryKey: ['locations', 'clinics'],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from('locations')
+        .from('clinics')
         .select(`
-          id, name, region, gps_lat, gps_lng,
+          id, name, address, location, capacity,
           safety_scores(score, level, timestamp)
         `)
-        .eq('type', 'clinic')
         .order('name');
 
       if (error) throw error;
-      return data || [];
+      return (data || []).map((clinic: any) => {
+        let gps_lat = 0;
+        let gps_lng = 0;
+        if (clinic.location) {
+          if (typeof clinic.location === 'string') {
+            const match = clinic.location.match(/POINT\(([^ ]+) ([^ ]+)\)/);
+            if (match) {
+              gps_lng = parseFloat(match[1]);
+              gps_lat = parseFloat(match[2]);
+            }
+          } else if (clinic.location.coordinates) {
+            gps_lng = clinic.location.coordinates[0];
+            gps_lat = clinic.location.coordinates[1];
+          }
+        }
+        return {
+          id: clinic.id,
+          name: clinic.name,
+          region: clinic.address,
+          gps_lat,
+          gps_lng,
+          capacity: clinic.capacity,
+          safety_scores: clinic.safety_scores,
+        };
+      });
     },
     refetchInterval: 60_000,
     retry: 2,

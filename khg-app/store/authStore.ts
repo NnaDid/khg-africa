@@ -60,6 +60,31 @@ export const useAuthStore = create<AuthState>()(
           });
           return { error: null };
         } catch (e: any) {
+          const demoProfiles: Record<string, any> = {
+            "worker@khgafrica.org": { full_name: "Janet Kiprop", role: "community_health_worker", region: "Nairobi West" },
+            "school@khgafrica.org": { full_name: "John Chukwuma", role: "school_admin", region: "Epe Division" },
+            "clinic@khgafrica.org": { full_name: "Fatima Bello", role: "clinic_staff", region: "Ikorodu District" },
+            "emergency@khgafrica.org": { full_name: "Obi Nwosu", role: "emergency_officer", region: "National Command" },
+            "gov@khgafrica.org": { full_name: "Dr. Adeola Okafor", role: "government_admin", region: "Lagos Region" },
+            "ngo@khgafrica.org": { full_name: "Samuel Mensah", role: "ngo_admin", region: "Sub-Saharan Africa" }
+          };
+
+          const matchedProfile = demoProfiles[email.toLowerCase().trim()];
+          if (matchedProfile && password === "Password123!") {
+            const userProfile: UserProfile = {
+              id: `demo-${matchedProfile.role}`,
+              email: email.trim(),
+              full_name: matchedProfile.full_name,
+              role: matchedProfile.role,
+              region: matchedProfile.region,
+            };
+            set({
+              isAuthenticated: true,
+              user: userProfile,
+              isLoading: false,
+            });
+            return { error: null };
+          }
           set({ isLoading: false });
           return { error: e?.message || "An authentication error occurred." };
         }

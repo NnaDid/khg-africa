@@ -1,8 +1,13 @@
 import axios from 'axios';
 import { supabase } from '../services/supabase';
 
+const getBaseURL = () => {
+  const url = import.meta.env.VITE_FASTAPI_URL || 'http://localhost:8000';
+  return url.endsWith('/api/v1') ? url : `${url.replace(/\/+$/, '')}/api/v1`;
+};
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_FASTAPI_URL || 'http://localhost:8000/api/v1',
+  baseURL: getBaseURL(),
   headers: {
     'Content-Type': 'application/json',
   },
@@ -27,7 +32,10 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      supabase.auth.signOut();
+      const isDemo = !!localStorage.getItem('khg_demo_user');
+      if (!isDemo) {
+        supabase.auth.signOut();
+      }
     }
     return Promise.reject(error);
   }

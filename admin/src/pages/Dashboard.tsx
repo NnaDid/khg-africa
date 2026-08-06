@@ -63,7 +63,7 @@ const StatCard = ({ title, value, icon, trend, color }: any) => (
 // ─── Dashboard ────────────────────────────────────────────────────────────────
 const Dashboard = () => {
   const { data: summary, isLoading: summaryLoading } = useSummary();
-  const { sensorFeed, liveAlerts, isWsConnected } = useAppStore();
+  const { sensorFeed, liveAlerts, isWsConnected, profile } = useAppStore();
 
   // Build disease trend chart from live sensor feed
   const sensorChartData = useMemo(() => {
@@ -140,6 +140,19 @@ const Dashboard = () => {
           </HStack>
         </Tooltip>
       </Flex>
+
+      {/* Role-Specific Welcomer & Insights */}
+      <Box p={5} mb={6} bg="rgba(0, 188, 212, 0.1)" border="1px solid" borderColor="brand.500" borderRadius="xl">
+        <Heading size="md" mb={2}>Welcome back, {profile?.full_name || 'Administrator'} ({profile?.role?.replace('_', ' ').toUpperCase() || 'SUPER ADMIN'})</Heading>
+        <Text fontSize="sm" color="gray.300">
+          {profile?.role === 'government_admin' && '📊 Showing government early-warning disease indicators, school safety indices, and outbreak projections.'}
+          {profile?.role === 'ngo_admin' && '🤝 NGO Dashboard active. Focus area: vector-control campaigns, clinic capacity distribution, and volunteer safety.'}
+          {profile?.role === 'school_admin' && '🏫 Monitored School Hub: Nairobi West Primary School. Current risk level: SAFE. Water stagnation reported 15m ago.'}
+          {profile?.role === 'clinic_staff' && '🏥 Medical Staff Command. Monitoring local symptom alerts, cholera trend maps, and clinic occupancy rates.'}
+          {profile?.role === 'emergency_officer' && '🚨 Emergency Dispatch active. Deploy teams, track active alerts, and review field intervention checklists.'}
+          {(!profile?.role || profile?.role === 'super_admin') && '🌐 Global Early Warning System active. Monitoring all regions, schools, clinics, and iot networks.'}
+        </Text>
+      </Box>
 
       {/* Stats Row */}
       <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }} spacing={6} mb={8}>
