@@ -218,7 +218,7 @@ export default function ReportScreen() {
 
         {/* Online/Offline Visual Cue */}
         <View className="px-6 mb-4">
-          <View className={`rounded-xl px-4 py-2 border ${
+          <View className={`rounded px-4 py-2 border ${
             isOnline 
               ? "bg-emerald-500/10 border-emerald-500/20" 
               : "bg-amber-500/10 border-amber-500/20"
@@ -238,7 +238,12 @@ export default function ReportScreen() {
           {/* 1. Hazard Type Selector */}
           <View>
             <Text className="text-white text-sm font-bold mb-2.5">1. Select Hazard Type</Text>
-            <View className="flex-row flex-wrap gap-2.5">
+            <ScrollView 
+              horizontal 
+              showsHorizontalScrollIndicator={false}
+              className="-mx-6"
+              contentContainerStyle={{ paddingHorizontal: 24, gap: 10 }}
+            >
               {REPORT_TYPES.map((type) => {
                 const isSelected = selectedType === type.id;
                 const activeBg = isSelected 
@@ -250,14 +255,14 @@ export default function ReportScreen() {
                   <Pressable
                     key={type.id}
                     onPress={() => setSelectedType(type.id)}
-                    className={`px-3 py-2.5 rounded-xl flex-row items-center gap-2 active:opacity-75 ${activeBg}`}
+                    className={`px-3 py-2.5 rounded flex-row items-center gap-2 active:opacity-75 ${activeBg}`}
                   >
                     <Ionicons name={type.icon as any} size={16} color={isSelected ? COLORS.primary : "#94a3b8"} />
                     <Text className={`text-xs ${textColor}`}>{type.label}</Text>
                   </Pressable>
                 );
               })}
-            </View>
+            </ScrollView>
           </View>
 
           {/* 2. Severity Slider */}
@@ -281,7 +286,7 @@ export default function ReportScreen() {
                   <Pressable
                     key={level}
                     onPress={() => setSeverity(level)}
-                    className={`flex-1 py-3 rounded-xl items-center active:opacity-75 ${activeStyle}`}
+                    className={`flex-1 py-3 rounded items-center active:opacity-75 ${activeStyle}`}
                   >
                     <Text className={`text-xs uppercase tracking-wider ${textColor}`}>{level}</Text>
                   </Pressable>
@@ -301,7 +306,7 @@ export default function ReportScreen() {
               value={description}
               onChangeText={setDescription}
               style={{ backgroundColor: COLORS.surface }}
-              className="rounded-2xl border border-blue-900/20 p-4 text-white text-xs leading-relaxed text-left align-top h-24"
+              className="rounded border border-blue-900/20 p-4 text-white text-xs leading-relaxed text-left align-top h-24"
             />
           </View>
 
@@ -313,10 +318,10 @@ export default function ReportScreen() {
               {/* Camera trigger */}
               <Pressable
                 onPress={handleCaptureImage}
-                className="flex-1 py-4 bg-slate-900/60 border border-blue-950 rounded-2xl items-center justify-center active:opacity-75"
+                className="flex-1 py-4 bg-slate-900/60 border border-blue-950 rounded items-center justify-center active:opacity-75"
               >
                 {localImage ? (
-                  <Image source={{ uri: localImage }} className="w-12 h-12 rounded-lg" />
+                  <Image source={{ uri: localImage }} className="w-12 h-12 rounded" />
                 ) : (
                   <>
                     <Ionicons name="camera" size={24} color="#94a3b8" />
@@ -328,7 +333,7 @@ export default function ReportScreen() {
               {/* Voice note trigger */}
               <Pressable
                 onPress={handleToggleVoice}
-                className={`flex-1 py-4 border rounded-2xl items-center justify-center active:opacity-75 ${
+                className={`flex-1 py-4 border rounded items-center justify-center active:opacity-75 ${
                   isRecording 
                     ? "bg-rose-500/20 border-rose-500 animate-pulse" 
                     : "bg-slate-900/60 border-blue-950"
@@ -353,7 +358,7 @@ export default function ReportScreen() {
           </View>
 
           {/* 5. Geographic Resolution */}
-          <View className="bg-slate-950/40 border border-blue-950/20 p-4 rounded-2xl">
+          <View className="bg-slate-950/40 border border-blue-950/20 p-4 rounded">
             <View className="flex-row justify-between items-center mb-2">
               <Text className="text-slate-300 text-xs font-bold">5. Location Point Resolution</Text>
               <Pressable onPress={fetchCoordinates} disabled={isFetchingLocation} className="active:opacity-60">
@@ -380,7 +385,7 @@ export default function ReportScreen() {
           <Pressable
             onPress={handleSubmit}
             disabled={isSubmitting}
-            className="mt-2 py-4 bg-emerald-500 rounded-2xl items-center justify-center active:opacity-85 shadow-lg flex-row gap-2"
+            className="mt-2 py-4 bg-emerald-500 rounded items-center justify-center active:opacity-85 shadow-lg flex-row gap-2"
           >
             {isSubmitting ? (
               <ActivityIndicator size="small" color="white" />
