@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
   ScrollView,
   Pressable,
+  ActivityIndicator,
   useWindowDimensions,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { useAlertStore } from "../../store/alertStore";
 import { COLORS, RISK_LEVELS } from "../../constants/colors";
+import { supabase } from "../../services/supabase";
 import Toast from "react-native-toast-message";
 
 // MOCK ALERTS (Fallback for demo mode / initial view)
@@ -63,12 +66,73 @@ export default function AlertsScreen() {
   const { width } = useWindowDimensions();
   const isSmallScreen = width < 380;
   const [activeFilter, setActiveFilter] = useState<"all" | "critical" | "high" | "moderate">("all");
-  const [alertsList, setAlertsList] = useState(INITIAL_ALERTS);
+  const [isLoadingDb, setIsLoadingDb] = useState(false);
 
-  const handleAcknowledge = (id: string) => {
-    setAlertsList(prev =>
-      prev.map(item => item.id === id ? { ...item, acknowledged: true } : item)
-    );
+  // ── Get alerts from Zustand store (pushed by WebSocket) ──────────────────
+  const { alerts: storeAlerts, addAlert, acknowledgeAlert } = useAlertStore();
+
+  // ── Fetch database alerts on mount ───────────────────────────────────────
+  const [dbAlerts, setDbAlerts] = useState(INITIAL_ALERTS);
+
+  useEffect(() => {
+    const fetchDbAlerts = async () => {
+      setIsLoadingDb(true);
+      try {
+        const { data, error } = await supabase
+          .from("risk_alerts")
+          .select("*")
+          .eq("is_resolved", false)
+          .order("created_at", { ascending: false })
+          .limit(50);
+
+        if (data && !error) {
+          const mapped = data.map((a: any) => ({
+            id: a.id,
+            title: `${a.severity}: ${(a.type || '').replace(/_/g, ' ')}`,
+            body: a.message || "Environmental risk detected in your area.",
+            hazard_type: (a.type || 'flooding').toLowerCase().replace('_outbreak', ''),
+            risk_level: (a.severity || 'moderate').toLowerCase(),
+            region: a.location_id || "General",
+            issued_at: a.created_at ? new Date(a.created_at).toLocaleString() : "Recently",
+            acknowledged: a.is_resolved || false,
+            source: "sensor" as const,
+          }));
+          setDbAlerts(mapped.length > 0 ? mapped : INITIAL_ALERTS);
+        }
+      } catch {
+        // Network error — use INITIAL_ALERTS fallback
+      } finally {
+        setIsLoadingDb(false);
+      }
+    };
+    fetchDbAlerts();
+  }, []);
+
+  // Merge DB alerts with live WebSocket-pushed alerts (dedup by id)
+  const mergedAlerts = React.useMemo(() => {
+    const wsAlerts = storeAlerts || [];
+    const wsIds = new Set(wsAlerts.map((a: any) => a.id));
+    return [
+      ...wsAlerts,
+      ...dbAlerts.filter((a: any) => !wsIds.has(a.id)),
+    ];
+  }, [storeAlerts, dbAlerts]);
+
+  const handleAcknowledge = async (id: string) => {
+    // Update local state
+    setDbAlerts(prev => prev.map(item => item.id === id ? { ...item, acknowledged: true } : item));
+    acknowledgeAlert(id);
+
+    // Try to update in Supabase if online
+    try {
+      await supabase
+        .from("risk_alerts")
+        .update({ is_resolved: true })
+        .eq("id", id);
+    } catch {
+      // Acknowledged locally — will sync when backend is reachable
+    }
+
     Toast.show({
       type: "success",
       text1: "Alert Acknowledged",
@@ -76,9 +140,9 @@ export default function AlertsScreen() {
     });
   };
 
-  const filteredAlerts = alertsList.filter(item => {
+  const filteredAlerts = mergedAlerts.filter((item: any) => {
     if (activeFilter === "all") return true;
-    return item.risk_level === activeFilter;
+    return (item.risk_level || '').toLowerCase() === activeFilter;
   });
 
   const getHazardIcon = (type: string) => {
@@ -102,147 +166,149 @@ export default function AlertsScreen() {
   };
 
   return (
-    <ScrollView
-      className="flex-1"
-      style={{ backgroundColor: COLORS.background }}
-      contentContainerStyle={{ paddingBottom: 110 }}
-      showsVerticalScrollIndicator={false}
-    >
-      {/* Header */}
-      <View className="px-6 pt-12 pb-4">
-        <Text className="text-slate-400 text-xs font-semibold uppercase tracking-wider">
-          Early Warnings
-        </Text>
-        <Text className="text-white text-2xl font-bold mt-0.5">
-          Climate-Health Alerts
-        </Text>
-        <Text className="text-slate-400 text-xs mt-1">
-          Active geographic bulletins and vector-borne advisory directives.
-        </Text>
-      </View>
+    <SafeAreaView edges={["top"]} style={{ flex: 1, backgroundColor: COLORS.background }}>
+      <ScrollView
+        className="flex-1"
+        style={{ backgroundColor: COLORS.background }}
+        contentContainerStyle={{ paddingBottom: 110 }}
+        showsVerticalScrollIndicator={false}
+      >
+        {/* Header */}
+        <View className="px-6 pt-4 pb-4">
+          <Text className="text-slate-400 text-xs font-semibold uppercase tracking-wider">
+            Early Warnings
+          </Text>
+          <Text className="text-white text-2xl font-bold mt-0.5">
+            Climate-Health Alerts
+          </Text>
+          <Text className="text-slate-400 text-xs mt-1">
+            Active geographic bulletins and vector-borne advisory directives.
+          </Text>
+        </View>
 
-      {/* Filter Chips Row */}
-      <View className="flex-row px-6 gap-2 mb-4">
-        {(["all", "critical", "high", "moderate"] as const).map((filter) => {
-          const isActive = activeFilter === filter;
-          let activeBg = "bg-slate-800/40 border border-slate-700/50";
-          let textColor = "text-slate-400";
-          
-          if (isActive) {
-            textColor = "text-white font-bold";
-            if (filter === "all") activeBg = "bg-blue-600 border border-blue-500";
-            if (filter === "critical") activeBg = "bg-red-600 border border-red-500";
-            if (filter === "high") activeBg = "bg-orange-600 border border-orange-500";
-            if (filter === "moderate") activeBg = "bg-amber-600 border border-amber-500";
-          }
-
-          return (
-            <Pressable
-              key={filter}
-              onPress={() => setActiveFilter(filter)}
-              className={`px-3 py-1.5 rounded-full uppercase text-[10px] tracking-wide active:opacity-75 ${activeBg}`}
-            >
-              <Text className={textColor}>{filter}</Text>
-            </Pressable>
-          );
-        })}
-      </View>
-
-      {/* Alerts Grid */}
-      <View className="px-6 gap-4">
-        {filteredAlerts.length === 0 ? (
-          <View className="items-center py-12 bg-slate-900/40 border border-slate-800/50 rounded-2xl">
-            <Ionicons name="shield-checkmark" size={48} color={COLORS.risk.safe} />
-            <Text className="text-white font-bold text-base mt-3">No active risks</Text>
-            <Text className="text-slate-400 text-xs text-center mt-1 px-6">
-              All sensors and community logs indicate a stable climate-health landscape in your filters.
-            </Text>
-          </View>
-        ) : (
-          filteredAlerts.map((alert) => {
-            const riskColors = RISK_LEVELS[alert.risk_level as keyof typeof RISK_LEVELS];
-            const hazardColor = getHazardColor(alert.hazard_type);
-            const hazardIcon = getHazardIcon(alert.hazard_type);
+        {/* Filter Chips Row */}
+        <View className="flex-row px-6 gap-2 mb-4">
+          {(["all", "critical", "high", "moderate"] as const).map((filter) => {
+            const isActive = activeFilter === filter;
+            let activeBg = "bg-slate-800/40 border border-slate-700/50";
+            let textColor = "text-slate-400";
+            
+            if (isActive) {
+              textColor = "text-white font-bold";
+              if (filter === "all") activeBg = "bg-blue-600 border border-blue-500";
+              if (filter === "critical") activeBg = "bg-red-600 border border-red-500";
+              if (filter === "high") activeBg = "bg-orange-600 border border-orange-500";
+              if (filter === "moderate") activeBg = "bg-amber-600 border border-amber-500";
+            }
 
             return (
-              <View
-                key={alert.id}
-                className="rounded-2xl border border-blue-900/20 overflow-hidden"
-                style={{ backgroundColor: COLORS.surface }}
+              <Pressable
+                key={filter}
+                onPress={() => setActiveFilter(filter)}
+                className={`px-3 py-1.5 rounded-full uppercase text-[10px] tracking-wide active:opacity-75 ${activeBg}`}
               >
-                {/* Header Strip */}
-                <View className="flex-row justify-between items-center px-4 py-3 bg-slate-950/40 border-b border-blue-950/20">
-                  <View className="flex-row items-center gap-2">
-                    <Ionicons name={hazardIcon} size={18} color={hazardColor} />
-                    <Text className="text-white/90 text-xs font-semibold capitalize">
-                      {alert.hazard_type.replace("_", " ")} Bulletin
-                    </Text>
-                  </View>
-                  <View
-                    className="px-2 py-0.5 rounded border"
-                    style={{
-                      borderColor: riskColors.color + "30",
-                      backgroundColor: riskColors.color + "10",
-                    }}
-                  >
-                    <Text
-                      className="text-[9px] font-black uppercase tracking-wider"
-                      style={{ color: riskColors.color }}
-                    >
-                      {alert.risk_level}
-                    </Text>
-                  </View>
-                </View>
-
-                {/* Card Body */}
-                <View className="p-4">
-                  <Text className="text-white font-bold text-base leading-tight mb-2">
-                    {alert.title}
-                  </Text>
-                  <Text className="text-slate-300 text-xs leading-relaxed mb-4">
-                    {alert.body}
-                  </Text>
-
-                  {/* Metadata Row */}
-                  <View className="flex-row justify-between items-center pt-2 border-t border-blue-900/10">
-                    <View>
-                      <Text className="text-slate-400 text-[10px]">Geographic Scope</Text>
-                      <Text className="text-slate-300 text-xs font-bold mt-0.5">
-                        {alert.region}
-                      </Text>
-                    </View>
-                    <View className="items-end">
-                      <Text className="text-slate-400 text-[10px]">Issued Timestamp</Text>
-                      <Text className="text-slate-300 text-xs font-medium mt-0.5">
-                        {alert.issued_at}
-                      </Text>
-                    </View>
-                  </View>
-
-                  {/* Actions */}
-                  <View className="mt-4 flex-row justify-end">
-                    {alert.acknowledged ? (
-                      <View className="bg-slate-900/50 px-3 py-2 rounded-xl flex-row items-center gap-1">
-                        <Ionicons name="checkmark-done-circle" size={16} color={COLORS.risk.safe} />
-                        <Text className="text-emerald-400 text-xs font-semibold">Acknowledged</Text>
-                      </View>
-                    ) : (
-                      <Pressable
-                        onPress={() => handleAcknowledge(alert.id)}
-                        className="bg-blue-600/20 border border-blue-500/30 px-4 py-2 rounded-xl flex-row items-center gap-1.5 active:opacity-75"
-                      >
-                        <Ionicons name="eye-outline" size={16} color="#3b82f6" />
-                        <Text className="text-blue-400 text-xs font-bold">Acknowledge Alert</Text>
-                      </Pressable>
-                    )}
-                  </View>
-
-                </View>
-              </View>
+                <Text className={textColor}>{filter}</Text>
+              </Pressable>
             );
-          })
-        )}
-      </View>
-    </ScrollView>
+          })}
+        </View>
+
+        {/* Alerts Grid */}
+        <View className="px-6 gap-4">
+          {filteredAlerts.length === 0 ? (
+            <View className="items-center py-12 bg-slate-900/40 border border-slate-800/50 rounded-2xl">
+              <Ionicons name="shield-checkmark" size={48} color={COLORS.risk.safe} />
+              <Text className="text-white font-bold text-base mt-3">No active risks</Text>
+              <Text className="text-slate-400 text-xs text-center mt-1 px-6">
+                All sensors and community logs indicate a stable climate-health landscape in your filters.
+              </Text>
+            </View>
+          ) : (
+            filteredAlerts.map((alert) => {
+              const riskColors = RISK_LEVELS[alert.risk_level as keyof typeof RISK_LEVELS];
+              const hazardColor = getHazardColor(alert.hazard_type);
+              const hazardIcon = getHazardIcon(alert.hazard_type);
+
+              return (
+                <View
+                  key={alert.id}
+                  className="rounded-2xl border border-blue-900/20 overflow-hidden"
+                  style={{ backgroundColor: COLORS.surface }}
+                >
+                  {/* Header Strip */}
+                  <View className="flex-row justify-between items-center px-4 py-3 bg-slate-950/40 border-b border-blue-950/20">
+                    <View className="flex-row items-center gap-2">
+                      <Ionicons name={hazardIcon} size={18} color={hazardColor} />
+                      <Text className="text-white/90 text-xs font-semibold capitalize">
+                        {alert.hazard_type.replace("_", " ")} Bulletin
+                      </Text>
+                    </View>
+                    <View
+                      className="px-2 py-0.5 rounded border"
+                      style={{
+                        borderColor: riskColors.color + "30",
+                        backgroundColor: riskColors.color + "10",
+                      }}
+                    >
+                      <Text
+                        className="text-[9px] font-black uppercase tracking-wider"
+                        style={{ color: riskColors.color }}
+                      >
+                        {alert.risk_level}
+                      </Text>
+                    </View>
+                  </View>
+
+                  {/* Card Body */}
+                  <View className="p-4">
+                    <Text className="text-white font-bold text-base leading-tight mb-2">
+                      {alert.title}
+                    </Text>
+                    <Text className="text-slate-300 text-xs leading-relaxed mb-4">
+                      {alert.body}
+                    </Text>
+
+                    {/* Metadata Row */}
+                    <View className="flex-row justify-between items-center pt-2 border-t border-blue-900/10">
+                      <View>
+                        <Text className="text-slate-400 text-[10px]">Geographic Scope</Text>
+                        <Text className="text-slate-300 text-xs font-bold mt-0.5">
+                          {alert.region}
+                        </Text>
+                      </View>
+                      <View className="items-end">
+                        <Text className="text-slate-400 text-[10px]">Issued Timestamp</Text>
+                        <Text className="text-slate-300 text-xs font-medium mt-0.5">
+                          {alert.issued_at}
+                        </Text>
+                      </View>
+                    </View>
+
+                    {/* Actions */}
+                    <View className="mt-4 flex-row justify-end">
+                      {alert.acknowledged ? (
+                        <View className="bg-slate-900/50 px-3 py-2 rounded-xl flex-row items-center gap-1">
+                          <Ionicons name="checkmark-done-circle" size={16} color={COLORS.risk.safe} />
+                          <Text className="text-emerald-400 text-xs font-semibold">Acknowledged</Text>
+                        </View>
+                      ) : (
+                        <Pressable
+                          onPress={() => handleAcknowledge(alert.id)}
+                          className="bg-blue-600/20 border border-blue-500/30 px-4 py-2 rounded-xl flex-row items-center gap-1.5 active:opacity-75"
+                        >
+                          <Ionicons name="eye-outline" size={16} color="#3b82f6" />
+                          <Text className="text-blue-400 text-xs font-bold">Acknowledge Alert</Text>
+                        </Pressable>
+                      )}
+                    </View>
+
+                  </View>
+                </View>
+              );
+            })
+          )}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }

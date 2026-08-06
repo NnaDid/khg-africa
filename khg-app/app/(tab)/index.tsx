@@ -7,22 +7,28 @@ import {
   ActivityIndicator,
   useWindowDimensions,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
 import { useAuthStore } from "../../store/authStore";
 import { useSettingsStore } from "../../store/settingsStore";
 import { useAlertStore } from "../../store/alertStore";
+import { useSensorStore } from "../../store/sensorStore";
 import { COLORS, RISK_LEVELS } from "../../constants/colors";
 import { getPendingOfflineReports } from "../../offline/database";
 import { runSyncCycle } from "../../offline/sync";
 import NetInfo from "@react-native-community/netinfo";
 import Toast from "react-native-toast-message";
+import { wsClient } from "../../websocket/wsClient";
+import { backendApi } from "../../services/api";
+import { supabase } from "../../services/supabase";
 
 export default function DashboardScreen() {
   const { user } = useAuthStore();
   const { isDemoMode, offlineMode } = useSettingsStore();
   const { unreadCount } = useAlertStore();
+  const { primaryReading } = useSensorStore();
   const { width } = useWindowDimensions();
   const isSmallScreen = width < 380;
 
@@ -30,16 +36,25 @@ export default function DashboardScreen() {
   const [isOnline, setIsOnline] = useState(true);
   const [pendingCount, setPendingCount] = useState(0);
   const [isSyncing, setIsSyncing] = useState(false);
-  const [sensorReadings, setSensorReadings] = useState({
-    temperature: 32.8,
-    humidity: 79,
-    airQuality: 88,
-    uvIndex: 9,
-  });
 
-  // Simulated metrics for demo mode
-  const schoolSafetyScore = 74;
-  const generalRiskLevel = "moderate"; // safe, moderate, high, critical
+  // Derive sensor readings from live WebSocket feed (sensorStore)
+  // Falls back to sensible defaults until first WS message arrives
+  const sensorReadings = {
+    temperature: primaryReading?.temperature ?? 32.8,
+    humidity: primaryReading?.humidity ?? 79,
+    airQuality: primaryReading?.air_quality ?? 88,
+    uvIndex: primaryReading?.uv_index ?? 9,
+    rainfall: primaryReading?.rainfall ?? 0,
+    floodRisk: primaryReading?.flood_risk ?? 0,
+  };
+
+  // School safety score from AI engine (via WebSocket SENSOR_UPDATE)
+  const schoolSafetyScore = primaryReading?.safety_score ?? 74;
+  const safetyLevel = (primaryReading?.safety_level || "MODERATE").toLowerCase();
+  const generalRiskLevel = safetyLevel === "safe" ? "safe"
+    : safetyLevel === "high risk" ? "high"
+    : safetyLevel === "critical" ? "critical"
+    : "moderate";
 
   useEffect(() => {
     // Monitor real network state
@@ -93,19 +108,63 @@ export default function DashboardScreen() {
     }
   };
 
-  // Generate some simulated variations in readings for interactive fun
-  const handleRefreshSensors = () => {
-    setSensorReadings({
-      temperature: +(30 + Math.random() * 6).toFixed(1),
-      humidity: Math.floor(65 + Math.random() * 25),
-      airQuality: Math.floor(50 + Math.random() * 70),
-      uvIndex: Math.floor(4 + Math.random() * 8),
-    });
+  const handleRefreshSensors = async () => {
+    // 1. Show instant UI toast feedback IMMEDIATELY on tap
     Toast.show({
       type: "info",
-      text1: "Sensor Feed Updated",
-      text2: "Fetched latest real-time environmental telemetry.",
+      text1: "Refreshing Live Telemetry...",
+      text2: "Connecting WebSocket & polling latest Smart Box readings.",
     });
+
+    // 2. Trigger WebSocket connection attempt with forceReset
+    wsClient.connect(true);
+
+    // 3. Poll backend REST API (fast 3s timeout) or fallback to Supabase DB directly
+    try {
+      const data = await backendApi.getLiveSimulation();
+      if (data?.readings && data.readings.length > 0) {
+        const latest = data.readings[0];
+        useSensorStore.getState().updateReading({
+          device_id: latest.device_id,
+          temperature: latest.temperature,
+          humidity: latest.humidity,
+          air_quality: latest.air_quality,
+          uv_index: latest.uv_index,
+          rainfall: latest.rainfall,
+          overcrowding_index: latest.overcrowding_index,
+          flood_risk: latest.flood_risk,
+          safety_score: 85,
+          timestamp: latest.timestamp || new Date().toISOString(),
+        });
+      }
+    } catch {
+      // Backend REST server offline — fallback to querying Supabase directly
+      try {
+        const { data } = await supabase
+          .from("sensor_readings")
+          .select("*")
+          .order("timestamp", { ascending: false })
+          .limit(1);
+
+        if (data && data.length > 0) {
+          const latest = data[0];
+          useSensorStore.getState().updateReading({
+            device_id: latest.device_id,
+            temperature: latest.temperature,
+            humidity: latest.humidity,
+            air_quality: latest.air_quality,
+            uv_index: latest.uv_index,
+            rainfall: latest.rainfall,
+            overcrowding_index: latest.overcrowding_index,
+            flood_risk: latest.flood_risk,
+            safety_score: 85,
+            timestamp: latest.timestamp,
+          });
+        }
+      } catch {
+        // Ignored
+      }
+    }
   };
 
   const activeRisk = RISK_LEVELS[generalRiskLevel];
@@ -401,8 +460,8 @@ export default function DashboardScreen() {
             <Ionicons name="pulse" size={20} color={activeRisk.color} />
           </View>
           
-          <View className="flex-row items-end gap-2.5 my-2">
-            <Text className="text-white text-3xl font-extrabold" style={{ color: activeRisk.color }}>
+          <View className=" gap-2"> 
+            <Text className="text-white text-lg font-extrabold" style={{ color: activeRisk.color }}>
               {activeRisk.label}
             </Text>
             <Text className="text-slate-400 text-xs font-medium mb-1.5">
@@ -535,90 +594,92 @@ export default function DashboardScreen() {
   };
 
   return (
-    <ScrollView
-      className="flex-1"
-      style={{ backgroundColor: COLORS.background }}
-      contentContainerStyle={{ paddingBottom: 110 }}
-      showsVerticalScrollIndicator={false}
-    >
-      {/* ─── Premium Glassmorphic Header ─── */}
-      <LinearGradient
-        colors={[COLORS.secondary, COLORS.background]}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 0, y: 1 }}
-        className="px-6 pt-12 pb-6 border-b border-blue-900/30"
+    <SafeAreaView edges={["top"]} style={{ flex: 1, backgroundColor: COLORS.background }}>
+      <ScrollView
+        className="flex-1"
+        style={{ backgroundColor: COLORS.background }}
+        contentContainerStyle={{ paddingBottom: 110 }}
+        showsVerticalScrollIndicator={false}
       >
-        <View className="flex-row justify-between items-center mb-4">
-          <View>
-            <Text className="text-slate-400 text-xs font-semibold uppercase tracking-wider">
-              Field Companion
-            </Text>
-            <Text className="text-white text-2xl font-bold mt-0.5">
-              {user?.full_name || "Agent KHG"}
-            </Text>
-            <View className="flex-row items-center gap-1.5 mt-1.5">
-              <View className="bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-md">
-                <Text className="text-emerald-400 text-[10px] font-bold uppercase">
-                  {user?.role?.replace("_", " ") || "Health Worker"}
-                </Text>
-              </View>
-              {isDemoMode && (
-                <View className="bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-md">
-                  <Text className="text-amber-400 text-[10px] font-bold uppercase">
-                    Demo Active
+        {/* ─── Premium Glassmorphic Header ─── */}
+        <LinearGradient
+          colors={[COLORS.secondary, COLORS.background]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 0, y: 1 }}
+          className="px-6 pt-6 pb-6 border-b border-blue-900/30"
+        >
+          <View className="flex-row justify-between items-center mb-4">
+            <View>
+              <Text className="text-slate-400 text-xs font-semibold uppercase tracking-wider">
+                Field Companion
+              </Text>
+              <Text className="text-white text-2xl font-bold mt-0.5">
+                {user?.full_name || "Agent KHG"}
+              </Text>
+              <View className="flex-row items-center gap-1.5 mt-1.5">
+                <View className="bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-md">
+                  <Text className="text-emerald-400 text-[10px] font-bold uppercase">
+                    {user?.role?.replace("_", " ") || "Health Worker"}
                   </Text>
                 </View>
-              )}
+                {isDemoMode && (
+                  <View className="bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-md">
+                    <Text className="text-amber-400 text-[10px] font-bold uppercase">
+                      Demo Active
+                    </Text>
+                  </View>
+                )}
+              </View>
+            </View>
+            
+            {/* Avatar / Unread Icon */}
+            <View className="flex-row items-center gap-3">
+              <Pressable className="relative p-2 bg-slate-800/40 rounded-full border border-slate-700/50">
+                <Ionicons name="notifications-outline" size={22} color={COLORS.text.primary} />
+                {unreadCount > 0 && (
+                  <View className="absolute top-1.5 right-1.5 bg-rose-500 w-4 h-4 rounded-full justify-center items-center">
+                    <Text className="text-white text-[9px] font-bold">{unreadCount}</Text>
+                  </View>
+                )}
+              </Pressable>
             </View>
           </View>
-          
-          {/* Avatar / Unread Icon */}
-          <View className="flex-row items-center gap-3">
-            <Pressable className="relative p-2 bg-slate-800/40 rounded-full border border-slate-700/50">
-              <Ionicons name="notifications-outline" size={22} color={COLORS.text.primary} />
-              {unreadCount > 0 && (
-                <View className="absolute top-1.5 right-1.5 bg-rose-500 w-4 h-4 rounded-full justify-center items-center">
-                  <Text className="text-white text-[9px] font-bold">{unreadCount}</Text>
-                </View>
-              )}
-            </Pressable>
-          </View>
-        </View>
 
-        {/* Sync / Connection Status Banner */}
-        <View className="flex-row justify-between items-center bg-slate-900/60 border border-blue-950 px-4 py-3 rounded-xl mt-2">
-          <View className="flex-row items-center gap-2">
-            <View className={`w-2.5 h-2.5 rounded-full ${netStatusColor}`} />
-            <Text className="text-slate-300 text-xs font-medium">{netStatusText}</Text>
-          </View>
-          {pendingCount > 0 ? (
-            <Pressable
-              onPress={handleManualSync}
-              disabled={isSyncing}
-              className="bg-amber-500/20 border border-amber-500/30 px-3 py-1 rounded-lg flex-row items-center gap-1.5 active:opacity-70"
-            >
-              {isSyncing ? (
-                <ActivityIndicator size="small" color="#eab308" />
-              ) : (
-                <>
-                  <Ionicons name="cloud-upload" size={14} color="#eab308" />
-                  <Text className="text-amber-400 text-xs font-bold">{pendingCount} Sync Pending</Text>
-                </>
-              )}
-            </Pressable>
-          ) : (
-            <View className="flex-row items-center gap-1">
-              <Ionicons name="checkmark-circle-outline" size={16} color={COLORS.risk.safe} />
-              <Text className="text-emerald-400 text-xs font-semibold">Synced</Text>
+          {/* Sync / Connection Status Banner */}
+          <View className="flex-row justify-between items-center bg-slate-900/60 border border-blue-950 px-4 py-3 rounded-xl mt-2">
+            <View className="flex-row items-center gap-2">
+              <View className={`w-2.5 h-2.5 rounded-full ${netStatusColor}`} />
+              <Text className="text-slate-300 text-xs font-medium">{netStatusText}</Text>
             </View>
-          )}
-        </View>
-      </LinearGradient>
+            {pendingCount > 0 ? (
+              <Pressable
+                onPress={handleManualSync}
+                disabled={isSyncing}
+                className="bg-amber-500/20 border border-amber-500/30 px-3 py-1 rounded-lg flex-row items-center gap-1.5 active:opacity-70"
+              >
+                {isSyncing ? (
+                  <ActivityIndicator size="small" color="#eab308" />
+                ) : (
+                  <>
+                    <Ionicons name="cloud-upload" size={14} color="#eab308" />
+                    <Text className="text-amber-400 text-xs font-bold">{pendingCount} Sync Pending</Text>
+                  </>
+                )}
+              </Pressable>
+            ) : (
+              <View className="flex-row items-center gap-1">
+                <Ionicons name="checkmark-circle-outline" size={16} color={COLORS.risk.safe} />
+                <Text className="text-emerald-400 text-xs font-semibold">Synced</Text>
+              </View>
+            )}
+          </View>
+        </LinearGradient>
 
-      {/* ─── Main Content ─── */}
-      <View className="px-6 mt-4 gap-5">
-        {renderRoleDashboard()}
-      </View>
-    </ScrollView>
+        {/* ─── Main Content ─── */}
+        <View className="px-6 mt-4 gap-5">
+          {renderRoleDashboard()}
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }

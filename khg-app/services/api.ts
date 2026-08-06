@@ -74,4 +74,9 @@ export const backendApi = {
     const res = await apiClient.get(`/sensors/predictions/${locationId}`);
     return res.data;
   },
+
+  getLiveSimulation: async () => {
+    const res = await apiClient.get("/simulation/live");
+    return res.data;
+  },
 };

@@ -9,6 +9,11 @@ import { router } from "expo-router";
 import "../global.css";
 import { supabase } from "../services/supabase";
 import { useAuthStore } from "../store/authStore";
+import { wsClient } from "../websocket/wsClient";
+import { LogBox } from "react-native";
+
+// Ignore third-party SafeAreaView deprecation warning in Metro dev console
+LogBox.ignoreLogs(["SafeAreaView has been deprecated"]);
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -41,6 +46,9 @@ export default function RootLayout() {
           region: profile?.region || "Nairobi West",
         });
         setAuthenticated(true);
+
+        // Connect WebSocket for realtime sensor + alert streams
+        wsClient.connect();
       }
     });
 
@@ -49,17 +57,27 @@ export default function RootLayout() {
       async (event, session) => {
         if (event === "SIGNED_IN" && session?.user) {
           setAuthenticated(true);
+          // Connect WebSocket on sign in
+          wsClient.connect();
         } else if (event === "SIGNED_OUT") {
           setAuthenticated(false);
           setUserProfile(null);
+          // Disconnect WebSocket on sign out
+          wsClient.disconnect();
           router.replace("/(auth)/login");
         } else if (event === "TOKEN_REFRESHED") {
-          // Session silently refreshed — do nothing
+          // Session silently refreshed — reconnect WS if needed
+          if (!wsClient.isConnected) {
+            wsClient.connect();
+          }
         }
       }
     );
 
-    return () => subscription.unsubscribe();
+    return () => {
+      subscription.unsubscribe();
+      wsClient.disconnect();
+    };
   }, []);
 
   return (
